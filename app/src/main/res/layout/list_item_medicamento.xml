@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iconoMedicamento"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_capsula"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nombreMedicamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Proponolol"
+
+        android:textSize="@dimen/normal"
+        app:layout_constraintStart_toEndOf="@+id/iconoMedicamento"
+        app:layout_constraintTop_toBottomOf="@+id/nombreComercialMedicamento" />
+
+    <TextView
+        android:id="@+id/nombreComercialMedicamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Inderalici"
+        android:textColor="@color/negro"
+        android:textSize="@dimen/subtitulos"
+        app:layout_constraintStart_toEndOf="@+id/iconoMedicamento"
+        app:layout_constraintTop_toTopOf="@+id/iconoMedicamento" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iconoMedicamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_capsula"
+        app:layout_constraintEnd_toEndOf="@+id/iconoBookmark"
+        app:layout_constraintStart_toStartOf="@+id/iconoBookmark"
+        app:layout_constraintTop_toBottomOf="@+id/iconoBookmark" />
+
+    <TextView
+        android:id="@+id/nombreMedicamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:text="Carbamacepina"
+        app:layout_constraintBottom_toBottomOf="@+id/iconoMedicamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconoMedicamento"
+        app:layout_constraintTop_toTopOf="@+id/iconoMedicamento"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/status_tratamientoTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:text="Activo"
+        android:textColor="@color/negro"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iconoStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconoStatus"
+        app:layout_constraintTop_toTopOf="@+id/iconoStatus" />
+
+    <ImageView
+        android:id="@+id/iconoBookmark"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bookmark" />
+
+    <TextView
+        android:id="@+id/tagTratamientoTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/negro"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iconoBookmark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconoBookmark"
+        app:layout_constraintTop_toTopOf="@+id/iconoBookmark" />
+
+    <ImageView
+        android:id="@+id/iconoStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iconoMedicamento"
+        app:layout_constraintStart_toStartOf="@+id/iconoMedicamento"
+        app:layout_constraintTop_toBottomOf="@+id/iconoMedicamento"
+        app:srcCompat="@drawable/ic_circle_24dp" />
+
+</android.support.constraint.ConstraintLayout>

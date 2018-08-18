@@ -1,0 +1,195 @@
+<resources>
+    <string name="app_name">Moski M.R</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main_activityg">MainActivityg</string>
+    <string name="title_home">Horario</string>
+    <string name="title_tratamientos">Tratamientos</string>
+    <string name="title_medicamentos">Medicamentos</string>
+    <string name="title_directorio">Directorio</string>
+    <string name="title_citas">Citas</string>
+
+    <string name="anadir">Añadir</string>
+
+    <!-- Nombre de los fragmentos -->
+    <string name="fragmentoHoy">FragmentoHoy</string>
+    <string name="fragmentoTratamientos">FragmentoTratamientos</string>
+    <string name="fragmentoMedicamentos">FragmentoMedicamentos</string>
+    <string name="fragmentoDirectorio">FragmentoDirectorio</string>
+    <string name="fragmentoCitas">FragmentoCitas</string>
+
+    <!-- Cadenas de la actividad Añadir Medicamentos -->
+    <string name="AnadirMedicamento">Añadir medicamento nuevo</string>
+    <string name="NombreComercial">Nombre comercial</string>
+    <string name="NombreGenerico">Nombre genérico</string>
+    <string name="Dosis">Dosis/Presentación</string>
+    <string name="IconoMedicamento">Icono</string>
+    <string name="ColorIconoMedicamento">Color Icono:</string>
+    <string name="FormaFarmaceutica">Forma farmacéutica</string>
+
+    <array name="TipoMedicamento">
+        <item>Pastillas/Comprimidos</item>
+        <item>Tabletas</item>
+        <item>Capsulas</item>
+        <item>Jarabe</item>
+        <item>Gotas</item>
+        <item>Pomadas</item>
+        <item>Polvo</item>
+        <item>Geles</item>
+        <item>Inhalador</item>
+        <item>Supositorios</item>
+    </array>
+
+
+    <!-- Cadenas del fragmento Directorio -->
+    <string name="Farmacias">Farmacias</string>
+    <string name="Medicos">Médicos</string>
+    <string name="SeleccionAnadir">Anadir nuevo:</string>
+
+    <array name="anadirnuevo">
+        <item>Médico</item>
+        <item>Farmacia</item>
+    </array>
+
+
+    <!-- Cadenas de la actividad Añadir Medico  -->
+    <string name="anadirMedico">Añadir médico:</string>
+
+    <array name="TituloMedico">
+        <item>Dr.</item>
+        <item>Dra.</item>
+        <item>Mtra.</item>
+        <item>Mtro.</item>
+        <item>Lic.</item>
+    </array>
+
+    <string name="tituloMedico">Título:</string>
+    <string name="nombreMedico">Nombre</string>
+    <string name="especialidad">Especialidad</string>
+    <string name="direccion1">Dirección 1</string>
+    <string name="direccion2">Direccion 2</string>
+    <string name="telefono">Teléfono</string>
+    <string name="celular">Celular</string>
+    <string name="email">Email</string>
+    <string name="colorDistintivo">Color distintivo:</string>
+    <string name="icono">Icono</string>
+
+
+    <!-- Cadenas de la actividad Añadir Medico -->
+
+    <string name="anadirFarmacia">Añadir farmacia</string>
+
+
+    <!-- Cadenas de la actividad Añadir Tratamiento -->
+
+    <string name="anadirTratamiento">Nuevo tratamiento</string>
+
+
+    <!-- Cadenas de la actividad Añadir Cita Medica -->
+
+    <string name="anadirCita">Nueva cita médica</string>
+    <string name="tituloCita">Título/Motivo de la cita</string>
+    <string name="medicoCita">Médico </string>
+    <string name="ubicacionCita">Ubicación</string>
+    <string name="fechaHoraCita">Fecha y hora de la cita</string>
+
+
+    <!-- Cadenas de la actividad Añadir farmacia -->
+
+    <string name="nombreFarmacia">Nombre farmacia</string>
+    <string name="direccionFarmacia">Dirección</string>
+    <string name="telefono1Farmacia">Teléfono 1</string>
+    <string name="telefono2Farmacia">Teléfono 2</string>
+    <string name="guardar">Guardar</string>
+    <string name="tipo_medicamento">Tipo medicamento:</string>
+    <string name="buscar">Buscar</string>
+    <string name="detalles_farmacia">Detalles farmacia</string>
+    <string name="editar">Editar</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="detalles_medicamento">Detalles de medicamento</string>
+    <string name="notas">Notas</string>
+    <string name="fotografia">Fotografía:</string>
+    <string name="detalles_cita_medica">Detalles de cita médica</string>
+    <string name="sitio_web">Sitio web</string>
+    <string name="detalles_de_medico">Detalles de Médico</string>
+    <string name="tipo_de_recordatorio">Tipo de recordatorio:</string>
+    <string name="notificaci_n">Notificación</string>
+    <string name="alarma">Alarma</string>
+    <string name="t_tulo">Título</string>
+    <string name="esteblecer_como_acceso_rapido">Esteblecer como acceso rapido</string>
+    <string name="a_adir_otra_ficha_de_contacto">Añadir otra ficha de contacto</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="remover">Remover</string>
+    <string name="fichas_de_contacto">Fichas de contacto:</string>
+    <string name="alertaFichaVacia">Es necesario añadir un título y al menos otro dato de contacto antes de añadir otra ficha de contacto</string>
+
+
+    <array name="especialidades">
+        <item>Médico familiar</item>
+        <item>Alergólogo</item>
+        <item>Anestesiólogo</item>
+        <item>Angiólogo</item>
+        <item>Cardiólogo</item>
+        <item>Dermatólogo</item>
+        <item>Endocrinólogo</item>
+        <item>Fisioterapeuta</item>
+        <item>Gastroenterólgo</item>
+        <item>Geriatra</item>
+        <item>Ginecólogo</item>
+        <item>Hematólogo</item>
+        <item>Homeópata</item>
+        <item>Infectólogo</item>
+        <item>Internista</item>
+        <item>Inmunólogo</item>
+        <item>Nefrólogo</item>
+        <item>Neumólogo</item>
+        <item>Neurólogo</item>
+        <item>Nutriólogo</item>
+        <item>Oftalmólogo</item>
+        <item>Ortopedista</item>
+        <item>Pediatra</item>
+        <item>Psiquiatra</item>
+        <item>Proctólogo</item>
+        <item>Radiólogo</item>
+        <item>Reumatólogo</item>
+        <item>Urólogo</item>
+        <item>Traumatólogo</item>
+    </array>
+
+    <array name="FormasFamaceuticas">
+        <item>Pastillas</item>
+        <item>Capsulas</item>
+        <item>Inyecciones</item>
+        <item>Gotas</item>
+        <item>Supositorios</item>
+        <item>Pomadas</item>
+        <item>Crema</item>
+        <item>Jarabes</item>
+        <item>Inhalador</item>
+        <item>Polvos</item>
+        <item>Esferas</item>
+        <item>Intravenosa</item>
+    </array>
+
+    <array name="Establecimientos">
+        <item>Farmacia</item>
+        <item>Laboratorio Análisis clínicos</item>
+        <item>Laboratorio de Imágenes medicas</item>
+
+    </array>
+
+    <string name="tomato">Tomato</string>
+    <string name="tangerine">Tangerine</string>
+    <string name="banana">Banana</string>
+    <string name="basil">Basil</string>
+    <string name="sage">Sage</string>
+    <string name="peacock">Peacock</string>
+    <string name="blueberry">Blueberry</string>
+    <string name="lavender">Lavender</string>
+    <string name="grape">Grape</string>
+    <string name="flamingo">Flamingo</string>
+    <string name="graphite">Graphite</string>
+    <string name="default_color">Default color</string>
+    <string name="title_activity_maps">Añadir ubicación</string>
+</resources>

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kps.spart.moskimedicationreminder.DetallesFarmaciaActivity"
+    android:background="@color/grisClaro">
+
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:elevation="0dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+</android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/CardView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:contentPadding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconoCitaMedica"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_pharmacy"
+                        android:tint="@color/blanco" />
+
+                    <TextView
+                        android:id="@+id/tituloCitaMedica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Farmacia del Ahorro"
+                        android:textAlignment="center"
+                        android:textColor="@color/blanco"
+                        android:textSize="@dimen/titulos" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/CardView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/blanco"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                app:contentPadding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CardView1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iconoLocFarmacia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_placeholder"
+                        android:tint="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tagTelefonoTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_toEndOf="@id/iconoLocFarmacia"
+                        android:text="@string/direccionFarmacia"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/subtitulos" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/tagTelefonoTV"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/UbicacionTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider1"
+                        android:layout_marginTop="8dp"
+                        android:text="Jardin de las palmas #106 la Cañada Apizaco, Tlaxcala"
+                        android:textColor="@color/grisOscuro"
+                        android:textSize="@dimen/normal" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/blanco"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                app:contentPadding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CardView2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iconoTelFarmacia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone_black_24dp"
+                        android:tint="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tagTelTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_toEndOf="@id/iconoTelFarmacia"
+                        android:text="@string/telefono"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/subtitulos" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/tagTelTV"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/Telefono1FarmaciaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider2"
+                        android:layout_marginTop="8dp"
+                        android:text="2414176496"
+                        android:textColor="@color/grisOscuro"
+                        android:textSize="@dimen/normal" />
+
+                    <TextView
+                        android:id="@+id/Telefono2FarmaciaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Telefono1FarmaciaTV"
+                        android:layout_marginTop="8dp"
+                        android:text="2414176496"
+                        android:textColor="@color/grisOscuro"
+                        android:textSize="@dimen/normal" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/blanco"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                app:contentPadding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView3">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iconoDirFarmacia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_web"
+                        android:tint="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tagUbicacionTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_toEndOf="@id/iconoDirFarmacia"
+                        android:text="@string/sitio_web"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/subtitulos" />
+
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/tagUbicacionTV"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/SitioWebFarmaciaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider6"
+                        android:layout_marginTop="8dp"
+                        android:text="http://www.fahorro.com"
+                        android:textColor="@color/grisOscuro"
+                        android:textSize="@dimen/normal" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/blanco"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                app:contentPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView4">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iconoEmailFarmacia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_email"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/tagEmailTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_toEndOf="@id/iconoEmailFarmacia"
+                        android:text="@string/email"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/subtitulos" />
+
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/tagEmailTV"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/EmailFarmaciaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider5"
+                        android:layout_marginTop="8dp"
+                        android:text="farmaciasDel@ahorro.com"
+                        android:textColor="@color/grisOscuro"
+                        android:textSize="@dimen/normal" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

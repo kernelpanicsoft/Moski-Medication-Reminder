@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_hoy"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_tratamientos"
+        android:icon="@drawable/ic_botiquin"
+        android:title="@string/title_tratamientos" />
+
+    <item
+        android:id="@+id/navigation_medicamentos"
+        android:icon="@drawable/ic_pildora"
+        android:title="@string/title_medicamentos" />
+
+
+    <item
+        android:id="@+id/navigation_directorio"
+        android:icon="@drawable/ic_directorio"
+        android:title="@string/title_directorio"/>
+
+    <item
+        android:id="@+id/navigation_citas"
+        android:icon="@drawable/ic_date"
+        android:title="@string/title_citas" />
+
+</menu>
