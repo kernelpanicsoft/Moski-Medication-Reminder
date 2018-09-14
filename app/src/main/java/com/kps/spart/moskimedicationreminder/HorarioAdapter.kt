@@ -37,7 +37,7 @@ class HorarioAdapter(private val items: Array<Toma>) : RecyclerView.Adapter<Hora
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
-        holder.iconoMedicamento.setImageResource(R.drawable.ic_pildora)
+        holder.iconoMedicamento.setImageResource(R.drawable.ic_capsula)
         holder.iconoTratamiento.setImageResource(R.drawable.ic_bookmark)
         holder.horaToma.text=items[position].horaToma
         holder.nombreTratamientoTV.text = items[position].nombreTratamiento

@@ -24,7 +24,7 @@ class AnadirTratamientoActivity : AppCompatActivity() {
         ab!!.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.anadirTratamiento)
 
-        SpinnerPrueba.adapter  = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TituloMedico))
+
 
     }
 

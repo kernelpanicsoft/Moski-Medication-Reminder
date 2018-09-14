@@ -2,6 +2,7 @@ package com.kps.spart.moskimedicationreminder
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_detalles_tratamiento.*
@@ -18,6 +19,11 @@ class DetallesTratamientoActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_edit, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

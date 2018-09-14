@@ -4,10 +4,11 @@
 
 
     <item
-        android:drawable="@color/colorPrimary" />
+        android:drawable="@color/colorPrimaryDark" />
 
     <item>
-        <bitmap android:src=""
+        <bitmap android:src="@drawable/ic_splash"
+            android:gravity="center"/>
     </item>
 
 

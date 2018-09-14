@@ -31,10 +31,9 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val v = inflater!!.inflate(R.layout.fragment_farmacias, container, false)
+        val v = inflater.inflate(R.layout.fragment_farmacias, container, false)
         val RV = v.findViewById<View>(R.id.RecViewFarmacias) as RecyclerView
         RV.setHasFixedSize(true)
 
@@ -49,7 +48,7 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
 
 
-        val dbHelper = mmrbd(context)
+        val dbHelper = mmrbd(context!!)
         val db = dbHelper.writableDatabase
 
         // Filter results WHERE "title" = 'My Title'
@@ -68,11 +67,11 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 null               // The sort order
         )
 
-       //  val cursor = db.rawQuery("select * from ${MMDContract.columnas.TABLA_FARMACIA}", null)
+        //  val cursor = db.rawQuery("select * from ${MMDContract.columnas.TABLA_FARMACIA}", null)
 
-     //   Toast.makeText(context,"Datos en el cursor " + cursor.count + " Con datos: " + DatabaseUtils.dumpCursorToString(cursor), Toast.LENGTH_SHORT).show()
+        //   Toast.makeText(context,"Datos en el cursor " + cursor.count + " Con datos: " + DatabaseUtils.dumpCursorToString(cursor), Toast.LENGTH_SHORT).show()
 
-       // adapter.swapCursor(cursor)
+        // adapter.swapCursor(cursor)
 
         val adapter = FarmaciasAdapter(farmacias, cursor)
         adapter.setOnClickListener(View.OnClickListener {
@@ -87,15 +86,16 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         return v
     }
 
+
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(context,MMDContract.columnas.CONTENT_BASE_URI, null, null, null, null) as Loader<Cursor>
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor>?, data: Cursor?) {
+    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
      // adapter.swapCursor(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor>?) {
+    override fun onLoaderReset(loader: Loader<Cursor>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
     }

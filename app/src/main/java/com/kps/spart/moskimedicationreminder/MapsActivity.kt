@@ -1,8 +1,17 @@
 package com.kps.spart.moskimedicationreminder
 
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -12,10 +21,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_maps.*
 import model.mmrbd
+import java.util.jar.Manifest
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private val SOLICITA_UBICACION_CLAVE = 23
+    private val SOLICITA_UBICACION_APROXIMADA = 24;
+    private lateinit var fusedLocationCliente: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +41,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        title = "Elegir ubicación en el mapa"
+        fusedLocationCliente = LocationServices.getFusedLocationProviderClient(this)
+        title = getString(R.string.elegir_ubicacion_en_el_mapa)
     }
 
     /**
@@ -42,14 +56,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
         mMap.uiSettings.isCompassEnabled = true
-    //    mMap.isMyLocationEnabled = true
+
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),SOLICITA_UBICACION_CLAVE)
+
+        }else{
+            mMap.isMyLocationEnabled = true
+
+        }
+
         mMap.uiSettings.isMyLocationButtonEnabled  = true
-        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isZoomControlsEnabled = false
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+      //  val sydney = LatLng(-34.0, 151.0)
+       // mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        centerMapToUserLocation()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -61,5 +87,44 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            SOLICITA_UBICACION_CLAVE -> {
+                if((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)){
+                    @SuppressLint
+                    mMap.isMyLocationEnabled = true
+                    centerMapToUserLocation()
+
+                }else{
+                    @SuppressLint
+                    mMap.isMyLocationEnabled = false
+
+                }
+            }
+        }
+    }
+
+    fun centerMapToUserLocation(){
+
+
+        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),SOLICITA_UBICACION_APROXIMADA)
+        }else{
+            fusedLocationCliente.lastLocation
+                    .addOnSuccessListener {
+                        location : Location->
+
+                  //      mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location!!.latitude,location.longitude)))
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 15.0f))
+
+                    }
+        }
+
+
+
+    }
+
+
 
 }

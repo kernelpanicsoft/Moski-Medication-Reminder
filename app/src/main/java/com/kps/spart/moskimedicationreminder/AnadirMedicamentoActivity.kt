@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
@@ -33,13 +34,14 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
         SpinnerTipoMedicamento.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TipoMedicamento))
 
+        var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
 
 
-        anadirFotoMedicamentoButton.setOnClickListener(
+        ColorMedicamentoButton.setOnClickListener(
                 View.OnClickListener {
 
 
-                    var selectedColor = resources.getColor(R.color.flamingo)
+
 
                     val mColors : IntArray =  resources.getIntArray(R.array.default_rainbow)
 
@@ -52,13 +54,15 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                             0,
                             Color.BLACK
                     )
+                    dialog.setOnColorSelectedListener(ColorPickerSwatch.OnColorSelectedListener {
 
-                    dialog.setOnColorSelectedListener {
-                        ColorPickerSwatch.OnColorSelectedListener { color ->
-                            selectedColor = color
-                            Toast.makeText(this@AnadirMedicamentoActivity,"Hola mundo desde el color picker",Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                        color ->
+                        selectedColor = color
+
+                        iconoMedicamento.setColorFilter(selectedColor)
+
+                    })
+
 
                     dialog.show(fragmentManager,"color_dialog_test")
                 }

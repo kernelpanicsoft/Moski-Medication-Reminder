@@ -42,7 +42,6 @@ class AnadirFarmaciaActivity : AppCompatActivity() {
 
         val buttonLocation = anadirLocationButton
         anadirLocationButton.setOnClickListener(View.OnClickListener {
-            Toast.makeText(this, "Estas mostrando algo" +  savePharmacyToBD(), Toast.LENGTH_SHORT).show()
 
             val nav = Intent(this@AnadirFarmaciaActivity,MapsActivity::class.java)
             startActivity(nav)

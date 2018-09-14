@@ -28,8 +28,7 @@ class MedicosFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater!!.inflate(R.layout.fragment_medicos, container, false)
         val RV = v.findViewById<View>(R.id.RecViewMedicos) as RecyclerView
         RV.setHasFixedSize(true)
@@ -64,7 +63,6 @@ class MedicosFragment : Fragment() {
         // Inflate the layout for this fragment
         return v
     }
-
 
     override fun onDetach() {
         super.onDetach()

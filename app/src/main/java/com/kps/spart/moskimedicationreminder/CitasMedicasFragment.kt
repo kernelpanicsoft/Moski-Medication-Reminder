@@ -29,8 +29,7 @@ class CitasMedicasFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val v = inflater!!.inflate(R.layout.fragment_citas_medicas, container, false)
         val RV = v.findViewById<View>(R.id.RecViewCitas) as RecyclerView
@@ -46,7 +45,7 @@ class CitasMedicasFragment : Fragment() {
         val adapter = CitasAdapter(o)
 
         adapter.setOnItemClickListener(View.OnClickListener {
-           val nav = Intent(context, DetallesCitaMedicaActivity::class.java)
+            val nav = Intent(context, DetallesCitaMedicaActivity::class.java)
             startActivity(nav)
 
         })
@@ -56,6 +55,8 @@ class CitasMedicasFragment : Fragment() {
         // Inflate the layout for this fragment
         return v
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

@@ -29,6 +29,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 >
 
                 <ImageView
@@ -155,7 +156,8 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="@dimen/normal"
                     android:text="@string/tipo_de_recordatorio"
                     app:layout_constraintStart_toStartOf="@+id/editText4"
                     app:layout_constraintTop_toBottomOf="@+id/editText4" />
@@ -222,7 +224,7 @@
                     android:layout_marginTop="16dp"
                     android:background="@color/rounded_border_edittext"
                     android:gravity="top"
-                    android:hint="Nota o indicaciones adicionales"
+                    android:hint="@string/nota_o_indicaciones_adicionales"
                     android:lines="5"
                     android:minHeight="40dp"
                     android:minLines="5"
@@ -247,6 +249,8 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="@dimen/normal"
                     android:text="@string/colorDistintivo"
                     app:layout_constraintStart_toStartOf="@+id/colorDistivoSpinner"
                     app:layout_constraintTop_toBottomOf="@+id/RadioButtonGroup" />

@@ -81,9 +81,34 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView10"
                 app:layout_constraintTop_toBottomOf="@+id/CampoNombreGenerico">
-
-
             </EditText>
+
+            <ImageView
+                android:id="@+id/IconoNota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_note"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/CampoNota" />
+
+            <EditText
+                android:id="@+id/CampoNota"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/rounded_border_edittext"
+                android:hint="@string/nota_o_indicaciones_especiales_para_este_medicamento"
+                android:lines="5"
+                android:minHeight="40dp"
+                android:minLines="5"
+                android:gravity="top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/IconoNota"
+                app:layout_constraintTop_toBottomOf="@+id/CampoDosis" />
 
 
             <Spinner
@@ -94,8 +119,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/background_spinner"
-                android:spinnerMode="dropdown"
                 android:minHeight="40dp"
+                android:spinnerMode="dialog"
                 app:layout_constraintEnd_toStartOf="@+id/iconoMedicamento"
                 app:layout_constraintStart_toEndOf="@+id/iconoCategoriaMedicamentoIV"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTipoMedicamento" />
@@ -107,6 +132,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_capsula"
+                android:tint="@color/azure"
                 app:layout_constraintBottom_toBottomOf="@+id/SpinnerTipoMedicamento"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewTipoMedicamento" />
@@ -115,24 +141,12 @@
                 android:id="@+id/textViewTipoMedicamento"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
 
+                android:layout_marginTop="8dp"
                 android:text="@string/tipo_medicamento"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/SpinnerTipoMedicamento"
-                app:layout_constraintTop_toBottomOf="@+id/CampoDosis" />
-
-
-            <TextView
-                android:id="@+id/ColorDistintivoTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="16dp"
-                android:text="@string/colorDistintivo"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/spinnerColorMedicamento"
-                app:layout_constraintTop_toBottomOf="@+id/iconoMedicamento" />
+                app:layout_constraintTop_toBottomOf="@+id/CampoNota" />
 
 
             <ImageView
@@ -194,21 +208,24 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_color_bucket"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/spinnerColorMedicamento"
+                app:layout_constraintBottom_toBottomOf="@+id/ColorMedicamentoButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/spinnerColorMedicamento" />
+                app:layout_constraintTop_toTopOf="@+id/ColorMedicamentoButton" />
 
-            <Spinner
-                android:id="@+id/spinnerColorMedicamento"
+            <Button
+                android:id="@+id/ColorMedicamentoButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/background_spinner"
+                android:layout_marginTop="16dp"
                 android:minHeight="40dp"
+                android:text="@string/colorDistintivo"
+                android:textColor="@color/blanco"
+                android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/colorIconoIV"
-                app:layout_constraintTop_toBottomOf="@+id/ColorDistintivoTV" />
+                app:layout_constraintTop_toBottomOf="@+id/iconoMedicamento" />
 
 
             <android.support.v7.widget.AppCompatButton
@@ -227,7 +244,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerColorMedicamento" />
+                app:layout_constraintTop_toBottomOf="@+id/ColorMedicamentoButton" />
 
         </android.support.constraint.ConstraintLayout>
 

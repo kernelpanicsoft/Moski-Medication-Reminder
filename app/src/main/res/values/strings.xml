@@ -34,6 +34,7 @@
         <item>Capsulas</item>
         <item>Jarabe</item>
         <item>Gotas</item>
+        <item>Gotas oftálmicas</item>
         <item>Pomadas</item>
         <item>Polvo</item>
         <item>Geles</item>
@@ -44,6 +45,7 @@
 
     <!-- Cadenas del fragmento Directorio -->
     <string name="Farmacias">Farmacias</string>
+    <string name="Establecimientos">Establecimientos</string>
     <string name="Medicos">Médicos</string>
     <string name="SeleccionAnadir">Anadir nuevo:</string>
 
@@ -72,7 +74,7 @@
     <string name="telefono">Teléfono</string>
     <string name="celular">Celular</string>
     <string name="email">Email</string>
-    <string name="colorDistintivo">Color distintivo:</string>
+    <string name="colorDistintivo">Color distintivo</string>
     <string name="icono">Icono</string>
 
 
@@ -148,6 +150,7 @@
         <item>Nutriólogo</item>
         <item>Oftalmólogo</item>
         <item>Ortopedista</item>
+        <item>Otorrinolaringólogo</item>
         <item>Pediatra</item>
         <item>Psiquiatra</item>
         <item>Proctólogo</item>
@@ -192,4 +195,8 @@
     <string name="graphite">Graphite</string>
     <string name="default_color">Default color</string>
     <string name="title_activity_maps">Añadir ubicación</string>
+    <string name="nota_o_indicaciones_adicionales">Nota o indicaciones adicionales</string>
+    <string name="nota_o_indicaciones_especiales_para_este_medicamento">Nota o indicaciones especiales para este medicamento</string>
+    <string name="elegir_ubicacion_en_el_mapa">Elegir ubicación en el mapa</string>
+    <string name="seleccionar_esta_ubicaci_n">Seleccionar esta ubicación</string>
 </resources>

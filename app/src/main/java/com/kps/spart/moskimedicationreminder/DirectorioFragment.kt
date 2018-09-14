@@ -35,8 +35,8 @@ class DirectorioFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater!!.inflate(R.layout.fragment_directorio, container, false)
 
         viewPager = v.findViewById(R.id.ViewPagerDirectorio)
@@ -51,7 +51,7 @@ class DirectorioFragment : Fragment() {
     private fun setupViewPager(pager: ViewPager) {
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(MedicosFragment(), getString(R.string.Medicos))
-        adapter.addFragment(FarmaciasFragment(), getString(R.string.Farmacias))
+        adapter.addFragment(FarmaciasFragment(), getString(R.string.Establecimientos))
 
         pager.adapter = adapter
     }

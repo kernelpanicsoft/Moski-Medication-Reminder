@@ -84,12 +84,11 @@
                 android:id="@+id/CardView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/blanco"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_placeholder"
-                        android:tint="@color/colorPrimary"/>
+                        android:tint="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/tagTelefonoTV"
@@ -145,12 +144,11 @@
                 android:id="@+id/cardView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/blanco"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_phone_black_24dp"
-                        android:tint="@color/colorPrimary"/>
+                        android:tint="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/tagTelTV"
@@ -215,12 +213,11 @@
                 android:id="@+id/cardView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/blanco"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +234,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_web"
-                        android:tint="@color/colorPrimary"/>
+                        android:tint="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/tagUbicacionTV"
@@ -280,7 +277,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/blanco"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"

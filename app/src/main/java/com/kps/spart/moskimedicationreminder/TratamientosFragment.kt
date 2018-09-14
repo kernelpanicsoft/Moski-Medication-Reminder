@@ -28,8 +28,7 @@ class TratamientosFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val v = inflater!!.inflate(R.layout.fragment_tratamientos, container, false)
         val RV = v.findViewById<RecyclerView>(R.id.RecViewTratamientos)
@@ -44,22 +43,16 @@ class TratamientosFragment : Fragment() {
         var tratamiento = Tratamiento()
         val t = Array(20){Tratamiento() }
 
-
-
-
-
         val adapter = TratamientosAdapter(t)
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesTratamientoActivity::class.java)
-                    startActivity(nav)
+            startActivity(nav)
         })
-
 
 
         RV.adapter = adapter
         return v
     }
-
 
     override fun onDetach() {
         super.onDetach()
