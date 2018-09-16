@@ -199,4 +199,33 @@
     <string name="nota_o_indicaciones_especiales_para_este_medicamento">Nota o indicaciones especiales para este medicamento</string>
     <string name="elegir_ubicacion_en_el_mapa">Elegir ubicación en el mapa</string>
     <string name="seleccionar_esta_ubicaci_n">Seleccionar esta ubicación</string>
+    <string name="titulo_tratamiento">Titulo tratamiento</string>
+    <string name="medicamento">Medicamento:</string>
+    <string name="continuidad">Continuidad:</string>
+    <string name="tipo_de_recodatorio">Tipo de recodatorio:</string>
+    <string name="fecha_de_inicio">Fecha de inicio:</string>
+    <string name="c_mo_desea_registrar_sus_tomas">¿Cómo desea registrar sus tomas?</string>
+    <string name="por_cada_x_horas">Por cada x horas</string>
+    <string name="por_x_veces_al_d_a">Por x veces al día</string>
+    <string name="incluir_horario_de_sue_o">¿Incluir horario de sueño?</string>
+    <string name="hora_de_dormir">Hora de dormir:</string>
+    <string name="hora_de_despertar">Hora de despertar:</string>
+    <string name="hora_de_la_primera_toma">Hora de la primera toma:</string>
+    <string name="programar_tomas">Programar tomas:</string>
+    <string name="registrar_usuario">Registrar usuario</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="edad">Edad</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="genero">Genero:</string>
+    <string name="usar_contrase_a">¿Usar contraseña?</string>
+    <string name="contrase_a">Contraseña</string>
+
+
+    <array name="continuidad_trataminto">
+        <item>Periodo</item>
+        <item>Indefinido</item>
+        <item>Hasta acabar medicamento</item>
+    </array>
 </resources>

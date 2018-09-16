@@ -40,7 +40,7 @@ class AnadirFarmaciaActivity : AppCompatActivity() {
 
 
 
-        val buttonLocation = anadirLocationButton
+
         anadirLocationButton.setOnClickListener(View.OnClickListener {
 
             val nav = Intent(this@AnadirFarmaciaActivity,MapsActivity::class.java)

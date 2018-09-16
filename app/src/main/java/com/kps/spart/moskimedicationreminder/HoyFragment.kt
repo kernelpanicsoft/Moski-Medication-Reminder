@@ -2,6 +2,7 @@ package com.kps.spart.moskimedicationreminder
 
 import Elementos.Toma
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -66,6 +67,8 @@ class HoyFragment : Fragment() {
         when (item!!.itemId) {
             R.id.itemFilter -> {
                 Toast.makeText(context, "Estás haciendo click en el icono sort", Toast.LENGTH_SHORT).show()
+                val nav = Intent(context,RegistrarUsuarioActivity::class.java)
+                startActivity(nav)
                 return true
             }
         }

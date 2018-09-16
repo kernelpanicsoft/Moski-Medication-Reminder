@@ -141,10 +141,9 @@
                 android:id="@+id/textViewTipoMedicamento"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="8dp"
                 android:text="@string/tipo_medicamento"
-                android:textSize="18sp"
+                android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toStartOf="@+id/SpinnerTipoMedicamento"
                 app:layout_constraintTop_toBottomOf="@+id/CampoNota" />
 

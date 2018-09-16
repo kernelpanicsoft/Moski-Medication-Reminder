@@ -28,7 +28,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/bookmark"
@@ -48,10 +48,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
-
+                android:inputType="text"
                 android:layout_marginTop="8dp"
                 android:background="@color/rounded_border_edittext"
-                android:hint="Titulo tratamiento"
+                android:hint="@string/titulo_tratamiento"
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/bookmark"
@@ -63,8 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Medicamento:"
-                android:textSize="@dimen/normal"
+                android:text="@string/medicamento"
+                android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText11" />
 
@@ -92,6 +92,7 @@
                 android:background="@color/rounded_border_edittext"
                 android:gravity="top"
                 android:hint="@string/nota_o_indicaciones_adicionales"
+                android:inputType="text"
                 android:lines="5"
                 android:minHeight="40dp"
                 android:minLines="5"
@@ -104,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="189dp" />
+                app:layout_constraintGuide_percent=".5" />
 
             <TextView
                 android:id="@+id/tipoDeContinuidadTV"
@@ -119,8 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Continuidad:"
-                android:textSize="@dimen/normal"
+                android:text="@string/continuidad"
+                android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/FechaInicioButton" />
 
@@ -144,8 +145,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Tipo de recodatorio:"
-                android:textSize="@dimen/normal"
+                android:text="@string/tipo_de_recodatorio"
+                android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText12" />
 
@@ -162,16 +163,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/tipoNotificacion">
 
                 <RadioButton
-                    android:id="@+id/alarmaRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alarma" />
-
-                <RadioButton
                     android:id="@+id/notificacionRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notificación" />
+                    android:textSize="@dimen/normal"
+                    android:text="@string/notificaci_n"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/alarmaRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/normal"
+                    android:text="@string/alarma" />
+
+
             </RadioGroup>
 
 
@@ -181,8 +187,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Fecha de inicio:"
-                android:textSize="@dimen/normal"
+                android:text="@string/fecha_de_inicio"
+                android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -195,24 +201,14 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorPrimary"
                 android:text="13/09/2018"
+                android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/blanco"
                 android:textSize="@dimen/normal"
+                android:minHeight="56dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fechaDeInicioNotaTV" />
-
-            <fragment
-                android:id="@+id/tipoTRatamientoFragment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodicidad" />
 
             <TextView
                 android:id="@+id/comoRegistrarLasTomasTV"
@@ -220,10 +216,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="¿Cómo desea registrar sus tomas?"
-                android:textSize="@dimen/normal"
+                android:text="@string/c_mo_desea_registrar_sus_tomas"
+                android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tipoTRatamientoFragment" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodicidad" />
 
 
             <RadioGroup
@@ -232,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:tooltipText="Hola mundo"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comoRegistrarLasTomasTV">
@@ -240,14 +236,137 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Por x veces al día"/>
+                    android:text="@string/por_cada_x_horas"
+                    android:textSize="@dimen/subtitulos"
+                    android:checked="true"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Por cada x horas"/>
+                    android:textSize="@dimen/normal"
+                    android:text="@string/por_x_veces_al_d_a"/>
+
+
 
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/HorarioDeSueñoTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/incluir_horario_de_sue_o"
+                android:textSize="@dimen/subtitulos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RadibuttonComoRegistrarTomas" />
+
+            <CheckBox
+                android:id="@+id/HorarioDeSueñoCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/HorarioDeSueñoTV"
+                app:layout_constraintStart_toEndOf="@+id/HorarioDeSueñoTV"
+                app:layout_constraintTop_toTopOf="@+id/HorarioDeSueñoTV" />
+
+
+            <TextView
+                android:id="@+id/HoraInicioDormir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/hora_de_dormir"
+                android:textSize="@dimen/subtitulos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HorarioDeSueñoTV" />
+
+
+            <Button
+                android:id="@+id/horaInicioSuenoButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:minHeight="56dp"
+                android:text="12:19"
+                android:textColor="@color/blanco"
+                android:textSize="@dimen/normal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HoraInicioDormir" />
+
+
+            <TextView
+                android:id="@+id/HoraFinDormir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/hora_de_despertar"
+                android:textSize="@dimen/subtitulos"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/HorarioDeSueñoTV" />
+
+            <Button
+                android:id="@+id/horaFinSuenoButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:minHeight="56dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="12:19"
+                android:textColor="@color/blanco"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/HoraFinDormir" />
+
+
+            <TextView
+                android:id="@+id/DefinirHoraPrimeraTomaTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/hora_de_la_primera_toma"
+                android:textSize="@dimen/subtitulos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horaInicioSuenoButton" />
+
+            <Button
+                android:id="@+id/primeraTomaButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:minHeight="56dp"
+                android:text="04:23"
+                android:textColor="@color/blanco"
+                android:textSize="@dimen/normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DefinirHoraPrimeraTomaTV" />
+
+
+            <TextView
+                android:id="@+id/programarTomasTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/programar_tomas"
+                android:textSize="@dimen/subtitulos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/primeraTomaButton" />
+
+
 
 
         </android.support.constraint.ConstraintLayout>
