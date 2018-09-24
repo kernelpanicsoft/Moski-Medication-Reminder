@@ -221,8 +221,19 @@
     <string name="genero">Genero:</string>
     <string name="usar_contrase_a">¿Usar contraseña?</string>
     <string name="contrase_a">Contraseña</string>
-
-
+    <string name="mi_perfil">Mi perfil</string>
+    <string name="configuraci_n">Configuración</string>
+    <string name="cambiar_usuario">Cambiar usuario</string>
+    <string name="usuarios_registrados">Usuarios registrados</string>
+    <string name="email_de_recuperaci_n">Email de recuperación:</string>
+    <string name="Entendido">Entendido</string>
+    <string name="Porque_usar_contrasena">¿Para que se usa la contraseña?</string>
+    <string name="explicacion_contrasena">Al usar una contraseña esta será solicitada para registrar o eliminar tratamientos, medicamentos y elementos en el directorio. \n\nPodrá cambiar las capacidades de la contraseña desde la configuración de la aplicación. \n\nDebe especificar un correo electrónico al cual se enviará la contraseña en caso de que esta sea olvidada.</string>
+    <string name="edad_necesaria">Es necesario especificar la edad del usuario</string>
+    <string name="nombre_apellido_necesario">Es necesario especificar el nombre, apellidos y edad para poder registrar un usuario nuevo</string>
+    <string name="contrasena_necesaria">Es necesario especificar una contraseña y un email de recuperación</string>
+    <string name="error_crear_usuario">Ocurrió un problema durante la creación del usuario, intente de nuevo</string>
+    <string name="usuario_creado_correctamente">Usuario registrado correctamente</string>
     <array name="continuidad_trataminto">
         <item>Periodo</item>
         <item>Indefinido</item>

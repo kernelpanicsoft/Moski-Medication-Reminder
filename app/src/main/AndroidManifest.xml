@@ -85,6 +85,12 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RegistrarUsuarioActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ListarUsuariosActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DetallesPerfilActivity"
             android:parentActivityName=".MainActivity"/>
     </application>
 

@@ -59,8 +59,10 @@ object MMDContract {
         const val NOMBRE_USUARIO = "nombre_usuario"
         const val APELLIDOS_USUARIO = "apellidos_usuarios"
         const val EDAD_USUARIO = "edad_usuario"
+        const val GENERO_USUARIO = "genero_usuario"
         const val PASSWORD_USUARIO = "password_usuario"
-        const val COLOR_DISTINTIVO_USUARIO = "color_distintivo_usuario"
+        const val IMAGEN_USUARIO = "imagen_usuario"
+        const val EMAIL_RECUPERACION = "email_recuperacion_usuario"
 
         const val TABLA_FARMACIA = "farmacia"
         const val NOMBRE_FARMACIA = "nombre_farmacia"

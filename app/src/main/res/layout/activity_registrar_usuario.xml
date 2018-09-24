@@ -22,160 +22,222 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView9"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="4dp"
-        app:layout_anchorGravity="left|top"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iconoUsuarioIV"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_user"
-                android:tint="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/nombreUsuarioET"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/rounded_border_edittext"
-                android:hint="@string/nombre"
-                android:inputType="text"
-                android:minHeight="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iconoUsuarioIV" />
-
-            <EditText
-                android:id="@+id/apellidoUsuarioET"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/rounded_border_edittext"
-                android:hint="@string/apellidos"
-                android:inputType="text"
-                android:minHeight="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nombreUsuarioET" />
-
-            <EditText
-                android:id="@+id/Edad"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/rounded_border_edittext"
-                android:hint="@string/edad"
-                android:inputType="text"
-                android:minHeight="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/apellidoUsuarioET" />
-
-            <TextView
-                android:id="@+id/GeneroTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/genero"
-                android:textSize="@dimen/normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Edad" />
-
-            <RadioGroup
-                android:id="@+id/GeneroRadioGroup"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/GeneroTextView">
-
-                <RadioButton
-                    android:id="@+id/masculinoRB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/masculino"
-                    android:textSize="@dimen/normal" />
-
-                <RadioButton
-                    android:id="@+id/femeninoRB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/femenino"
-                    android:textSize="@dimen/normal" />
-
-            </RadioGroup>
+                android:layout_margin="16dp"
+                app:cardCornerRadius="4dp"
+                app:layout_anchor="@+id/cardView9">
 
 
-            <TextView
-                android:id="@+id/usarContraseñaTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/usar_contrase_a"
-                android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/GeneroRadioGroup" />
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <CheckBox
-                android:id="@+id/usaPasswordCheckbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/usarContraseñaTV"
-                app:layout_constraintStart_toEndOf="@+id/usarContraseñaTV"
-                app:layout_constraintTop_toTopOf="@+id/usarContraseñaTV" />
+                    <ImageView
+                        android:id="@+id/iconoUsuarioIV"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_user"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/nombreUsuarioET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/rounded_border_edittext"
+                        android:hint="@string/nombre"
+                        android:inputType="text"
+                        android:minHeight="40dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iconoUsuarioIV" />
+
+                    <EditText
+                        android:id="@+id/apellidoUsuarioET"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/rounded_border_edittext"
+                        android:hint="@string/apellidos"
+                        android:inputType="text"
+                        android:minHeight="40dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nombreUsuarioET" />
+
+                    <EditText
+                        android:id="@+id/Edad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/rounded_border_edittext"
+                        android:hint="@string/edad"
+                        android:inputType="number"
+                        android:minHeight="40dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/apellidoUsuarioET" />
+
+                    <TextView
+                        android:id="@+id/GeneroTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/genero"
+                        android:textSize="@dimen/normal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/Edad" />
+
+                    <RadioGroup
+                        android:id="@+id/GeneroRadioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/GeneroTextView">
+
+                        <RadioButton
+                            android:id="@+id/masculinoRB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/masculino"
+                            android:textSize="@dimen/normal" />
+
+                        <RadioButton
+                            android:id="@+id/femeninoRB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/femenino"
+                            android:textSize="@dimen/normal" />
+
+                    </RadioGroup>
 
 
-            <EditText
-                android:id="@+id/PasswordEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/rounded_border_edittext"
-                android:hint="@string/contrase_a"
-                android:minHeight="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usarContraseñaTV" />
+                    <TextView
+                        android:id="@+id/usarContraseñaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/usar_contrase_a"
+                        android:textSize="@dimen/subtitulos"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/GeneroRadioGroup" />
 
-        </android.support.constraint.ConstraintLayout>
+                    <CheckBox
+                        android:id="@+id/usaPasswordCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/usarContraseñaTV"
+                        app:layout_constraintStart_toEndOf="@+id/usarContraseñaTV"
+                        app:layout_constraintTop_toTopOf="@+id/usarContraseñaTV" />
 
 
-    </android.support.v7.widget.CardView>
+                    <EditText
+                        android:id="@+id/PasswordEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/rounded_border_edittext"
+                        android:hint="@string/contrase_a"
+                        android:inputType="textPassword"
+                        android:minHeight="40dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/usarContraseñaTV" />
+
+                    <TextView
+                        android:id="@+id/emailRecuperacionTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/email_de_recuperaci_n"
+                        android:textSize="@dimen/normal"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/PasswordEditText" />
+
+                    <EditText
+                        android:id="@+id/RecoveryET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/rounded_border_edittext"
+                        android:inputType="textEmailAddress"
+                        android:minHeight="40dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/emailRecuperacionTV" />
+
+                    <ImageView
+                        android:id="@+id/iconoInfoTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/ic_round_help_button"
+                        android:tint="@color/colorPrimaryLight"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/usaPasswordCheckbox"
+                        app:layout_constraintTop_toTopOf="@+id/usaPasswordCheckbox"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/savePerfilFAB"
@@ -183,7 +245,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_gravity="right|bottom"/>
+        android:layout_gravity="end|bottom"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

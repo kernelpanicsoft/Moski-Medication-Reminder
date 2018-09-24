@@ -46,8 +46,6 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val farmacias = Array(20){Farmacia()}
 
 
-
-
         val dbHelper = mmrbd(context!!)
         val db = dbHelper.writableDatabase
 

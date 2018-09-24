@@ -8,10 +8,22 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
+
+    <ImageView
+        android:id="@+id/currentUserIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_user"
+        android:tint="@color/colorPrimaryLight"
+        android:layout_gravity="center_horizontal"
+        />
+    <!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My header title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+        -->
 
 </LinearLayout>
