@@ -239,4 +239,5 @@
         <item>Indefinido</item>
         <item>Hasta acabar medicamento</item>
     </array>
+    <string name="detalle_usuario">Detalles del usuario</string>
 </resources>
