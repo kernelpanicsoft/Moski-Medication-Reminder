@@ -1,16 +1,23 @@
 package com.kps.spart.moskimedicationreminder
 
+import Elementos.Usuario
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.BaseColumns
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_listar_usuarios.*
+import model.MMDContract
+import model.mmrbd
 
 class ListarUsuariosActivity : AppCompatActivity() {
+    lateinit var dbHelper: mmrbd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +28,8 @@ class ListarUsuariosActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
+
+        //Añadimos el evento al Floatting button
         add_user_fab.setOnClickListener {
             val nav = Intent(this@ListarUsuariosActivity,RegistrarUsuarioActivity::class.java)
             startActivity(nav)
@@ -34,7 +43,45 @@ class ListarUsuariosActivity : AppCompatActivity() {
         RecViewUsuarios.addItemDecoration(dividerIterator)
 
 
+        //Consultamos la base de datos usando un DB Helper.
+        dbHelper = mmrbd(this@ListarUsuariosActivity)
+        val db = dbHelper.readableDatabase
 
+        //Creamos la proyeccion de las columnas que deseamos leear
+        val projection = arrayOf(BaseColumns._ID,MMDContract.columnas.NOMBRE_USUARIO,MMDContract.columnas.APELLIDOS_USUARIO,MMDContract.columnas.GENERO_USUARIO,MMDContract.columnas.EDAD_USUARIO)
+
+        val cursor = db.query(
+                MMDContract.columnas.TABLA_USUARIO,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        )
+
+       val itemsIds = mutableListOf<Long>()
+        with(cursor){
+            while(moveToNext()){
+                val itemId = getLong(getColumnIndexOrThrow(BaseColumns._ID))
+                itemsIds.add(itemId)
+            }
+        }
+
+
+        //Asignamos el adaptador a nuestro Recyclerview
+        val adapter = UsuariosAdapter(cursor)
+
+
+        //Especificamos el escucha de eventos
+        adapter.setOnClickListener( View.OnClickListener {
+            val nav = Intent(this@ListarUsuariosActivity, DetallesPerfilActivity::class.java)
+            nav.putExtra("ID_USUARIO",5)
+            startActivity(nav)
+        }
+        )
+
+        RecViewUsuarios.adapter = adapter
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -46,5 +93,11 @@ class ListarUsuariosActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbHelper.close()
     }
 }

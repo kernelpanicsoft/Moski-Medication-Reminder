@@ -1,9 +1,12 @@
 package com.kps.spart.moskimedicationreminder
 
 import Elementos.Usuario
+import android.content.DialogInterface
+import android.content.Intent
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.view.Menu
@@ -105,9 +108,20 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         when (item.itemId){
             R.id.add_photo_item ->{
 
-                var usuario = Usuario()
-                Toast.makeText(this, "Datos del usuario : " + usuario.printUsuario(), Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(this@RegistrarUsuarioActivity)
+                builder.setTitle("Elegir imagen de perfil desde:")
+                        .setItems(R.array.origen_imagen) { dialog, which ->
+                            when(which){
+                                0 -> {}
+                                1 -> {
+                                    val takePictue = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                                    startActivityForResult(takePictue,1047)
+                                }
+                            }
 
+                        }
+                val dialog = builder.create()
+                dialog.show()
                 return true
             }
             android.R.id.home ->{

@@ -28,19 +28,7 @@
     <string name="ColorIconoMedicamento">Color Icono:</string>
     <string name="FormaFarmaceutica">Forma farmacéutica</string>
 
-    <array name="TipoMedicamento">
-        <item>Pastillas/Comprimidos</item>
-        <item>Tabletas</item>
-        <item>Capsulas</item>
-        <item>Jarabe</item>
-        <item>Gotas</item>
-        <item>Gotas oftálmicas</item>
-        <item>Pomadas</item>
-        <item>Polvo</item>
-        <item>Geles</item>
-        <item>Inhalador</item>
-        <item>Supositorios</item>
-    </array>
+
 
 
     <!-- Cadenas del fragmento Directorio -->
@@ -159,19 +147,19 @@
         <item>Urólogo</item>
         <item>Traumatólogo</item>
     </array>
-
-    <array name="FormasFamaceuticas">
-        <item>Pastillas</item>
+    
+    <array name="TipoMedicamento">
+        <item>Pastillas/Comprimidos</item>
+        <item>Tabletas</item>
         <item>Capsulas</item>
-        <item>Inyecciones</item>
+        <item>Jarabe</item>
         <item>Gotas</item>
-        <item>Supositorios</item>
+        <item>Gotas oftálmicas</item>
         <item>Pomadas</item>
-        <item>Crema</item>
-        <item>Jarabes</item>
-        <item>Inhalador</item>
         <item>Polvos</item>
-        <item>Esferas</item>
+        <item>Geles</item>
+        <item>Inhalador</item>
+        <item>Supositorios</item>
         <item>Intravenosa</item>
     </array>
 
@@ -234,10 +222,15 @@
     <string name="contrasena_necesaria">Es necesario especificar una contraseña y un email de recuperación</string>
     <string name="error_crear_usuario">Ocurrió un problema durante la creación del usuario, intente de nuevo</string>
     <string name="usuario_creado_correctamente">Usuario registrado correctamente</string>
-    <array name="continuidad_trataminto">
+    <array name="continuidad_tratamiento">
         <item>Periodo</item>
         <item>Indefinido</item>
         <item>Hasta acabar medicamento</item>
     </array>
     <string name="detalle_usuario">Detalles del usuario</string>
+    <array name="origen_imagen">
+        <item>Galería</item>
+        <item>Cámara</item>
+    </array>
+    <string name="elegir_imagen_perfil_desde">Elegir imagen de perfil desde:</string>
 </resources>

@@ -10,14 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import model.MMDContract
 
-const val ID_USUARIO = 0
-const val NOMBRE_USUARIO = 1
-const val APELLIDOS_USUARIO = 2
-const val EDAD_USUARIO = 3
-const val GENERO_USUARIO = 4
-const val PASSWORD_USUARIO = 5
-const val IMAGEN_USUARIO = 6
-const val EMAIL_RECUPERAICION = 7
+
 
 
 class UsuariosAdapter (private val cursor: Cursor) : RecyclerView.Adapter<UsuariosAdapter.ViewHolder>(), View.OnClickListener {
@@ -43,15 +36,15 @@ class UsuariosAdapter (private val cursor: Cursor) : RecyclerView.Adapter<Usuari
         cursor.moveToPosition(position)
 
         holder.icono.setImageResource(R.drawable.ic_user)
-        holder.nombre.text = cursor.getString(NOMBRE_USUARIO)
-        holder.apellidos.text = cursor.getString(APELLIDOS_USUARIO)
+        holder.nombre.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_USUARIO))
+        holder.apellidos.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.APELLIDOS_USUARIO))
     }
 
     override fun getItemCount(): Int {
         return cursor.count
     }
 
-    fun setOnClickListner(listener : View.OnClickListener){
+    fun setOnClickListener(listener : View.OnClickListener){
         this.listener = listener
     }
 
