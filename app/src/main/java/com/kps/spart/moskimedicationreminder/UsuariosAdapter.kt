@@ -2,6 +2,7 @@ package com.kps.spart.moskimedicationreminder
 
 import Elementos.Usuario
 import android.database.Cursor
+import android.provider.BaseColumns
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import model.MMDContract
+import model.mmrbd
 
 
-
-
-class UsuariosAdapter (private val cursor: Cursor) : RecyclerView.Adapter<UsuariosAdapter.ViewHolder>(), View.OnClickListener {
+class UsuariosAdapter (private var cursor: Cursor) : RecyclerView.Adapter<UsuariosAdapter.ViewHolder>(), View.OnClickListener {
     private var listener: View.OnClickListener? = null
 
 
@@ -50,6 +50,19 @@ class UsuariosAdapter (private val cursor: Cursor) : RecyclerView.Adapter<Usuari
 
     override fun onClick(v: View?) {
         listener?.onClick(v)
+    }
+
+    fun swapCursor(newCursor : Cursor){
+        cursor = newCursor
+        notifyDataSetChanged()
+    }
+
+    fun getUserID(position: Int) : Int{
+        return when(cursor.moveToPosition(position)){
+            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
+            else -> -1
+
+        }
     }
 
 

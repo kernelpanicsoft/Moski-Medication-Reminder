@@ -73,6 +73,7 @@ object MMDContract {
         const val WEB_FARMACIA = "web_farmacia"
         const val LATITUD_FARMACIA = "latitud_farmacia"
         const val LONGITUD_FARMACIA = "longitud_farmacia"
+        const val USUARIO_FARMACIA_ID = "usuario_farmacia_id"
 
         const val TABLA_MEDICAMENTO = "medicamento"
         const val NOMBRE_COMERCIAL_MEDICAMENTO = "nombre_comercial_medicamento"

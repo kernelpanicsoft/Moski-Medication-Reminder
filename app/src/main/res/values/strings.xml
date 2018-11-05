@@ -233,4 +233,6 @@
         <item>Cámara</item>
     </array>
     <string name="elegir_imagen_perfil_desde">Elegir imagen de perfil desde:</string>
+    <string name="registros">Registros:</string>
+    <string name="estadisticas">Estadisticas:</string>
 </resources>

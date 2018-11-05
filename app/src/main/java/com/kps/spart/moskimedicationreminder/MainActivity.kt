@@ -156,7 +156,6 @@ class MainActivity : AppCompatActivity() {
 
 
         outState?.putInt("currentFragmentId",currentSectionID)
-
     }
 
 

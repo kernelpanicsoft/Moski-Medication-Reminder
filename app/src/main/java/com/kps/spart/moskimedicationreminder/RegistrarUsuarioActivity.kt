@@ -1,8 +1,10 @@
 package com.kps.spart.moskimedicationreminder
 
 import Elementos.Usuario
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -114,8 +116,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                             when(which){
                                 0 -> {}
                                 1 -> {
-                                    val takePictue = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                                    startActivityForResult(takePictue,1047)
+                                    Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+                                        takePictureIntent.resolveActivity(packageManager)?.also {
+                                            startActivityForResult(takePictureIntent,1047)
+                                        }
+                                    }
+
                                 }
                             }
 
@@ -145,6 +151,13 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         }
 
         finish()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        if(requestCode == 1047 && resultCode == Activity.RESULT_OK){
+            val imageBitmap = data.extras.get("data") as Bitmap
+            iconoUsuarioIV.setImageBitmap(imageBitmap)
+        }
     }
 
     override fun onDestroy() {

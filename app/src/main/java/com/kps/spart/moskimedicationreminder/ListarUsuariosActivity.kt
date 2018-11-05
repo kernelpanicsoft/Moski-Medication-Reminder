@@ -1,12 +1,14 @@
 package com.kps.spart.moskimedicationreminder
 
 import Elementos.Usuario
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -60,6 +62,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
                 null
         )
 
+        /*
        val itemsIds = mutableListOf<Long>()
         with(cursor){
             while(moveToNext()){
@@ -67,22 +70,25 @@ class ListarUsuariosActivity : AppCompatActivity() {
                 itemsIds.add(itemId)
             }
         }
-
+        */
 
         //Asignamos el adaptador a nuestro Recyclerview
         val adapter = UsuariosAdapter(cursor)
 
-
         //Especificamos el escucha de eventos
         adapter.setOnClickListener( View.OnClickListener {
             val nav = Intent(this@ListarUsuariosActivity, DetallesPerfilActivity::class.java)
-            nav.putExtra("ID_USUARIO",5)
+            nav.putExtra("USER_ID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
             startActivity(nav)
         }
         )
 
         RecViewUsuarios.adapter = adapter
+
+        Toast.makeText(this@ListarUsuariosActivity,"Se esta llamando " + object{}.javaClass.enclosingMethod.name, Toast.LENGTH_SHORT).show()
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
@@ -93,6 +99,12 @@ class ListarUsuariosActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+      //  Toast.makeText(this@ListarUsuariosActivity,"Se esta llamando " + object{}.javaClass.enclosingMethod.name, Toast.LENGTH_SHORT).show()
     }
 
 
