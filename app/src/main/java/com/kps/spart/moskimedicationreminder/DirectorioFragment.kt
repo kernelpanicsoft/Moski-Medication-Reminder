@@ -1,11 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -18,8 +14,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
-import android.widget.Toast
 
 import java.util.ArrayList
 
@@ -51,7 +45,7 @@ class DirectorioFragment : Fragment() {
     private fun setupViewPager(pager: ViewPager) {
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(MedicosFragment(), getString(R.string.Medicos))
-        adapter.addFragment(FarmaciasFragment(), getString(R.string.Establecimientos))
+        adapter.addFragment(EstablecimientosFragment(), getString(R.string.Establecimientos))
 
         pager.adapter = adapter
     }
@@ -94,7 +88,7 @@ class DirectorioFragment : Fragment() {
                                 nav = Intent(context, AnadirMedicoActivity::class.java)
                                 startActivity(nav)
                             } else if (which == 1) {
-                                nav = Intent(context, AnadirFarmaciaActivity::class.java)
+                                nav = Intent(context, AnadirEstablecimientoActivity::class.java)
                                 startActivity(nav)
                             }
                         }

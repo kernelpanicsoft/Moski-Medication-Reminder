@@ -16,17 +16,6 @@ class Usuario{
 
 
 
-    /*
-    init {
-        nombre = ""
-        apellidos = ""
-        edad = 0
-        imagen = ""
-        password = ""
-        email_recuperacion = ""
-
-    }
-*/
 
     fun printUsuario() : String{
         return nombre + " " + apellidos + " " + edad.toString() + " " + " " + genero + " " + password + " " + email_recuperacion + " " + imagen

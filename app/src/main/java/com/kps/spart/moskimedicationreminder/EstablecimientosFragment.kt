@@ -1,7 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -13,23 +12,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 
-import Elementos.Farmacia
-import android.content.CursorLoader
-import android.database.Cursor
-import android.database.DatabaseUtils
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.Loader
+import Elementos.Establecimiento
 import model.MMDContract
 import model.mmrbd
 
 
-class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+class EstablecimientosFragment : Fragment() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -43,20 +32,20 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val farmacias = Array(20){Farmacia()}
+        val farmacias = Array(20){Establecimiento()}
 
 
         val dbHelper = mmrbd(context!!)
         val db = dbHelper.writableDatabase
 
         // Filter results WHERE "title" = 'My Title'
-        val selection = "${MMDContract.columnas.NOMBRE_FARMACIA} = ?"
+        val selection = "${MMDContract.columnas.NOMBRE_ESTABLECIMIENTO} = ?"
         val selectionArgs = arrayOf("My Title")
 
 
 
         val cursor = db.query(
-                MMDContract.columnas.TABLA_FARMACIA,   // The table to query
+                MMDContract.columnas.TABLA_ESTABLECIMIENTO,   // The table to query
                 null,             // The array of columns to return (pass null to get all)
                 null,              // The columns for the WHERE clause
                 null,          // The values for the WHERE clause
@@ -65,13 +54,9 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 null               // The sort order
         )
 
-        //  val cursor = db.rawQuery("select * from ${MMDContract.columnas.TABLA_FARMACIA}", null)
 
-        //   Toast.makeText(context,"Datos en el cursor " + cursor.count + " Con datos: " + DatabaseUtils.dumpCursorToString(cursor), Toast.LENGTH_SHORT).show()
 
-        // adapter.swapCursor(cursor)
-
-        val adapter = FarmaciasAdapter(farmacias, cursor)
+        val adapter = EstablecimientoAdapter(cursor)
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesFarmaciaActivity::class.java)
             startActivity(nav)
@@ -79,24 +64,12 @@ class FarmaciasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         RV.adapter = adapter
 
-        Toast.makeText(context,"Tamaño de adaptador: " + adapter.itemCount +  "Tamaño del cursor: " + cursor.count, Toast.LENGTH_SHORT).show()
 
         return v
     }
 
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return CursorLoader(context,MMDContract.columnas.CONTENT_BASE_URI, null, null, null, null) as Loader<Cursor>
-    }
 
-    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-     // adapter.swapCursor(data)
-    }
-
-    override fun onLoaderReset(loader: Loader<Cursor>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
-    }
 
 
 

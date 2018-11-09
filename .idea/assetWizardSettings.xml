@@ -29,8 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_intravenous" />
-                            <entry key="sourceFile" value="C:\Users\CEdua\Documents\IconosVector\intravenous.svg" />
+                            <entry key="outputName" value="ic_list" />
+                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\list.svg" />
                           </map>
                         </option>
                       </PersistentState>

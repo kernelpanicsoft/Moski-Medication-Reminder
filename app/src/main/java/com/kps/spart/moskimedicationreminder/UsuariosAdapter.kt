@@ -27,8 +27,7 @@ class UsuariosAdapter (private var cursor: Cursor) : RecyclerView.Adapter<Usuari
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item_usuario,parent,false)
-
-                v.setOnClickListener(this)
+        v.setOnClickListener(this)
         return ViewHolder(v)
     }
 

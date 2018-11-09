@@ -15,7 +15,7 @@ public class ProviderMMR : ContentProvider() {
         var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
         init{
-            uriMatcher.addURI(MMDContract.columnas.AUTHORITY,MMDContract.columnas.TABLA_FARMACIA,1)
+            uriMatcher.addURI(MMDContract.columnas.AUTHORITY,MMDContract.columnas.TABLA_ESTABLECIMIENTO,1)
         }
 
     }
@@ -29,7 +29,7 @@ public class ProviderMMR : ContentProvider() {
     override fun insert(uri: Uri?, values: ContentValues?): Uri {
         val db = dbHelper.writableDatabase
 
-        val rowID = db.insert(MMDContract.columnas.TABLA_FARMACIA, null, values)
+        val rowID = db.insert(MMDContract.columnas.TABLA_ESTABLECIMIENTO, null, values)
 
 
         val uri_actividad = ContentUris.withAppendedId(MMDContract.columnas.CONTENT_BASE_URI, rowID)

@@ -39,7 +39,7 @@
 
     <array name="anadirnuevo">
         <item>Médico</item>
-        <item>Farmacia</item>
+        <item>Establecimiento</item>
     </array>
 
 
@@ -235,4 +235,14 @@
     <string name="elegir_imagen_perfil_desde">Elegir imagen de perfil desde:</string>
     <string name="registros">Registros:</string>
     <string name="estadisticas">Estadisticas:</string>
+    <string name="error_crear_establecimiento">Ocurrió un problema durante la creación del nuevo establecimiento, intente de nuevo</string>
+    <string name="establecimiento_creado_correctamente">Establecimiento registrado correctamente</string>
+    <string name="nombre_establecimiento">Nombre Establecimiento</string>
+    <string name="anadir_establecimiento">Añadir establecimiento</string>
+    <array name="tipo_establecimiento">
+        <item>Farmacía</item>
+        <item>Laboratorió de análisis clínicos</item>
+        <item>Laboratorió de Imagénes médicas</item>
+        <item>Tienda de oparatos Ortopedicos</item>
+    </array>
 </resources>

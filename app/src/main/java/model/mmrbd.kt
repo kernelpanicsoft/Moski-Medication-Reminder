@@ -24,20 +24,21 @@ private const val SQL_DELETE_USER_TABLE = "DROP TABLE IF EXISTS ${MMDContract.co
 
 private const val SQL_CREATE_APPOINTMENT_TABLE = "CREATE TABLE ${MMDContract.columnas.TABLA_CITA} ("
 
-private const val SQL_CREATE_PHARMACY: String =  "CREATE TABLE ${MMDContract.columnas.TABLA_FARMACIA} (" +
+private const val SQL_CREATE_PHARMACY: String =  "CREATE TABLE ${MMDContract.columnas.TABLA_ESTABLECIMIENTO} (" +
                                                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                                                        "${MMDContract.columnas.NOMBRE_FARMACIA} TEXT NOT NULL," +
-                                                        "${MMDContract.columnas.DIRECCION_FARMACIA} TEXT NOT NULL," +
-                                                        "${MMDContract.columnas.TELEFONO1_FARMACIA} TEXT," +
-                                                        "${MMDContract.columnas.TELEFONO2_FARMACIA} TEXT," +
-                                                        "${MMDContract.columnas.EMAIL_FARMACIA} TEXT," +
-                                                        "${MMDContract.columnas.WEB_FARMACIA} TEXT," +
-                                                        "${MMDContract.columnas.LATITUD_FARMACIA} REAL," +
-                                                        "${MMDContract.columnas.LONGITUD_FARMACIA} REAL," +
-                                                        "${MMDContract.columnas.USUARIO_FARMACIA_ID} INTEGER," +
-                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_FARMACIA_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}))"
+                                                        "${MMDContract.columnas.NOMBRE_ESTABLECIMIENTO} TEXT NOT NULL," +
+                                                        "${MMDContract.columnas.TIPO_ESTABLECIMIENTO} TEXT NOT NULL," +
+                                                        "${MMDContract.columnas.DIRECCION_ESTABLECIMIENTO} TEXT NOT NULL," +
+                                                        "${MMDContract.columnas.TELEFONO1_ESTABLECIMIENTO} TEXT," +
+                                                        "${MMDContract.columnas.TELEFONO2_ESTABLECIMIENTO} TEXT," +
+                                                        "${MMDContract.columnas.EMAIL_ESTABLECIMIENTO} TEXT," +
+                                                        "${MMDContract.columnas.WEB_ESTABLECIMIENTO} TEXT," +
+                                                        "${MMDContract.columnas.LATITUD_ESTABLECIMIENTO} REAL," +
+                                                        "${MMDContract.columnas.LONGITUD_ESTABLECIMIENTO} REAL," +
+                                                        "${MMDContract.columnas.USUARIO_ESTABLECIMIENTO_ID} INTEGER," +
+                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_ESTABLECIMIENTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}))"
 
-private const val SQL_DELETE_PHARMACY: String =  "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_FARMACIA}"
+private const val SQL_DELETE_PHARMACY: String =  "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_ESTABLECIMIENTO}"
 
 
 

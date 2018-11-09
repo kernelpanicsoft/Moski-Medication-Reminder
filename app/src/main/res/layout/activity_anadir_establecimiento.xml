@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kps.spart.moskimedicationreminder.AnadirFarmaciaActivity">
+    tools:context="com.kps.spart.moskimedicationreminder.AnadirEstablecimientoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -43,13 +43,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText5"
+                app:layout_constraintBottom_toBottomOf="@+id/NombreEstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText5"
+                app:layout_constraintTop_toTopOf="@+id/NombreEstablecimientoTV"
                 app:srcCompat="@drawable/ic_pharmacy" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/NombreEstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -57,31 +57,57 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:ems="10"
-                android:hint="@string/nombreFarmacia"
+                android:hint="@string/nombre_establecimiento"
                 android:inputType="textPersonName"
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView17"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editText6"
+            <ImageView
+                android:id="@+id/iconoTipoEstablecimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_list"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/SpinnerTipoEstablecimiento"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/SpinnerTipoEstablecimiento" />
+
+            <Spinner
+                android:id="@+id/SpinnerTipoEstablecimiento"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/background_spinner"
+                android:minHeight="40dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iconoTipoEstablecimiento"
+                app:layout_constraintTop_toBottomOf="@+id/NombreEstablecimientoTV" />
+
+            <EditText
+                android:id="@+id/DireccionEstablecimientoTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:ems="10"
                 android:hint="@string/direccionFarmacia"
                 android:inputType="textPostalAddress"
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView24"
-                app:layout_constraintTop_toBottomOf="@+id/editText5" />
+                app:layout_constraintTop_toBottomOf="@+id/SpinnerTipoEstablecimiento" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/Telefono1EstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -94,10 +120,10 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView26"
-                app:layout_constraintTop_toBottomOf="@+id/editText6" />
+                app:layout_constraintTop_toBottomOf="@+id/DireccionEstablecimientoTV" />
 
             <EditText
-                android:id="@+id/editText8"
+                android:id="@+id/Telefono2EstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -110,10 +136,10 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView27"
-                app:layout_constraintTop_toBottomOf="@+id/editText7" />
+                app:layout_constraintTop_toBottomOf="@+id/Telefono1EstablecimientoTV" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/EmailEstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -126,7 +152,7 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView25"
-                app:layout_constraintTop_toBottomOf="@+id/editText8" />
+                app:layout_constraintTop_toBottomOf="@+id/Telefono2EstablecimientoTV" />
 
             <ImageView
                 android:id="@+id/imageView24"
@@ -136,9 +162,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText6"
+                app:layout_constraintBottom_toBottomOf="@+id/DireccionEstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText6"
+                app:layout_constraintTop_toTopOf="@+id/DireccionEstablecimientoTV"
                 app:srcCompat="@drawable/ic_placeholder" />
 
             <ImageView
@@ -149,9 +175,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText9"
+                app:layout_constraintBottom_toBottomOf="@+id/EmailEstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText9"
+                app:layout_constraintTop_toTopOf="@+id/EmailEstablecimientoTV"
                 app:srcCompat="@drawable/ic_email" />
 
             <ImageView
@@ -162,9 +188,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText7"
+                app:layout_constraintBottom_toBottomOf="@+id/Telefono1EstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText7"
+                app:layout_constraintTop_toTopOf="@+id/Telefono1EstablecimientoTV"
                 app:srcCompat="@drawable/ic_phone_black_24dp" />
 
             <ImageView
@@ -175,9 +201,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText8"
+                app:layout_constraintBottom_toBottomOf="@+id/Telefono2EstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText8"
+                app:layout_constraintTop_toTopOf="@+id/Telefono2EstablecimientoTV"
                 app:srcCompat="@drawable/ic_phone_black_24dp" />
 
 
@@ -188,12 +214,12 @@
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_web"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText10"
+                app:layout_constraintBottom_toBottomOf="@+id/SitioWebEstablecimeintoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText10" />
+                app:layout_constraintTop_toTopOf="@+id/SitioWebEstablecimeintoTV" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/SitioWebEstablecimeintoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -206,7 +232,7 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView28"
-                app:layout_constraintTop_toBottomOf="@+id/editText9" />
+                app:layout_constraintTop_toBottomOf="@+id/EmailEstablecimientoTV" />
 
             <Button
                 android:id="@+id/anadirLocationButton"
@@ -224,7 +250,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText10" />
+                app:layout_constraintTop_toBottomOf="@+id/SitioWebEstablecimeintoTV" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

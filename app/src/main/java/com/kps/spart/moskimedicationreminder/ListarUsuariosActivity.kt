@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.BaseColumns
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -62,15 +63,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
                 null
         )
 
-        /*
-       val itemsIds = mutableListOf<Long>()
-        with(cursor){
-            while(moveToNext()){
-                val itemId = getLong(getColumnIndexOrThrow(BaseColumns._ID))
-                itemsIds.add(itemId)
-            }
-        }
-        */
+
 
         //Asignamos el adaptador a nuestro Recyclerview
         val adapter = UsuariosAdapter(cursor)
@@ -79,6 +72,13 @@ class ListarUsuariosActivity : AppCompatActivity() {
         adapter.setOnClickListener( View.OnClickListener {
             val nav = Intent(this@ListarUsuariosActivity, DetallesPerfilActivity::class.java)
             nav.putExtra("USER_ID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
+
+            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@ListarUsuariosActivity)
+
+            with(sharedPref.edit()){
+                putInt("actualUserID",RecViewUsuarios.getChildAdapterPosition(it))
+                commit()
+            }
             startActivity(nav)
         }
         )
@@ -111,5 +111,11 @@ class ListarUsuariosActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         dbHelper.close()
+    }
+
+    fun setCurrentUserActive(currentUserID : Int){
+
+
+
     }
 }

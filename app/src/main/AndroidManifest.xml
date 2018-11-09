@@ -38,7 +38,7 @@
             android:name=".AnadirMedicoActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AnadirFarmaciaActivity"
+            android:name=".AnadirEstablecimientoActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AnadirTratamientoActivity"
