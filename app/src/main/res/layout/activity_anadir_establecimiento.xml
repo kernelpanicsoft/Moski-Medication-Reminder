@@ -30,6 +30,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/containerStablishment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -238,19 +239,32 @@
                 android:id="@+id/anadirLocationButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/rounded_button"
-                android:text="Añadir ubicación en Mapa"
+                android:text="@string/a_adir_ubicaci_n_en_mapa"
                 android:textColor="@color/blanco"
                 android:textSize="@dimen/normal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/SitioWebEstablecimeintoTV" />
+
+            <FrameLayout
+                android:id="@+id/mapaAnadido"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anadirLocationButton" />
+
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

@@ -1,37 +1,40 @@
 package com.kps.spart.moskimedicationreminder
 
 import Elementos.Establecimiento
-import android.content.ContentValues
+import android.app.Activity
 import android.content.Intent
-import android.support.v4.app.NavUtils
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.Toast
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import model.mmrbd
 import kotlinx.android.synthetic.main.activity_anadir_establecimiento.*
 import model.MMDContract
+import java.lang.Exception
+import kotlin.math.ln
 
 
 class AnadirEstablecimientoActivity : AppCompatActivity() {
 
     lateinit var dbHelper : mmrbd
     lateinit var establecimiento: Establecimiento
+    var latitud : Double = 0.0
+    var longitud : Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anadir_establecimiento)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
@@ -54,11 +57,37 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             }
         }
         anadirLocationButton.setOnClickListener{
-            val nav = Intent(this@AnadirEstablecimientoActivity,MapsActivity::class.java)
-            startActivity(nav)
+            if(latitud == 0.0 && longitud == 0.0) {
+                val nav = Intent(this@AnadirEstablecimientoActivity, MapsActivity::class.java)
+                startActivityForResult(nav, 6832)
+            }else{
+                disableMapFragment()
+            }
         }
+        //Si latitud o longitud != null o != 0.0 añade el mapa en rotación de pantalla
+        try{
+            latitud = savedInstanceState?.getDouble("latitud")!!
+            longitud = savedInstanceState.getDouble("longitud")
+            if(latitud != 0.0 && longitud != 0.0){
+                addMapFragment(latitud,longitud)
+            }
 
 
+        }catch (e : Exception){}
+
+       // Toast.makeText(this@AnadirEstablecimientoActivity,"Valores recuperados en rotacion: " + latitud + " " + longitud, Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 6832){
+            if(resultCode == Activity.RESULT_OK){
+                latitud = data?.getDoubleExtra("lat",0.0)!!
+                longitud = data.getDoubleExtra("lng", 0.0)
+                addMapFragment(latitud,longitud)
+                anadirLocationButton.text = getString(R.string.eliminar_ubicacion)
+            }
+        }
     }
 
 
@@ -88,6 +117,35 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
 
     }
+    //Añade un fragmento que muestra un mapa con un marcador indicando la ubicacion ingresada por el usuario
+    private fun addMapFragment(lat : Double, lng: Double){
+        mapaAnadido.visibility = View.VISIBLE
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val mapFragment = MapFragment()
+        fragmentTransaction.add(R.id.mapaAnadido,mapFragment)
+        fragmentTransaction.commit()
+
+        mapFragment.getMapAsync {
+            val markerLocation = LatLng(lat, lng)
+            it.addMarker(MarkerOptions().position(markerLocation))
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation, 15.0f))
+        }
+    }
+
+    //Elimina el fragmento especificado en el punto anterior y restablece la ubicación en (0,0)
+    private fun disableMapFragment(){
+        val mapFragment = fragmentManager.findFragmentById(R.id.mapaAnadido)
+        if(mapFragment != null){
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.remove(mapFragment).commit()
+        }
+        mapaAnadido.visibility = View.GONE
+        latitud = 0.0
+        longitud = 0.0
+        anadirLocationButton.text=getString(R.string.a_adir_ubicaci_n_en_mapa)
+    }
 
 
     private fun saveEstablishmentToDB(establecimiento: Establecimiento){
@@ -102,6 +160,13 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             Toast.makeText(this@AnadirEstablecimientoActivity, getString(R.string.establecimiento_creado_correctamente), Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putDouble("latitud", latitud)
+        outState?.putDouble("longitud", longitud)
     }
 
     override fun onDestroy(){

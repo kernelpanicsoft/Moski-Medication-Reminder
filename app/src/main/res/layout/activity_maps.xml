@@ -55,6 +55,7 @@
         android:id="@+id/lacationPin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:src="@drawable/ic_placeholder"
         android:layout_gravity="center"
         android:tint="@color/colorPrimary"/>

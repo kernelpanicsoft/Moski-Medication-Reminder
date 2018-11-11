@@ -1,27 +1,24 @@
 package com.kps.spart.moskimedicationreminder
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_maps.*
-import model.mmrbd
-import java.util.jar.Manifest
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -76,6 +73,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
         centerMapToUserLocation()
+
+        selectLocationButton.setOnClickListener{
+            val returnIntent = Intent()
+            mMap.cameraPosition.target
+            returnIntent.putExtra("lat",mMap.cameraPosition.target.latitude)
+            returnIntent.putExtra("lng", mMap.cameraPosition.target.longitude)
+
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -105,7 +112,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    fun centerMapToUserLocation(){
+    private fun centerMapToUserLocation(){
 
 
         if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
