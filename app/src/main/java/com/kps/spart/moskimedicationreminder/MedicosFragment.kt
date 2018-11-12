@@ -57,7 +57,6 @@ class MedicosFragment : Fragment() {
         })
 
         RV.adapter = adapter
-        Toast.makeText(context,"# en adaptador: " + adapter.itemCount, Toast.LENGTH_SHORT).show()
 
 
         // Inflate the layout for this fragment

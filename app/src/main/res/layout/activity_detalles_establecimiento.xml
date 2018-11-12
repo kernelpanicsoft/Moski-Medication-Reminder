@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kps.spart.moskimedicationreminder.DetallesFarmaciaActivity"
+    tools:context="com.kps.spart.moskimedicationreminder.DetallesEstablecimientoActivity"
     android:background="@color/grisClaro">
 
 <android.support.design.widget.AppBarLayout

@@ -68,7 +68,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
         //Asignamos el adaptador a nuestro Recyclerview
         val adapter = UsuariosAdapter(cursor)
 
-        //Especificamos el escucha de eventos
+        //Especificamos el escucha de eventos para definir el usuario activo de la aplicacion
         adapter.setOnClickListener( View.OnClickListener {
             val nav = Intent(this@ListarUsuariosActivity, DetallesPerfilActivity::class.java)
             nav.putExtra("USER_ID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
@@ -79,7 +79,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
                 putInt("actualUserID",RecViewUsuarios.getChildAdapterPosition(it))
                 commit()
             }
-            startActivity(nav)
+            //startActivity(nav)
         }
         )
 

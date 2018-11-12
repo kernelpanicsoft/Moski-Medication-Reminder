@@ -15,6 +15,9 @@ class Establecimiento {
     var telefono2: String? = null
     var email: String? = null
     var sitioWeb : String? = null
+    var latitud : Double? = null
+    var longitud : Double? = null
+    var usuarioID : Int? = null
 
 
     fun toContentValues() : ContentValues{
@@ -27,9 +30,10 @@ class Establecimiento {
         contentValues.put(MMDContract.columnas.TELEFONO2_ESTABLECIMIENTO, telefono2)
         contentValues.put(MMDContract.columnas.WEB_ESTABLECIMIENTO, sitioWeb)
         contentValues.put(MMDContract.columnas.EMAIL_ESTABLECIMIENTO, email)
-
+        contentValues.put(MMDContract.columnas.LATITUD_ESTABLECIMIENTO, latitud)
+        contentValues.put(MMDContract.columnas.LONGITUD_ESTABLECIMIENTO, longitud)
+        contentValues.put(MMDContract.columnas.USUARIO_ESTABLECIMIENTO_ID, usuarioID)
         return contentValues
     }
-
 
 }

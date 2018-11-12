@@ -2,9 +2,11 @@ package com.kps.spart.moskimedicationreminder
 
 import Elementos.Establecimiento
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -106,7 +108,15 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
                 establecimiento.email = EmailEstablecimientoTV.text.toString()
                 establecimiento.sitioWeb = SitioWebEstablecimeintoTV.text.toString()
 
-                finish()
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirEstablecimientoActivity)
+
+                val usuarioID = sharedPref.getInt("actualUserID",-1)
+
+                if(usuarioID != -1){
+                    establecimiento.usuarioID = usuarioID
+                    saveEstablishmentToDB(establecimiento)
+                }
+
                 return true
             }
             android.R.id.home -> {
@@ -152,6 +162,8 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         val db = dbHelper.writableDatabase
         val errorAtInsertion : Long = -1
 
+
+
         val newRowId = db.insert(MMDContract.columnas.TABLA_ESTABLECIMIENTO,null,establecimiento.toContentValues())
 
         if(newRowId == errorAtInsertion){
@@ -159,6 +171,8 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this@AnadirEstablecimientoActivity, getString(R.string.establecimiento_creado_correctamente), Toast.LENGTH_SHORT).show()
         }
+
+        finish()
 
     }
 

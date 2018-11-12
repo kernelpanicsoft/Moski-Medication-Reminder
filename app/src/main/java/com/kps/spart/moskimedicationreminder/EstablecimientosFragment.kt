@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 
 import Elementos.Establecimiento
 import model.MMDContract
@@ -58,7 +57,7 @@ class EstablecimientosFragment : Fragment() {
 
         val adapter = EstablecimientoAdapter(cursor)
         adapter.setOnClickListener(View.OnClickListener {
-            val nav = Intent(context, DetallesFarmaciaActivity::class.java)
+            val nav = Intent(context, DetallesEstablecimientoActivity::class.java)
             startActivity(nav)
         })
 
