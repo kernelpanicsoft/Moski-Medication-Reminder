@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 
 import Elementos.Establecimiento
+import android.database.DatabaseUtils
+import android.util.Log
 import model.MMDContract
 import model.mmrbd
 
@@ -54,10 +56,12 @@ class EstablecimientosFragment : Fragment() {
         )
 
 
+        Log.v("cursor establecimientos", DatabaseUtils.dumpCursorToString(cursor))
 
         val adapter = EstablecimientoAdapter(cursor)
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesEstablecimientoActivity::class.java)
+            nav.putExtra("ESTABLISHMENT_ID", adapter.getEstablishMentID(RV.getChildAdapterPosition(it)))
             startActivity(nav)
         })
 

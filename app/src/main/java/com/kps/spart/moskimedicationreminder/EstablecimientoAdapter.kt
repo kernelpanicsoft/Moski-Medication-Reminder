@@ -30,7 +30,7 @@ class EstablecimientoAdapter (private val cursor: Cursor) : RecyclerView.Adapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EstablecimientoAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_farmacia, parent, false)
+                .inflate(R.layout.list_item_establecimiento, parent, false)
         v.setOnClickListener(this)
         return ViewHolder(v)
     }

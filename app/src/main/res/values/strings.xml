@@ -241,10 +241,17 @@
     <string name="anadir_establecimiento">Añadir establecimiento</string>
     <string name="a_adir_ubicaci_n_en_mapa">Añadir ubicación en Mapa</string>
     <string name="eliminar_ubicacion">Eliminar ubicación</string>
+    <string name="no_se_pudo_cargar_usuario">No se pudo cargar el usuario</string>
+    <string name="detalles_establecimiento">Detalles del establecimiento</string>
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
         <item>Laboratorió de análisis clínicos</item>
         <item>Laboratorió de Imagénes médicas</item>
         <item>Tienda de oparatos Ortopedicos</item>
+    </array>
+
+    <array name="dialogo_editar_eliminar">
+        <item>Editar</item>
+        <item>Eliminar</item>
     </array>
 </resources>

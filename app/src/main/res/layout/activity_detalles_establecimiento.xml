@@ -57,7 +57,7 @@
                     android:layout_marginTop="16dp">
 
                     <ImageView
-                        android:id="@+id/iconoCitaMedica"
+                        android:id="@+id/iconoEstablecimiento"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center_horizontal"
@@ -65,7 +65,7 @@
                         android:tint="@color/blanco" />
 
                     <TextView
-                        android:id="@+id/tituloCitaMedica"
+                        android:id="@+id/nombreEstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -73,6 +73,15 @@
                         android:textAlignment="center"
                         android:textColor="@color/blanco"
                         android:textSize="@dimen/titulos" />
+
+                    <TextView
+                        android:id="@+id/tipoEstablecimientoTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Farmacia"
+                        android:textSize="@dimen/subtitulos"
+                        android:textColor="@color/grisClaro"
+                        android:layout_gravity="center_horizontal"/>
 
                 </LinearLayout>
 
@@ -127,7 +136,7 @@
                         android:background="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/UbicacionTV"
+                        android:id="@+id/direccionEstablecimietoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider1"
@@ -144,9 +153,9 @@
                 android:id="@+id/cardView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="@color/blanco"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
@@ -171,8 +180,8 @@
                         android:id="@+id/tagTelTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
                         android:layout_marginStart="2dp"
+                        android:layout_marginBottom="2dp"
                         android:layout_toEndOf="@id/iconoTelFarmacia"
                         android:text="@string/telefono"
                         android:textColor="@color/colorPrimary"
@@ -187,7 +196,7 @@
                         android:background="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/Telefono1FarmaciaTV"
+                        android:id="@+id/telefono1EstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider2"
@@ -197,10 +206,10 @@
                         android:textSize="@dimen/normal" />
 
                     <TextView
-                        android:id="@+id/Telefono2FarmaciaTV"
+                        android:id="@+id/telefono2EstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Telefono1FarmaciaTV"
+                        android:layout_below="@id/telefono1EstablecimientoTV"
                         android:layout_marginTop="8dp"
                         android:text="2414176496"
                         android:textColor="@color/grisOscuro"
@@ -213,17 +222,19 @@
                 android:id="@+id/cardView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/blanco"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView3">
+                app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -240,8 +251,8 @@
                         android:id="@+id/tagUbicacionTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
                         android:layout_marginStart="2dp"
+                        android:layout_marginBottom="2dp"
                         android:layout_toEndOf="@id/iconoDirFarmacia"
                         android:text="@string/sitio_web"
                         android:textColor="@color/colorPrimary"
@@ -256,7 +267,7 @@
                         android:background="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/SitioWebFarmaciaTV"
+                        android:id="@+id/sitioWebEstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider6"
@@ -272,19 +283,17 @@
                 android:id="@+id/cardView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="@color/blanco"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView4">
+                app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -301,8 +310,8 @@
                         android:id="@+id/tagEmailTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
                         android:layout_marginStart="2dp"
+                        android:layout_marginBottom="2dp"
                         android:layout_toEndOf="@id/iconoEmailFarmacia"
                         android:text="@string/email"
                         android:textColor="@color/colorPrimary"
@@ -317,7 +326,7 @@
                         android:background="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/EmailFarmaciaTV"
+                        android:id="@+id/emailEstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider5"

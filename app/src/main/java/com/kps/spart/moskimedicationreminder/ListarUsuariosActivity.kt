@@ -76,16 +76,19 @@ class ListarUsuariosActivity : AppCompatActivity() {
             val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@ListarUsuariosActivity)
 
             with(sharedPref.edit()){
-                putInt("actualUserID",RecViewUsuarios.getChildAdapterPosition(it))
+                putInt("actualUserID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
                 commit()
             }
+            Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + adapter.getUserName(RecViewUsuarios.getChildAdapterPosition(it)), Toast.LENGTH_SHORT).show()
+            finish()
             //startActivity(nav)
+
         }
         )
 
         RecViewUsuarios.adapter = adapter
 
-        Toast.makeText(this@ListarUsuariosActivity,"Se esta llamando " + object{}.javaClass.enclosingMethod.name, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this@ListarUsuariosActivity,"Se esta llamando " + object{}.javaClass.enclosingMethod.name, Toast.LENGTH_SHORT).show()
     }
 
 

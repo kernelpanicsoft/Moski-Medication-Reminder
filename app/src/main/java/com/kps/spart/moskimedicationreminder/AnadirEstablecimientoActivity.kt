@@ -2,7 +2,6 @@ package com.kps.spart.moskimedicationreminder
 
 import Elementos.Establecimiento
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -21,7 +20,6 @@ import model.mmrbd
 import kotlinx.android.synthetic.main.activity_anadir_establecimiento.*
 import model.MMDContract
 import java.lang.Exception
-import kotlin.math.ln
 
 
 class AnadirEstablecimientoActivity : AppCompatActivity() {
@@ -103,9 +101,9 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             R.id.itemSave -> {
                 establecimiento.nombre  = NombreEstablecimientoTV.text.toString()
                 establecimiento.direccion = DireccionEstablecimientoTV.text.toString()
-                establecimiento.telefono1 = Telefono1EstablecimientoTV.text.toString()
-                establecimiento.telefono2 = Telefono2EstablecimientoTV.text.toString()
-                establecimiento.email = EmailEstablecimientoTV.text.toString()
+                establecimiento.telefono1 = telefono1EstablecimientoTV.text.toString()
+                establecimiento.telefono2 = telefono2EstablecimientoTV.text.toString()
+                establecimiento.email = emailEstablecimientoTV.text.toString()
                 establecimiento.sitioWeb = SitioWebEstablecimeintoTV.text.toString()
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirEstablecimientoActivity)
@@ -161,8 +159,6 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
     private fun saveEstablishmentToDB(establecimiento: Establecimiento){
         val db = dbHelper.writableDatabase
         val errorAtInsertion : Long = -1
-
-
 
         val newRowId = db.insert(MMDContract.columnas.TABLA_ESTABLECIMIENTO,null,establecimiento.toContentValues())
 

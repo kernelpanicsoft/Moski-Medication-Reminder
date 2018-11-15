@@ -23,7 +23,7 @@
         android:layout_marginTop="8dp"
         android:text="Farmacias del ahorro"
         android:textColor="@color/negro"
-        android:textSize="14sp"
+        android:textSize="@dimen/titulos"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/IconoFarmacia"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Jardín de las palmas #106 La Cañada Apizaco Tlaxcala Hola mundo como están esto es un comentario para demostrar como es que se ve con mucho mas elementos en este item"
-        android:textSize="14sp"
+        android:textSize="@dimen/subtitulos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/IconoFarmacia"
         app:layout_constraintTop_toBottomOf="@+id/NombreTV" />
@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:text="24176496"
         android:textColor="@color/negro"
-        android:textSize="18sp"
+        android:textSize="@dimen/subtitulos"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"

@@ -64,5 +64,12 @@ class UsuariosAdapter (private var cursor: Cursor) : RecyclerView.Adapter<Usuari
         }
     }
 
+    fun getUserName(position: Int) : String{
+        return when(cursor.moveToPosition(position)){
+            true -> cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_USUARIO))
+            else -> ""
+        }
+    }
+
 
 }

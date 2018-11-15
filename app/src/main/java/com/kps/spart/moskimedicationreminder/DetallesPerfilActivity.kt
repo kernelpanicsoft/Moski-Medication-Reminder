@@ -58,7 +58,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
         val projection = arrayOf(MMDContract.columnas.NOMBRE_USUARIO,MMDContract.columnas.APELLIDOS_USUARIO, MMDContract.columnas.GENERO_USUARIO, MMDContract.columnas.EDAD_USUARIO)
 
         val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("${user_id}")
+        val selectionArgs = arrayOf("$user_id")
         val cursor = db.query(
                 MMDContract.columnas.TABLA_USUARIO,
                 projection,
