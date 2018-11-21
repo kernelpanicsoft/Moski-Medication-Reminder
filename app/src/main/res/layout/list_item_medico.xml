@@ -23,6 +23,7 @@
         android:text="Dr."
         android:textColor="@color/negro"
         android:textStyle="bold"
+        android:textSize="@dimen/titulos"
         app:layout_constraintStart_toEndOf="@+id/iconoMedico"
         app:layout_constraintTop_toTopOf="@+id/NombreDoctorTV" />
 
@@ -35,6 +36,7 @@
         android:text="Eduardo Corona"
         android:textColor="@color/negro"
         android:textStyle="bold"
+        android:textSize="@dimen/titulos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/TituloDoctorTV"
@@ -46,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Cardiologo"
+        android:textSize="@dimen/subtitulos"
 
         app:layout_constraintStart_toEndOf="@+id/iconoMedico"
         app:layout_constraintTop_toBottomOf="@+id/NombreDoctorTV" />
@@ -57,7 +60,7 @@
         android:layout_marginEnd="8dp"
         android:text="2229261293"
         android:textColor="@color/negro"
-        android:textSize="18sp"
+        android:textSize="@dimen/subtitulos"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/telefonoIV"
         app:layout_constraintEnd_toEndOf="parent"

@@ -33,15 +33,12 @@ class EstablecimientosFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val farmacias = Array(20){Establecimiento()}
-
-
         val dbHelper = mmrbd(context!!)
         val db = dbHelper.writableDatabase
 
         // Filter results WHERE "title" = 'My Title'
-        val selection = "${MMDContract.columnas.NOMBRE_ESTABLECIMIENTO} = ?"
-        val selectionArgs = arrayOf("My Title")
+        // val selection = "${MMDContract.columnas.NOMBRE_ESTABLECIMIENTO} = ?"
+        //  val selectionArgs = arrayOf("My Title")
 
 
 
@@ -56,12 +53,12 @@ class EstablecimientosFragment : Fragment() {
         )
 
 
-        Log.v("cursor establecimientos", DatabaseUtils.dumpCursorToString(cursor))
+       // Log.v("cursor establecimientos", DatabaseUtils.dumpCursorToString(cursor))
 
         val adapter = EstablecimientoAdapter(cursor)
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesEstablecimientoActivity::class.java)
-            nav.putExtra("ESTABLISHMENT_ID", adapter.getEstablishMentID(RV.getChildAdapterPosition(it)))
+            nav.putExtra("ESTABLISHMENT_ID", adapter.getEstablishmentID(RV.getChildAdapterPosition(it)))
             startActivity(nav)
         })
 

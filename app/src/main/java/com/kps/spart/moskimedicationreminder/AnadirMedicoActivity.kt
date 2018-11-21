@@ -1,22 +1,24 @@
 package com.kps.spart.moskimedicationreminder
 
 import Elementos.FichaContacto
-import android.support.v7.app.ActionBar
+import Elementos.Medico
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_anadir_medico.*
-
+import model.MMDContract
+import model.mmrbd
 
 
 class AnadirMedicoActivity : AppCompatActivity() {
+
+    private lateinit var dbHelper : mmrbd
+    private lateinit var medico : Medico
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +30,32 @@ class AnadirMedicoActivity : AppCompatActivity() {
         ab!!.setDisplayHomeAsUpEnabled(true)
         setTitle(R.string.anadirMedico)
 
+        dbHelper = mmrbd(this@AnadirMedicoActivity)
+
+
 
         spinnerTitulo.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TituloMedico))
-
         spinnerTitulo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(this@AnadirMedicoActivity,"# en adaptador: "+ position , Toast.LENGTH_SHORT).show()
+                medico.titulo = parent?.getItemAtPosition(position).toString()
 
             }
         }
 
         SpinnerEspecialidad.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.especialidades))
+        SpinnerEspecialidad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                medico.especialidad = parent?.getItemAtPosition(position).toString()
+            }
+        }
 
         val fichas = ArrayList<FichaContacto>();
         //val fichaContactoDefault = FichaContacto("Consultorio personal","Torre medica 3 Hospital Upaep","23234343","53453","rwerwe@gf.com","google.com",true)
@@ -84,7 +97,8 @@ class AnadirMedicoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.itemSave -> {
-                Toast.makeText(this, "Estás guardado la farmacia", Toast.LENGTH_SHORT).show()
+                medico.nombre = textInputLayoutNombre.text.toString()
+
                 return true
             }
             android.R.id.home -> {
@@ -99,5 +113,20 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
     fun nuevaFicha(v : View){
         Toast.makeText(this, "Estas precionando la nueva ficha", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveMedicToBD(){
+        val db = dbHelper.writableDatabase
+        val errorATInsertion : Long = -1
+
+        val newRowId = db.insert(MMDContract.columnas.TABLA_DOCTOR, null, medico.toContentValues())
+
+        if(newRowId == errorATInsertion){
+            Toast.makeText(this@AnadirMedicoActivity,getString(R.string.ocurrio_un_problema_nuevo_doctor),Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this@AnadirMedicoActivity, getString(R.string.doctor_registrado_correctamente),Toast.LENGTH_SHORT).show()
+        }
+
+        finish()
     }
 }

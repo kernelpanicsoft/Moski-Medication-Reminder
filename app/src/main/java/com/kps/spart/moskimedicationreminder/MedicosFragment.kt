@@ -17,6 +17,8 @@ import android.widget.LinearLayout
 
 import Elementos.Medico
 import android.widget.Toast
+import model.MMDContract
+import model.mmrbd
 
 
 class MedicosFragment : Fragment() {
@@ -25,7 +27,6 @@ class MedicosFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,34 +40,34 @@ class MedicosFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val medicos = Array(20){Medico()}
 
-        for (i in medicos.indices) {
-            medicos[i] = Medico()
+        val dbHelper = mmrbd(context!!)
+        val db = dbHelper.writableDatabase
 
-        }
+        val cursor = db.query(
+                MMDContract.columnas.TABLA_DOCTOR,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        )
 
 
-        val adapter = MedicosAdapter(medicos)
-
+        val adapter = MedicosAdapter(cursor)
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context,DetallesMedicoActivity::class.java)
+            nav.putExtra("MEDIC_ID", adapter.getMedicID(RV.getChildAdapterPosition(it)))
             startActivity(nav)
-
 
         })
 
         RV.adapter = adapter
 
-
-        // Inflate the layout for this fragment
         return v
     }
 
-    override fun onDetach() {
-        super.onDetach()
-
-    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -81,7 +82,6 @@ class MedicosFragment : Fragment() {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_sort, menu)

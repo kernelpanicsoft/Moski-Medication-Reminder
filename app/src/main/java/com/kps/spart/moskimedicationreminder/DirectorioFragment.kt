@@ -14,6 +14,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import java.util.ArrayList
 
@@ -27,11 +28,13 @@ class DirectorioFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
+
+
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater!!.inflate(R.layout.fragment_directorio, container, false)
+        val v = inflater.inflate(R.layout.fragment_directorio, container, false)
 
         viewPager = v.findViewById(R.id.ViewPagerDirectorio)
         setupViewPager(viewPager!!)
@@ -39,8 +42,16 @@ class DirectorioFragment : Fragment() {
         tabLayout = v.findViewById(R.id.TabLayoutDirectorio)
         tabLayout!!.setupWithViewPager(viewPager)
 
+        var currentTabSelected = savedInstanceState?.getInt("currentDirectoryFragmentId") ?: 0
+
+        tabLayout?.getTabAt(currentTabSelected)?.select()
+
+        //tabLayout.getTabAt(savedInstanceState.getInt(currentDirectoryFragmentId))
+
         return v
     }
+
+
 
     private fun setupViewPager(pager: ViewPager) {
         val adapter = ViewPagerAdapter(childFragmentManager)
@@ -100,5 +111,26 @@ class DirectorioFragment : Fragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+
+        outState.putInt("currentDirectoryFragmentId",tabLayout!!.selectedTabPosition)
+    }
+
+
+    /*
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        Toast.makeText(context,"Estas llamando a onActivityCreated",Toast.LENGTH_SHORT).show()
+    }
+    */
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Toast.makeText(context,"You are calling onDestroy",Toast.LENGTH_SHORT).show()
+    }
 
 }// Required empty public constructor

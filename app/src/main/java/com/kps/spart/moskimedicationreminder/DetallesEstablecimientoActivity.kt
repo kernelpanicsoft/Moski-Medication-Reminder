@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_anadir_tratamiento.*
 import kotlinx.android.synthetic.main.activity_detalles_establecimiento.*
 import model.MMDContract
 import model.mmrbd
@@ -28,7 +29,6 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.detalles_establecimiento)
-
 
 
         establishment_id = intent.getIntExtra("ESTABLISHMENT_ID", -1)
@@ -59,12 +59,12 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
                         }
                         1 ->{
                             val innerBuilder = AlertDialog.Builder(this@DetallesEstablecimientoActivity)
-                            innerBuilder.setTitle("Eliminar establecimiento")
-                                    .setMessage("¿Está seguro que desea eliminar el establecimiento?")
-                                    .setPositiveButton("Sí") { dialog, id ->
-                                        Toast.makeText(this@DetallesEstablecimientoActivity,"Estas eliminado el establecimiento" + id,Toast.LENGTH_SHORT).show()
+                            innerBuilder.setTitle(getString(R.string.eliminar_establecimiento))
+                                    .setMessage(getString(R.string.esta_seguro_que_desea_eliminar_el_establecimiento))
+                                    .setPositiveButton(getString(R.string.si)) { dialog, id ->
+                                      deleteEstablishment()
                                     }
-                                    .setNegativeButton("No"){ dialog, id ->
+                                    .setNegativeButton(getString(R.string.no)){ dialog, id ->
                                         Toast.makeText(this@DetallesEstablecimientoActivity,"Estas no eliminas el establecimiento" + id,Toast.LENGTH_SHORT).show()
                                     }
 
@@ -121,6 +121,20 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
             emailEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.EMAIL_ESTABLECIMIENTO))
             sitioWebEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.WEB_ESTABLECIMIENTO))
 
+        }
+    }
+
+    private fun deleteEstablishment(){
+        val db = dbHelper.writableDatabase
+        val selection = "${BaseColumns._ID} = ?"
+        val selectionArgs = arrayOf("$establishment_id")
+        val deletedRows = db.delete(MMDContract.columnas.TABLA_ESTABLECIMIENTO, selection,selectionArgs)
+
+        if(deletedRows == 1){
+            Toast.makeText(this@DetallesEstablecimientoActivity,getString(R.string.establecimiento_eliminado_correctamente), Toast.LENGTH_SHORT).show()
+            finish()
+        }else{
+            Toast.makeText(this@DetallesEstablecimientoActivity,getString(R.string.no_es_posible_eliminar_establecimiento), Toast.LENGTH_SHORT).show()
         }
     }
 

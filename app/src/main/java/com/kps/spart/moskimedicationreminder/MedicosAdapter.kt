@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-import Elementos.Medico
+
+import android.database.Cursor
+import android.provider.BaseColumns
+import model.MMDContract
 
 /**
  * Created by spart on 20/11/2017.
  */
 
-class MedicosAdapter(private val medicos: Array<Medico>) : RecyclerView.Adapter<MedicosAdapter.ViewHolder>(), View.OnClickListener {
+class MedicosAdapter(private val cursor: Cursor) : RecyclerView.Adapter<MedicosAdapter.ViewHolder>(), View.OnClickListener {
     private var listener: View.OnClickListener? = null
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -44,17 +47,18 @@ class MedicosAdapter(private val medicos: Array<Medico>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        cursor.moveToPosition(position)
+
         holder.icono.setImageResource(R.drawable.ic_capsula)
-        holder.icono.setColorFilter(Color.parseColor(medicos[position].colorIcono))
-        holder.titulo.text = medicos[position].titulo
-        holder.nombre.text = medicos[position].nombreMedico
-        holder.especialidad.text = medicos[position].especialidad
-        holder.telefono.text = medicos[position].telefono1
+        holder.icono.setColorFilter(Color.parseColor(cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_DOCTOR))))
+        holder.titulo.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_DOCTOR))
+        holder.nombre.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_DOCTOR))
+        holder.especialidad.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.ESPECIALIDAD_DOCTOR))
 
     }
 
     override fun getItemCount(): Int {
-        return medicos.size
+        return cursor.count
     }
 
     fun setOnItemClickListener(listener: View.OnClickListener) {
@@ -62,8 +66,13 @@ class MedicosAdapter(private val medicos: Array<Medico>) : RecyclerView.Adapter<
     }
 
     override fun onClick(v: View) {
-        if (listener != null) {
-            listener!!.onClick(v)
+        listener?.onClick(v)
+    }
+
+    fun getMedicID(position: Int) : Int {
+        return when(cursor.moveToPosition(position)){
+            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
+            else -> -1
         }
     }
 }

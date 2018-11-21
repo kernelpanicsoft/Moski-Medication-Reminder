@@ -58,7 +58,7 @@ class EstablecimientoAdapter (private val cursor: Cursor) : RecyclerView.Adapter
         listener?.onClick(v)
     }
 
-    fun getEstablishMentID(position: Int) : Int{
+    fun getEstablishmentID(position: Int) : Int{
         return when(cursor.moveToPosition(position)){
             true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
             else -> -1
