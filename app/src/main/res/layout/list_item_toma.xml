@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/iconoMedicamento"
+        android:id="@+id/MedicamentoIconoTV"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/iconoMedicamento"
-        app:layout_constraintStart_toStartOf="@+id/iconoMedicamento"
-        app:layout_constraintTop_toBottomOf="@+id/iconoMedicamento"
+        app:layout_constraintEnd_toEndOf="@+id/MedicamentoIconoTV"
+        app:layout_constraintStart_toStartOf="@+id/MedicamentoIconoTV"
+        app:layout_constraintTop_toBottomOf="@+id/MedicamentoIconoTV"
         app:srcCompat="@drawable/ic_bookmark" />
 
     <ImageView
@@ -46,11 +46,11 @@
         android:text="TextView"
         android:textColor="@color/negro"
         android:textSize="@dimen/subtitulos"
-        app:layout_constraintBottom_toBottomOf="@+id/iconoMedicamento"
+        app:layout_constraintBottom_toBottomOf="@+id/MedicamentoIconoTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/iconoMedicamento"
-        app:layout_constraintTop_toTopOf="@+id/iconoMedicamento"
+        app:layout_constraintStart_toEndOf="@+id/MedicamentoIconoTV"
+        app:layout_constraintTop_toTopOf="@+id/MedicamentoIconoTV"
         tools:text="Dexometazona" />
 
     <TextView

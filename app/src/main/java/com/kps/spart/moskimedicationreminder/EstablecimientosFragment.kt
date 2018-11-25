@@ -40,8 +40,6 @@ class EstablecimientosFragment : Fragment() {
         // val selection = "${MMDContract.columnas.NOMBRE_ESTABLECIMIENTO} = ?"
         //  val selectionArgs = arrayOf("My Title")
 
-
-
         val cursor = db.query(
                 MMDContract.columnas.TABLA_ESTABLECIMIENTO,   // The table to query
                 null,             // The array of columns to return (pass null to get all)
@@ -67,12 +65,5 @@ class EstablecimientosFragment : Fragment() {
 
         return v
     }
-
-
-
-
-
-
-
 
 }// Required empty public constructor

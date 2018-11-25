@@ -21,8 +21,6 @@
         <item>@color/lavender</item>
         <item>@color/violet</item>
         <item>@color/grape</item>
-
-
         <item>@color/graphite</item>
     </array>
     <string-array name="default_rainbow_name">

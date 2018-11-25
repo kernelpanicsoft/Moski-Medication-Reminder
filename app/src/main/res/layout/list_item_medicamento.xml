@@ -6,12 +6,12 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iconoMedicamento"
+        android:id="@+id/MedicamentoIconoTV"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_capsula"
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,8 +25,8 @@
         android:layout_marginStart="8dp"
         android:text="Proponolol"
 
-        android:textSize="@dimen/normal"
-        app:layout_constraintStart_toEndOf="@+id/iconoMedicamento"
+        android:textSize="@dimen/subtitulos"
+        app:layout_constraintStart_toEndOf="@+id/MedicamentoIconoTV"
         app:layout_constraintTop_toBottomOf="@+id/nombreComercialMedicamento" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_marginStart="8dp"
         android:text="Inderalici"
         android:textColor="@color/negro"
-        android:textSize="@dimen/subtitulos"
-        app:layout_constraintStart_toEndOf="@+id/iconoMedicamento"
-        app:layout_constraintTop_toTopOf="@+id/iconoMedicamento" />
+        android:textSize="@dimen/titulos"
+        app:layout_constraintStart_toEndOf="@+id/MedicamentoIconoTV"
+        app:layout_constraintTop_toTopOf="@+id/MedicamentoIconoTV" />
 </android.support.constraint.ConstraintLayout>

@@ -121,18 +121,18 @@
                 android:background="@drawable/background_spinner"
                 android:minHeight="40dp"
                 android:spinnerMode="dialog"
-                app:layout_constraintEnd_toStartOf="@+id/iconoMedicamento"
+                app:layout_constraintEnd_toStartOf="@+id/MedicamentoIconoTV"
                 app:layout_constraintStart_toEndOf="@+id/iconoCategoriaMedicamentoIV"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTipoMedicamento" />
 
             <ImageView
-                android:id="@+id/iconoMedicamento"
+                android:id="@+id/MedicamentoIconoTV"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_capsula"
-                android:tint="@color/azure"
+                android:tint="@color/blueberry"
                 app:layout_constraintBottom_toBottomOf="@+id/SpinnerTipoMedicamento"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewTipoMedicamento" />
@@ -221,22 +221,22 @@
                 android:minHeight="40dp"
                 android:text="@string/colorDistintivo"
                 android:textColor="@color/blanco"
-                android:backgroundTint="@color/colorPrimary"
+                android:background="@drawable/rounded_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/colorIconoIV"
-                app:layout_constraintTop_toBottomOf="@+id/iconoMedicamento" />
+                app:layout_constraintTop_toBottomOf="@+id/MedicamentoIconoTV" />
 
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/anadirFotoMedicamentoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:drawableLeft="@drawable/ic_add_a_photo_white_24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorPrimary"
+                android:drawableStart="@drawable/ic_add_a_photo_white_24dp"
                 android:text="Añadir foto"
                 android:textColor="@color/blanco"
 

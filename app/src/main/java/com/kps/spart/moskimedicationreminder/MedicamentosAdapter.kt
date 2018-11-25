@@ -8,26 +8,21 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import Elementos.Medicamento
+import android.content.Context
+import android.database.Cursor
+import android.provider.BaseColumns
+import android.support.v4.content.ContextCompat
+import model.MMDContract
 
-/**
- * Created by spart on 27/10/2017.
- */
-
-class MedicamentosAdapter(private val items: Array<Medicamento>) : RecyclerView.Adapter<MedicamentosAdapter.ViewHolder>(), View.OnClickListener {
+class MedicamentosAdapter(private var context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<MedicamentosAdapter.ViewHolder>(), View.OnClickListener {
     private var listener: View.OnClickListener? = null
+    private val IconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
+
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val icono: ImageView
-        val NombreComercial: TextView
-        val Nombre: TextView
-
-        init {
-
-            icono = v.findViewById<View>(R.id.iconoMedicamento) as ImageView
-            Nombre = v.findViewById<View>(R.id.nombreMedicamento) as TextView
-            NombreComercial = v.findViewById<View>(R.id.nombreComercialMedicamento) as TextView
-
-        }
+        val icono: ImageView = v.findViewById(R.id.MedicamentoIconoTV)
+        val NombreComercial : TextView = v.findViewById(R.id.nombreMedicamento)
+        val NombreGenerico: TextView = v.findViewById(R.id.nombreComercialMedicamento)
 
     }
 
@@ -41,15 +36,34 @@ class MedicamentosAdapter(private val items: Array<Medicamento>) : RecyclerView.
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.icono.setImageResource(R.drawable.ic_capsula)
-        holder.Nombre.text = items[position].nombreMedicamento
-        holder.NombreComercial.text = items[position].nombreComercial
+        cursor.moveToPosition(position)
+        val medicineType = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TIPO_MEDICAMENTO))
 
+        when(IconsCollection?.indexOf(medicineType)){
+            0 -> {holder.icono.setImageResource(R.drawable.ic_roundpill)}
+            1 -> {holder.icono.setImageResource(R.drawable.ic_tab)}
+            2 -> {holder.icono.setImageResource(R.drawable.ic_capsula)}
+            3 -> {holder.icono.setImageResource(R.drawable.ic_syrup)}
+            4 -> {holder.icono.setImageResource(R.drawable.ic_drops)}
+            5 -> {holder.icono.setImageResource(R.drawable.ic_eyedrops)}
+            6 -> {holder.icono.setImageResource(R.drawable.ic_ointment)}
+            7 -> {holder.icono.setImageResource(R.drawable.ic_powder)}
+            8 -> {holder.icono.setImageResource(R.drawable.ic_gel)}
+            9 -> {holder.icono.setImageResource(R.drawable.ic_inhalator)}
+            10-> {holder.icono.setImageResource(R.drawable.ic_suppository)}
+            11-> {holder.icono.setImageResource(R.drawable.ic_intravenous)}
+            12-> {holder.icono.setImageResource(R.drawable.ic_syringe)}
+        }
+
+        //holder.icono.colorFilter(ContextCompat.getColor(holder.itemView.context,R.color.flamingo)
+
+        holder.NombreComercial.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_COMERCIAL_MEDICAMENTO))
+        holder.NombreGenerico.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_GENERICO_MEDICAMENTO))
     }
 
 
     override fun getItemCount(): Int {
-        return items.size
+        return cursor.count
     }
 
     fun setOnClickListener(listener: View.OnClickListener) {
@@ -57,8 +71,13 @@ class MedicamentosAdapter(private val items: Array<Medicamento>) : RecyclerView.
     }
 
     override fun onClick(v: View) {
-        if (listener != null) {
-            listener!!.onClick(v)
+        listener?.onClick(v)
+    }
+
+    fun getMedicineID(position: Int) : Int{
+        return when(cursor.moveToPosition(position)){
+            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
+            else -> -1
         }
     }
 

@@ -15,6 +15,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 
 import Elementos.Medicamento
+import model.MMDContract
+import model.mmrbd
 
 
 class MedicamentosFragment : Fragment() {
@@ -40,13 +42,23 @@ class MedicamentosFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val meds = Array(20){Medicamento()}
+        val dbHelper = mmrbd(context!!)
+        val db = dbHelper.writableDatabase
 
-        val adapter = MedicamentosAdapter(meds)
+        val cursor = db.query(MMDContract.columnas.TABLA_MEDICAMENTO,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null)
+
+        val adapter = MedicamentosAdapter(context,cursor)
 
 
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesMedicamentoActivity::class.java)
+            nav.putExtra("MEDICINE_ID", adapter.getMedicineID(RV.getChildAdapterPosition(it)))
             startActivity(nav)
         })
 
@@ -59,8 +71,6 @@ class MedicamentosFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_add, menu)
-
-
     }
 
 

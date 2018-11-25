@@ -18,7 +18,7 @@ class HorarioAdapter(private val items: Array<Toma>) : RecyclerView.Adapter<Hora
         val horaToma: TextView
 
         init{
-            iconoMedicamento = v.findViewById(R.id.iconoMedicamento)
+            iconoMedicamento = v.findViewById(R.id.MedicamentoIconoTV)
             iconoTratamiento = v.findViewById(R.id.iconoTrataMiento)
             nombreTratamientoTV = v.findViewById(R.id.textViewTratamiento)
             nombreMedicamentoTV = v.findViewById(R.id.textViewMedicamento)

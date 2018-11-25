@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-import org.w3c.dom.Text
-
 import Elementos.Tratamiento
 
 /**
@@ -29,7 +27,7 @@ class TratamientosAdapter(private val items: Array<Tratamiento>) : RecyclerView.
         init {
 
             bookmarkIV = v.findViewById<View>(R.id.iconoBookmark) as ImageView
-            iconoMedicamentoIV = v.findViewById<View>(R.id.iconoMedicamento) as ImageView
+            iconoMedicamentoIV = v.findViewById<View>(R.id.MedicamentoIconoTV) as ImageView
             statusIV = v.findViewById<View>(R.id.iconoStatus) as ImageView
             bookmarkTV = v.findViewById<View>(R.id.tagTratamientoTV) as TextView
             medicamentoTV = v.findViewById<View>(R.id.nombreMedicamento) as TextView

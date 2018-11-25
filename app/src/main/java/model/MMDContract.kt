@@ -80,10 +80,10 @@ object MMDContract {
         const val NOMBRE_COMERCIAL_MEDICAMENTO = "nombre_comercial_medicamento"
         const val NOMBRE_GENERICO_MEDICAMENTO = "nombre_generico_medicamento"
         const val DOSIS_MEDICAMENTO = "dosis_medicamento"
-        const val FOTOGRAFIA_MEDICAMENTO = "fotografia_medicamento"
-        const val ICONO_MEDICAMENTO = "icono_medicamento"
+        const val COLOR_MEDICAMENTO = "color_distintivo_medicamento"
         const val TIPO_MEDICAMENTO = "tipo_medicamento"
-        const val COLOR_DISTINTIVO_MEDICAMENTO = "color_distintivo_medicamento"
+        const val FOTOGRAFIA_MEDICAMENTO = "fotografia_medicamento"
+        const val NOTA_MEDICAMENTO = "nota_medicamento"
         const val USUARIO_MEDICAMENTO_ID = "usuario_medicamento_id"
 
         const val TABLA_TRATAMIENTO = "tratamiento"
