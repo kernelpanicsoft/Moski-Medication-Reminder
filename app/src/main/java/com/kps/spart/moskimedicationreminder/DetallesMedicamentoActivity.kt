@@ -1,8 +1,10 @@
 package com.kps.spart.moskimedicationreminder
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -40,11 +42,41 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.edit_item -> return true
+            R.id.edit_item -> {
+                val builder = AlertDialog.Builder(this@DetallesMedicamentoActivity)
+                builder.setItems(R.array.dialogo_editar_eliminar){
+                    dialog, which ->
+                    when(which){
+                        0 -> {
+                            val nav = Intent(this@DetallesMedicamentoActivity, AnadirMedicamentoActivity::class.java)
+                            nav.putExtra("MEDICINE_ID", medicine_id)
+                            startActivityForResult(nav, 417)
+                        }
+                        1 -> {
+                            val innerBuilder = AlertDialog.Builder(this@DetallesMedicamentoActivity)
+                            innerBuilder.setTitle(getString(R.string.eliminar_medicamento))
+                                    .setMessage(getString(R.string.esta_seguro_que_desea_eliminar_el_medicamento))
+                                    .setPositiveButton(getString(R.string.si)){
+                                        dialog, id ->
+                                        deleteMedicine()
+                                    }
+                                    .setNegativeButton(getString(R.string.no)){ dialog, id ->
+
+                                    }
+                            val innerDialog = innerBuilder.create()
+                            innerDialog.show()
+                        }
+                    }
+                }
+                val dialog = builder.create()
+                dialog.show()
+                return true
+            }
             android.R.id.home -> {
                 onBackPressed()
                 return true
             }
+
         }
 
         return super.onOptionsItemSelected(item)

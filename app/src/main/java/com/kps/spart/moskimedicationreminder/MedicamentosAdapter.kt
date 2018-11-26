@@ -55,7 +55,8 @@ class MedicamentosAdapter(private var context: Context?, private val cursor: Cur
             12-> {holder.icono.setImageResource(R.drawable.ic_syringe)}
         }
 
-        //holder.icono.colorFilter(ContextCompat.getColor(holder.itemView.context,R.color.flamingo)
+        holder.icono.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_MEDICAMENTO)))
+
 
         holder.NombreComercial.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_COMERCIAL_MEDICAMENTO))
         holder.NombreGenerico.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_GENERICO_MEDICAMENTO))
