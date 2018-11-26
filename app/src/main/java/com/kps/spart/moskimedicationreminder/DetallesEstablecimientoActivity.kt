@@ -32,7 +32,7 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
 
 
         establishment_id = intent.getIntExtra("ESTABLISHMENT_ID", -1)
-        populateEstablishmentFieldFromDB()
+        populateEstablishmentFieldsFromDB()
 
     }
 
@@ -85,7 +85,7 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun populateEstablishmentFieldFromDB(){
+    private fun populateEstablishmentFieldsFromDB(){
         dbHelper = mmrbd(this@DetallesEstablecimientoActivity)
         val db = dbHelper.readableDatabase
 

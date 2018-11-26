@@ -16,7 +16,7 @@ import model.MMDContract
 
 class MedicamentosAdapter(private var context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<MedicamentosAdapter.ViewHolder>(), View.OnClickListener {
     private var listener: View.OnClickListener? = null
-    private val IconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
+    private val iconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
 
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -39,7 +39,7 @@ class MedicamentosAdapter(private var context: Context?, private val cursor: Cur
         cursor.moveToPosition(position)
         val medicineType = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TIPO_MEDICAMENTO))
 
-        when(IconsCollection?.indexOf(medicineType)){
+        when(iconsCollection?.indexOf(medicineType)){
             0 -> {holder.icono.setImageResource(R.drawable.ic_roundpill)}
             1 -> {holder.icono.setImageResource(R.drawable.ic_tab)}
             2 -> {holder.icono.setImageResource(R.drawable.ic_capsula)}
