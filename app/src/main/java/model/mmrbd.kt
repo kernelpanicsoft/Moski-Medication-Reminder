@@ -52,7 +52,35 @@ private const val SQL_CREATE_MEDICINE_TABLE: String =   "CREATE TABLE ${MMDContr
                                                         "FOREIGN KEY(${MMDContract.columnas.USUARIO_MEDICAMENTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}))"
 
 
-private const val SQL_DELETE_MEDICINE_TABLE: String = "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_MEDICAMENTO}"
+private const val SQL_DELETE_MEDICINE_TABLE: String =   "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_MEDICAMENTO}"
+
+private const val SQL_CREATE_MEDICS_TABLE : String =     "CREATE TABLE ${MMDContract.columnas.TABLA_DOCTOR} (" +
+                                                        "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                                                        "${MMDContract.columnas.TITULO_DOCTOR} TEXT NOT NULL," +
+                                                        "${MMDContract.columnas.NOMBRE_DOCTOR} TEXT NOT NULL," +
+                                                        "${MMDContract.columnas.ESPECIALIDAD_DOCTOR} TEXT NOT NULL,"  +
+                                                        "${MMDContract.columnas.COLOR_DOCTOR} TEXT NOT NULL," +
+                                                        "${MMDContract.columnas.USUARIO_DOCTOR_ID} INTEGER," +
+                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_DOCTOR_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO} (${BaseColumns._ID}))"
+
+private const val SQL_DELETE_MEDICS_TABLE : String =     "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_DOCTOR}"
+
+private const val SQL_CREATE_CONTACT_CARD_TABLE : String =  "CREATE TABLE ${MMDContract.columnas.TABLA_FICHA_CONTACTO} (" +
+                                                            "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                                                            "${MMDContract.columnas.TITULO_FICHA_CONTACTO} TEXT NOT NULL," +
+                                                            "${MMDContract.columnas.DIRECCION_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.TELEFONO_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.CELULAR_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.EMAIL_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.WEB_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.ACCESSO_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.LATITUD_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.LONGITUD_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.DOCTOR_FICHA_CONTACTO_ID} INTEGER," +
+                                                            "FOREIGN KEY(${MMDContract.columnas.DOCTOR_FICHA_CONTACTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_DOCTOR} (${BaseColumns._ID}))"
+
+private const val SQL_DELETE_CONTACT_CARD_TABLE : String = "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_FICHA_CONTACTO}"
+
 
 class mmrbd(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -60,12 +88,16 @@ class mmrbd(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, D
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_USERS_TABLE)
         db.execSQL(SQL_CREATE_ESTABLISHMENT_TABLE)
+        db.execSQL(SQL_CREATE_MEDICS_TABLE)
+        db.execSQL(SQL_CREATE_CONTACT_CARD_TABLE)
         db.execSQL(SQL_CREATE_MEDICINE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL(SQL_DELETE_USER_TABLE)
         db.execSQL(SQL_DELETE_ESTABLISHMENT_TABLE)
+        db.execSQL(SQL_DELETE_MEDICS_TABLE)
+        db.execSQL(SQL_DELETE_CONTACT_CARD_TABLE)
         db.execSQL(SQL_DELETE_MEDICINE_TABLE)
 
         onCreate(db)

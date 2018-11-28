@@ -18,31 +18,25 @@ object MMDContract {
         val CONTENT_BASE_URI : Uri = Uri.parse("content://"  + AUTHORITY + "/" + SECTION)
 
         const val TABLA_DOCTOR = "doctor"
+        const val TITULO_DOCTOR = "titulo_doctor"
         const val NOMBRE_DOCTOR = "nombre_doctor"
         const val ESPECIALIDAD_DOCTOR = "especialidad_doctor"
         const val ICONO_DOCTOR = "icono_doctor"
         const val COLOR_DOCTOR = "color_doctor"
-        const val LATITUD_DOCTOR = "latitud_doctor"
-        const val LONGITUD_DOCTOR = "longitud_doctor"
-        const val TITULO_DOCTOR_ID = "titulo_doctor_id"
         const val USUARIO_DOCTOR_ID = "usuario_doctor_id"
 
-        const val TABLA_TITULO_DOCTOR = "titulo_doctor"
-        const val TITULO_DOCTOR = "titulo"
+        const val TABLA_FICHA_CONTACTO = "ficha_contacto"
+        const val TITULO_FICHA_CONTACTO = "titulo_ficha_contacto"
+        const val DIRECCION_FICHA_CONTACTO = "direccion_ficha_contacto"
+        const val TELEFONO_FICHA_CONTACTO = "telefono_ficha_contacto"
+        const val CELULAR_FICHA_CONTACTO = "celular_ficha_contacto"
+        const val EMAIL_FICHA_CONTACTO = "email_ficha_contacto"
+        const val WEB_FICHA_CONTACTO = "web_ficha_contacto"
+        const val ACCESSO_FICHA_CONTACTO = "accesso_rapido_ficha_contacto"
+        const val LATITUD_FICHA_CONTACTO = "latitud_ficha_contacto"
+        const val LONGITUD_FICHA_CONTACTO = "longitud_ficha_contacto"
+        const val DOCTOR_FICHA_CONTACTO_ID = "doctor_ficha_contacto_id"
 
-        const val TABLA_EMAIL_DOCTOR = "email_doctor"
-        const val EMAIL_DOCTOR = "email"
-        const val DOCTOR_EMAIL_ID = "doctor_email_id"
-
-        const val TABLA_TELEFONO_DOCTOR = "telefono_doctor"
-        const val TELEFONO_DOCTOR = "telefono"
-        const val ICONO_TELEFONO_DOCTOR = "icono"
-        const val DOCTOR_TELEFONO_ID = "doctor_telefono_id"
-
-        const val TABLA_DIRECCION_DOCTOR = "direccion_doctor"
-        const val DIRECCION__DOCTOR = "direccion"
-        const val ICONO_DIRECCION_DOCTOR = "icono"
-        const val DOCTOR_DIRECCION_ID = "doctor_direccion_id"
 
         const val TABLA_CITA = "citas"
         const val TITULO_CITA = "titulo_cita"

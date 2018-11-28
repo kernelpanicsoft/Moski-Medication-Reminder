@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_anadir_tratamiento.*
 import kotlinx.android.synthetic.main.activity_detalles_establecimiento.*
 import model.MMDContract
 import model.mmrbd
