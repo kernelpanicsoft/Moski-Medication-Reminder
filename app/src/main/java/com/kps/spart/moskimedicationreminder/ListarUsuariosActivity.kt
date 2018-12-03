@@ -116,9 +116,4 @@ class ListarUsuariosActivity : AppCompatActivity() {
         dbHelper.close()
     }
 
-    fun setCurrentUserActive(currentUserID : Int){
-
-
-
-    }
 }

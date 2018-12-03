@@ -20,7 +20,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 
 class MainActivity : AppCompatActivity() {
-    var currentSectionID: Int = 0
+    private var currentSectionID: Int = 0
+     var currentDirectoryID: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
         bnve.enableAnimation(true)
         bnve.enableShiftingMode(false)
         bnve.enableItemShiftingMode(false)
+
+        currentDirectoryID = savedInstanceState?.getInt("currentDirectoryId") ?: 0
+
 
         bnve.setOnNavigationItemSelectedListener { item ->
             val manager = supportFragmentManager
@@ -64,7 +68,9 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_directorio -> {
-                    transaction.replace(R.id.content, DirectorioFragment(), getString(R.string.fragmentoDirectorio)).commit()
+                    val directorioFragment = DirectorioFragment()
+
+                    transaction.replace(R.id.content, directorioFragment, getString(R.string.fragmentoDirectorio)).commit()
                     currentSectionID = item.itemId
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -73,15 +79,13 @@ class MainActivity : AppCompatActivity() {
 
             true
 
-
         }
 
 
-        //Cargamos el fragmento inicial Hoy si es que no se ha seleccionado nada con la navegacion en otro caso cargamos el ulyimo fragmento
+        //Cargamos el fragmento inicial Hoy si es que no se ha seleccionado nada con la navegacion en otro caso cargamos el ultimo fragmento
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
             //transaction.replace(R.id.content, HoyFragment(), getString(R.string.fragmentoHoy)).commit()
-
 
 
         currentSectionID = savedInstanceState?.getInt("currentFragmentId") ?: 0
@@ -101,7 +105,8 @@ class MainActivity : AppCompatActivity() {
                 transaction.replace(R.id.content, CitasMedicasFragment(), getString(R.string.fragmentoCitas)).commit()
             }
             R.id.navigation_directorio -> {
-                transaction.replace(R.id.content, DirectorioFragment(), getString(R.string.fragmentoDirectorio)).commit()
+                val directorioFragment = DirectorioFragment()
+                transaction.replace(R.id.content, directorioFragment, getString(R.string.fragmentoDirectorio)).commit()
             }
 
             else ->{
@@ -156,12 +161,12 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-
         outState.putInt("currentFragmentId",currentSectionID)
+        outState.putInt("currentDirectoryId",currentDirectoryID)
     }
 
-
-
-
+    fun getVariable() : String{
+        return "Saludos desde la activity"
+    }
 
 }

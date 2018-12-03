@@ -38,7 +38,7 @@ class FichasContactoAdapter (private val fichasContacto: Array<FichaContacto>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-       // holder?.titulo?.text = fichasContacto[position].titulo
+        // holder?.titulo?.text = fichasContacto[position].titulo
     }
 
     override fun getItemCount(): Int {

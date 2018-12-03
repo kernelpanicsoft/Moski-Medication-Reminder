@@ -56,7 +56,7 @@
 
     <string name="tituloMedico">Título:</string>
     <string name="nombreMedico">Nombre</string>
-    <string name="especialidad">Especialidad</string>
+    <string name="especialidad">Especialidad:</string>
     <string name="direccion1">Dirección 1</string>
     <string name="direccion2">Direccion 2</string>
     <string name="telefono">Teléfono</string>

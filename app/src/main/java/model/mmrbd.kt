@@ -73,7 +73,7 @@ private const val SQL_CREATE_CONTACT_CARD_TABLE : String =  "CREATE TABLE ${MMDC
                                                             "${MMDContract.columnas.CELULAR_FICHA_CONTACTO} TEXT," +
                                                             "${MMDContract.columnas.EMAIL_FICHA_CONTACTO} TEXT," +
                                                             "${MMDContract.columnas.WEB_FICHA_CONTACTO} TEXT," +
-                                                            "${MMDContract.columnas.ACCESSO_FICHA_CONTACTO} TEXT," +
+                                                            "${MMDContract.columnas.ACCESSO_FICHA_CONTACTO} INTEGER," +
                                                             "${MMDContract.columnas.LATITUD_FICHA_CONTACTO} TEXT," +
                                                             "${MMDContract.columnas.LONGITUD_FICHA_CONTACTO} TEXT," +
                                                             "${MMDContract.columnas.DOCTOR_FICHA_CONTACTO_ID} INTEGER," +

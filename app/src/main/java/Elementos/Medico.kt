@@ -13,15 +13,7 @@ class Medico {
     var colorIcono: String? = null
     var icono: String? = null
     var titulo: String? = null
-
-    init {
-        nombre = "Luis Gerando Mendez"
-        especialidad = "Cardiologo"
-        icono = "Doctor"
-        colorIcono = "#027569"
-        titulo = "Dr."
-
-    }
+    var usuarioID : Int? = null
 
     fun toContentValues() : ContentValues{
         val contentValues = ContentValues()
@@ -31,8 +23,7 @@ class Medico {
         contentValues.put(MMDContract.columnas.ESPECIALIDAD_DOCTOR, especialidad)
         contentValues.put(MMDContract.columnas.ICONO_DOCTOR, icono)
         contentValues.put(MMDContract.columnas.COLOR_DOCTOR, colorIcono)
-
-
+        contentValues.put(MMDContract.columnas.USUARIO_DOCTOR_ID, usuarioID)
 
         return contentValues
     }

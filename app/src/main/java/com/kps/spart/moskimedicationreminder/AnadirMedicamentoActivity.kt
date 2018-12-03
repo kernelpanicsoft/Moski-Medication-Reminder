@@ -67,6 +67,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         }
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
+        medicamento.color = selectedColor.toString()
 
         val colors = resources.getIntArray(R.array.default_rainbow)
 
@@ -88,8 +89,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 medicamento.color = selectedColor.toString()
 
              //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
-
-
             }
 
             colorPickerDialog.show(fragmentManager,"color_picker_dialer")

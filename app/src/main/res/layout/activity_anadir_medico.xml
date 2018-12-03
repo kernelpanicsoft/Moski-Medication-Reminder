@@ -21,36 +21,39 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/LayoutConstrain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                >
 
                 <EditText
                     android:id="@+id/textInputLayoutNombre"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/rounded_border_edittext"
                     android:hint="@string/nombreMedico"
+                    android:inputType=""
                     android:minHeight="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guideline3"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewMedicamento"
-                    android:inputType="" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewMedicamento" />
 
 
                 <Spinner
@@ -81,43 +84,44 @@
                     app:layout_constraintStart_toStartOf="@+id/spinnerTitulo"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/textViewEspecialidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/especialidad"
+                    app:layout_constraintStart_toStartOf="@+id/SpinnerEspecialidad"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombre" />
+
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/SpinnerEspecialidad"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_spinner"
                     android:hint="@string/especialidad"
                     android:minHeight="40dp"
                     android:spinnerMode="dialog"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombre" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewEspecialidad" />
 
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/icono"
-                    app:layout_constraintStart_toStartOf="@+id/spinner"
-                    app:layout_constraintTop_toBottomOf="@+id/SpinnerEspecialidad" />
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                <ImageView
+                    android:id="@+id/iconoMedicoIV"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/background_spinner"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:minHeight="40dp"
+                    android:src="@drawable/ic_doctor"
+                    android:tint="@color/blueberry"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/SpinnerEspecialidad" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline"
@@ -126,28 +130,21 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent=".5" />
 
-                <Spinner
-                    android:id="@+id/spinner3"
+                <Button
+                    android:id="@+id/colorMedicoButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/background_spinner"
+                    android:background="@drawable/rounded_button"
                     android:minHeight="40dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:text="@string/colorDistintivo"
+                    android:textColor="@color/blanco"
+                    app:layout_constraintBottom_toBottomOf="@+id/iconoMedicoIV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/SpinnerEspecialidad" />
+                    app:layout_constraintTop_toTopOf="@+id/iconoMedicoIV" />
 
                 <ImageView
                     android:id="@+id/imageView11"
@@ -165,29 +162,31 @@
                     android:id="@+id/FichasDeContactoTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/fichas_de_contacto"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/iconoMedicoIV" />
 
 
             </android.support.constraint.ConstraintLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/RecViewfichasContacto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
     </android.support.v4.widget.NestedScrollView>
 
 
+    <ListView
+        android:id="@+id/ListViewfichasContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        />
+
+
+    </LinearLayout>
 
 
 
