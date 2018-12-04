@@ -25,10 +25,7 @@ class DirectorioFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
-
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_directorio, container, false)
@@ -46,14 +43,10 @@ class DirectorioFragment : Fragment() {
 
         tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
-
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-
             }
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
                 mainActivity.currentDirectoryID  = tab!!.position
             }
         })

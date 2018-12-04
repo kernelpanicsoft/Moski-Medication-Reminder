@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -46,7 +45,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 medico.titulo = parent?.getItemAtPosition(position).toString()
-
             }
         }
 
@@ -58,6 +56,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 medico.especialidad = parent?.getItemAtPosition(position).toString()
+
             }
         }
 
@@ -69,7 +68,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
         adapter = FichaDeContactoVaciaAdapter(this@AnadirMedicoActivity,fichas)
 
         ListViewfichasContacto.adapter = adapter
-
 
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicoActivity,R.color.blueberry)
@@ -94,10 +92,8 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
             colorPickerDialog.show(fragmentManager,"color_picker_dialer")
 
-            adapter.add(FichaContacto())
-            Toast.makeText(this@AnadirMedicoActivity,"El adaptador tiene: " + adapter.count, Toast.LENGTH_SHORT).show()
-        }
 
+        }
 
     }
 
@@ -110,7 +106,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.itemSave -> {
                 medico.nombre = textInputLayoutNombre.text.toString()
-
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicoActivity)
                 val usuarioID = sharedPref.getInt("actualUserID", -1)
@@ -131,7 +126,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
     }
 
-
     private fun saveMedicToBD(){
         val db = dbHelper.writableDatabase
         val errorAtInsertion : Long = -1
@@ -144,7 +138,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
             Toast.makeText(this@AnadirMedicoActivity, getString(R.string.doctor_registrado_correctamente),Toast.LENGTH_SHORT).show()
         }
 
-        saveContactCardsToBD(adapter)
+    //    saveContactCardsToBD(adapter)
     }
 
     private fun saveContactCardsToBD(adapter : FichaDeContactoVaciaAdapter){
@@ -161,9 +155,5 @@ class AnadirMedicoActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this@AnadirMedicoActivity,"Por favor rellene al menos una ficha de contacto", Toast.LENGTH_SHORT).show()
         }
-
-
-
-
     }
 }

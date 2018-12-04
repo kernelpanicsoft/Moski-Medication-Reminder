@@ -11,7 +11,6 @@ class Medico {
     var nombre: String? = null
     var especialidad: String? = null
     var colorIcono: String? = null
-    var icono: String? = null
     var titulo: String? = null
     var usuarioID : Int? = null
 
@@ -21,7 +20,6 @@ class Medico {
         contentValues.put(MMDContract.columnas.TITULO_DOCTOR, titulo)
         contentValues.put(MMDContract.columnas.NOMBRE_DOCTOR, nombre)
         contentValues.put(MMDContract.columnas.ESPECIALIDAD_DOCTOR, especialidad)
-        contentValues.put(MMDContract.columnas.ICONO_DOCTOR, icono)
         contentValues.put(MMDContract.columnas.COLOR_DOCTOR, colorIcono)
         contentValues.put(MMDContract.columnas.USUARIO_DOCTOR_ID, usuarioID)
 

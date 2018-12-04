@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/iconoMedico"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:src="@drawable/ic_capsula"
+        android:src="@drawable/ic_doctor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/NombreDoctorTV" />
 
@@ -22,7 +22,6 @@
         android:layout_marginStart="8dp"
         android:text="Dr."
         android:textColor="@color/negro"
-        android:textStyle="bold"
         android:textSize="@dimen/titulos"
         app:layout_constraintStart_toEndOf="@+id/iconoMedico"
         app:layout_constraintTop_toTopOf="@+id/NombreDoctorTV" />
@@ -35,7 +34,7 @@
         android:layout_marginTop="8dp"
         android:text="Eduardo Corona"
         android:textColor="@color/negro"
-        android:textStyle="bold"
+
         android:textSize="@dimen/titulos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

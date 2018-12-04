@@ -51,11 +51,11 @@ class ListarUsuariosActivity : AppCompatActivity() {
         val db = dbHelper.readableDatabase
 
         //Creamos la proyeccion de las columnas que deseamos leear
-        val projection = arrayOf(BaseColumns._ID,MMDContract.columnas.NOMBRE_USUARIO,MMDContract.columnas.APELLIDOS_USUARIO,MMDContract.columnas.GENERO_USUARIO,MMDContract.columnas.EDAD_USUARIO)
+        val columns = arrayOf(BaseColumns._ID,MMDContract.columnas.NOMBRE_USUARIO,MMDContract.columnas.APELLIDOS_USUARIO)
 
         val cursor = db.query(
                 MMDContract.columnas.TABLA_USUARIO,
-                projection,
+                columns,
                 null,
                 null,
                 null,

@@ -165,8 +165,4 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("currentDirectoryId",currentDirectoryID)
     }
 
-    fun getVariable() : String{
-        return "Saludos desde la activity"
-    }
-
 }

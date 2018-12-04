@@ -50,7 +50,7 @@ class MedicosAdapter(private val cursor: Cursor) : RecyclerView.Adapter<MedicosA
         cursor.moveToPosition(position)
 
         holder.icono.setImageResource(R.drawable.ic_capsula)
-        holder.icono.setColorFilter(Color.parseColor(cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_DOCTOR))))
+        holder.icono.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_DOCTOR)))
         holder.titulo.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_DOCTOR))
         holder.nombre.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_DOCTOR))
         holder.especialidad.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.ESPECIALIDAD_DOCTOR))
