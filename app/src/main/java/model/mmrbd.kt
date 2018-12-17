@@ -3,9 +3,8 @@ package model
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.database.sqlite.SQLiteDatabase.CursorFactory
 import android.provider.BaseColumns
-import android.support.v7.widget.MenuPopupWindow
+
 
 /**
  * Created by spart on 11/03/2018.

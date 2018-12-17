@@ -21,7 +21,6 @@ object MMDContract {
         const val TITULO_DOCTOR = "titulo_doctor"
         const val NOMBRE_DOCTOR = "nombre_doctor"
         const val ESPECIALIDAD_DOCTOR = "especialidad_doctor"
-        const val ICONO_DOCTOR = "icono_doctor"
         const val COLOR_DOCTOR = "color_doctor"
         const val USUARIO_DOCTOR_ID = "usuario_doctor_id"
 

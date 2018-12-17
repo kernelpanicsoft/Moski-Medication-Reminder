@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,13 +18,15 @@ import kotlinx.android.synthetic.main.activity_anadir_medico.*
 import model.MMDContract
 import model.mmrbd
 import org.xdty.preference.colorpicker.ColorPickerDialog
+import java.util.zip.Inflater
 
 
 class AnadirMedicoActivity : AppCompatActivity() {
 
     private lateinit var dbHelper : mmrbd
     private lateinit var medico : Medico
-    private lateinit var adapter : FichaDeContactoVaciaAdapter
+    private lateinit var adapter : FichaDeContactoCompactaAdapter
+    private var fichas = ArrayList<FichaContacto>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,21 +65,20 @@ class AnadirMedicoActivity : AppCompatActivity() {
             }
         }
 
-        val fichas = ArrayList<FichaContacto>()
-        //val fichaContactoDefault = FichaContacto("Consultorio personal","Torre medica 3 Hospital Upaep","23234343","53453","rwerwe@gf.com","google.com",true)
-        val fichaContactoDefault = FichaContacto()
-        fichaContactoDefault.accesoRapido = true
-        fichas.add(fichaContactoDefault)
-        adapter = FichaDeContactoVaciaAdapter(this@AnadirMedicoActivity,fichas)
 
-        ListViewfichasContacto.adapter = adapter
+        adapter = FichaDeContactoCompactaAdapter(this@AnadirMedicoActivity, fichas)
 
+        RecViewfichasContacto.setHasFixedSize(true)
+        val mLAyoutManager = LinearLayoutManager(this@AnadirMedicoActivity,LinearLayoutManager.VERTICAL, false)
+
+        RecViewfichasContacto.layoutManager = mLAyoutManager
+        RecViewfichasContacto.adapter = adapter
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicoActivity,R.color.blueberry)
         medico.colorIcono = selectedColor.toString()
 
         val colors = resources.getIntArray(R.array.default_rainbow)
-        colorMedicoButton.setOnClickListener{
+        iconoMedicoIV.setOnClickListener{
 
             val colorPickerDialog = ColorPickerDialog.newInstance(R.string.colorDistintivo,
                     colors,
@@ -94,6 +98,50 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
 
         }
+
+        addFichaContactoButton.setOnClickListener{
+            val builder = AlertDialog.Builder(this@AnadirMedicoActivity)
+            val inflatedView = layoutInflater.inflate(R.layout.list_item_ficha_contacto, null)
+            builder.setTitle(getString(R.string.anadir_ficha_de_contacto))
+                    .setView(inflatedView)
+                    .setPositiveButton(getString(R.string.guardar), null)
+                    .setNegativeButton(getString(R.string.cancelar)) { dialog, which ->
+
+                    }
+
+
+
+
+            val dialog = builder.create()
+            dialog.setOnShowListener{
+                val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                positiveButton.setOnClickListener{
+                    val fichaContacto = FichaContacto()
+                    val tituloFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTituloficha)
+                    val direccionFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutDireccion)
+                    val telefonoFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTelefono)
+                    val celularFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTelefono)
+                    val emailFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutEmail)
+                    val sitioWebFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutWebSite)
+
+                    fichaContacto.titulo = tituloFichaContactoET.text.toString()
+                    fichaContacto.direccion = direccionFichaContactoET.text.toString()
+                    fichaContacto.telefono = telefonoFichaContactoET.text.toString()
+                    fichaContacto.celular = celularFichaContactoET.text.toString()
+                    fichaContacto.email = emailFichaContactoET.text.toString()
+                    fichaContacto.sitioweb = sitioWebFichaContactoET.text.toString()
+
+                    fichas.add(fichaContacto)
+                    adapter.notifyDataSetChanged()
+
+                    dialog.dismiss()
+            }
+
+
+            }
+            dialog.show()
+        }
+
 
     }
 
@@ -141,12 +189,12 @@ class AnadirMedicoActivity : AppCompatActivity() {
     //    saveContactCardsToBD(adapter)
     }
 
-    private fun saveContactCardsToBD(adapter : FichaDeContactoVaciaAdapter){
+    private fun saveContactCardsToBD(adapter : FichaDeContactoCompactaAdapter){
         val db = dbHelper.writableDatabase
         val errorAtInsertion : Long = -1
 
-
-        if(adapter.count > 0){
+/*
+        if(adapter.itemCount > 0){
             for(contactCard in adapter.items){
                 if(!contactCard.titulo.isNullOrEmpty()){
                     val newRowId = db.insert(MMDContract.columnas.TABLA_FICHA_CONTACTO, null, contactCard.toContentValues())
@@ -155,5 +203,31 @@ class AnadirMedicoActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this@AnadirMedicoActivity,"Por favor rellene al menos una ficha de contacto", Toast.LENGTH_SHORT).show()
         }
+        */
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+       // outState?.putSerializable("contactCards", fichas)
+        outState?.putParcelableArrayList("contactCards",fichas)
+
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        fichas = savedInstanceState!!.getParcelableArrayList("contactCards")
+        adapter = FichaDeContactoCompactaAdapter(this@AnadirMedicoActivity, fichas)
+
+        RecViewfichasContacto.setHasFixedSize(true)
+        val mLAyoutManager = LinearLayoutManager(this@AnadirMedicoActivity,LinearLayoutManager.VERTICAL, false)
+
+        RecViewfichasContacto.layoutManager = mLAyoutManager
+
+        RecViewfichasContacto.adapter = adapter
+
+
     }
 }

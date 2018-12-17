@@ -12,12 +12,14 @@ import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.widget.Toolbar
+import android.util.AttributeSet
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+import kotlinx.android.synthetic.main.activity_detalles_medicamento.*
 
 class MainActivity : AppCompatActivity() {
     private var currentSectionID: Int = 0
@@ -43,9 +45,19 @@ class MainActivity : AppCompatActivity() {
         currentDirectoryID = savedInstanceState?.getInt("currentDirectoryId") ?: 0
 
 
+
         bnve.setOnNavigationItemSelectedListener { item ->
             val manager = supportFragmentManager
             val transaction = manager.beginTransaction()
+
+            when(item.itemId){
+                R.id.navigation_home ->{
+                    add_element_fab.hide()
+                }else->{
+                add_element_fab.show()
+                }
+            }
+
             when (item.itemId) {
                 R.id.navigation_home -> {
                     transaction.replace(R.id.content, HoyFragment(), getString(R.string.fragmentoHoy)).commit()
@@ -76,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+
 
             true
 
@@ -146,7 +159,13 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        add_element_fab.setOnClickListener{
+            Toast.makeText(this@MainActivity,"Estas tocando el fab", Toast.LENGTH_SHORT).show()
+        }
+
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -163,6 +182,7 @@ class MainActivity : AppCompatActivity() {
 
         outState.putInt("currentFragmentId",currentSectionID)
         outState.putInt("currentDirectoryId",currentDirectoryID)
+
     }
 
 }

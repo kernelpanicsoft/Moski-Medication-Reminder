@@ -92,6 +92,7 @@
     <string name="telefono1Farmacia">Teléfono 1</string>
     <string name="telefono2Farmacia">Teléfono 2</string>
     <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
     <string name="tipo_medicamento">Tipo medicamento:</string>
     <string name="buscar">Buscar</string>
     <string name="detalles_farmacia">Detalles farmacia</string>
@@ -102,7 +103,7 @@
     <string name="fotografia">Fotografía:</string>
     <string name="detalles_cita_medica">Detalles de cita médica</string>
     <string name="sitio_web">Sitio web</string>
-    <string name="detalles_de_medico">Detalles de Médico</string>
+    <string name="detalles_de_medico">Detalles del Médico</string>
     <string name="tipo_de_recordatorio">Tipo de recordatorio:</string>
     <string name="notificaci_n">Notificación</string>
     <string name="alarma">Alarma</string>
@@ -258,6 +259,12 @@
     <string name="no_es_posible_eliminar_medicamento">No es posible eliminar el medicamento</string>
     <string name="eliminar_medicamento">Eliminar medicamento</string>
     <string name="esta_seguro_que_desea_eliminar_el_medicamento">¿Está seguro que desea eliminar el establecimiento?</string>
+    <string name="medico_eliminado_correctamente">Médico eliminado correctamente</string>
+    <string name="no_es_posible_eliminar_medico">No es posible eliminar al médico</string>
+    <string name="eliminar_medico">Eliminar médico</string>
+    <string name="esta_seguro_que_desea_eliminar_al_medico">¿Está seguro que desea eliminar a este médico?</string>
+    <string name="toca_para_cambiar_el_color">Toca para cambiar el color</string>
+    <string name="anadir_ficha_de_contacto">Añadir ficha de contacto</string>
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
         <item>Laboratorió de análisis clínicos</item>

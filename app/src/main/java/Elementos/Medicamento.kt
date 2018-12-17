@@ -1,23 +1,9 @@
 package Elementos
-
 import android.content.ContentValues
 import model.MMDContract
 
-/**
- * Created by spart on 27/10/2017.
- */
 
-class Medicamento {
-
-    var nombreMedicamento: String? = null
-    var nombreGenerico: String? = null
-    var dosis: String? = null
-    var nota: String? = null
-    var tipo: String? = null
-    var color: String? = null
-    var fotografia: String? = null
-    var usuarioID : Int? = null
-
+class Medicamento (var nombreMedicamento: String? = null, var nombreGenerico: String? = null, var dosis: String? = null, var nota: String? = null, var tipo: String? = null, var color: String? = null, var fotografia: String? = null, var usuarioID : Int? = null) {
 
     fun toContentValues() : ContentValues{
         val contentValues = ContentValues()
@@ -33,5 +19,4 @@ class Medicamento {
         return contentValues
 
     }
-
 }

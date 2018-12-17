@@ -1,12 +1,10 @@
 package com.kps.spart.moskimedicationreminder
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.support.v7.app.AlertDialog
-import android.support.v7.widget.AppCompatImageHelper
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -140,7 +138,6 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         dbHelper.close()
     }
 }

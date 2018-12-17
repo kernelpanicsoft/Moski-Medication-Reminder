@@ -59,7 +59,6 @@ class MedicamentosFragment : Fragment() {
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesMedicamentoActivity::class.java)
             nav.putExtra("MEDICINE_ID", adapter.getMedicineID(RV.getChildAdapterPosition(it)))
-
             startActivity(nav)
         })
 
