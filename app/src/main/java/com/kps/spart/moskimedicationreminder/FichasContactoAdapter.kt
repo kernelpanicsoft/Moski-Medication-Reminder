@@ -1,6 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
 import Elementos.FichaContacto
+import android.content.Context
+import android.database.Cursor
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 
@@ -10,8 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.list_item_ficha_contacto_llena.*
+import model.MMDContract
 
-class FichasContactoAdapter (private val fichasContacto: Array<FichaContacto>) : RecyclerView.Adapter<FichasContactoAdapter.ViewHolder>(), View.OnClickListener {
+class FichasContactoAdapter (private val context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<FichasContactoAdapter.ViewHolder>(), View.OnClickListener {
 
 
     private var listener: View.OnClickListener? = null
@@ -37,12 +40,12 @@ class FichasContactoAdapter (private val fichasContacto: Array<FichaContacto>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        // holder?.titulo?.text = fichasContacto[position].titulo
+        cursor.moveToPosition(position)
+        holder.titulo.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_FICHA_CONTACTO))
     }
 
     override fun getItemCount(): Int {
-        return fichasContacto.size
+        return cursor.count
     }
 
     fun setOnClickListener(listener: View.OnClickListener){

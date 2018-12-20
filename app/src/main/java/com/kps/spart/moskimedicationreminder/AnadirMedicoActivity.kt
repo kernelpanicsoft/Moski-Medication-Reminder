@@ -109,9 +109,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
                     }
 
-
-
-
             val dialog = builder.create()
             dialog.setOnShowListener{
                 val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -131,10 +128,16 @@ class AnadirMedicoActivity : AppCompatActivity() {
                     fichaContacto.email = emailFichaContactoET.text.toString()
                     fichaContacto.sitioweb = sitioWebFichaContactoET.text.toString()
 
-                    fichas.add(fichaContacto)
-                    adapter.notifyDataSetChanged()
 
-                    dialog.dismiss()
+                    if(fichaContacto.titulo.isNullOrEmpty() && (fichaContacto.direccion.isNullOrEmpty() || fichaContacto.telefono.isNullOrEmpty() || fichaContacto.celular.isNullOrEmpty() || fichaContacto.email.isNullOrEmpty() || fichaContacto.sitioweb.isNullOrEmpty())){
+                        Toast.makeText(this@AnadirMedicoActivity,getString(R.string.es_necesario_especificar_el_titulo_y_otro_campo),Toast.LENGTH_LONG).show()
+                    }else{
+                        fichas.add(fichaContacto)
+                        adapter.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+
+
             }
 
 
@@ -183,34 +186,38 @@ class AnadirMedicoActivity : AppCompatActivity() {
         if(newRowId == errorAtInsertion){
             Toast.makeText(this@AnadirMedicoActivity,getString(R.string.ocurrio_un_problema_nuevo_doctor),Toast.LENGTH_SHORT).show()
         }else{
+            if(adapter.itemCount > 0){
+                saveContactCardsToBD(adapter)
+            }
             Toast.makeText(this@AnadirMedicoActivity, getString(R.string.doctor_registrado_correctamente),Toast.LENGTH_SHORT).show()
         }
 
-    //    saveContactCardsToBD(adapter)
+
     }
 
     private fun saveContactCardsToBD(adapter : FichaDeContactoCompactaAdapter){
         val db = dbHelper.writableDatabase
         val errorAtInsertion : Long = -1
 
-/*
+
         if(adapter.itemCount > 0){
-            for(contactCard in adapter.items){
-                if(!contactCard.titulo.isNullOrEmpty()){
-                    val newRowId = db.insert(MMDContract.columnas.TABLA_FICHA_CONTACTO, null, contactCard.toContentValues())
+            for(contactCard in fichas){
+
+                val newRowId = db.insert(MMDContract.columnas.TABLA_FICHA_CONTACTO, null, contactCard.toContentValues())
+                if(newRowId == errorAtInsertion){
+                    break
                 }
             }
+            finish()
         }else{
             Toast.makeText(this@AnadirMedicoActivity,"Por favor rellene al menos una ficha de contacto", Toast.LENGTH_SHORT).show()
         }
-        */
     }
 
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-       // outState?.putSerializable("contactCards", fichas)
         outState?.putParcelableArrayList("contactCards",fichas)
 
     }
@@ -227,7 +234,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
         RecViewfichasContacto.layoutManager = mLAyoutManager
 
         RecViewfichasContacto.adapter = adapter
-
 
     }
 }

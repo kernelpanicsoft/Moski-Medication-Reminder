@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -29,6 +30,7 @@ class DetallesMedicoActivity : AppCompatActivity() {
 
         medic_id = intent.getIntExtra("MEDIC_ID", -1)
         populateMedicFieldFromDB()
+        populateMedicContactCards()
 
     }
 
@@ -59,6 +61,31 @@ class DetallesMedicoActivity : AppCompatActivity() {
             NombreDoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_DOCTOR))
             EspecialidadTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.ESPECIALIDAD_DOCTOR))
         }
+    }
+
+    private fun populateMedicContactCards(){
+        RecViewFichasContactoMedico.setHasFixedSize(true)
+        val mLayoutManager = LinearLayoutManager(this@DetallesMedicoActivity,LinearLayoutManager.VERTICAL, false)
+        RecViewFichasContactoMedico.layoutManager = mLayoutManager
+
+        val dbHelper = mmrbd(this@DetallesMedicoActivity)
+        val db = dbHelper.readableDatabase
+
+        val selection = "${BaseColumns._ID} =?"
+        val selectionArgs = arrayOf("$medic_id")
+
+
+        val cursor = db.query(MMDContract.columnas.TABLA_FICHA_CONTACTO,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null)
+
+        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,cursor)
+
+        RecViewFichasContactoMedico.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{

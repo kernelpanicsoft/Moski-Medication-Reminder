@@ -265,6 +265,8 @@
     <string name="esta_seguro_que_desea_eliminar_al_medico">¿Está seguro que desea eliminar a este médico?</string>
     <string name="toca_para_cambiar_el_color">Toca para cambiar el color</string>
     <string name="anadir_ficha_de_contacto">Añadir ficha de contacto</string>
+    <string name="es_necesario_especificar_el_titulo_y_otro_campo">Es necesario especificar el título y al menos otro dato de contacto</string>
+    <string name="editar_ficha_contacto">Editar ficha de contacto</string>
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
         <item>Laboratorió de análisis clínicos</item>

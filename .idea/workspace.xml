@@ -20,42 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca7f6519-f33a-4f69-b717-305bd3c96adb" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirFichaContactoDialogFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_compacta.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_2_71_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_2_71_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_2_71_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/Elementos/FichaContacto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Elementos/FichaContacto.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/Elementos/Medicamento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Elementos/Medicamento.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirMedicoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirMedicoActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesEstablecimientoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesEstablecimientoActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoVaciaAdapter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/model/MMDContract.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/model/MMDContract.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/model/mmrbd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/model/mmrbd.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_medico.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_medico.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_llena.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_llena.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,91 +60,83 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="AnadirMedicoActivity.kt" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirMedicoActivity.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1411">
-                  <caret line="141" column="12" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
-                  <folding>
-                    <element signature="e#47#723#0" expanded="true" />
-                    <element signature="e#4227#4271#1" expanded="true" />
-                    <element signature="e#4351#4378#1" expanded="true" />
-                    <element signature="e#4425#4453#1" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="193">
-                  <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="list_item_ficha_contacto_compacta.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_compacta.xml">
-              <provider selected="true" editor-type-id="android-designer2">
-                <state />
-              </provider>
-              <provider editor-type-id="text-editor">
-                <state relative-caret-position="697">
-                  <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="FichaDeContactoCompactaAdapter.kt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="425">
-                  <caret line="25" selection-start-line="25" selection-end-line="25" />
-                  <folding>
-                    <element signature="e#47#303#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DetallesEstablecimientoActivity.kt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesEstablecimientoActivity.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-12">
-                  <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-                  <folding>
-                    <element signature="e#47#468#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="AnadirFichaContactoDialogFragment.kt" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirFichaContactoDialogFragment.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="19" selection-start-line="19" selection-end-line="19" />
-                  <folding>
-                    <element signature="e#47#193#0" expanded="true" />
-                    <element signature="e#505#549#1" expanded="true" />
-                    <element signature="e#586#613#1" expanded="true" />
-                    <element signature="e#656#684#1" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="FichaDeContactoCompactaAdapter.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1037">
+              <caret line="70" column="26" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DetallesMedicoActivity.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="80" column="29" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_detalles_medico.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2244">
+              <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_item_ficha_contacto.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_item_ficha_contacto_llena.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_llena.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1284">
+              <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+              <folding>
+                <element signature="e#2465#2480#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MedicamentosAdapter.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosAdapter.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="16" column="45" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MedicamentosFragment.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosFragment.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -202,6 +176,7 @@
       <find>FichaDeContactoVaciaAdapter</find>
       <find>notifyItemRemoved</find>
       <find>Guardar</find>
+      <find>Toast</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -2570,7 +2545,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/model/ProviderMMR.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/Elementos/Usuario.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_farmacia.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_establecimiento.xml" />
@@ -2593,7 +2567,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicamentoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_medicamento.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirMedicamentoActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DirectorioFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_medico.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_establecimiento.xml" />
@@ -2601,9 +2574,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicosAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/ListarUsuariosActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicosFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesEstablecimientoActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/model/mmrbd.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/model/MMDContract.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/Elementos/Medicamento.kt" />
@@ -2614,21 +2585,24 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_medico.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/Elementos/FichaContacto.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_compacta.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoVaciaAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirFichaContactoDialogFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirMedicoActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_llena.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -2639,6 +2613,7 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -2667,7 +2642,7 @@
               <item name="MoskiMedicationReminder" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="MoskiMedicationReminder" type="1abcf292:AndroidViewProjectNode" />
@@ -2677,7 +2652,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2872,26 +2846,26 @@
       <window_info id="Image Layers" order="7" />
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3608742" side_tool="true" visible="true" weight="0.2570806" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3619403" side_tool="true" weight="0.2570806" />
+      <window_info active="true" anchor="right" id="Preview" order="5" visible="true" weight="0.20415778" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3295325" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49946696" weight="0.40522876" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.53571427" weight="0.19172113" />
-      <window_info anchor="bottom" id="Logcat" order="8" sideWeight="0.6391258" visible="true" weight="0.2570806" />
+      <window_info anchor="bottom" id="Logcat" order="8" sideWeight="0.6380597" weight="0.2570806" />
       <window_info id="Captures" order="5" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1401919" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16364606" />
       <window_info anchor="bottom" id="Build" order="9" sideWeight="0.73880595" weight="0.045751635" />
       <window_info anchor="right" id="Gradle" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.81400436" weight="0.3069307" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" weight="0.4091904" />
       <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.81400436" weight="0.3069307" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="right" id="Assistant" order="9" weight="0.18017058" />
       <window_info anchor="right" id="StringPreview" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Preview" order="5" weight="0.20522387" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -2903,7 +2877,7 @@
     <layout-to-restore>
       <window_info anchor="right" id="StringPreview" order="10" />
       <window_info id="Designer" order="4" />
-      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.7420043" weight="0.47494555" />
+      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.73880595" weight="0.045751635" />
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3295325" />
@@ -2915,16 +2889,16 @@
       <window_info id="Capture Tool" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3464819" side_tool="true" visible="true" weight="0.2647059" />
-      <window_info anchor="right" id="Preview" order="5" weight="0.1652452" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3619403" side_tool="true" weight="0.2570806" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.20415778" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" weight="0.4091904" />
       <window_info anchor="right" id="Assistant" order="9" weight="0.18017058" />
-      <window_info anchor="bottom" id="Logcat" order="8" sideWeight="0.65351814" visible="true" weight="0.2647059" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49946696" weight="0.32897604" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.5405117" weight="0.19281046" />
+      <window_info anchor="bottom" id="Logcat" order="8" sideWeight="0.6380597" visible="true" weight="0.2570806" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49946696" weight="0.40522876" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.53571427" weight="0.19172113" />
       <window_info anchor="right" id="Gradle" order="6" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14818764" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16364606" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32897604" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
@@ -2933,7 +2907,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32897604" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8160981" weight="0.26688454" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.81400436" weight="0.3069307" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2990,12 +2964,6 @@
           <line>2</line>
           <properties />
           <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt</url>
-          <line>2</line>
-          <properties />
-          <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="86" />
@@ -3132,14 +3100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_llena.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_directorio.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3160,16 +3120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="285" column="11" selection-start-line="285" selection-start-column="11" selection-end-line="285" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/Elementos/CitaMedica.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -3181,20 +3131,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2227">
           <caret line="142" column="33" selection-start-line="142" selection-start-column="33" selection-end-line="142" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="58" selection-start-line="58" selection-end-line="62" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="77" selection-start-line="77" selection-end-line="82" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -3226,20 +3162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="89" column="44" selection-start-line="89" selection-start-column="44" selection-end-line="89" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-383">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -3299,23 +3221,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/Elementos/FichaContacto.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_medico.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="148" column="66" selection-start-line="148" selection-start-column="34" selection-end-line="148" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_farmacias.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3333,47 +3238,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="3519">
-          <caret line="207" selection-start-line="207" selection-end-line="207" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesEstablecimientoActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding>
-            <element signature="e#47#468#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
+        <state relative-caret-position="1598">
           <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoVaciaAdapter.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoVaciaAdapter.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirFichaContactoDialogFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#47#193#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_medico.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#47#303#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="443">
+          <caret line="148" column="66" selection-start-line="148" selection-start-column="34" selection-end-line="148" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -3387,28 +3276,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirFichaContactoDialogFragment.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesEstablecimientoActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#47#193#0" expanded="true" />
-            <element signature="e#505#549#1" expanded="true" />
-            <element signature="e#586#613#1" expanded="true" />
-            <element signature="e#656#684#1" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/Elementos/FichaContacto.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/AnadirMedicoActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="141" column="12" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
+        <state relative-caret-position="3264">
+          <caret line="210" column="20" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="20" />
           <folding>
             <element signature="e#47#723#0" expanded="true" />
-            <element signature="e#4227#4271#1" expanded="true" />
-            <element signature="e#4351#4378#1" expanded="true" />
-            <element signature="e#4425#4453#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichaDeContactoCompactaAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="70" column="26" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicamentosFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/FichasContactoAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="43" column="119" selection-start-line="43" selection-start-column="119" selection-end-line="43" selection-end-column="119" />
+          <folding>
+            <element signature="e#47#463#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesMedicoActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="80" column="29" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_medico.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2244">
+          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ficha_contacto_llena.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1284">
+          <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <element signature="e#2465#2480#0" expanded="true" />
           </folding>
         </state>
       </provider>
