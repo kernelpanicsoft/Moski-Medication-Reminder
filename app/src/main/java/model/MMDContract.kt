@@ -8,7 +8,16 @@ import android.provider.BaseColumns
  *
  */
 
+object TipoRecordatorio{
+    const val NOTIFICACION = 0
+    const val ALARMA = 1
+    const val NINGUNO = 2
+}
+
+
 object MMDContract {
+
+
 
     object columnas : BaseColumns {
 
@@ -39,14 +48,17 @@ object MMDContract {
 
         const val TABLA_CITA = "citas"
         const val TITULO_CITA = "titulo_cita"
-        const val DIRECCION_CITA = "direccion_cita"
-        const val FECHA_HORA_CITA = "fecha_hora_cita"
+        const val DOCTOR_CITA = "doctor_cita"
+        const val ESPECIALIDAD_DOCTOR_CITA = "especialidad_doctor_cita"
         const val NOTA_CITA = "nota_cita"
+        const val FECHA_HORA_CITA = "fecha_hora_cita"
+        const val UBICACION_CITA = "ubicacion_cita"
+        const val TIPO_RECORDATORIO_CITA = "recordatorio_cita"
+        const val COLOR_DISTINTIVO_CITA = "color_distintivo_cita"
         const val LATITUD_CITA = "latitud_cita"
         const val LONGITUD_CITA = "longitud_cita"
-        const val COLOR_DISTINTIVO_CITA = "color_distintivo_cita"
-        const val DOCTOR_CITA_ID = "doctor_cita_id"
         const val USUARIO_CITA_ID = "usuario_cita_id"
+
 
         const val TABLA_USUARIO = "usuario"
         const val NOMBRE_USUARIO = "nombre_usuario"

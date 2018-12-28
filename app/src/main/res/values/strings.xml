@@ -82,7 +82,7 @@
     <string name="tituloCita">Título/Motivo de la cita</string>
     <string name="medicoCita">Médico </string>
     <string name="ubicacionCita">Ubicación</string>
-    <string name="fechaHoraCita">Fecha y hora de la cita</string>
+    <string name="fechaHoraCita">Fecha y hora de la cita:</string>
 
 
     <!-- Cadenas de la actividad Añadir farmacia -->
@@ -267,6 +267,17 @@
     <string name="anadir_ficha_de_contacto">Añadir ficha de contacto</string>
     <string name="es_necesario_especificar_el_titulo_y_otro_campo">Es necesario especificar el título y al menos otro dato de contacto</string>
     <string name="editar_ficha_contacto">Editar ficha de contacto</string>
+    <string name="fecha">Fecha</string>
+    <string name="hora">Hora</string>
+    <string name="especialidadCita">Especialidad</string>
+    <string name="ninguno">Ninguno</string>
+    <string name="ocurrio_un_problema_durante_la_creacion_cita">Ocurrió un problema durante la creación de la nueva cita médica</string>
+    <string name="cita_registrada_correctamente">Cita registrada correctamente</string>
+    <string name="usuario_eliminado_correctamente">Usuario eliminado correctamente</string>
+    <string name="no_es_posible_eliminar_al_usuario">No es posible eliminar al usuario</string>
+    <string name="eliminar_usuario">Eliminar usuario</string>
+    <string name="esta_seguro_que_desea_eliminar_usuario">¿Está seguro de que desea eliminar al usuario?, Esto eliminará de manera irreversible al usuario actual y todos los elementos que haya creado: medicamentos, médicos, tratamientos, citas y establecimientos serán borrados</string>
+
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
         <item>Laboratorió de análisis clínicos</item>

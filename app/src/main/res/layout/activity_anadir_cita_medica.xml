@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,81 +34,79 @@
                 >
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/iconoCita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/editText"
+                    app:layout_constraintBottom_toBottomOf="@+id/TituloCitaET"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editText"
+                    app:layout_constraintTop_toTopOf="@+id/TituloCitaET"
                     app:srcCompat="@drawable/ic_selectorcolor" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/TituloCitaET"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/rounded_border_edittext"
                     android:ems="10"
                     android:hint="@string/tituloCita"
                     android:inputType="textPersonName"
                     android:minHeight="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView18"
+                    app:layout_constraintStart_toEndOf="@+id/iconoCita"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
                     android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/editText4"
+                    app:layout_constraintBottom_toBottomOf="@+id/FechaYHoraEspecificadaTV"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editText4"
+                    app:layout_constraintTop_toTopOf="@+id/FechaYHoraEspecificadaTV"
                     app:srcCompat="@drawable/ic_calendar_date" />
 
                 <ImageView
                     android:id="@+id/imageView20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/editText2"
+                    app:layout_constraintBottom_toBottomOf="@+id/NombreMedicoET"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editText2"
+                    app:layout_constraintTop_toTopOf="@+id/NombreMedicoET"
                     app:srcCompat="@drawable/ic_doctor" />
 
                 <ImageView
                     android:id="@+id/imageView21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:tint="@color/colorPrimary"
 
-                    app:layout_constraintBottom_toBottomOf="@+id/editText3"
+                    app:layout_constraintBottom_toBottomOf="@+id/UbicacionET"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editText3"
+                    app:layout_constraintTop_toTopOf="@+id/UbicacionET"
                     app:srcCompat="@drawable/ic_placeholder" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/NombreMedicoET"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/rounded_border_edittext"
                     android:ems="10"
                     android:hint="@string/medicoCita"
@@ -115,15 +114,41 @@
                     android:minHeight="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView20"
-                    app:layout_constraintTop_toBottomOf="@+id/editText" />
+                    app:layout_constraintTop_toBottomOf="@+id/TituloCitaET" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/EspecialidadCitaET"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/rounded_border_edittext"
+                    android:hint="@string/especialidadCita"
+                    android:inputType="textPersonName"
+                    android:minHeight="40dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iconoEspecialidad"
+                    app:layout_constraintTop_toBottomOf="@+id/NombreMedicoET" />
+
+                <ImageView
+                    android:id="@+id/iconoEspecialidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_doctor"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/EspecialidadCitaET"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/EspecialidadCitaET" />
+
+                <EditText
+                    android:id="@+id/UbicacionET"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/rounded_border_edittext"
                     android:ems="10"
                     android:hint="@string/ubicacionCita"
@@ -132,24 +157,56 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/imageView21"
-                    app:layout_constraintTop_toBottomOf="@+id/colorDistivoSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/colorDistintivoButton" />
 
-                <EditText
-                    android:id="@+id/editText4"
+                <TextView
+                    android:id="@+id/FichaYHoraCitaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fechaHoraCita"
+                    android:textSize="@dimen/normal"
+                    app:layout_constraintStart_toStartOf="@+id/editTextNota"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextNota" />
+
+                <TextView
+                    android:id="@+id/FechaYHoraEspecificadaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="24/12/2018 8:18 pm"
+                    android:textSize="@dimen/titulos"
+                    app:layout_constraintStart_toStartOf="@+id/FichaYHoraCitaTV"
+                    app:layout_constraintTop_toBottomOf="@+id/FichaYHoraCitaTV"
+                    android:textColor="@color/negro"/>
+
+                <Button
+                    android:id="@+id/FechaCitaButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/rounded_border_edittext"
-                    android:ems="10"
-                    android:hint="@string/fechaHoraCita"
-                    android:inputType="textPersonName"
-                    android:minHeight="40dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/fecha"
+                    android:textColor="@color/blanco"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
                     app:layout_constraintStart_toEndOf="@+id/imageView19"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextNota" />
+                    app:layout_constraintTop_toBottomOf="@+id/FechaYHoraEspecificadaTV" />
+
+                <Button
+                    android:id="@+id/HoraCitaButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/hora"
+                    android:textColor="@color/blanco"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/FechaYHoraEspecificadaTV" />
 
 
                 <TextView
@@ -157,21 +214,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textSize="@dimen/normal"
                     android:text="@string/tipo_de_recordatorio"
-                    app:layout_constraintStart_toStartOf="@+id/editText4"
-                    app:layout_constraintTop_toBottomOf="@+id/editText4" />
+                    android:textSize="@dimen/normal"
+                    app:layout_constraintStart_toStartOf="@+id/FechaCitaButton"
+                    app:layout_constraintTop_toBottomOf="@+id/FechaCitaButton" />
 
                 <RadioGroup
                     android:id="@+id/RadioButtonGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="16dp"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="@+id/editText4"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    >
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                     <RadioButton
                         android:id="@+id/radio_notificacion"
@@ -185,25 +241,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/alarma"
-                        android:textColor="@color/grisOscuro"/>
+                        android:textColor="@color/grisOscuro" />
+
+                    <RadioButton
+                        android:id="@+id/radio_ninguna"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ninguno" />
                 </RadioGroup>
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/anadirUbicacionCitaButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="64dp"
                     android:layout_marginStart="64dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="64dp"
                     android:background="@drawable/rounded_button"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Añadir ubicación en mapa"
                     android:textColor="@color/blanco"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText3" />
+                    app:layout_constraintTop_toBottomOf="@+id/UbicacionET" />
 
                 <ImageView
                     android:id="@+id/noteIV"
@@ -219,9 +279,9 @@
                     android:id="@+id/editTextNota"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/rounded_border_edittext"
                     android:gravity="top"
                     android:hint="@string/nota_o_indicaciones_adicionales"
@@ -229,46 +289,50 @@
                     android:minHeight="40dp"
                     android:minLines="5"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/noteIV"
-                    app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                    app:layout_constraintTop_toBottomOf="@+id/EspecialidadCitaET" />
 
                 <ImageView
                     android:id="@+id/iconoBucketIV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_color_bucket"
                     android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/colorDistivoSpinner"
+                    app:layout_constraintBottom_toBottomOf="@+id/colorDistintivoButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/colorDistivoSpinner" />
+                    app:layout_constraintTop_toTopOf="@+id/colorDistintivoButton" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textSize="@dimen/normal"
                     android:text="@string/colorDistintivo"
-                    app:layout_constraintStart_toStartOf="@+id/colorDistivoSpinner"
+                    android:textSize="@dimen/normal"
+                    app:layout_constraintStart_toStartOf="@+id/colorDistintivoButton"
                     app:layout_constraintTop_toBottomOf="@+id/RadioButtonGroup" />
 
-                <Spinner
-                    android:id="@+id/colorDistivoSpinner"
+                <Button
+                    android:id="@+id/colorDistintivoButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/background_spinner"
-                    android:minHeight="40dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/colorDistintivo"
+                    android:textColor="@color/blanco"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iconoBucketIV"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.53" />
 
 
             </android.support.constraint.ConstraintLayout>

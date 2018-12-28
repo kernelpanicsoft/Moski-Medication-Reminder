@@ -58,15 +58,15 @@ class CitasAdapter(private val items: Array<CitaMedica>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.esfera.setColorFilter(Color.parseColor(items[position].color))
+       // holder.esfera.setColorFilter(Color.parseColor(items[position].color))
        // holder.iconoFecha.setColorFilter(Color.parseColor(items[position].color))
       //  holder.iconoDoctor.setColorFilter(Color.parseColor(items[position].color))
       //  holder.iconoUbicacion.setColorFilter(Color.parseColor(items[position].color))
 
         holder.TituloTV.text = items[position].titulo
-        holder.DoctorTV.text = items[position].medico
+        holder.DoctorTV.text = items[position].doctor
         holder.DireccionTV.text = items[position].ubicacion
-        holder.FechaTV.text = sdf.format(items[position].fechaYhora)
+        //        holder.FechaTV.text = sdf.format(items[position].fechaYhora)
 
     }
 

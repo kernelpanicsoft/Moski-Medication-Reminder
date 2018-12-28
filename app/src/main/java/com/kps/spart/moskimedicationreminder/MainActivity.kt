@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_detalles_medicamento.*
 
 class MainActivity : AppCompatActivity() {
     private var currentSectionID: Int = 0
-     var currentDirectoryID: Int = 0
+    var currentDirectoryID: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         bnve.enableShiftingMode(false)
         bnve.enableItemShiftingMode(false)
 
+
+
         currentDirectoryID = savedInstanceState?.getInt("currentDirectoryId") ?: 0
 
 
@@ -50,13 +52,6 @@ class MainActivity : AppCompatActivity() {
             val manager = supportFragmentManager
             val transaction = manager.beginTransaction()
 
-            when(item.itemId){
-                R.id.navigation_home ->{
-                    add_element_fab.hide()
-                }else->{
-                add_element_fab.show()
-                }
-            }
 
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -141,6 +136,7 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_account -> {
                     val nav = Intent(this@MainActivity, DetallesPerfilActivity::class.java)
+                    nav.putExtra("USER_ID",getCurrentUserID())
                     startActivity(nav)
                 }
 
@@ -159,12 +155,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        add_element_fab.setOnClickListener{
-            Toast.makeText(this@MainActivity,"Estas tocando el fab", Toast.LENGTH_SHORT).show()
-        }
+
 
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -184,5 +177,13 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("currentDirectoryId",currentDirectoryID)
 
     }
+
+    fun getCurrentUserID() : Int{
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
+         return sharedPref.getInt("actualUserID", -1)
+
+    }
+
+
 
 }

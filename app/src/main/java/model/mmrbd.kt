@@ -34,7 +34,8 @@ private const val SQL_CREATE_ESTABLISHMENT_TABLE: String =  "CREATE TABLE ${MMDC
                                                         "${MMDContract.columnas.LATITUD_ESTABLECIMIENTO} REAL," +
                                                         "${MMDContract.columnas.LONGITUD_ESTABLECIMIENTO} REAL," +
                                                         "${MMDContract.columnas.USUARIO_ESTABLECIMIENTO_ID} INTEGER," +
-                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_ESTABLECIMIENTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}))"
+                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_ESTABLECIMIENTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}) " +
+                                                        "ON DELETE CASCADE)"
 
 private const val SQL_DELETE_ESTABLISHMENT_TABLE: String =  "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_ESTABLECIMIENTO}"
 
@@ -48,7 +49,8 @@ private const val SQL_CREATE_MEDICINE_TABLE: String =   "CREATE TABLE ${MMDContr
                                                         "${MMDContract.columnas.COLOR_MEDICAMENTO} TEXT NOT NULL," +
                                                         "${MMDContract.columnas.FOTOGRAFIA_MEDICAMENTO} TEXT," +
                                                         "${MMDContract.columnas.USUARIO_MEDICAMENTO_ID} INTEGER," +
-                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_MEDICAMENTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}))"
+                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_MEDICAMENTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO}(${BaseColumns._ID}) " +
+                                                        "ON DELETE CASCADE)"
 
 
 private const val SQL_DELETE_MEDICINE_TABLE: String =   "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_MEDICAMENTO}"
@@ -60,7 +62,8 @@ private const val SQL_CREATE_MEDICS_TABLE : String =     "CREATE TABLE ${MMDCont
                                                         "${MMDContract.columnas.ESPECIALIDAD_DOCTOR} TEXT NOT NULL,"  +
                                                         "${MMDContract.columnas.COLOR_DOCTOR} TEXT NOT NULL," +
                                                         "${MMDContract.columnas.USUARIO_DOCTOR_ID} INTEGER," +
-                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_DOCTOR_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO} (${BaseColumns._ID}))"
+                                                        "FOREIGN KEY(${MMDContract.columnas.USUARIO_DOCTOR_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO} (${BaseColumns._ID}) " +
+                                                        "ON DELETE CASCADE)"
 
 private const val SQL_DELETE_MEDICS_TABLE : String =     "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_DOCTOR}"
 
@@ -76,9 +79,29 @@ private const val SQL_CREATE_CONTACT_CARD_TABLE : String =  "CREATE TABLE ${MMDC
                                                             "${MMDContract.columnas.LATITUD_FICHA_CONTACTO} TEXT," +
                                                             "${MMDContract.columnas.LONGITUD_FICHA_CONTACTO} TEXT," +
                                                             "${MMDContract.columnas.DOCTOR_FICHA_CONTACTO_ID} INTEGER," +
-                                                            "FOREIGN KEY(${MMDContract.columnas.DOCTOR_FICHA_CONTACTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_DOCTOR} (${BaseColumns._ID}))"
+                                                            "FOREIGN KEY(${MMDContract.columnas.DOCTOR_FICHA_CONTACTO_ID}) REFERENCES ${MMDContract.columnas.TABLA_DOCTOR} (${BaseColumns._ID}) " +
+                                                            "ON DELETE CASCADE)"
 
-private const val SQL_DELETE_CONTACT_CARD_TABLE : String = "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_FICHA_CONTACTO}"
+private const val SQL_DELETE_CONTACT_CARD_TABLE : String =  "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_FICHA_CONTACTO}"
+
+private const val SQL_CREATE_APPOINTMENTS_TABLE : String =  "CREATE TABLE ${MMDContract.columnas.TABLA_CITA} (" +
+                                                            "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                                                            "${MMDContract.columnas.TITULO_CITA} TEXT NOT NULL," +
+                                                            "${MMDContract.columnas.DOCTOR_CITA} TEXT," +
+                                                            "${MMDContract.columnas.ESPECIALIDAD_DOCTOR_CITA} TEXT," +
+                                                            "${MMDContract.columnas.NOTA_CITA} TEXT," +
+                                                            "${MMDContract.columnas.FECHA_HORA_CITA} TEXT," +
+                                                            "${MMDContract.columnas.UBICACION_CITA} TEXT," +
+                                                            "${MMDContract.columnas.TIPO_RECORDATORIO_CITA} INTEGER," +
+                                                            "${MMDContract.columnas.COLOR_DISTINTIVO_CITA} TEXT NOT NULL," +
+                                                            "${MMDContract.columnas.LATITUD_CITA} TEXT," +
+                                                            "${MMDContract.columnas.LONGITUD_CITA} TEXT," +
+                                                            "${MMDContract.columnas.USUARIO_CITA_ID} INTEGER," +
+                                                            "FOREIGN KEY(${MMDContract.columnas.USUARIO_CITA_ID}) REFERENCES ${MMDContract.columnas.TABLA_USUARIO} (${BaseColumns._ID}) " +
+                                                            "ON DELETE CASCADE)"
+
+private const val SQL_DELETE_APPOINTMENTS_TABLE : String = "DROP TABLE IF EXISTS ${MMDContract.columnas.TABLA_CITA}"
+
 
 
 class mmrbd(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -90,6 +113,7 @@ class mmrbd(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, D
         db.execSQL(SQL_CREATE_MEDICS_TABLE)
         db.execSQL(SQL_CREATE_CONTACT_CARD_TABLE)
         db.execSQL(SQL_CREATE_MEDICINE_TABLE)
+        db.execSQL(SQL_CREATE_APPOINTMENTS_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -98,8 +122,14 @@ class mmrbd(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, D
         db.execSQL(SQL_DELETE_MEDICS_TABLE)
         db.execSQL(SQL_DELETE_CONTACT_CARD_TABLE)
         db.execSQL(SQL_DELETE_MEDICINE_TABLE)
+        db.execSQL(SQL_DELETE_APPOINTMENTS_TABLE)
 
         onCreate(db)
+    }
+
+    override fun onOpen(db: SQLiteDatabase) {
+        super.onOpen(db)
+        db.execSQL("PRAGMA foreign_keys=ON")
     }
 
 

@@ -1,9 +1,11 @@
 package com.kps.spart.moskimedicationreminder
 
+import android.content.Intent
 import android.database.DatabaseUtils
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -29,8 +31,6 @@ class DetallesPerfilActivity : AppCompatActivity() {
 
         user_id = intent.getIntExtra("USER_ID", -1)
 
-     //   Toast.makeText(this@DetallesPerfilActivity,"Valor: " + user_id, Toast.LENGTH_SHORT).show()
-
         populateUserFieldsFromDB()
 
     }
@@ -44,6 +44,36 @@ class DetallesPerfilActivity : AppCompatActivity() {
         when(item?.itemId){
             android.R.id.home ->{
                 onBackPressed()
+                return true
+            }
+            R.id.edit_item ->{
+                val builder = AlertDialog.Builder(this@DetallesPerfilActivity)
+                builder.setItems(R.array.dialogo_editar_eliminar){
+                    dialog, which ->
+                    when(which){
+                        0-> {
+                            val nav = Intent(this@DetallesPerfilActivity, RegistrarUsuarioActivity::class.java)
+                            nav.putExtra("USER_ID", user_id)
+                            startActivityForResult(nav,349)
+                        }
+                        1 -> {
+                            val innerBuilder = AlertDialog.Builder(this@DetallesPerfilActivity)
+                            innerBuilder.setTitle(getString(R.string.eliminar_usuario))
+                                    .setMessage(getString(R.string.esta_seguro_que_desea_eliminar_usuario))
+                                    .setPositiveButton(getString(R.string.si)){
+                                        dialog, id ->
+                                        deleteUser()
+                                    }
+                                    .setNegativeButton(getString(R.string.no)){
+                                        dialog, id ->
+                                    }
+                            val innerDialog = innerBuilder.create()
+                            innerDialog.show()
+                        }
+                    }
+                }
+                val dialog = builder.create()
+                dialog.show()
                 return true
             }
         }
@@ -79,7 +109,20 @@ class DetallesPerfilActivity : AppCompatActivity() {
             EdadUsuarioTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.EDAD_USUARIO))
         }
 
+    }
 
+    private fun deleteUser(){
+        val db = dbHelper.writableDatabase
+        val selection = "${BaseColumns._ID} = ?"
+        val selectionArgs = arrayOf("$user_id")
+        val deletedRows = db.delete(MMDContract.columnas.TABLA_USUARIO, selection, selectionArgs)
+
+        if(deletedRows == 1){
+            Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_eliminado_correctamente),Toast.LENGTH_SHORT).show()
+            finish()
+        }else{
+            Toast.makeText(this@DetallesPerfilActivity, getString(R.string.no_es_posible_eliminar_al_usuario),Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroy() {

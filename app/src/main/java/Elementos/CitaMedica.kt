@@ -1,5 +1,7 @@
 package Elementos
 
+import android.content.ContentValues
+import model.MMDContract
 import java.util.Calendar
 import java.util.Date
 
@@ -9,22 +11,32 @@ import java.util.Date
 
 class CitaMedica {
     var titulo: String? = null
-    var medico: String? = null
+    var doctor: String? = null
     var especialidad: String? = null
-    var fechaYhora: Date? = null
-    var ubicacion: String? = null
-    var color: String? = null
     var nota: String? = null
+    var fechaYhora: String? = null
+    var ubicacion: String? = null
+    var tipoRecordatorio: Int? = null
+    var color: String? = null
+    var latitud : Double? = null
+    var longitud : Double? = null
+    var usuarioID : Int? = null
 
-    init {
-        titulo = "limpieza dental"
-        medico = "Alma Delia"
-        especialidad = "Otorrinolaringologia"
-        fechaYhora = Calendar.getInstance().time
-        ubicacion = "42Poniente, Colonia Volcanes, Puebla, Puebla"
-        color = "#b200ff"
-        nota = "Acudir con los dientes limpios y haber comido al menos media hora antes"
+
+    fun toContentValues() : ContentValues{
+        val contentValues = ContentValues()
+        contentValues.put(MMDContract.columnas.TITULO_CITA, titulo)
+        contentValues.put(MMDContract.columnas.DOCTOR_CITA, doctor)
+        contentValues.put(MMDContract.columnas.ESPECIALIDAD_DOCTOR_CITA, especialidad)
+        contentValues.put(MMDContract.columnas.NOTA_CITA,nota)
+        contentValues.put(MMDContract.columnas.FECHA_HORA_CITA, fechaYhora)
+        contentValues.put(MMDContract.columnas.UBICACION_CITA, ubicacion)
+        contentValues.put(MMDContract.columnas.TIPO_RECORDATORIO_CITA, tipoRecordatorio)
+        contentValues.put(MMDContract.columnas.COLOR_DISTINTIVO_CITA, color)
+        contentValues.put(MMDContract.columnas.LATITUD_CITA, latitud)
+        contentValues.put(MMDContract.columnas.LONGITUD_CITA, longitud)
+        contentValues.put(MMDContract.columnas.USUARIO_CITA_ID, usuarioID)
+
+        return contentValues
     }
-
-
 }
