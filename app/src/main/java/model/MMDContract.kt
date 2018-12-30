@@ -14,6 +14,11 @@ object TipoRecordatorio{
     const val NINGUNO = 2
 }
 
+object ContinuidadTratamiento{
+    const val PERIODO = 0
+    const val INDEFINIDO = 1
+}
+
 
 object MMDContract {
 
@@ -45,7 +50,6 @@ object MMDContract {
         const val LONGITUD_FICHA_CONTACTO = "longitud_ficha_contacto"
         const val DOCTOR_FICHA_CONTACTO_ID = "doctor_ficha_contacto_id"
 
-
         const val TABLA_CITA = "citas"
         const val TITULO_CITA = "titulo_cita"
         const val DOCTOR_CITA = "doctor_cita"
@@ -58,7 +62,6 @@ object MMDContract {
         const val LATITUD_CITA = "latitud_cita"
         const val LONGITUD_CITA = "longitud_cita"
         const val USUARIO_CITA_ID = "usuario_cita_id"
-
 
         const val TABLA_USUARIO = "usuario"
         const val NOMBRE_USUARIO = "nombre_usuario"
@@ -92,11 +95,14 @@ object MMDContract {
         const val USUARIO_MEDICAMENTO_ID = "usuario_medicamento_id"
 
         const val TABLA_TRATAMIENTO = "tratamiento"
-        const val TITULO_TRATAMINETO = "titulo_tratamiento"
+        const val TITULO_TRATAMIENTO = "titulo_tratamiento"
+        const val CONTINUIDAD_TRATAMIENTO = "continuidad_tratamiento"
         const val FECHA_INICIO_TRATAMIENTO = "fecha_inicio_tratamiento"
         const val FECHA_FIN_TRATAMIENTO = "fecha_fin_tratamiento"
         const val DIAS_TRATAMIENTO = "dias_tratamiento"
         const val STATUS_TRATAMIENTO = "status_tratamiento"
+        const val TIPO_RECORDATORIO_TRATAMIENTO = "recordatorio_tratamiento"
+        const val INDICACIONES_TRATAMIENTO = "indicaciones_tratamiento"
         const val MEDICAMENTO_TRATAMIENTO_ID = "medicamento_tratamiento_id"
         const val USUARIO_TRATAMIENTO_ID = "usuario_tratamiento_id"
 
@@ -104,6 +110,10 @@ object MMDContract {
         const val HORA_TOMA = "hora_toma"
         const val STATUS_TOMA = "status_toma"
         const val TRATAMIENTO_TOMA_ID = "tratamiento_toma_id"
+
+        const val TABLA_VENTA_MEDICAMENTO = "venta_medicamento"
+        const val MEDICAMENTO_VENTA_ID = "medicamento_venta_id"
+        const val ESTABLECIMIENTO_VENTA_ID = "establecimiento_venta_id"
 
     }
 

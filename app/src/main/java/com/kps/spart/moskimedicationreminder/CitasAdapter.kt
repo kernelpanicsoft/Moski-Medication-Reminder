@@ -11,45 +11,31 @@ import android.widget.TextView
 import java.text.SimpleDateFormat
 
 import Elementos.CitaMedica
+import android.database.Cursor
+import android.provider.BaseColumns
+import model.MMDContract
 
 /**
  * Created by spart on 15/12/2017.
  */
 
-class CitasAdapter(private val items: Array<CitaMedica>) : RecyclerView.Adapter<CitasAdapter.ViewHolder>(), View.OnClickListener{
+class CitasAdapter(private val cursor: Cursor) : RecyclerView.Adapter<CitasAdapter.ViewHolder>(), View.OnClickListener{
     private val sdf = SimpleDateFormat("dd/MM/yyyy, h:mm a")
     var listener: View.OnClickListener? = null
 
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val esfera: ImageView
-        val iconoUbicacion: ImageView
-        val iconoDoctor: ImageView
-        val iconoFecha: ImageView
-        val TituloTV: TextView
-        val DoctorTV: TextView
-        val DireccionTV: TextView
-        val FechaTV: TextView
-
-        init {
-
-            esfera = v.findViewById<View>(R.id.imageView4) as ImageView
-            iconoUbicacion = v.findViewById<View>(R.id.imageView5) as ImageView
-            iconoDoctor = v.findViewById<View>(R.id.imageView6) as ImageView
-            iconoFecha = v.findViewById<View>(R.id.imageView7) as ImageView
-
-            TituloTV = v.findViewById<View>(R.id.textView4) as TextView
-            DoctorTV = v.findViewById<View>(R.id.medictoCitaTV) as TextView
-            DireccionTV = v.findViewById<View>(R.id.direccionCitaTV) as TextView
-            FechaTV = v.findViewById<View>(R.id.fechaCitaTV) as TextView
-
-        }
+        val esfera: ImageView = v.findViewById(R.id.imageView4)
+        val iconoUbicacion: ImageView = v.findViewById(R.id.imageView5)
+        val iconoDoctor: ImageView = v.findViewById(R.id.imageView6)
+        val iconoFecha: ImageView = v.findViewById(R.id.imageView7)
+        val TituloTV: TextView = v.findViewById(R.id.textView4)
+        val DoctorTV: TextView = v.findViewById(R.id.medictoCitaTV)
+        val DireccionTV: TextView =  v.findViewById(R.id.direccionCitaTV)
+        val FechaTV: TextView = v.findViewById(R.id.fechaCitaTV)
 
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): CitasAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item_cita_medica, parent, false)
@@ -58,16 +44,21 @@ class CitasAdapter(private val items: Array<CitaMedica>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        cursor.moveToPosition(position)
        // holder.esfera.setColorFilter(Color.parseColor(items[position].color))
        // holder.iconoFecha.setColorFilter(Color.parseColor(items[position].color))
       //  holder.iconoDoctor.setColorFilter(Color.parseColor(items[position].color))
       //  holder.iconoUbicacion.setColorFilter(Color.parseColor(items[position].color))
-
-        holder.TituloTV.text = items[position].titulo
-        holder.DoctorTV.text = items[position].doctor
-        holder.DireccionTV.text = items[position].ubicacion
+        holder.esfera.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_DISTINTIVO_CITA)))
+        holder.TituloTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_CITA))
+        holder.DoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.DOCTOR_CITA))
+        holder.DireccionTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.UBICACION_CITA))
         //        holder.FechaTV.text = sdf.format(items[position].fechaYhora)
 
+    }
+
+    override fun getItemCount(): Int {
+        return cursor.count
     }
 
     fun setOnItemClickListener(listener: View.OnClickListener){
@@ -75,8 +66,13 @@ class CitasAdapter(private val items: Array<CitaMedica>) : RecyclerView.Adapter<
     }
 
     override fun onClick(v: View){
-        if(listener != null){
-            listener!!.onClick(v)
+        listener?.onClick(v)
+    }
+
+    fun getAppointmentID(position: Int) : Int{
+        return when(cursor.moveToPosition(position)){
+            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
+            else -> -1
         }
     }
 

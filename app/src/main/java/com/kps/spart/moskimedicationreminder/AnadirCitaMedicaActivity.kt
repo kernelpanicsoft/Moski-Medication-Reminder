@@ -71,6 +71,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
 
         }
 
+        CitaMedica.tipoRecordatorio = TipoRecordatorio.NOTIFICACION
         RadioButtonGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.radio_notificacion ->{
@@ -159,6 +160,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
             Toast.makeText(this@AnadirCitaMedicaActivity,getString(R.string.ocurrio_un_problema_durante_la_creacion_cita), Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(this@AnadirCitaMedicaActivity,getString(R.string.cita_registrada_correctamente), Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 

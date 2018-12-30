@@ -167,9 +167,10 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             Toast.makeText(this@AnadirEstablecimientoActivity,getString(R.string.error_crear_establecimiento), Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(this@AnadirEstablecimientoActivity, getString(R.string.establecimiento_creado_correctamente), Toast.LENGTH_SHORT).show()
+            finish()
         }
 
-        finish()
+
 
     }
 

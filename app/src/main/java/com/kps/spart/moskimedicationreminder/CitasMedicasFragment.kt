@@ -18,6 +18,8 @@ import android.widget.LinearLayout
 
 import Elementos.CitaMedica
 import android.widget.Toast
+import model.MMDContract
+import model.mmrbd
 
 
 class CitasMedicasFragment : Fragment() {
@@ -41,15 +43,27 @@ class CitasMedicasFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val o =Array(20){CitaMedica()}
-        val adapter = CitasAdapter(o)
+
+        val dbHelper = mmrbd(context!!)
+        val db = dbHelper.writableDatabase
+
+        val cursor = db.query(MMDContract.columnas.TABLA_CITA,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null)
+
+        val adapter = CitasAdapter(cursor)
+
 
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesCitaMedicaActivity::class.java)
+            nav.putExtra("APPOINTMENT_ID", adapter.getAppointmentID(RV.getChildAdapterPosition(it)))
             startActivity(nav)
 
         })
-
 
         RV.adapter = adapter
         // Inflate the layout for this fragment
