@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-import Elementos.Medicamento
 import android.content.Context
 import android.database.Cursor
 import android.provider.BaseColumns
-import android.support.v4.content.ContextCompat
 import model.MMDContract
 
 class MedicamentosAdapter(private var context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<MedicamentosAdapter.ViewHolder>(), View.OnClickListener {

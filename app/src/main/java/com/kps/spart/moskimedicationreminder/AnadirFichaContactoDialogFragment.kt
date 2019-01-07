@@ -1,6 +1,5 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.FichaContacto
 import android.app.AlertDialog
 import android.app.Dialog
 import android.app.DialogFragment

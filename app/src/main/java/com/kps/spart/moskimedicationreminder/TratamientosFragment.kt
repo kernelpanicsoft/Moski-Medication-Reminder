@@ -1,8 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -16,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 
-import Elementos.Tratamiento
+import elements.Tratamiento
 
 
 class TratamientosFragment : Fragment() {

@@ -1,6 +1,5 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.FichaContacto
 import android.content.Context
 import android.database.Cursor
 import android.support.v7.widget.RecyclerView
@@ -10,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import kotlinx.android.synthetic.main.list_item_ficha_contacto_llena.*
 import model.MMDContract
 
 class FichasContactoAdapter (private val context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<FichasContactoAdapter.ViewHolder>(), View.OnClickListener {

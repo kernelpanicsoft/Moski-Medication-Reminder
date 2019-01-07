@@ -1,6 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.CitaMedica
+import elements.CitaMedica
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.support.v7.app.AppCompatActivity

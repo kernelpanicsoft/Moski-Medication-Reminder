@@ -11,9 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 
-import Elementos.Establecimiento
-import android.database.DatabaseUtils
-import android.util.Log
 import model.MMDContract
 import model.mmrbd
 

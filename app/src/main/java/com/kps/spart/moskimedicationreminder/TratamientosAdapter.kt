@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-import Elementos.Tratamiento
+import elements.Tratamiento
 
 /**
  * Created by spart on 20/12/2017.

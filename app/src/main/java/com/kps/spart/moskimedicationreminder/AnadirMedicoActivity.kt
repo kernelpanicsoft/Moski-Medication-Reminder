@@ -1,7 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.FichaContacto
-import Elementos.Medico
+import elements.FichaContacto
+import elements.Medico
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_anadir_medico.*
 import model.MMDContract
 import model.mmrbd
 import org.xdty.preference.colorpicker.ColorPickerDialog
-import java.util.zip.Inflater
 
 
 class AnadirMedicoActivity : AppCompatActivity() {

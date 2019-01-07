@@ -1,8 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.Usuario
+import elements.Usuario
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 
@@ -62,7 +61,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         }
 
         savePerfilFAB.setOnClickListener{
-            val usuario = Usuario()
+            val usuario = Usuario(1,"Carlos","corona")
 
             if(nombreUsuarioET.text.isEmpty() || apellidoUsuarioET.text.isEmpty() || Edad.text.isEmpty()){
                 Snackbar.make(it,getString(R.string.nombre_apellido_necesario),Snackbar.LENGTH_LONG).show()
@@ -142,14 +141,14 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
        val db = dbHelper.writableDatabase
         val errorAtInsertion : Long = -1
 
-        val newRowId = db.insert(MMDContract.columnas.TABLA_USUARIO,null,usuario.toContentValues())
+       /* val newRowId = db.insert(MMDContract.columnas.TABLA_USUARIO,null,usuario.toContentValues())
 
         if(newRowId == errorAtInsertion){
             Toast.makeText(this,  getString(R.string.error_crear_usuario), Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(this,  getString(R.string.usuario_creado_correctamente), Toast.LENGTH_SHORT).show()
         }
-
+*/
         finish()
     }
 

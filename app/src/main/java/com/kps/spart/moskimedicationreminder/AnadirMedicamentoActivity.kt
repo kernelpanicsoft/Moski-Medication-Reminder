@@ -1,6 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.Medicamento
+import elements.Medicamento
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager

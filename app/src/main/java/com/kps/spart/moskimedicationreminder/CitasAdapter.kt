@@ -1,6 +1,5 @@
 package com.kps.spart.moskimedicationreminder
 
-import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.widget.TextView
 
 import java.text.SimpleDateFormat
 
-import Elementos.CitaMedica
 import android.database.Cursor
 import android.provider.BaseColumns
 import model.MMDContract

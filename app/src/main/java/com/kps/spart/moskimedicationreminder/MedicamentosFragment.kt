@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 
-import Elementos.Medicamento
 import model.MMDContract
 import model.mmrbd
 

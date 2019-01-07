@@ -1,6 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
-import Elementos.FichaContacto
+import elements.FichaContacto
 import android.app.AlertDialog
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 
 
 class FichaDeContactoCompactaAdapter (private val context : Context, private val fichasContacto : ArrayList<FichaContacto>) : RecyclerView.Adapter<FichaDeContactoCompactaAdapter.ViewHolder>() {
