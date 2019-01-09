@@ -21,7 +21,7 @@ import org.xdty.preference.colorpicker.ColorPickerDialog
 class AnadirMedicamentoActivity : AppCompatActivity() {
 
     lateinit var dbHelper : mmrbd
-    lateinit var medicamento : Medicamento
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         title = getString(R.string.AnadirMedicamento)
 
 
-        medicamento = Medicamento()
+
         dbHelper = mmrbd(this@AnadirMedicamentoActivity)
 
         SpinnerTipoMedicamento.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TipoMedicamento))
@@ -46,7 +46,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-                medicamento.tipo = parent?.getItemAtPosition(position).toString()
+
                 //Toast.makeText(this@AnadirMedicamentoActivity, "Elemento seleccionado: " + position.toString(), Toast.LENGTH_SHORT).show()
                 when (position){
                     0 -> { MedicamentoIconoTV.setImageResource(R.drawable.ic_roundpill) }
@@ -67,7 +67,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         }
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
-        medicamento.color = selectedColor.toString()
+
 
         val colors = resources.getIntArray(R.array.default_rainbow)
 
@@ -86,7 +86,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 selectedColor = color
                 MedicamentoIconoTV.setColorFilter(selectedColor)
 
-                medicamento.color = selectedColor.toString()
+
 
              //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }
@@ -104,17 +104,13 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.itemSave -> {
-                medicamento.nombreMedicamento = CampoNombreComercial.text.toString()
-                medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
-                medicamento.dosis = CampoDosis.text.toString()
-                medicamento.nota = CampoNota.text.toString()
+
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicamentoActivity)
                 val usuarioID = sharedPref.getInt("actualUserID", -1)
 
                 if(usuarioID != -1){
-                    medicamento.usuarioID = usuarioID
-                    saveMedicineToDB(medicamento)
+
                 }
                 return true
             }
@@ -127,20 +123,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
     }
 
-    private fun saveMedicineToDB(medicamento: Medicamento){
-        val db = dbHelper.writableDatabase
-        val errorAtInsertion : Long = -1
-
-        val newRowId = db.insert(MMDContract.columnas.TABLA_MEDICAMENTO, null, medicamento.toContentValues())
-
-        if(newRowId == errorAtInsertion){
-            Toast.makeText(this@AnadirMedicamentoActivity,getString(R.string.ocurrio_un_problema_crear_medicamento), Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this@AnadirMedicamentoActivity,getString(R.string.medicamento_registrado_correctamente), Toast.LENGTH_SHORT).show()
-        }
-
-        finish()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

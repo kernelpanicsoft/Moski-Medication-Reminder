@@ -1,7 +1,9 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.UsuarioViewModel
 import elements.Usuario
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Bitmap
 
@@ -20,7 +22,9 @@ import model.MMDContract
 import model.mmrbd
 
 class RegistrarUsuarioActivity : AppCompatActivity() {
-    lateinit var dbHelper : mmrbd
+
+    lateinit var usuarioViewModel : UsuarioViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +35,8 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
-        dbHelper = mmrbd(this@RegistrarUsuarioActivity)
+        usuarioViewModel = ViewModelProviders.of(this@RegistrarUsuarioActivity).get(UsuarioViewModel::class.java)
+
 
         iconoInfoTV.setOnClickListener{
             val builder = AlertDialog.Builder(this)
@@ -61,7 +66,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         }
 
         savePerfilFAB.setOnClickListener{
-            val usuario = Usuario(1,"Carlos","corona")
+            val usuario = Usuario(0)
 
             if(nombreUsuarioET.text.isEmpty() || apellidoUsuarioET.text.isEmpty() || Edad.text.isEmpty()){
                 Snackbar.make(it,getString(R.string.nombre_apellido_necesario),Snackbar.LENGTH_LONG).show()
@@ -138,17 +143,10 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     }
 
     private fun saveUserToDB(usuario: Usuario){
-       val db = dbHelper.writableDatabase
-        val errorAtInsertion : Long = -1
 
-       /* val newRowId = db.insert(MMDContract.columnas.TABLA_USUARIO,null,usuario.toContentValues())
-
-        if(newRowId == errorAtInsertion){
-            Toast.makeText(this,  getString(R.string.error_crear_usuario), Toast.LENGTH_SHORT).show()
-        }else{
+            usuarioViewModel.insert(usuario)
             Toast.makeText(this,  getString(R.string.usuario_creado_correctamente), Toast.LENGTH_SHORT).show()
-        }
-*/
+
         finish()
     }
 
@@ -159,10 +157,6 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        dbHelper.close()
-        super.onDestroy()
-    }
 
 
 }

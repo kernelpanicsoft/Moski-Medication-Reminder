@@ -52,6 +52,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
         adapter.setOnClickListener( View.OnClickListener {
             val usuarioSeleccionado = adapter.getUsuarioAt(RecViewUsuarios.getChildAdapterPosition(it))
             Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + usuarioSeleccionado.nombre+ " " + usuarioSeleccionado.apellidos, Toast.LENGTH_SHORT).show()
+            usuarioViewModel.delete(usuarioSeleccionado)
             /*
             val nav = Intent(this@ListarUsuariosActivity, DetallesPerfilActivity::class.java)
             nav.putExtra("USER_ID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
@@ -79,10 +80,10 @@ class ListarUsuariosActivity : AppCompatActivity() {
 
         //Añadimos el evento al Floatting button
         add_user_fab.setOnClickListener {
-            //val nav = Intent(this@ListarUsuariosActivity,RegistrarUsuarioActivity::class.java)
-            // startActivity(nav)
-            var usuario = Usuario(0,"Sopita","De caracol",23,"Masculino","dfdf","DFDF","DFDGF")
-            usuarioViewModel.insert(usuario)
+            val nav = Intent(this@ListarUsuariosActivity,RegistrarUsuarioActivity::class.java)
+             startActivity(nav)
+        //    var usuario = Usuario(0,"Sopita","De caracol",23,"Masculino","dfdf","DFDF","DFDGF")
+        //    usuarioViewModel.insert(usuario)
         }
 
         //Toast.makeText(this@ListarUsuariosActivity,"Se esta llamando " + object{}.javaClass.enclosingMethod.name, Toast.LENGTH_SHORT).show()

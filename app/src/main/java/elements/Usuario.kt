@@ -7,9 +7,9 @@ import android.content.ContentValues
 import model.MMDContract
 
 @Entity
-class Usuario(@PrimaryKey(autoGenerate = true) var uid: Int,
-              var nombre: String?,
-              var apellidos: String?,
+data class Usuario(@PrimaryKey(autoGenerate = true) var uid: Int,
+              var nombre: String? = null,
+              var apellidos: String? = null,
               var edad: Int? = null,
               var genero: String? = null,
               var imagen: String? = null,
