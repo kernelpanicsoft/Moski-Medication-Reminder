@@ -1,7 +1,13 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.UsuarioViewModel
+import android.app.Activity
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.database.DatabaseUtils
+import android.database.Observable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
@@ -11,14 +17,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import elements.Usuario
 import kotlinx.android.synthetic.main.activity_detalles_perfil.*
+import model.CodigosDeSolicitud
 import model.MMDContract
 import model.mmrbd
 
 class DetallesPerfilActivity : AppCompatActivity() {
 
     private var user_id : Int = -1
-    private lateinit var dbHelper : mmrbd
+    lateinit var usuarioViewModel: UsuarioViewModel
+    private lateinit var usuarioActualLive : LiveData<Usuario>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +41,14 @@ class DetallesPerfilActivity : AppCompatActivity() {
 
         user_id = intent.getIntExtra("USER_ID", -1)
 
-        populateUserFieldsFromDB()
+        usuarioViewModel = ViewModelProviders.of(this).get(UsuarioViewModel::class.java)
+
+        usuarioActualLive =  usuarioViewModel.getUsuario(user_id)
+        usuarioActualLive.observe(this, Observer {
+            populateUserFieldsFromDB(it)
+
+        })
+
 
     }
 
@@ -54,7 +71,8 @@ class DetallesPerfilActivity : AppCompatActivity() {
                         0-> {
                             val nav = Intent(this@DetallesPerfilActivity, RegistrarUsuarioActivity::class.java)
                             nav.putExtra("USER_ID", user_id)
-                            startActivityForResult(nav,349)
+                            startActivityForResult(nav,CodigosDeSolicitud.EDITAR_USUARIO)
+                            //usuarioViewModel.update(usuarioActual)
                         }
                         1 -> {
                             val innerBuilder = AlertDialog.Builder(this@DetallesPerfilActivity)
@@ -66,6 +84,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
                                     }
                                     .setNegativeButton(getString(R.string.no)){
                                         dialog, id ->
+
                                     }
                             val innerDialog = innerBuilder.create()
                             innerDialog.show()
@@ -81,53 +100,28 @@ class DetallesPerfilActivity : AppCompatActivity() {
     }
 
 
-    private fun populateUserFieldsFromDB(){
-        dbHelper = mmrbd(this@DetallesPerfilActivity)
-        val db = dbHelper.readableDatabase
+    private fun populateUserFieldsFromDB(usuario: Usuario?){
 
-        val projection = arrayOf(MMDContract.columnas.NOMBRE_USUARIO,MMDContract.columnas.APELLIDOS_USUARIO, MMDContract.columnas.GENERO_USUARIO, MMDContract.columnas.EDAD_USUARIO)
-
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$user_id")
-        val cursor = db.query(
-                MMDContract.columnas.TABLA_USUARIO,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-                )
-
-
-      //  Log.v("Valores del cursor: ", DatabaseUtils.dumpCursorToString(cursor))
-
-
-        if(cursor.moveToFirst()){
-            NombreApellidosUsuarioTV.text = "${cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_USUARIO))} ${cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.APELLIDOS_USUARIO))}"
-            GeneroUsuarioTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.GENERO_USUARIO))
-            EdadUsuarioTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.EDAD_USUARIO))
-        }
+            NombreApellidosUsuarioTV.text = "${usuario?.nombre} ${usuario?.apellidos}"
+            GeneroUsuarioTV.text = usuario?.genero
+            EdadUsuarioTV.text = usuario?.edad.toString()
 
     }
 
     private fun deleteUser(){
-        val db = dbHelper.writableDatabase
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$user_id")
-        val deletedRows = db.delete(MMDContract.columnas.TABLA_USUARIO, selection, selectionArgs)
-
-        if(deletedRows == 1){
-            Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_eliminado_correctamente),Toast.LENGTH_SHORT).show()
+        if(usuarioActualLive.hasObservers()){
+            usuarioActualLive.removeObservers(this@DetallesPerfilActivity)
+            usuarioViewModel.delete(usuarioActualLive.value!!)
             finish()
-        }else{
-            Toast.makeText(this@DetallesPerfilActivity, getString(R.string.no_es_posible_eliminar_al_usuario),Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-        dbHelper.close()
+        if(requestCode == CodigosDeSolicitud.EDITAR_USUARIO && resultCode == Activity.RESULT_OK){
+            Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
+        }
     }
+
 }

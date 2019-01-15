@@ -19,7 +19,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-import kotlinx.android.synthetic.main.activity_detalles_medicamento.*
+
 
 class MainActivity : AppCompatActivity() {
     private var currentSectionID: Int = 0

@@ -20,6 +20,14 @@ object ContinuidadTratamiento{
 }
 
 
+object CodigosDeSolicitud{
+    const val ANADIR_FOTOGRAFIA = 1000
+    const val REGISTRAR_USUARIO = 1001
+    const val EDITAR_USUARIO = 1002
+    const val ELIMINAR_USUARIO = 1003
+
+}
+
 object MMDContract {
 
 

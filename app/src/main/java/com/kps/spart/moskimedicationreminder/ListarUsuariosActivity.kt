@@ -1,6 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.UsuarioViewModel
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -16,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import elements.Usuario
 import kotlinx.android.synthetic.main.activity_listar_usuarios.*
+import model.CodigosDeSolicitud
 import model.MMDContract
 import model.mmrbd
 
@@ -35,8 +37,6 @@ class ListarUsuariosActivity : AppCompatActivity() {
         ab!!.setDisplayHomeAsUpEnabled(true)
 
 
-
-
         RecViewUsuarios.setHasFixedSize(true)
         val mLayoutManager = LinearLayoutManager(this@ListarUsuariosActivity,LinearLayoutManager.VERTICAL,false)
         RecViewUsuarios.layoutManager = mLayoutManager
@@ -45,28 +45,22 @@ class ListarUsuariosActivity : AppCompatActivity() {
         RecViewUsuarios.addItemDecoration(dividerIterator)
 
         //Asignamos el adaptador a nuestro Recyclerview
-        //val adapter = UsuariosAdapter(cursor)
         val adapter = UsuariosAdapter()
 
         //Especificamos el escucha de eventos para definir el usuario activo de la aplicacion
         adapter.setOnClickListener( View.OnClickListener {
             val usuarioSeleccionado = adapter.getUsuarioAt(RecViewUsuarios.getChildAdapterPosition(it))
             Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + usuarioSeleccionado.nombre+ " " + usuarioSeleccionado.apellidos, Toast.LENGTH_SHORT).show()
-            usuarioViewModel.delete(usuarioSeleccionado)
-            /*
-            val nav = Intent(this@ListarUsuariosActivity, DetallesPerfilActivity::class.java)
-            nav.putExtra("USER_ID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
+            //usuarioViewModel.delete(usuarioSeleccionado)
 
             val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@ListarUsuariosActivity)
-
             with(sharedPref.edit()){
-                putInt("actualUserID",adapter.getUserID(RecViewUsuarios.getChildAdapterPosition(it)))
+                putInt("actualUserID",usuarioSeleccionado.uid)
                 commit()
             }
-            Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + adapter.getUserName(RecViewUsuarios.getChildAdapterPosition(it)), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + usuarioSeleccionado.nombre, Toast.LENGTH_SHORT).show()
             finish()
-            //startActivity(nav)
-            */
+
         }
         )
 
@@ -81,15 +75,11 @@ class ListarUsuariosActivity : AppCompatActivity() {
         //Añadimos el evento al Floatting button
         add_user_fab.setOnClickListener {
             val nav = Intent(this@ListarUsuariosActivity,RegistrarUsuarioActivity::class.java)
-             startActivity(nav)
+             startActivityForResult(nav, CodigosDeSolicitud.REGISTRAR_USUARIO)
         //    var usuario = Usuario(0,"Sopita","De caracol",23,"Masculino","dfdf","DFDF","DFDGF")
         //    usuarioViewModel.insert(usuario)
         }
-
-        //Toast.makeText(this@ListarUsuariosActivity,"Se esta llamando " + object{}.javaClass.enclosingMethod.name, Toast.LENGTH_SHORT).show()
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
@@ -102,8 +92,15 @@ class ListarUsuariosActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == CodigosDeSolicitud.REGISTRAR_USUARIO && resultCode == Activity.RESULT_OK){
+            Toast.makeText(this,  getString(R.string.usuario_creado_correctamente), Toast.LENGTH_SHORT).show()
+        }else if (requestCode == CodigosDeSolicitud.ELIMINAR_USUARIO && resultCode == Activity.RESULT_OK){
 
-
-
+            val usuarioAEliminar : Usuario = usuarioViewModel.getUsuario(data!!.getIntExtra("USER_ID", -1)) as Usuario
+          //  usuarioViewModel.delete(usuarioAEliminar)
+            Toast.makeText(this,  getString(R.string.usuario_eliminado_correctamente), Toast.LENGTH_SHORT).show()
+        }
+    }
 
 }

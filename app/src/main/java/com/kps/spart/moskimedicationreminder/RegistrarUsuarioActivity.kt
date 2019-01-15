@@ -18,6 +18,7 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
+import model.CodigosDeSolicitud
 import model.MMDContract
 import model.mmrbd
 
@@ -30,12 +31,26 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_usuario)
 
-        toolbar.title = getString(R.string.registrar_usuario)
+
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
+
         usuarioViewModel = ViewModelProviders.of(this@RegistrarUsuarioActivity).get(UsuarioViewModel::class.java)
+
+        if(intent.hasExtra("USER_ID")){
+            title = getString(R.string.editar_usuario)
+            val usuarioLive = usuarioViewModel.getUsuario(intent.getIntExtra("USER_ID", -1))
+
+
+            val usuarioAEditar = usuarioLive.value
+            Toast.makeText(this@RegistrarUsuarioActivity,"Datos: " + usuarioAEditar?.nombre, Toast.LENGTH_SHORT).show()
+            nombreUsuarioET.setText(usuarioAEditar?.nombre)
+
+        }else{
+            title = getString(R.string.registrar_usuario)
+        }
 
 
         iconoInfoTV.setOnClickListener{
@@ -92,15 +107,10 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                         usuario.password = PasswordEditText.text.toString()
                         usuario.email_recuperacion = RecoveryET.text.toString()
                         saveUserToDB(usuario)
-                        //Toast.makeText(this, "Llamado dentro del checkbox", Toast.LENGTH_SHORT).show()
-
                     }
-
                 }else{
                     saveUserToDB(usuario)
-                    //Toast.makeText(this, "Llamada fuera del else", Toast.LENGTH_SHORT).show()
                 }
-
             }
         }
     }
@@ -122,13 +132,11 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                                 1 -> {
                                     Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                                         takePictureIntent.resolveActivity(packageManager)?.also {
-                                            startActivityForResult(takePictureIntent,1047)
+                                            startActivityForResult(takePictureIntent,1044)
                                         }
                                     }
-
                                 }
                             }
-
                         }
                 val dialog = builder.create()
                 dialog.show()
@@ -143,10 +151,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     }
 
     private fun saveUserToDB(usuario: Usuario){
-
+        if(intent.hasExtra("USER_ID")){
+            usuarioViewModel.update(usuario)
+        }else{
             usuarioViewModel.insert(usuario)
-            Toast.makeText(this,  getString(R.string.usuario_creado_correctamente), Toast.LENGTH_SHORT).show()
-
+        }
+        setResult(Activity.RESULT_OK)
         finish()
     }
 
@@ -156,7 +166,4 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             iconoUsuarioIV.setImageBitmap(imageBitmap)
         }
     }
-
-
-
 }

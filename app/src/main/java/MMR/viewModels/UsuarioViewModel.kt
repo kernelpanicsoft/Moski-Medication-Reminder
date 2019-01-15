@@ -20,7 +20,7 @@ class UsuarioViewModel (application: Application) : AndroidViewModel(application
     }
 
     fun update(usuario: Usuario){
-        repository.insert(usuario)
+        repository.update(usuario)
     }
 
     fun delete(usuario: Usuario){
@@ -29,6 +29,10 @@ class UsuarioViewModel (application: Application) : AndroidViewModel(application
 
     fun deleteAllUsuarios(){
         repository.deleteAllUsuarios()
+    }
+
+    fun getUsuario(id : Int) : LiveData<Usuario>{
+       return repository.getUsuario(id)
     }
 
 }

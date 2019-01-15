@@ -36,6 +36,14 @@ class UsuarioRepository(application: Application) {
         return usuarioDao.getAllUsuarios()
     }
 
+    fun getUsuario( id : Int) : LiveData<Usuario>{
+        return usuarioDao.getUsuario(id)
+    }
+
+    fun setUsuario(usuario: Usuario) : Usuario{
+        return usuario
+    }
+
     private class InsertUsuarioAsynTask constructor(private val usuarioDao: UsuarioDao) : AsyncTask<Usuario, Void, Void>(){
         override fun doInBackground(vararg usuarios: Usuario): Void? {
             usuarioDao.insert(usuarios[0])
@@ -63,4 +71,19 @@ class UsuarioRepository(application: Application) {
             return null
         }
     }
+
+    /*
+    private class GetUsuarioAsyncTask constructor(private val usuarioDao: UsuarioDao) : AsyncTask<Int, Void, Usuario>(){
+        override fun doInBackground(vararg params: Int?): Usuario{
+            return usuarioDao.getUsuario(params[0])
+
+        }
+
+        override fun onPostExecute(result: Usuario?) {
+            super.onPostExecute(result)
+
+        }
+
+    }
+    */
 }

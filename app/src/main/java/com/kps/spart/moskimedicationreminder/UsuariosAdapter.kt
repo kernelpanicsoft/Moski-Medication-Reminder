@@ -49,7 +49,6 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
     }
 
 
-
     fun setOnClickListener(listener : View.OnClickListener){
         this.listener = listener
     }
@@ -62,22 +61,4 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
         return getItem(position)
     }
 
-
-/*
-    fun getUserID(position: Int) : Int{
-        return when(cursor.moveToPosition(position)){
-            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
-            else -> -1
-
-        }
-    }
-
-    fun getUserName(position: Int) : String{
-        return when(cursor.moveToPosition(position)){
-            true -> cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_USUARIO))
-            else -> ""
-        }
-    }
-
-*/
 }

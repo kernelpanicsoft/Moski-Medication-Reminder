@@ -20,4 +20,7 @@ interface UsuarioDao {
 
     @Query("SELECT * FROM Usuario")
     fun getAllUsuarios() : LiveData<List<Usuario>>
+
+    @Query("SELECT * FROM Usuario WHERE Usuario.uid = :id")
+    fun getUsuario( id : Int?) : LiveData<Usuario>
 }
