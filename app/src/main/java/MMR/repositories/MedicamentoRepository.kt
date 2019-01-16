@@ -16,23 +16,27 @@ class MedicamentoRepository (application: Application){
     }
 
     fun insert(medicamento : Medicamento){
-
+        InsertMedicamentoAsyncTask(medicamentoDao).execute(medicamento)
     }
 
     fun update(medicamento: Medicamento){
-
+        UpdateMedicamentoAsyncTask(medicamentoDao).execute(medicamento)
     }
 
     fun delete(medicamento: Medicamento){
-
+        DeleteMedicamentoAsyncTask(medicamentoDao).execute(medicamento)
     }
 
     fun deleteAllMedicamentos(){
-
+        DeleteAllMedicamentosAsyncTask(medicamentoDao).execute()
     }
 
     fun getAllMedicamentos() : LiveData<List<Medicamento>>{
         return medicamentoDao.getAllMedicamentos()
+    }
+
+    fun getMedicamento( id : Int) : LiveData<Medicamento>{
+        return medicamentoDao.getMedicamento(id)
     }
 
     private class InsertMedicamentoAsyncTask constructor(private val medicamentoDao: MedicamentoDao) : AsyncTask<Medicamento, Void, Void>(){
@@ -49,7 +53,14 @@ class MedicamentoRepository (application: Application){
         }
     }
 
-    private class DeleteAllUsuariosAsyncTask constructor(private val medicamentoDao: MedicamentoDao) : AsyncTask<Void, Void, Void>(){
+    private class DeleteMedicamentoAsyncTask constructor(private val medicamentoDao: MedicamentoDao) : AsyncTask<Medicamento,Void, Void>(){
+        override fun doInBackground(vararg params: Medicamento): Void? {
+            medicamentoDao.delete(params[0])
+            return null
+        }
+    }
+
+    private class DeleteAllMedicamentosAsyncTask constructor(private val medicamentoDao: MedicamentoDao) : AsyncTask<Void, Void, Void>(){
         override fun doInBackground(vararg params: Void?): Void? {
             medicamentoDao.deleteAllMedicamentos()
             return null

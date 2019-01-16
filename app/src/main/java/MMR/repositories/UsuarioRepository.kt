@@ -72,18 +72,4 @@ class UsuarioRepository(application: Application) {
         }
     }
 
-    /*
-    private class GetUsuarioAsyncTask constructor(private val usuarioDao: UsuarioDao) : AsyncTask<Int, Void, Usuario>(){
-        override fun doInBackground(vararg params: Int?): Usuario{
-            return usuarioDao.getUsuario(params[0])
-
-        }
-
-        override fun onPostExecute(result: Usuario?) {
-            super.onPostExecute(result)
-
-        }
-
-    }
-    */
 }

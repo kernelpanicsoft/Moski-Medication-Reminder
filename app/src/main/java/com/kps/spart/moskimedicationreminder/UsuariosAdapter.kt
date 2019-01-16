@@ -1,7 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
-import android.database.Cursor
-import android.provider.BaseColumns
+
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.widget.TextView
 import elements.Usuario
-import model.MMDContract
 
 
 class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
@@ -44,7 +42,7 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val usuarioActual = getItem(position)
         holder.icono.setImageResource(R.drawable.ic_user)
-        holder.nombre.text = usuarioActual.nombre
+        holder.nombre.text = usuarioActual.nombre + " " + usuarioActual.uid
         holder.apellidos.text = usuarioActual.apellidos
     }
 

@@ -60,7 +60,6 @@ class ListarUsuariosActivity : AppCompatActivity() {
             }
             Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + usuarioSeleccionado.nombre, Toast.LENGTH_SHORT).show()
             finish()
-
         }
         )
 

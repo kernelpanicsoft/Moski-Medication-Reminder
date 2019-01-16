@@ -31,4 +31,8 @@ class MedicamentoViewModel (application: Application) : AndroidViewModel(applica
     fun deleteAllMedicamentos(){
         repository.deleteAllMedicamentos()
     }
+
+    fun getMedicamento(id : Int) : LiveData<Medicamento>{
+        return repository.getMedicamento(id)
+    }
 }

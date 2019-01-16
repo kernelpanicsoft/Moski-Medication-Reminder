@@ -10,11 +10,25 @@ import android.widget.TextView
 import android.content.Context
 import android.database.Cursor
 import android.provider.BaseColumns
+import android.support.v7.recyclerview.extensions.ListAdapter
+import android.support.v7.util.DiffUtil
+import elements.Medicamento
 import model.MMDContract
 
-class MedicamentosAdapter(private var context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<MedicamentosAdapter.ViewHolder>(), View.OnClickListener {
+class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, MedicamentosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
+
     private val iconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
+
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<Medicamento>(){
+        override fun areItemsTheSame(oldItem: Medicamento, newItem: Medicamento): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Medicamento, newItem: Medicamento): Boolean {
+            return oldItem.nombreMedicamento.equals(newItem.nombreMedicamento)
+        }
+    }
 
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -24,7 +38,7 @@ class MedicamentosAdapter(private var context: Context?, private val cursor: Cur
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicamentosAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item_medicamento, parent, false)
         v.setOnClickListener(this)
@@ -34,8 +48,9 @@ class MedicamentosAdapter(private var context: Context?, private val cursor: Cur
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        cursor.moveToPosition(position)
-        val medicineType = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TIPO_MEDICAMENTO))
+        val medicamentoActual = getItem(position)
+
+        val medicineType = medicamentoActual.tipo
 
         when(iconsCollection?.indexOf(medicineType)){
             0 -> {holder.icono.setImageResource(R.drawable.ic_roundpill)}
@@ -53,17 +68,14 @@ class MedicamentosAdapter(private var context: Context?, private val cursor: Cur
             12-> {holder.icono.setImageResource(R.drawable.ic_syringe)}
         }
 
-        holder.icono.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_MEDICAMENTO)))
+        holder.icono.setColorFilter(medicamentoActual.color!!)
 
+        holder.NombreGenerico.text = medicamentoActual.nombreGenerico
+        holder.NombreComercial.text = medicamentoActual.nombreMedicamento
 
-        holder.NombreComercial.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_COMERCIAL_MEDICAMENTO))
-        holder.NombreGenerico.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_GENERICO_MEDICAMENTO))
     }
 
 
-    override fun getItemCount(): Int {
-        return cursor.count
-    }
 
     fun setOnClickListener(listener: View.OnClickListener) {
         this.listener = listener
@@ -73,11 +85,8 @@ class MedicamentosAdapter(private var context: Context?, private val cursor: Cur
         listener?.onClick(v)
     }
 
-    fun getMedicineID(position: Int) : Int{
-        return when(cursor.moveToPosition(position)){
-            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
-            else -> -1
-        }
+    fun getMedicamentoAt(position : Int) : Medicamento{
+        return getItem(position)
     }
 
 }

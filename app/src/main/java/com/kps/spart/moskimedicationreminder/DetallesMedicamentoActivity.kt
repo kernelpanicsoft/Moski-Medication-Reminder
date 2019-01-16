@@ -1,5 +1,9 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicamentoViewModel
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +13,16 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import elements.Medicamento
 import kotlinx.android.synthetic.main.activity_detalles_medicamento.*
 import model.MMDContract
 import model.mmrbd
 
 class DetallesMedicamentoActivity : AppCompatActivity() {
     private var medicine_id : Int = -1
-    private lateinit var dbHelper: mmrbd
+    lateinit var medicamentoViewModel : MedicamentoViewModel
+    lateinit var medicamentoActualLive : LiveData<Medicamento>
+
     private var iconsCollection: Array<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +38,14 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
         medicine_id = intent.getIntExtra("MEDICINE_ID", -1)
         iconsCollection = this@DetallesMedicamentoActivity.resources?.getStringArray(R.array.TipoMedicamento)
-        populateMedicineFieldsFromDB()
+
+        medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
+
+        medicamentoActualLive = medicamentoViewModel.getMedicamento(medicine_id)
+        medicamentoActualLive.observe(this, Observer {
+            populateMedicineFieldsFromDB(it)
+        })
+
     }
 
 
@@ -76,43 +90,17 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
                 onBackPressed()
                 return true
             }
-
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun populateMedicineFieldsFromDB(){
-        dbHelper = mmrbd(this@DetallesMedicamentoActivity)
-        val db = dbHelper.readableDatabase
+    private fun populateMedicineFieldsFromDB(medicamento: Medicamento?){
 
-        val projection = arrayOf(MMDContract.columnas.NOMBRE_COMERCIAL_MEDICAMENTO,
-                                MMDContract.columnas.NOMBRE_GENERICO_MEDICAMENTO,
-                                MMDContract.columnas.DOSIS_MEDICAMENTO,
-                                MMDContract.columnas.TIPO_MEDICAMENTO,
-                                MMDContract.columnas.COLOR_MEDICAMENTO,
-                                MMDContract.columnas.NOTA_MEDICAMENTO,
-                                MMDContract.columnas.FOTOGRAFIA_MEDICAMENTO
-        )
-
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$medicine_id")
-        val cursor = db.query(
-                MMDContract.columnas.TABLA_MEDICAMENTO,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null,
-                "1"
-        )
-
-        if(cursor.moveToFirst()){
-            nombreComercialMedicamentoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_COMERCIAL_MEDICAMENTO))
-            nombreGenericoMedicamentoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_GENERICO_MEDICAMENTO))
-            dosisMedicamento.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.DOSIS_MEDICAMENTO))
-            val medicineType = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TIPO_MEDICAMENTO))
+            nombreComercialMedicamentoTV.text = medicamento?.nombreMedicamento
+            nombreGenericoMedicamentoTV.text = medicamento?.nombreGenerico
+            dosisMedicamento.text = medicamento?.dosis
+            val medicineType = medicamento?.tipo
 
             when(iconsCollection?.indexOf(medicineType)){
                 0 -> {fabIconoMedicamento.setImageResource(R.drawable.ic_roundpill)}
@@ -130,29 +118,15 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
                 12-> {fabIconoMedicamento.setImageResource(R.drawable.ic_syringe)}
             }
 
-            fabIconoMedicamento.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_MEDICAMENTO)))
+            fabIconoMedicamento.setColorFilter(medicamento?.color!!)
 
-            contenidoNotaTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOTA_MEDICAMENTO))
+            contenidoNotaTV.text = medicamento.nota
 
-        }
     }
 
     private fun deleteMedicine(){
-        val db = dbHelper.writableDatabase
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$medicine_id")
-        val deletedRows = db.delete(MMDContract.columnas.TABLA_MEDICAMENTO, selection,selectionArgs)
 
-        if(deletedRows == 1){
-            Toast.makeText(this@DetallesMedicamentoActivity,getString(R.string.medicamento_eliminado_correctamente), Toast.LENGTH_SHORT).show()
-            finish()
-        }else{
-            Toast.makeText(this@DetallesMedicamentoActivity,getString(R.string.no_es_posible_eliminar_medicamento), Toast.LENGTH_SHORT).show()
-        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        dbHelper.close()
-    }
+
 }

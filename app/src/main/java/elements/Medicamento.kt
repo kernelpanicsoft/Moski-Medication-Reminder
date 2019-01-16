@@ -16,6 +16,6 @@ data class Medicamento (@PrimaryKey(autoGenerate = true) var id: Int,
                    var dosis: String? = null,
                    var nota: String? = null,
                    var tipo: String? = null,
-                   var color: String? = null,
+                   var color: Int? = null,
                    var fotografia: String? = null,
                    var usuarioID : Int? = null)
