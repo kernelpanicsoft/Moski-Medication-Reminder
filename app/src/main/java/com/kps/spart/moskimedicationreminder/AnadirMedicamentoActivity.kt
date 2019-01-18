@@ -20,8 +20,6 @@ import org.xdty.preference.colorpicker.ColorPickerDialog
 
 class AnadirMedicamentoActivity : AppCompatActivity() {
 
-    lateinit var dbHelper : mmrbd
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +34,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
 
 
-        dbHelper = mmrbd(this@AnadirMedicamentoActivity)
 
         SpinnerTipoMedicamento.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TipoMedicamento))
         SpinnerTipoMedicamento.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -123,10 +120,5 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dbHelper.close()
-    }
 
 }

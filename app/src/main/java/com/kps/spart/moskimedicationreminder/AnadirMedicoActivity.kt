@@ -36,8 +36,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
         ab!!.setDisplayHomeAsUpEnabled(true)
         setTitle(R.string.anadirMedico)
 
-        dbHelper = mmrbd(this@AnadirMedicoActivity)
-        medico = Medico()
+
 
 
         spinnerTitulo.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TituloMedico))
@@ -176,20 +175,6 @@ class AnadirMedicoActivity : AppCompatActivity() {
     }
 
     private fun saveMedicToBD(){
-        val db = dbHelper.writableDatabase
-        val errorAtInsertion : Long = -1
-
-        val newRowId = db.insert(MMDContract.columnas.TABLA_DOCTOR, null, medico.toContentValues())
-
-        if(newRowId == errorAtInsertion){
-            Toast.makeText(this@AnadirMedicoActivity,getString(R.string.ocurrio_un_problema_nuevo_doctor),Toast.LENGTH_SHORT).show()
-        }else{
-            if(adapter.itemCount > 0){
-                saveContactCardsToBD(adapter)
-            }
-            Toast.makeText(this@AnadirMedicoActivity, getString(R.string.doctor_registrado_correctamente),Toast.LENGTH_SHORT).show()
-        }
-
 
     }
 
