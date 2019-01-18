@@ -8,12 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import android.content.Context
-import android.database.Cursor
-import android.provider.BaseColumns
+
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import elements.Medicamento
-import model.MMDContract
+
 
 class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, MedicamentosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null

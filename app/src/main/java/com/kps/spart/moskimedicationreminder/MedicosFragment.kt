@@ -1,5 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicoViewModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,6 +16,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.fragment_medicos.*
 
 import android.provider.BaseColumns
 import model.MMDContract
@@ -21,6 +25,7 @@ import model.mmrbd
 
 class MedicosFragment : Fragment() {
 
+    lateinit var medicoViewModel : MedicoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,40 +34,31 @@ class MedicosFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater!!.inflate(R.layout.fragment_medicos, container, false)
-        val RV = v.findViewById<View>(R.id.RecViewMedicos) as RecyclerView
-        RV.setHasFixedSize(true)
+
+        RecViewMedicos.setHasFixedSize(true)
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        RV.layoutManager = mLayoutManager
+        RecViewMedicos.layoutManager = mLayoutManager
 
-        val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
-        RV.addItemDecoration(dividerItemDecoration)
-
-
-        val dbHelper = mmrbd(context!!)
-        val db = dbHelper.writableDatabase
-
-        val columns = arrayOf(BaseColumns._ID, MMDContract.columnas.TITULO_DOCTOR, MMDContract.columnas.NOMBRE_DOCTOR, MMDContract.columnas.ESPECIALIDAD_DOCTOR, MMDContract.columnas.COLOR_DOCTOR)
-        val cursor = db.query(
-                MMDContract.columnas.TABLA_DOCTOR,
-                columns,
-                null,
-                null,
-                null,
-                null,
-                null
-        )
+        val dividerItemDecoration = DividerItemDecoration(RecViewMedicos.context, LinearLayout.VERTICAL)
+        RecViewMedicos.addItemDecoration(dividerItemDecoration)
 
 
-        val adapter = MedicosAdapter(cursor)
+
+
+        val adapter = MedicosAdapter(context)
+        medicoViewModel = ViewModelProviders.of(this).get(MedicoViewModel::class.java)
+        medicoViewModel.allMedicos.observe(this, Observer {
+            adapter.submitList(it)
+        })
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context,DetallesMedicoActivity::class.java)
-            nav.putExtra("MEDIC_ID", adapter.getMedicID(RV.getChildAdapterPosition(it)))
+           // nav.putExtra("MEDIC_ID", adapter.getMedicID(RV.getChildAdapterPosition(it)))
             startActivity(nav)
 
         })
 
-        RV.adapter = adapter
+        RecViewMedicos.adapter = adapter
 
         return v
     }

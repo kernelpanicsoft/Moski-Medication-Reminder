@@ -21,7 +21,6 @@ import org.xdty.preference.colorpicker.ColorPickerDialog
 
 class AnadirMedicoActivity : AppCompatActivity() {
 
-    private lateinit var dbHelper : mmrbd
     private lateinit var medico : Medico
     private lateinit var adapter : FichaDeContactoCompactaAdapter
     private var fichas = ArrayList<FichaContacto>()
@@ -72,7 +71,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
         RecViewfichasContacto.adapter = adapter
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicoActivity,R.color.blueberry)
-        medico.colorIcono = selectedColor.toString()
+        medico.colorIcono = selectedColor
 
         val colors = resources.getIntArray(R.array.default_rainbow)
         iconoMedicoIV.setOnClickListener{
@@ -88,7 +87,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
             colorPickerDialog.setOnColorSelectedListener { color ->
                 selectedColor = color
                 iconoMedicoIV.setColorFilter(selectedColor)
-                medico.colorIcono = selectedColor.toString()
+                medico.colorIcono = selectedColor
             }
 
             colorPickerDialog.show(fragmentManager,"color_picker_dialer")
@@ -179,22 +178,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
     }
 
     private fun saveContactCardsToBD(adapter : FichaDeContactoCompactaAdapter){
-        val db = dbHelper.writableDatabase
-        val errorAtInsertion : Long = -1
 
-
-        if(adapter.itemCount > 0){
-            for(contactCard in fichas){
-
-                val newRowId = db.insert(MMDContract.columnas.TABLA_FICHA_CONTACTO, null, contactCard.toContentValues())
-                if(newRowId == errorAtInsertion){
-                    break
-                }
-            }
-            finish()
-        }else{
-            Toast.makeText(this@AnadirMedicoActivity,"Por favor rellene al menos una ficha de contacto", Toast.LENGTH_SHORT).show()
-        }
     }
 
 

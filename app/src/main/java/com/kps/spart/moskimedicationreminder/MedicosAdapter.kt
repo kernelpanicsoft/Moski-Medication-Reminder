@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
+import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,31 +12,34 @@ import android.widget.TextView
 
 import android.database.Cursor
 import android.provider.BaseColumns
+import android.support.v7.util.DiffUtil
+import android.support.v7.recyclerview.extensions.ListAdapter
+import elements.Medico
 import model.MMDContract
 
 /**
  * Created by spart on 20/11/2017.
  */
 
-class MedicosAdapter(private val cursor: Cursor) : RecyclerView.Adapter<MedicosAdapter.ViewHolder>(), View.OnClickListener {
+class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
 
-    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val icono: ImageView
-        val titulo: TextView
-        val nombre: TextView
-        val especialidad: TextView
-        val telefono: TextView
-
-        init {
-
-            icono = v.findViewById<View>(R.id.iconoMedico) as ImageView
-            titulo = v.findViewById<View>(R.id.TituloDoctorTV) as TextView
-            nombre = v.findViewById<View>(R.id.NombreDoctorTV) as TextView
-            especialidad = v.findViewById<View>(R.id.EspecialidadTV) as TextView
-            telefono = v.findViewById<View>(R.id.TelefonoDoctorTV) as TextView
-
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<Medico>(){
+        override fun areItemsTheSame(oldItem: Medico, newItem: Medico): Boolean {
+            return oldItem.id == newItem.id
         }
+
+        override fun areContentsTheSame(oldItem: Medico, newItem: Medico): Boolean {
+            return oldItem.nombre.equals(newItem.nombre) && oldItem.especialidad.equals(newItem.especialidad)
+        }
+    }
+
+    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val icono = v.findViewById<View>(R.id.iconoMedico) as ImageView
+        val titulo = v.findViewById<View>(R.id.TituloDoctorTV) as TextView
+        val nombre = v.findViewById<View>(R.id.NombreDoctorTV) as TextView
+        val especialidad = v.findViewById<View>(R.id.EspecialidadTV) as TextView
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicosAdapter.ViewHolder {
@@ -47,19 +51,16 @@ class MedicosAdapter(private val cursor: Cursor) : RecyclerView.Adapter<MedicosA
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        cursor.moveToPosition(position)
+        val medicoActual = getItem(position)
 
         holder.icono.setImageResource(R.drawable.ic_capsula)
-        holder.icono.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_DOCTOR)))
-        holder.titulo.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_DOCTOR))
-        holder.nombre.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_DOCTOR))
-        holder.especialidad.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.ESPECIALIDAD_DOCTOR))
+        holder.icono.setColorFilter(medicoActual.colorIcono!!)
+        holder.titulo.text = medicoActual.titulo
+        holder.nombre.text = medicoActual.nombre
+        holder.especialidad.text = medicoActual.especialidad
 
     }
 
-    override fun getItemCount(): Int {
-        return cursor.count
-    }
 
     fun setOnItemClickListener(listener: View.OnClickListener) {
         this.listener = listener
@@ -69,10 +70,7 @@ class MedicosAdapter(private val cursor: Cursor) : RecyclerView.Adapter<MedicosA
         listener?.onClick(v)
     }
 
-    fun getMedicID(position: Int) : Int {
-        return when(cursor.moveToPosition(position)){
-            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
-            else -> -1
-        }
+    fun getMedicAt(position: Int) : Medico {
+        return getItem(position)
     }
 }
