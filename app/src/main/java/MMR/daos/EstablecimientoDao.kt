@@ -7,7 +7,7 @@ import elements.Establecimiento
 @Dao
 interface EstablecimientoDao {
     @Insert
-    fun inser(establecimiento: Establecimiento)
+    fun insert(establecimiento: Establecimiento)
 
     @Update
     fun update(establecimiento: Establecimiento)

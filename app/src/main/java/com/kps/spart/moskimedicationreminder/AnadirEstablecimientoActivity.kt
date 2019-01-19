@@ -24,7 +24,7 @@ import java.lang.Exception
 
 class AnadirEstablecimientoActivity : AppCompatActivity() {
 
-    lateinit var dbHelper : mmrbd
+
     lateinit var establecimiento: Establecimiento
     var latitud : Double = 0.0
     var longitud : Double = 0.0
@@ -41,9 +41,9 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
         title = getString(R.string.anadir_establecimiento)
 
-        dbHelper = mmrbd(this@AnadirEstablecimientoActivity)
 
-        establecimiento = Establecimiento()
+
+        establecimiento = Establecimiento(0)
         establecimiento.nombre
 
         SpinnerTipoEstablecimiento.adapter = ArrayAdapter(this@AnadirEstablecimientoActivity, android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_establecimiento))
@@ -157,19 +157,6 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
 
     private fun saveEstablishmentToDB(establecimiento: Establecimiento){
-        val db = dbHelper.writableDatabase
-        val errorAtInsertion : Long = -1
-
-        val newRowId = db.insert(MMDContract.columnas.TABLA_ESTABLECIMIENTO,null,establecimiento.toContentValues())
-
-        if(newRowId == errorAtInsertion){
-            Toast.makeText(this@AnadirEstablecimientoActivity,getString(R.string.error_crear_establecimiento), Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this@AnadirEstablecimientoActivity, getString(R.string.establecimiento_creado_correctamente), Toast.LENGTH_SHORT).show()
-            finish()
-        }
-
-
 
     }
 
@@ -180,10 +167,7 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         outState?.putDouble("longitud", longitud)
     }
 
-    override fun onDestroy(){
-        dbHelper.close()
-        super.onDestroy()
-    }
+
 
 
 

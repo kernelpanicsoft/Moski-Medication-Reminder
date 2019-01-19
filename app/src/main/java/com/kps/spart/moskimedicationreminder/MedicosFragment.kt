@@ -16,11 +16,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.fragment_medicos.*
-
-import android.provider.BaseColumns
-import model.MMDContract
-import model.mmrbd
+import elements.Medico
 
 
 class MedicosFragment : Fragment() {
@@ -35,6 +31,7 @@ class MedicosFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater!!.inflate(R.layout.fragment_medicos, container, false)
 
+        val RecViewMedicos = v.findViewById<RecyclerView>(R.id.RecViewMedicos)
         RecViewMedicos.setHasFixedSize(true)
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -59,6 +56,7 @@ class MedicosFragment : Fragment() {
         })
 
         RecViewMedicos.adapter = adapter
+    //    medicoViewModel.insert(Medico(0,"Prueba","Cardiologo",344534,"Dr.",1))
 
         return v
     }

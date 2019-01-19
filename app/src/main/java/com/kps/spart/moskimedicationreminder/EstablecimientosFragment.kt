@@ -1,5 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.EstablecimientoViewModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import elements.Establecimiento
 
 import model.MMDContract
 import model.mmrbd
@@ -17,6 +21,7 @@ import model.mmrbd
 
 class EstablecimientosFragment : Fragment() {
 
+    lateinit var establecimientoViewModel : EstablecimientoViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -30,36 +35,23 @@ class EstablecimientosFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val dbHelper = mmrbd(context!!)
-        val db = dbHelper.writableDatabase
-
-        // Filter results WHERE "title" = 'My Title'
-        // val selection = "${MMDContract.columnas.NOMBRE_ESTABLECIMIENTO} = ?"
-        //  val selectionArgs = arrayOf("My Title")
-
-        val cursor = db.query(
-                MMDContract.columnas.TABLA_ESTABLECIMIENTO,   // The table to query
-                null,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
-        )
 
 
-       // Log.v("cursor establecimientos", DatabaseUtils.dumpCursorToString(cursor))
+        val adapter = EstablecimientoAdapter(context)
+        establecimientoViewModel = ViewModelProviders.of(this).get(EstablecimientoViewModel::class.java)
+        establecimientoViewModel.allEstablecimientos.observe(this, Observer<List<Establecimiento>>{
+            adapter.submitList(it)
+        })
 
-        val adapter = EstablecimientoAdapter(cursor)
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesEstablecimientoActivity::class.java)
-            nav.putExtra("ESTABLISHMENT_ID", adapter.getEstablishmentID(RV.getChildAdapterPosition(it)))
+
             startActivity(nav)
         })
 
         RV.adapter = adapter
 
-
+      //  establecimientoViewModel.insert(Establecimiento(0,"Prueba","Farmacia","NA", "232423232", "23232323", "we@fd.com","www.com.cm",2.9,23.0, 1))
         return v
     }
 
