@@ -8,14 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
-
-import android.database.Cursor
-import android.provider.BaseColumns
 import android.support.v7.util.DiffUtil
 import android.support.v7.recyclerview.extensions.ListAdapter
 import elements.Medico
-import model.MMDContract
 
 /**
  * Created by spart on 20/11/2017.

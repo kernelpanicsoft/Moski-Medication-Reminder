@@ -1,28 +1,29 @@
 package model
 
 
-import MMR.daos.EstablecimientoDao
-import MMR.daos.MedicamentoDao
-import MMR.daos.MedicoDao
-import MMR.daos.UsuarioDao
+import MMR.daos.*
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import elements.Establecimiento
-import elements.Medicamento
-import elements.Medico
-import elements.Usuario
+import elements.*
 
-@Database(entities = arrayOf(Usuario::class, Medicamento::class, Medico::class, Establecimiento::class), version = 1)
+@Database(entities = arrayOf(Usuario::class,
+                            Medicamento::class,
+                            Medico::class,
+                            FichaContacto::class,
+                            Establecimiento::class,
+                            CitaMedica::class),
+        version = 1)
 abstract  class MMRDataBase : RoomDatabase() {
 
 
     abstract fun usuarioDao(): UsuarioDao
     abstract fun medicamentoDao() : MedicamentoDao
     abstract fun medicoDao() : MedicoDao
+    abstract fun fichaContactoDao() : FichaContactoDao
     abstract fun establecimientoDao() : EstablecimientoDao
-
+    abstract fun citaMedicaDao() : CitaMedicaDao
     companion object {
         @Volatile private var instance : MMRDataBase? = null
 

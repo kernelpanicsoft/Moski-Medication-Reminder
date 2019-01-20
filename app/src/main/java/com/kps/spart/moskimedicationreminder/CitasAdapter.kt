@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +10,30 @@ import android.widget.TextView
 
 import java.text.SimpleDateFormat
 
-import android.database.Cursor
-import android.provider.BaseColumns
+
+import android.support.v7.util.DiffUtil
+import android.support.v7.recyclerview.extensions.ListAdapter
+import elements.CitaMedica
 import model.MMDContract
 
 /**
  * Created by spart on 15/12/2017.
  */
 
-class CitasAdapter(private val cursor: Cursor) : RecyclerView.Adapter<CitasAdapter.ViewHolder>(), View.OnClickListener{
+class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,CitasAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
     private val sdf = SimpleDateFormat("dd/MM/yyyy, h:mm a")
     var listener: View.OnClickListener? = null
+
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<CitaMedica>(){
+        override fun areItemsTheSame(oldItem: CitaMedica, newItem: CitaMedica): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: CitaMedica, newItem: CitaMedica): Boolean {
+            return oldItem.titulo.equals(newItem.titulo)
+        }
+
+    }
 
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -42,22 +56,16 @@ class CitasAdapter(private val cursor: Cursor) : RecyclerView.Adapter<CitasAdapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        cursor.moveToPosition(position)
-       // holder.esfera.setColorFilter(Color.parseColor(items[position].color))
-       // holder.iconoFecha.setColorFilter(Color.parseColor(items[position].color))
-      //  holder.iconoDoctor.setColorFilter(Color.parseColor(items[position].color))
-      //  holder.iconoUbicacion.setColorFilter(Color.parseColor(items[position].color))
-        holder.esfera.setColorFilter(cursor.getInt(cursor.getColumnIndexOrThrow(MMDContract.columnas.COLOR_DISTINTIVO_CITA)))
-        holder.TituloTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_CITA))
-        holder.DoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.DOCTOR_CITA))
-        holder.DireccionTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.UBICACION_CITA))
+        val citaMedicaActual = getItem(position)
+
+        holder.esfera.setColorFilter(citaMedicaActual.color!!)
+        holder.TituloTV.text = citaMedicaActual.titulo
+        holder.DoctorTV.text = citaMedicaActual.doctor
+        holder.DireccionTV.text = citaMedicaActual.ubicacion
         //        holder.FechaTV.text = sdf.format(items[position].fechaYhora)
 
     }
 
-    override fun getItemCount(): Int {
-        return cursor.count
-    }
 
     fun setOnItemClickListener(listener: View.OnClickListener){
         this.listener = listener
@@ -67,12 +75,11 @@ class CitasAdapter(private val cursor: Cursor) : RecyclerView.Adapter<CitasAdapt
         listener?.onClick(v)
     }
 
-    fun getAppointmentID(position: Int) : Int{
-        return when(cursor.moveToPosition(position)){
-            true -> cursor.getInt(cursor.getColumnIndex(BaseColumns._ID))
-            else -> -1
-        }
+    fun getCitaMedicaAt(position: Int) : CitaMedica{
+        return getItem(position)
     }
+
+
 
 
 }

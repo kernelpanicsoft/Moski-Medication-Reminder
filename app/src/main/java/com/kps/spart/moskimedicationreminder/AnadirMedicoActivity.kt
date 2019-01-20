@@ -109,7 +109,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
             dialog.setOnShowListener{
                 val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
                 positiveButton.setOnClickListener{
-                    val fichaContacto = FichaContacto()
+                    val fichaContacto = FichaContacto(0)
                     val tituloFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTituloficha)
                     val direccionFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutDireccion)
                     val telefonoFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTelefono)
@@ -185,14 +185,14 @@ class AnadirMedicoActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-        outState?.putParcelableArrayList("contactCards",fichas)
+       // outState?.putParcelableArrayList("contactCards",fichas)
 
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
 
-        fichas = savedInstanceState!!.getParcelableArrayList("contactCards")
+        //fichas = savedInstanceState!!.getParcelableArrayList("contactCards")
         adapter = FichaDeContactoCompactaAdapter(this@AnadirMedicoActivity, fichas)
 
         RecViewfichasContacto.setHasFixedSize(true)

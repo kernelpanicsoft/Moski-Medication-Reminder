@@ -26,7 +26,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     val calendario = Calendar.getInstance()
     val sdf = SimpleDateFormat.getDateTimeInstance()
 
-    lateinit var dbHelper : mmrbd
+
     lateinit var CitaMedica : CitaMedica
 
 
@@ -42,8 +42,8 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         title = getString(R.string.anadirCita)
         FechaYHoraEspecificadaTV.text = sdf.format(calendario.time)
 
-        CitaMedica = CitaMedica();
-        dbHelper = mmrbd(this@AnadirCitaMedicaActivity)
+        CitaMedica = CitaMedica(0)
+
 
 
         FechaCitaButton.setOnClickListener{
@@ -87,7 +87,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         }
 
         var selectedColor = ContextCompat.getColor(this@AnadirCitaMedicaActivity,R.color.blueberry)
-        CitaMedica.color = selectedColor.toString()
+        CitaMedica.color = selectedColor
 
         val colors = resources.getIntArray(R.array.default_rainbow)
 
@@ -104,7 +104,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
                 selectedColor = color
                 iconoCita.setColorFilter(selectedColor)
 
-                CitaMedica.color = selectedColor.toString()
+                CitaMedica.color = selectedColor
 
                 //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }
@@ -151,21 +151,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     }
 
     private fun saveAppointmentToDB(cita : CitaMedica){
-        val db = dbHelper.writableDatabase
-        val errorAtInsertion : Long = -1
 
-        val newRowId = db.insert(MMDContract.columnas.TABLA_CITA, null, cita.toContentValues())
-
-        if(newRowId == errorAtInsertion){
-            Toast.makeText(this@AnadirCitaMedicaActivity,getString(R.string.ocurrio_un_problema_durante_la_creacion_cita), Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this@AnadirCitaMedicaActivity,getString(R.string.cita_registrada_correctamente), Toast.LENGTH_SHORT).show()
-            finish()
-        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        dbHelper.close()
-    }
 }

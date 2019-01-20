@@ -1,5 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.CitaMedicaViewModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,6 +22,7 @@ import model.mmrbd
 
 
 class CitasMedicasFragment : Fragment() {
+    lateinit var citaMedicasViewModel : CitaMedicaViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,23 +44,16 @@ class CitasMedicasFragment : Fragment() {
         RV.addItemDecoration(dividerItemDecoration)
 
 
-        val dbHelper = mmrbd(context!!)
-        val db = dbHelper.writableDatabase
 
-        val cursor = db.query(MMDContract.columnas.TABLA_CITA,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null)
-
-        val adapter = CitasAdapter(cursor)
-
+        val adapter = CitasAdapter(context)
+        citaMedicasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
+        citaMedicasViewModel.allCitasMedicas.observe(this, Observer{
+            adapter.submitList(it)
+        })
 
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesCitaMedicaActivity::class.java)
-            nav.putExtra("APPOINTMENT_ID", adapter.getAppointmentID(RV.getChildAdapterPosition(it)))
+
             startActivity(nav)
 
         })

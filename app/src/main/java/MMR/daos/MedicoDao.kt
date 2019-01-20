@@ -13,7 +13,7 @@ interface MedicoDao {
     fun update(medico : Medico)
 
     @Delete
-    fun delete (medico : Medico)
+    fun delete(medico : Medico)
 
     @Query("DELETE FROM Medico")
     fun deleteAllMedicos()
