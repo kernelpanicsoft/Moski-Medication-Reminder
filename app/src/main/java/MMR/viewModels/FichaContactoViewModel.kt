@@ -6,12 +6,12 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import elements.FichaContacto
 
-class FichaContactoViewModel (application: Application) : AndroidViewModel(application) {
+class FichaContactoViewModel (application: Application, MedicoID : Int) : AndroidViewModel(application) {
     val repository : FichaContactoRepository = FichaContactoRepository(application)
     val allFichas : LiveData<List<FichaContacto>>
 
     init{
-        allFichas = repository.getAllFichasContacto(0)
+        allFichas = repository.getAllFichasContacto(MedicoID)
     }
 
     fun insert(fichaContacto: FichaContacto){

@@ -1,5 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.TratamientoViewModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,6 +22,7 @@ import elements.Tratamiento
 
 class TratamientosFragment : Fragment() {
 
+    lateinit var tratamientoViewModel : TratamientoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +42,12 @@ class TratamientosFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        var tratamiento = Tratamiento()
-        val t = Array(20){Tratamiento() }
 
-        val adapter = TratamientosAdapter(t)
+        val adapter = TratamientosAdapter(context)
+        tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
+        tratamientoViewModel.allTratamientos.observe(this, Observer {
+            adapter.submitList(it)
+        })
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesTratamientoActivity::class.java)
             startActivity(nav)

@@ -13,7 +13,8 @@ import elements.*
                             Medico::class,
                             FichaContacto::class,
                             Establecimiento::class,
-                            CitaMedica::class),
+                            CitaMedica::class,
+                            Tratamiento::class),
         version = 1)
 abstract  class MMRDataBase : RoomDatabase() {
 
@@ -24,6 +25,7 @@ abstract  class MMRDataBase : RoomDatabase() {
     abstract fun fichaContactoDao() : FichaContactoDao
     abstract fun establecimientoDao() : EstablecimientoDao
     abstract fun citaMedicaDao() : CitaMedicaDao
+    abstract fun tratamientoDao() : TratamientoDao
     companion object {
         @Volatile private var instance : MMRDataBase? = null
 
