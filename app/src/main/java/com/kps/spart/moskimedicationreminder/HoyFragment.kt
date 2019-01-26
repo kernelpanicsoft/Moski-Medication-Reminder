@@ -1,5 +1,9 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.TomaViewModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import elements.Toma
 import android.content.Intent
 import android.os.Bundle
@@ -19,8 +23,7 @@ import android.widget.Toast
 
 class HoyFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
-
+    lateinit var tomaViewModel : TomaViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +44,12 @@ class HoyFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val tomas = Array(20){Toma()}
-        val adapter = HorarioAdapter(tomas)
+
+        val adapter = HorarioAdapter()
+        tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
+        tomaViewModel.allTomas.observe(this, Observer {
+            adapter.submitList(it)
+        })
 
         adapter.setOnClickListener(View.OnClickListener {
 

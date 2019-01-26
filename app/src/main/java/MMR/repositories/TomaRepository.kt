@@ -1,0 +1,85 @@
+package MMR.repositories
+
+import MMR.daos.TomaDao
+import android.app.Application
+import android.arch.lifecycle.LiveData
+import android.os.AsyncTask
+import elements.Toma
+import model.MMRDataBase
+
+class TomaRepository(application: Application) {
+    val tomaDao : TomaDao
+
+    init{
+        val database = MMRDataBase.getInstance(application)
+        tomaDao = database.tomaDao()
+    }
+
+    fun insert(toma : Toma){
+        InsertTomaAsyncTask(tomaDao).execute(toma)
+    }
+
+    fun update(toma : Toma){
+        UpdateTomaAsyncTask(tomaDao).execute(toma)
+    }
+
+    fun delete(toma : Toma){
+        DeleteTomaAsyncTask(tomaDao).execute(toma)
+    }
+
+    fun deleteAllTomas(){
+        DeleteAllTomasAsyncTask(tomaDao).execute()
+    }
+
+    fun deleteAllTomasTratamiento(tratamientoID : Int){
+        DeleteAllTomasTratamientoAsyncTask(tomaDao).execute(tratamientoID)
+    }
+
+    fun getAllTomas() : LiveData<List<Toma>> {
+        return tomaDao.getAllTomas()
+    }
+
+    fun getToma( id : Int) :  LiveData<Toma>{
+        return tomaDao.getToma(id)
+    }
+
+    fun getTomasTratamiento( idTratamiento : Int) : LiveData<List<Toma>>{
+        return tomaDao.getTomasTratamiento(idTratamiento)
+    }
+
+    private class InsertTomaAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Toma, Void, Void>(){
+        override fun doInBackground(vararg params: Toma): Void? {
+            tomaDao.insert(params[0])
+            return null
+        }
+    }
+
+    private class UpdateTomaAsyncTask constructor(private val tomaDao : TomaDao) : AsyncTask<Toma, Void, Void>(){
+        override fun doInBackground(vararg params: Toma): Void? {
+            tomaDao.update(params[0])
+            return null
+        }
+    }
+
+    private class DeleteTomaAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Toma, Void, Void>(){
+        override fun doInBackground(vararg params: Toma): Void? {
+            tomaDao.delete(params[0])
+            return null
+        }
+    }
+
+    private class DeleteAllTomasAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+            tomaDao.deleteAllTomas()
+            return null
+        }
+    }
+
+
+    private class DeleteAllTomasTratamientoAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Int, Void, Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            tomaDao.deleteAllTomasTratamiento(params[0])
+            return null
+        }
+    }
+}

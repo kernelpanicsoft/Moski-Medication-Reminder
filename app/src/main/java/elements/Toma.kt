@@ -1,17 +1,21 @@
 package elements
 
-class Toma{
-    var statusToma : Int = 0
-    var nombreTratamiento: String? = null
-    var nombreMedicamento: String? = null
-    var horaToma: String? = null
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
+import android.arch.persistence.room.PrimaryKey
 
-    init{
-        statusToma = 0
-        nombreTratamiento = "Dolor de muela"
-        nombreMedicamento = "Naproxeno sodico"
-        horaToma = "10:36pm"
 
-    }
+@Entity(foreignKeys = arrayOf(
+        ForeignKey(entity = Tratamiento::class,
+                parentColumns = arrayOf("id"),
+                childColumns = arrayOf("tratamientoID"),
+                onDelete = ForeignKey.CASCADE
+                )
+))
+class Toma(@PrimaryKey(autoGenerate = true) var id: Int,
+    var statusToma : Int = 0,
+    var horaToma: String? = null,
+    var tratamientoID: Int? = null
 
-}
+    )
+

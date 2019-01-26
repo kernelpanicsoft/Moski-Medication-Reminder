@@ -1,4 +1,7 @@
 package com.kps.spart.moskimedicationreminder
+import android.content.Context
+import android.support.v7.recyclerview.extensions.ListAdapter
+import android.support.v7.util.DiffUtil
 import elements.Toma
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,8 +10,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-class HorarioAdapter(private val items: Array<Toma>) : RecyclerView.Adapter<HorarioAdapter.ViewHolder>(), View.OnClickListener{
+class HorarioAdapter : ListAdapter<Toma,HorarioAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
     private var listener : View.OnClickListener? = null
+
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<Toma>(){
+        override fun areItemsTheSame(oldItem: Toma, newItem: Toma): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Toma, newItem: Toma): Boolean {
+            return oldItem.horaToma.equals(newItem.horaToma) && oldItem.tratamientoID == newItem.tratamientoID
+        }
+    }
+
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
         val iconoMedicamento: ImageView
@@ -37,15 +51,12 @@ class HorarioAdapter(private val items: Array<Toma>) : RecyclerView.Adapter<Hora
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
+        val tomaActual = getItem(position)
         holder.iconoMedicamento.setImageResource(R.drawable.ic_capsula)
         holder.iconoTratamiento.setImageResource(R.drawable.ic_bookmark)
-        holder.horaToma.text=items[position].horaToma
-        holder.nombreTratamientoTV.text = items[position].nombreTratamiento
-        holder.nombreMedicamentoTV.text = items[position].nombreMedicamento
-    }
+        holder.horaToma.text=tomaActual.horaToma
+        holder.nombreTratamientoTV.text = tomaActual.tratamientoID.toString()
 
-    override fun getItemCount(): Int{
-        return items.size
     }
 
     fun setOnClickListener(listener: View.OnClickListener){
