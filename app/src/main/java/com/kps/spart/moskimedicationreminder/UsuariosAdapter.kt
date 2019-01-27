@@ -42,7 +42,7 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val usuarioActual = getItem(position)
         holder.icono.setImageResource(R.drawable.ic_user)
-        holder.nombre.text = usuarioActual.nombre 
+        holder.nombre.text = usuarioActual.nombre
         holder.apellidos.text = usuarioActual.apellidos
     }
 

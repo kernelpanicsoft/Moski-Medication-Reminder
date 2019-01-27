@@ -6,11 +6,14 @@ import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
@@ -19,8 +22,11 @@ import android.widget.RadioButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 import model.CodigosDeSolicitud
-import model.MMDContract
-import model.mmrbd
+import java.io.File
+import java.io.IOException
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegistrarUsuarioActivity : AppCompatActivity() {
 
@@ -91,7 +97,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
                 try{
                     usuario.edad = Edad.text.toString().toInt()
-                }catch( e : NumberFormatException){
+                }catch( e : Exception){
 
                     Snackbar.make(it,getString(R.string.edad_necesaria),Snackbar.LENGTH_SHORT).show()
                 }
@@ -132,7 +138,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                                 1 -> {
                                     Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                                         takePictureIntent.resolveActivity(packageManager)?.also {
-                                            startActivityForResult(takePictureIntent,1044)
+                                            startActivityForResult(takePictureIntent,CodigosDeSolicitud.ANADIR_FOTOGRAFIA)
                                         }
                                     }
                                 }
@@ -161,9 +167,48 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if(requestCode == 1047 && resultCode == Activity.RESULT_OK){
+        if(requestCode == CodigosDeSolicitud.ANADIR_FOTOGRAFIA && resultCode == Activity.RESULT_OK){
             val imageBitmap = data.extras.get("data") as Bitmap
             iconoUsuarioIV.setImageBitmap(imageBitmap)
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile() : File{
+        var mCurrentPhotoPath : String
+
+
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir : File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+                "JPEG_${timeStamp}_",
+                ".jpg",
+                storageDir
+        ).apply {
+            mCurrentPhotoPath = absolutePath
+        }
+
+    }
+
+    private fun dispatchTakePicktureIntent(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile : File? = try{
+                    createImageFile()
+                } catch (ex : IOException){
+                    null
+                }
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                            this,
+                            "com.example.android.fileprovider",
+                            it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, CodigosDeSolicitud.ANADIR_FOTOGRAFIA)
+                }
+            }
+
         }
     }
 }

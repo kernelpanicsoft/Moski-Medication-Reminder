@@ -14,8 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_anadir_medico.*
-import model.MMDContract
-import model.mmrbd
 import org.xdty.preference.colorpicker.ColorPickerDialog
 
 

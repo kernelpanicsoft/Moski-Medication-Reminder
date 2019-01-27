@@ -15,7 +15,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_anadir_cita_medica.*
 import model.MMDContract
 import model.TipoRecordatorio
-import model.mmrbd
+
 import org.xdty.preference.colorpicker.ColorPickerDialog
 import java.text.SimpleDateFormat
 import java.util.*

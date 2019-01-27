@@ -11,11 +11,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_detalles_establecimiento.*
 import model.MMDContract
-import model.mmrbd
 
 class DetallesEstablecimientoActivity : AppCompatActivity() {
     private var establishment_id : Int = -1
-    private lateinit var dbHelper: mmrbd
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,32 +82,9 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
     }
 
     private fun populateEstablishmentFieldsFromDB(){
-        dbHelper = mmrbd(this@DetallesEstablecimientoActivity)
-        val db = dbHelper.readableDatabase
 
-        val projection = arrayOf(MMDContract.columnas.NOMBRE_ESTABLECIMIENTO,
-                                MMDContract.columnas.TIPO_ESTABLECIMIENTO,
-                                MMDContract.columnas.DIRECCION_ESTABLECIMIENTO,
-                                MMDContract.columnas.TELEFONO1_ESTABLECIMIENTO,
-                                MMDContract.columnas.TELEFONO2_ESTABLECIMIENTO,
-                                MMDContract.columnas.EMAIL_ESTABLECIMIENTO,
-                                MMDContract.columnas.WEB_ESTABLECIMIENTO,
-                                MMDContract.columnas.LATITUD_ESTABLECIMIENTO,
-                                MMDContract.columnas.LONGITUD_ESTABLECIMIENTO)
 
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$establishment_id")
-        val cursor = db.query(
-                MMDContract.columnas.TABLA_ESTABLECIMIENTO,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null,
-                "1"
-        )
-
+/*
         if(cursor.moveToFirst()){
             nombreEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_ESTABLECIMIENTO))
             tipoEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TIPO_ESTABLECIMIENTO))
@@ -119,25 +95,13 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
             sitioWebEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.WEB_ESTABLECIMIENTO))
 
         }
+        */
     }
 
     private fun deleteEstablishment(){
-        val db = dbHelper.writableDatabase
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$establishment_id")
-        val deletedRows = db.delete(MMDContract.columnas.TABLA_ESTABLECIMIENTO, selection,selectionArgs)
 
-        if(deletedRows == 1){
-            Toast.makeText(this@DetallesEstablecimientoActivity,getString(R.string.establecimiento_eliminado_correctamente), Toast.LENGTH_SHORT).show()
-            finish()
-        }else{
-            Toast.makeText(this@DetallesEstablecimientoActivity,getString(R.string.no_es_posible_eliminar_establecimiento), Toast.LENGTH_SHORT).show()
-        }
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        dbHelper.close()
-    }
+
 }

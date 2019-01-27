@@ -18,8 +18,7 @@ import android.widget.Toast
 import elements.Usuario
 import kotlinx.android.synthetic.main.activity_listar_usuarios.*
 import model.CodigosDeSolicitud
-import model.MMDContract
-import model.mmrbd
+
 
 class ListarUsuariosActivity : AppCompatActivity() {
 

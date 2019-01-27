@@ -12,11 +12,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_detalles_medico.*
 import model.MMDContract
-import model.mmrbd
+
 
 class DetallesMedicoActivity : AppCompatActivity() {
     private var medic_id : Int = -1
-    private lateinit var  dbHelper: mmrbd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,32 +34,11 @@ class DetallesMedicoActivity : AppCompatActivity() {
     }
 
     private fun populateMedicFieldFromDB() {
-        dbHelper = mmrbd(this@DetallesMedicoActivity)
-        val db = dbHelper.readableDatabase
-
-        val projection = arrayOf(MMDContract.columnas.NOMBRE_DOCTOR,
-                                MMDContract.columnas.TITULO_DOCTOR,
-                                MMDContract.columnas.ESPECIALIDAD_DOCTOR,
-                                MMDContract.columnas.COLOR_DOCTOR)
-
-        val selection ="${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$medic_id")
-        val cursor = db.query(
-                MMDContract.columnas.TABLA_DOCTOR,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null,
-                "1"
-        )
-
-        if(cursor.moveToFirst()){
+        /*
             TituloDoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_DOCTOR))
             NombreDoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_DOCTOR))
             EspecialidadTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.ESPECIALIDAD_DOCTOR))
-        }
+        */
     }
 
     private fun populateMedicContactCards(){
@@ -68,24 +46,10 @@ class DetallesMedicoActivity : AppCompatActivity() {
         val mLayoutManager = LinearLayoutManager(this@DetallesMedicoActivity,LinearLayoutManager.VERTICAL, false)
         RecViewFichasContactoMedico.layoutManager = mLayoutManager
 
-        val dbHelper = mmrbd(this@DetallesMedicoActivity)
-        val db = dbHelper.readableDatabase
 
-        val selection = "${BaseColumns._ID} =?"
-        val selectionArgs = arrayOf("$medic_id")
+      //  val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,cursor)
 
-
-        val cursor = db.query(MMDContract.columnas.TABLA_FICHA_CONTACTO,
-                null,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null)
-
-        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,cursor)
-
-        RecViewFichasContactoMedico.adapter = adapter
+     //   RecViewFichasContactoMedico.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{
@@ -135,21 +99,9 @@ class DetallesMedicoActivity : AppCompatActivity() {
     }
 
     private fun deleteMedic(){
-        val db = dbHelper.writableDatabase
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$medic_id")
-        val deletedRows = db.delete(MMDContract.columnas.TABLA_DOCTOR, selection, selectionArgs)
 
-        if(deletedRows == 1){
-            Toast.makeText(this@DetallesMedicoActivity,getString(R.string.medico_eliminado_correctamente),Toast.LENGTH_SHORT).show()
-            finish()
-        }else{
-            Toast.makeText(this@DetallesMedicoActivity,getString(R.string.no_es_posible_eliminar_medico), Toast.LENGTH_SHORT).show()
-        }
+
     }
 
-    override fun onDestroy(){
-        super.onDestroy()
-        dbHelper.close()
-    }
+
 }

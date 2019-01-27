@@ -18,7 +18,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 
 import model.MMDContract
-import model.mmrbd
 
 
 class CitasMedicasFragment : Fragment() {

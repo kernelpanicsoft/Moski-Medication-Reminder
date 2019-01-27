@@ -13,6 +13,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -59,10 +60,6 @@
             android:name=".DetallesCitaMedicaActivity"
             android:parentActivityName=".MainActivity" />
 
-        <provider
-            android:name="model.ProviderMMR"
-            android:authorities="com.kps.spart.moskimedicationreminder"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -84,6 +81,18 @@
         <activity
             android:name=".DetallesPerfilActivity"
             android:parentActivityName=".MainActivity"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.kps.spart.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
+
     </application>
 
 </manifest>

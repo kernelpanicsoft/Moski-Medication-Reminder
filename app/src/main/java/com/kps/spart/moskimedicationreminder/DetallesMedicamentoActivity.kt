@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -15,8 +14,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import elements.Medicamento
 import kotlinx.android.synthetic.main.activity_detalles_medicamento.*
-import model.MMDContract
-import model.mmrbd
+
 
 class DetallesMedicamentoActivity : AppCompatActivity() {
     private var medicine_id : Int = -1

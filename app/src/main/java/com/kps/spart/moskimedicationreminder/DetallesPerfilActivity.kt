@@ -20,8 +20,7 @@ import android.widget.Toast
 import elements.Usuario
 import kotlinx.android.synthetic.main.activity_detalles_perfil.*
 import model.CodigosDeSolicitud
-import model.MMDContract
-import model.mmrbd
+
 
 class DetallesPerfilActivity : AppCompatActivity() {
 

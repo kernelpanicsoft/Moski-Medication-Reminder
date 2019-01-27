@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_anadir_medicamento.*
 import model.MMDContract
-import model.mmrbd
 import org.xdty.preference.colorpicker.ColorPickerDialog
 
 
