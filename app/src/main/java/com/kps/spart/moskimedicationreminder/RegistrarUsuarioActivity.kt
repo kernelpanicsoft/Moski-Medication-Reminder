@@ -6,6 +6,7 @@ import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 
 import android.support.v7.app.AppCompatActivity
@@ -31,6 +32,7 @@ import java.util.*
 class RegistrarUsuarioActivity : AppCompatActivity() {
 
     lateinit var usuarioViewModel : UsuarioViewModel
+    var mCurrentPhotoPath : String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,11 +138,14 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                             when(which){
                                 0 -> {}
                                 1 -> {
+                                    /*
                                     Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                                         takePictureIntent.resolveActivity(packageManager)?.also {
                                             startActivityForResult(takePictureIntent,CodigosDeSolicitud.ANADIR_FOTOGRAFIA)
                                         }
                                     }
+                                    */
+                                    dispatchTakePicktureIntent()
                                 }
                             }
                         }
@@ -166,16 +171,18 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         finish()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.ANADIR_FOTOGRAFIA && resultCode == Activity.RESULT_OK){
-            val imageBitmap = data.extras.get("data") as Bitmap
-            iconoUsuarioIV.setImageBitmap(imageBitmap)
+         //   val imageBitmap = data.extras.get("data") as Bitmap
+         //   iconoUsuarioIV.setImageBitmap(imageBitmap)
+
+            setPic()
         }
     }
 
     @Throws(IOException::class)
     private fun createImageFile() : File{
-        var mCurrentPhotoPath : String
+
 
 
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
@@ -201,7 +208,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                             this,
-                            "com.example.android.fileprovider",
+                            "com.kps.spart.android.fileprovider",
                             it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -211,4 +218,28 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun setPic(){
+        val targetW: Int = iconoUsuarioIV.width
+        val targetH: Int = iconoUsuarioIV.height
+
+        val bmOptions = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(mCurrentPhotoPath,this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            val scaleFactor : Int = Math.min(photoW / targetW, photoH / targetH)
+
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
+            iconoUsuarioIV.setImageBitmap(bitmap)
+        }
+    }
+
+
 }

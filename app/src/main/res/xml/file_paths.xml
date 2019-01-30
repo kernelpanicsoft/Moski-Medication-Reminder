@@ -2,5 +2,5 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <external-path
         name="MMRImages"
-        path="Android/data.com.kps.spart.moskimedicationreminder/files/Pictures" />
+        path="Android/data/com.kps.spart.moskimedicationreminder/files/Pictures/" />
 </paths>
