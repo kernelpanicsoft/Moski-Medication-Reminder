@@ -7,11 +7,15 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.support.v4.content.FileProvider
@@ -19,9 +23,11 @@ import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
+
 import model.CodigosDeSolicitud
 import java.io.File
 import java.io.IOException
@@ -33,6 +39,8 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
     lateinit var usuarioViewModel : UsuarioViewModel
     var mCurrentPhotoPath : String = ""
+    var targetW: Int = 0
+    var targetH: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,11 +99,13 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         savePerfilFAB.setOnClickListener{
             val usuario = Usuario(0)
 
+
             if(nombreUsuarioET.text.isEmpty() || apellidoUsuarioET.text.isEmpty() || Edad.text.isEmpty()){
                 Snackbar.make(it,getString(R.string.nombre_apellido_necesario),Snackbar.LENGTH_LONG).show()
             }else{
                 usuario.nombre = nombreUsuarioET.text.toString()
                 usuario.apellidos = apellidoUsuarioET.text.toString()
+                usuario.imagen = mCurrentPhotoPath
 
                 try{
                     usuario.edad = Edad.text.toString().toInt()
@@ -120,6 +130,20 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     saveUserToDB(usuario)
                 }
             }
+
+        }
+
+        iconoUsuarioCV.setOnClickListener {
+            val builder = AlertDialog.Builder(this@RegistrarUsuarioActivity)
+            builder.setTitle("¿Eliminar fotografía?")
+                    .setPositiveButton("Eliminar"){ dialog, which ->
+                        Toast.makeText(this@RegistrarUsuarioActivity,"Estas eliminando la foto", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Cancelar"){ dialog, which ->
+
+                    }
+            val dialog  = builder.create()
+            dialog.show()
         }
     }
 
@@ -133,18 +157,21 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             R.id.add_photo_item ->{
 
                 val builder = AlertDialog.Builder(this@RegistrarUsuarioActivity)
-                builder.setTitle("Elegir imagen de perfil desde:")
+                builder.setTitle(getString(R.string.elegir_imagen_de_perfil))
                         .setItems(R.array.origen_imagen) { dialog, which ->
                             when(which){
-                                0 -> {}
+                                0 -> {
+                                    deleteImageFile()
+                                    iconoUsuarioIV.setImageResource(R.drawable.ic_user)
+
+                                }
                                 1 -> {
-                                    /*
-                                    Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-                                        takePictureIntent.resolveActivity(packageManager)?.also {
-                                            startActivityForResult(takePictureIntent,CodigosDeSolicitud.ANADIR_FOTOGRAFIA)
-                                        }
+                                    targetW = iconoUsuarioIV.width
+                                    targetH = iconoUsuarioIV.height
+                                    if(!mCurrentPhotoPath.isEmpty()){
+                                        deleteImageFile()
+                                        iconoUsuarioIV.setImageResource(R.drawable.ic_user)
                                     }
-                                    */
                                     dispatchTakePicktureIntent()
                                 }
                             }
@@ -173,17 +200,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.ANADIR_FOTOGRAFIA && resultCode == Activity.RESULT_OK){
-         //   val imageBitmap = data.extras.get("data") as Bitmap
-         //   iconoUsuarioIV.setImageBitmap(imageBitmap)
-
             setPic()
         }
     }
 
     @Throws(IOException::class)
     private fun createImageFile() : File{
-
-
 
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir : File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
@@ -195,6 +217,18 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             mCurrentPhotoPath = absolutePath
         }
 
+    }
+
+    @Throws(IOException::class)
+    private fun deleteImageFile(){
+        val photoFile = File(mCurrentPhotoPath)
+        val photoUri: Uri = FileProvider.getUriForFile(
+                this,
+                "com.kps.spart.android.fileprovider",
+                photoFile
+        )
+
+        this.contentResolver.delete(photoUri,null,null)
     }
 
     private fun dispatchTakePicktureIntent(){
@@ -220,8 +254,6 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     }
 
     private fun setPic(){
-        val targetW: Int = iconoUsuarioIV.width
-        val targetH: Int = iconoUsuarioIV.height
 
         val bmOptions = BitmapFactory.Options().apply {
             inJustDecodeBounds = true
@@ -229,17 +261,67 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             val photoW: Int = outWidth
             val photoH: Int = outHeight
 
-            val scaleFactor : Int = Math.min(photoW / targetW, photoH / targetH)
+            val scaleFactor : Int = Math.min(photoW / targetW , photoH / targetH )
 
             inJustDecodeBounds = false
             inSampleSize = scaleFactor
             inPurgeable = true
         }
 
+        val exif = ExifInterface(mCurrentPhotoPath)
+        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED)
+
+
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
-            iconoUsuarioIV.setImageBitmap(bitmap)
+            var rotatedBitmap : Bitmap? = null
+            when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> {
+                    rotatedBitmap = rotateImage(bitmap,90f)
+                }
+                ExifInterface.ORIENTATION_ROTATE_180 -> {
+                    rotatedBitmap = rotateImage(bitmap,180f)
+                }
+                ExifInterface.ORIENTATION_ROTATE_270 -> {
+                    rotatedBitmap = rotateImage(bitmap, 270f)
+                }
+                ExifInterface.ORIENTATION_NORMAL -> {
+                    rotatedBitmap = bitmap
+                }
+            }
+
+            iconoUsuarioIV.setImageBitmap(rotatedBitmap)
         }
     }
 
+    fun rotateImage(source : Bitmap, angle : Float) : Bitmap{
+        val matrix = Matrix()
+        matrix.postRotate(angle)
+
+        return Bitmap.createBitmap(source,0,0,source.width,source.height,matrix,true)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.run {
+            putString("ActualPhotoPath", mCurrentPhotoPath)
+            putInt("ActualWidth", targetW)
+            putInt("ActualHeight", targetH)
+
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        savedInstanceState?.run {
+            mCurrentPhotoPath = getString("ActualPhotoPath")
+            if(!mCurrentPhotoPath.isEmpty()){
+                targetW = getInt("ActualWidth")
+                targetH = getInt("ActualHeight")
+                setPic()
+            }
+        }
+    }
 
 }

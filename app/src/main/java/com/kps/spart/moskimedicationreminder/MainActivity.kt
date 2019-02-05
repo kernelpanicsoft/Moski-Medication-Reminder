@@ -84,11 +84,9 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-
             true
 
         }
-
 
         //Cargamos el fragmento inicial Hoy si es que no se ha seleccionado nada con la navegacion en otro caso cargamos el ultimo fragmento
         val manager = supportFragmentManager
@@ -126,12 +124,7 @@ class MainActivity : AppCompatActivity() {
 
         //Creamos el evento que escucha los cambios en el navigation drawer
         nav_view.setNavigationItemSelectedListener { menuItem ->
-
-            //menuItem.isChecked = true
-
             drawer_layout.closeDrawers()
-
-          //   Toast.makeText(this,"Item seleccionado: " + menuItem.title, Toast.LENGTH_SHORT).show()
 
             when (menuItem.itemId) {
                 R.id.nav_account -> {

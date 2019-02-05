@@ -279,6 +279,7 @@
     <string name="esta_seguro_que_desea_eliminar_usuario">¿Está seguro de que desea eliminar al usuario?, Esto eliminará de manera irreversible al usuario actual y todos los elementos que haya creado: medicamentos, médicos, tratamientos, citas y establecimientos serán borrados</string>
     <string name="editar_usuario">Editar usuario</string>
     <string name="usuario_actualizado_correctamente">Usuario actualizado correctamente</string>
+    <string name="elegir_imagen_de_perfil">Elegir imagen de perfil desde:</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>

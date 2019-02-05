@@ -7,4 +7,7 @@
     <dimen name="subtitulos">18sp</dimen>
     <dimen name="normal">16sp</dimen>
 
+
+    <dimen name="listItemImagen">70dp</dimen>
+
 </resources>
