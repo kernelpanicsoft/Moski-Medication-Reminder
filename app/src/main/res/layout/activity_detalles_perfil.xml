@@ -52,10 +52,10 @@
 
                     <ImageView
                         android:id="@+id/PerfilIV"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="@dimen/UserProfileImageSingle"
+                        android:layout_height="@dimen/UserProfileImageSingle"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_user"
 

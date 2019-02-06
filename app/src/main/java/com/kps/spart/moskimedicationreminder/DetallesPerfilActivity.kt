@@ -8,6 +8,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.database.DatabaseUtils
 import android.database.Observable
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
@@ -27,6 +29,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
     private var user_id : Int = -1
     lateinit var usuarioViewModel: UsuarioViewModel
     private lateinit var usuarioActualLive : LiveData<Usuario>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,6 +107,8 @@ class DetallesPerfilActivity : AppCompatActivity() {
             NombreApellidosUsuarioTV.text = "${usuario?.nombre} ${usuario?.apellidos}"
             GeneroUsuarioTV.text = usuario?.genero
             EdadUsuarioTV.text = usuario?.edad.toString()
+            val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
+            setPic(usuario?.imagen!!,valueInPixels.toInt(),valueInPixels.toInt())
 
     }
 
@@ -112,6 +117,25 @@ class DetallesPerfilActivity : AppCompatActivity() {
             usuarioActualLive.removeObservers(this@DetallesPerfilActivity)
             usuarioViewModel.delete(usuarioActualLive.value!!)
             finish()
+        }
+    }
+
+    private fun setPic(mCurrentPhotoPath : String, targetW: Int, targetH: Int)  {
+        val bmOptions = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(mCurrentPhotoPath,this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
+
+            PerfilIV.setImageBitmap(bitmap)
         }
     }
 
