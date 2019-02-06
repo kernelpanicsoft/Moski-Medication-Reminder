@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 
 import model.CodigosDeSolicitud
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -163,7 +164,6 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                                 0 -> {
                                     deleteImageFile()
                                     iconoUsuarioIV.setImageResource(R.drawable.ic_user)
-
                                 }
                                 1 -> {
                                     targetW = iconoUsuarioIV.width
@@ -231,6 +231,15 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         this.contentResolver.delete(photoUri,null,null)
     }
 
+    @Throws(IOException::class)
+    private fun rescaleImage(scaledBitmap : Bitmap){
+        val photoFile = File(mCurrentPhotoPath)
+
+        val out = FileOutputStream(photoFile)
+        scaledBitmap.compress(Bitmap.CompressFormat.JPEG,85,out)
+        out.close()
+    }
+
     private fun dispatchTakePicktureIntent(){
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
@@ -273,6 +282,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
 
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
+        rescaleImage(bitmap)
             var rotatedBitmap : Bitmap? = null
             when (orientation) {
                 ExifInterface.ORIENTATION_ROTATE_90 -> {
@@ -287,8 +297,11 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 ExifInterface.ORIENTATION_NORMAL -> {
                     rotatedBitmap = bitmap
                 }
+                else -> {
+                    rotatedBitmap = bitmap
+                }
             }
-
+            //rescaleImage()
             iconoUsuarioIV.setImageBitmap(rotatedBitmap)
         }
     }

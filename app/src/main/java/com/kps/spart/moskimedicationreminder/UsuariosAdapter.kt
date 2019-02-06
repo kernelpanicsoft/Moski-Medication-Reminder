@@ -15,6 +15,7 @@ import android.support.v7.recyclerview.extensions.ListAdapter
 import android.widget.TextView
 import elements.Usuario
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
+import java.io.FileNotFoundException
 
 
 class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
@@ -87,10 +88,13 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
             inPurgeable = true
         }
 
-        val exif = ExifInterface(mCurrentPhotoPath)
+        var rotatedBitmap : Bitmap? = null
+        try {
+            val exif = ExifInterface(mCurrentPhotoPath)
+
         val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
 
-        var rotatedBitmap : Bitmap? = null
+
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
 
             when (orientation) {
@@ -106,8 +110,15 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
                 ExifInterface.ORIENTATION_NORMAL -> {
                     rotatedBitmap = bitmap
                 }
+                else -> {
+                    rotatedBitmap = rotateImage(bitmap,90f)
+                }
             }
 
+        }
+
+        }catch ( e : FileNotFoundException){
+            return null
         }
 
         return rotatedBitmap
