@@ -123,8 +123,13 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
     }
 
     private fun deleteMedicine(){
-
+        if(medicamentoActualLive.hasObservers()){
+            medicamentoActualLive.removeObservers(this@DetallesMedicamentoActivity)
+                medicamentoViewModel.delete(medicamentoActualLive.value!!)
+                finish()
+            }
     }
+
 
 
 }

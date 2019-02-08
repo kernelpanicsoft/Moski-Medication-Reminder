@@ -1,5 +1,9 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicamentoViewModel
+import android.app.Activity
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import elements.Medicamento
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -19,6 +23,12 @@ import org.xdty.preference.colorpicker.ColorPickerDialog
 
 class AnadirMedicamentoActivity : AppCompatActivity() {
 
+    lateinit var medicamentoViewModel: MedicamentoViewModel
+    lateinit var medicamento: Medicamento
+    var mCurrentPhotoPath: String = ""
+    var targetW: Int = 0
+    var targetH: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +41,8 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
         title = getString(R.string.AnadirMedicamento)
 
-
-
+        medicamentoViewModel = ViewModelProviders.of(this@AnadirMedicamentoActivity).get(MedicamentoViewModel::class.java)
+        medicamento = Medicamento(0)
 
         SpinnerTipoMedicamento.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TipoMedicamento))
         SpinnerTipoMedicamento.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -42,8 +52,8 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-
-                //Toast.makeText(this@AnadirMedicamentoActivity, "Elemento seleccionado: " + position.toString(), Toast.LENGTH_SHORT).show()
+                medicamento.tipo = parent?.getItemAtPosition(position).toString()
+                //Toast.makeText(this@AnadirMedicamentoActivity, "Elemento seleccionado: " + position.toString() + " : " + parent?.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
                 when (position){
                     0 -> { MedicamentoIconoTV.setImageResource(R.drawable.ic_roundpill) }
                     1 -> { MedicamentoIconoTV.setImageResource(R.drawable.ic_tab)}
@@ -81,7 +91,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             colorPickerDialog.setOnColorSelectedListener { color ->
                 selectedColor = color
                 MedicamentoIconoTV.setColorFilter(selectedColor)
-
+                medicamento.color = selectedColor
 
 
              //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
@@ -104,9 +114,14 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicamentoActivity)
                 val usuarioID = sharedPref.getInt("actualUserID", -1)
+                medicamento.nombreMedicamento = CampoNombreComercial.text.toString()
+                medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
+                medicamento.dosis = CampoDosis.text.toString()
+                medicamento.nota = CampoNota.text.toString()
 
                 if(usuarioID != -1){
-
+                    medicamento.usuarioID = usuarioID
+                    saveMedicineToDB(medicamento)
                 }
                 return true
             }
@@ -117,6 +132,12 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
 
+    }
+
+    fun saveMedicineToDB(medicamento: Medicamento){
+        medicamentoViewModel.insert(medicamento)
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
 

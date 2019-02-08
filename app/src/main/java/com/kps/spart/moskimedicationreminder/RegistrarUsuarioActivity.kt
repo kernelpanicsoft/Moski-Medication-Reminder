@@ -5,6 +5,7 @@ import elements.Usuario
 import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -29,6 +30,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 
 import model.CodigosDeSolicitud
+import model.MMDContract
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -162,8 +164,9 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                         .setItems(R.array.origen_imagen) { dialog, which ->
                             when(which){
                                 0 -> {
-                                    deleteImageFile()
-                                    iconoUsuarioIV.setImageResource(R.drawable.ic_user)
+                                    targetW = iconoUsuarioIV.width
+                                    targetH = iconoUsuarioIV.height
+                                    pickFromGallery()
                                 }
                                 1 -> {
                                     targetW = iconoUsuarioIV.width
@@ -201,6 +204,34 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.ANADIR_FOTOGRAFIA && resultCode == Activity.RESULT_OK){
             setPic()
+        }
+        else if(requestCode == CodigosDeSolicitud.SELECCIONAR_IMAGEN && resultCode == Activity.RESULT_OK){
+            val selectedImageUri = data?.data
+
+            val filePathColum = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = this.contentResolver.query(selectedImageUri, filePathColum,null, null, null)
+            cursor.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColum[0])
+            val imgDecodableString = cursor.getString(columnIndex)
+            cursor.close()
+
+
+            val bmOptions = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+                BitmapFactory.decodeFile(imgDecodableString,this)
+                val photoW: Int = outWidth
+                val photoH: Int = outHeight
+
+                val scaleFactor : Int = Math.min(photoW / targetW , photoH / targetH )
+
+                inJustDecodeBounds = false
+                inSampleSize = scaleFactor
+                inPurgeable = true
+            }
+
+            val imageFromGallery = BitmapFactory.decodeFile(imgDecodableString, bmOptions)
+            iconoUsuarioIV.setImageBitmap(imageFromGallery)
+
         }
     }
 
@@ -334,6 +365,16 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 targetH = getInt("ActualHeight")
                 setPic()
             }
+        }
+    }
+
+    fun pickFromGallery(){
+        Intent(Intent.ACTION_PICK).also { selectPictureIntent ->
+            selectPictureIntent.setType("image/*")
+            val mimeTypes = arrayOf("image/jpg", "image/png")
+            selectPictureIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            startActivityForResult(selectPictureIntent,CodigosDeSolicitud.SELECCIONAR_IMAGEN)
+
         }
     }
 

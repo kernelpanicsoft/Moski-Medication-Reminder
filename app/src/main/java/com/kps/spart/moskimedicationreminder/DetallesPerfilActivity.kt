@@ -10,6 +10,7 @@ import android.database.DatabaseUtils
 import android.database.Observable
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
@@ -135,8 +136,15 @@ class DetallesPerfilActivity : AppCompatActivity() {
 
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
 
-            PerfilIV.setImageBitmap(bitmap)
+            PerfilIV.setImageBitmap(rotateImage(bitmap,90f))
         }
+    }
+
+    fun rotateImage(source: Bitmap, angle: Float) : Bitmap{
+        val matrix = Matrix()
+        matrix.postRotate(angle)
+
+        return Bitmap.createBitmap(source,0,0,source.width,source.height,matrix,true)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -146,5 +154,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
             Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 }
