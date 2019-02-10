@@ -151,7 +151,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == CodigosDeSolicitud.EDITAR_USUARIO && resultCode == Activity.RESULT_OK){
-            Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
         }
     }
 

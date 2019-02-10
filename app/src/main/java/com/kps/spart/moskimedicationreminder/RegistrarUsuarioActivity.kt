@@ -3,6 +3,7 @@ package com.kps.spart.moskimedicationreminder
 import MMR.viewModels.UsuarioViewModel
 import elements.Usuario
 import android.app.Activity
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.database.Cursor
@@ -21,11 +22,13 @@ import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
+import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 
@@ -41,6 +44,7 @@ import java.util.*
 class RegistrarUsuarioActivity : AppCompatActivity() {
 
     lateinit var usuarioViewModel : UsuarioViewModel
+    private lateinit var usuarioActualLive : LiveData<Usuario>
     var mCurrentPhotoPath : String = ""
     var targetW: Int = 0
     var targetH: Int = 0
@@ -60,12 +64,33 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
         if(intent.hasExtra("USER_ID")){
             title = getString(R.string.editar_usuario)
-            val usuarioLive = usuarioViewModel.getUsuario(intent.getIntExtra("USER_ID", -1))
+            usuarioActualLive = usuarioViewModel.getUsuario(intent.getIntExtra("USER_ID", -1))
+            usuarioActualLive.observe(this, android.arch.lifecycle.Observer {
+                nombreUsuarioET.setText(it?.nombre, TextView.BufferType.EDITABLE)
+                apellidoUsuarioET.setText(it?.apellidos, TextView.BufferType.EDITABLE)
+                Edad.setText(it?.edad.toString(),TextView.BufferType.EDITABLE)
+                val genero = it?.genero
 
+                if(genero!!.equals(getString(R.string.masculino))){
+                    GeneroRadioGroup.check(R.id.masculinoRB)
+                }else{
+                    GeneroRadioGroup.check(R.id.femeninoRB)
+                }
 
-            val usuarioAEditar = usuarioLive.value
-            Toast.makeText(this@RegistrarUsuarioActivity,"Datos: " + usuarioAEditar?.nombre, Toast.LENGTH_SHORT).show()
-            nombreUsuarioET.setText(usuarioAEditar?.nombre)
+                if(!it?.password.isNullOrEmpty()){
+                    usaPasswordCheckbox.isChecked = true
+                }
+
+                RecoveryET.setText(it?.email_recuperacion,TextView.BufferType.EDITABLE)
+                PasswordEditText.setText(it?.password,TextView.BufferType.EDITABLE)
+                mCurrentPhotoPath = it.imagen!!
+                if(!mCurrentPhotoPath.isNullOrEmpty()){
+                    val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
+                    targetH = valueInPixels.toInt()
+                    targetW = valueInPixels.toInt()
+                    setPic()
+                }
+            })
 
         }else{
             title = getString(R.string.registrar_usuario)
@@ -100,8 +125,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         }
 
         savePerfilFAB.setOnClickListener{
-            val usuario = Usuario(0)
-
+            val usuario : Usuario
+            if(intent.hasExtra("USER_ID")){
+                 usuario = usuarioActualLive.value!!
+            }else{
+                 usuario = Usuario(0)
+            }
 
             if(nombreUsuarioET.text.isEmpty() || apellidoUsuarioET.text.isEmpty() || Edad.text.isEmpty()){
                 Snackbar.make(it,getString(R.string.nombre_apellido_necesario),Snackbar.LENGTH_LONG).show()
@@ -194,6 +223,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     private fun saveUserToDB(usuario: Usuario){
         if(intent.hasExtra("USER_ID")){
             usuarioViewModel.update(usuario)
+
         }else{
             usuarioViewModel.insert(usuario)
         }

@@ -49,7 +49,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
         //Especificamos el escucha de eventos para definir el usuario activo de la aplicacion
         adapter.setOnClickListener( View.OnClickListener {
             val usuarioSeleccionado = adapter.getUsuarioAt(RecViewUsuarios.getChildAdapterPosition(it))
-            Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + usuarioSeleccionado.nombre+ " " + usuarioSeleccionado.apellidos, Toast.LENGTH_SHORT).show()
+            0
             //usuarioViewModel.delete(usuarioSeleccionado)
 
             val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@ListarUsuariosActivity)
@@ -57,7 +57,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
                 putInt("actualUserID",usuarioSeleccionado.uid)
                 commit()
             }
-            Toast.makeText(this@ListarUsuariosActivity,"Usuario seleccionado: " + usuarioSeleccionado.nombre, Toast.LENGTH_SHORT).show()
+
             finish()
         }
         )
