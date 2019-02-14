@@ -46,19 +46,23 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     lateinit var usuarioViewModel : UsuarioViewModel
     private lateinit var usuarioActualLive : LiveData<Usuario>
     var mCurrentPhotoPath : String = ""
-    var targetW: Int = 0
-    var targetH: Int = 0
+    var mNombre : String = ""
+    var mApellido : String = ""
+    var mEdad : String = ""
+    var mGenero : String = ""
+    var mPassword : String = ""
+    var mRecoveryEmail : String = ""
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_usuario)
 
-
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
-
 
         usuarioViewModel = ViewModelProviders.of(this@RegistrarUsuarioActivity).get(UsuarioViewModel::class.java)
 
@@ -66,10 +70,32 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             title = getString(R.string.editar_usuario)
             usuarioActualLive = usuarioViewModel.getUsuario(intent.getIntExtra("USER_ID", -1))
             usuarioActualLive.observe(this, android.arch.lifecycle.Observer {
-                nombreUsuarioET.setText(it?.nombre, TextView.BufferType.EDITABLE)
-                apellidoUsuarioET.setText(it?.apellidos, TextView.BufferType.EDITABLE)
-                Edad.setText(it?.edad.toString(),TextView.BufferType.EDITABLE)
-                val genero = it?.genero
+
+
+                if(!mNombre.isNullOrEmpty()){
+                    nombreUsuarioET.setText(mNombre, TextView.BufferType.EDITABLE)
+                }else{
+                    nombreUsuarioET.setText(it?.nombre, TextView.BufferType.EDITABLE)
+                }
+
+                if(!mApellido.isNullOrEmpty()){
+                    apellidoUsuarioET.setText(mApellido, TextView.BufferType.EDITABLE)
+                }else{
+                    apellidoUsuarioET.setText(it?.apellidos, TextView.BufferType.EDITABLE)
+                }
+
+                if(!mEdad.isNullOrEmpty()){
+                    Edad.setText(mEdad, TextView.BufferType.EDITABLE)
+                }else{
+                    Edad.setText(it?.edad.toString(),TextView.BufferType.EDITABLE)
+                }
+
+                val genero : String?
+                if(!mGenero.isNullOrEmpty()){
+                    genero = mGenero
+                }else{
+                    genero = it?.genero
+                }
 
                 if(genero!!.equals(getString(R.string.masculino))){
                     GeneroRadioGroup.check(R.id.masculinoRB)
@@ -77,19 +103,37 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     GeneroRadioGroup.check(R.id.femeninoRB)
                 }
 
-                if(!it?.password.isNullOrEmpty()){
+                if(!mPassword.isNullOrEmpty()){
                     usaPasswordCheckbox.isChecked = true
+                    PasswordEditText.setText(mPassword,TextView.BufferType.EDITABLE)
+
+                }else{
+                    if(!it?.password.isNullOrEmpty()){
+                        usaPasswordCheckbox.isChecked = true
+                    }
+                    PasswordEditText.setText(it?.password,TextView.BufferType.EDITABLE)
                 }
 
-                RecoveryET.setText(it?.email_recuperacion,TextView.BufferType.EDITABLE)
-                PasswordEditText.setText(it?.password,TextView.BufferType.EDITABLE)
-                mCurrentPhotoPath = it.imagen!!
-                if(!mCurrentPhotoPath.isNullOrEmpty()){
-                    val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
-                    targetH = valueInPixels.toInt()
-                    targetW = valueInPixels.toInt()
-                    setPic()
+                if(!mRecoveryEmail.isNullOrEmpty()){
+                    RecoveryET.setText(mRecoveryEmail,TextView.BufferType.EDITABLE)
+                }else{
+                    RecoveryET.setText(it?.email_recuperacion,TextView.BufferType.EDITABLE)
                 }
+
+
+
+
+
+
+
+                if(!it?.imagen.isNullOrEmpty() && mCurrentPhotoPath.isNullOrEmpty()){
+                    mCurrentPhotoPath = it?.imagen!!
+                    if(!mCurrentPhotoPath.isNullOrEmpty()){
+                        displayPic()
+                    }
+                }
+
+
             })
 
         }else{
@@ -193,15 +237,13 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                         .setItems(R.array.origen_imagen) { dialog, which ->
                             when(which){
                                 0 -> {
-                                    targetW = iconoUsuarioIV.width
-                                    targetH = iconoUsuarioIV.height
                                     pickFromGallery()
                                 }
                                 1 -> {
-                                    targetW = iconoUsuarioIV.width
-                                    targetH = iconoUsuarioIV.height
+
                                     if(!mCurrentPhotoPath.isEmpty()){
                                         deleteImageFile()
+                                        mCurrentPhotoPath = ""
                                         iconoUsuarioIV.setImageResource(R.drawable.ic_user)
                                     }
                                     dispatchTakePicktureIntent()
@@ -234,6 +276,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.ANADIR_FOTOGRAFIA && resultCode == Activity.RESULT_OK){
             setPic()
+            displayPic()
         }
         else if(requestCode == CodigosDeSolicitud.SELECCIONAR_IMAGEN && resultCode == Activity.RESULT_OK){
             val selectedImageUri = data?.data
@@ -252,7 +295,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 val photoW: Int = outWidth
                 val photoH: Int = outHeight
 
-                val scaleFactor : Int = Math.min(photoW / targetW , photoH / targetH )
+                val scaleFactor : Int = Math.min(photoW / resources.getDimension(R.dimen.UserProfileImageSingle).toInt() , photoH / resources.getDimension(R.dimen.UserProfileImageSingle).toInt() )
 
                 inJustDecodeBounds = false
                 inSampleSize = scaleFactor
@@ -319,7 +362,6 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     startActivityForResult(takePictureIntent, CodigosDeSolicitud.ANADIR_FOTOGRAFIA)
                 }
             }
-
         }
     }
 
@@ -331,7 +373,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             val photoW: Int = outWidth
             val photoH: Int = outHeight
 
-            val scaleFactor : Int = Math.min(photoW / targetW , photoH / targetH )
+            val scaleFactor : Int = Math.min(photoW / resources.getDimension(R.dimen.UserProfileImageSingle).toInt() , photoH / resources.getDimension(R.dimen.UserProfileImageSingle).toInt() )
 
             inJustDecodeBounds = false
             inSampleSize = scaleFactor
@@ -343,7 +385,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
 
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
-        rescaleImage(bitmap)
+
             var rotatedBitmap : Bitmap? = null
             when (orientation) {
                 ExifInterface.ORIENTATION_ROTATE_90 -> {
@@ -362,8 +404,15 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     rotatedBitmap = bitmap
                 }
             }
-            //rescaleImage()
-            iconoUsuarioIV.setImageBitmap(rotatedBitmap)
+
+                rescaleImage(rotatedBitmap)
+        }
+    }
+
+    private fun displayPic(){
+        BitmapFactory.decodeFile(mCurrentPhotoPath)?.also { scaledBitmap ->
+            iconoUsuarioIV.setImageBitmap(scaledBitmap)
+           // pathFotografia.text = mCurrentPhotoPath
         }
     }
 
@@ -379,9 +428,15 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
         outState?.run {
             putString("ActualPhotoPath", mCurrentPhotoPath)
-            putInt("ActualWidth", targetW)
-            putInt("ActualHeight", targetH)
+            putString("NombreUsuarioActualizado", nombreUsuarioET.text.toString())
+            putString("ApellidosUsuarioActualizado", apellidoUsuarioET.text.toString())
+            putString("EdadUsuarioActualizado", Edad.text.toString())
 
+            val selectedRadioButton = findViewById<RadioButton>(GeneroRadioGroup.checkedRadioButtonId)
+            putString("GeneroUsuarioActualizado", selectedRadioButton.text.toString() )
+
+            putString("PassWordUsuarioActualizado", PasswordEditText.text.toString())
+            putString("RecoveryEmailUsuarioActualizado", RecoveryET.text.toString())
         }
     }
 
@@ -391,10 +446,17 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         savedInstanceState?.run {
             mCurrentPhotoPath = getString("ActualPhotoPath")
             if(!mCurrentPhotoPath.isEmpty()){
-                targetW = getInt("ActualWidth")
-                targetH = getInt("ActualHeight")
-                setPic()
+
+                displayPic()
             }
+
+            mNombre = getString("NombreUsuarioActualizado")
+            mApellido = getString("ApellidosUsuarioActualizado")
+            mEdad = getString("EdadUsuarioActualizado")
+            mGenero = getString("GeneroUsuarioActualizado")
+            mPassword = getString("PassWordUsuarioActualizado")
+            mRecoveryEmail = getString("RecoveryEmailUsuarioActualizado")
+
         }
     }
 

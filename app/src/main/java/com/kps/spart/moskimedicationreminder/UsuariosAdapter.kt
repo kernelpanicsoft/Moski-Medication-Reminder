@@ -88,48 +88,21 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
             inPurgeable = true
         }
 
-        var rotatedBitmap : Bitmap? = null
+        var scaledBitmap : Bitmap? = null
         try {
-            val exif = ExifInterface(mCurrentPhotoPath)
-
-        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
 
 
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
-
-            when (orientation) {
-                ExifInterface.ORIENTATION_ROTATE_90 -> {
-                    rotatedBitmap = rotateImage(bitmap,90f)
-                }
-                ExifInterface.ORIENTATION_ROTATE_180 -> {
-                    rotatedBitmap = rotateImage(bitmap,180f)
-                }
-                ExifInterface.ORIENTATION_ROTATE_270 -> {
-                    rotatedBitmap = rotateImage(bitmap, 270f)
-                }
-                ExifInterface.ORIENTATION_NORMAL -> {
-                    rotatedBitmap = bitmap
-                }
-                else -> {
-                    rotatedBitmap = rotateImage(bitmap,90f)
-                }
-            }
-
+            scaledBitmap = bitmap
         }
 
         }catch ( e : FileNotFoundException){
             return null
         }
 
-        return rotatedBitmap
+        return scaledBitmap
     }
 
-    fun rotateImage(source : Bitmap, angle : Float) : Bitmap {
-        val matrix = Matrix()
-        matrix.postRotate(angle)
-
-        return Bitmap.createBitmap(source,0,0,source.width,source.height,matrix,true)
-    }
 
 
 }
