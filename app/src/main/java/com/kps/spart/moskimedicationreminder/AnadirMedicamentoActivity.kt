@@ -73,11 +73,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         }
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
-
-
         val colors = resources.getIntArray(R.array.default_rainbow)
-
-
 
         ColorMedicamentoButton.setOnClickListener{
            val colorPickerDialog = ColorPickerDialog.newInstance(R.string.colorDistintivo,
@@ -92,7 +88,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 selectedColor = color
                 MedicamentoIconoTV.setColorFilter(selectedColor)
                 medicamento.color = selectedColor
-
 
              //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }

@@ -6,23 +6,20 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.database.DatabaseUtils
-import android.database.Observable
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.BaseColumns
+import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toast
 import elements.Usuario
 import kotlinx.android.synthetic.main.activity_detalles_perfil.*
 import model.CodigosDeSolicitud
+import java.io.File
 
 
 class DetallesPerfilActivity : AppCompatActivity() {
@@ -30,8 +27,6 @@ class DetallesPerfilActivity : AppCompatActivity() {
     private var user_id : Int = -1
     lateinit var usuarioViewModel: UsuarioViewModel
     private lateinit var usuarioActualLive : LiveData<Usuario>
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +46,6 @@ class DetallesPerfilActivity : AppCompatActivity() {
             populateUserFieldsFromDB(it)
 
         })
-
 
     }
 
@@ -102,7 +96,6 @@ class DetallesPerfilActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     private fun populateUserFieldsFromDB(usuario: Usuario?){
 
             NombreApellidosUsuarioTV.text = "${usuario?.nombre} ${usuario?.apellidos}"
@@ -115,10 +108,24 @@ class DetallesPerfilActivity : AppCompatActivity() {
 
     private fun deleteUser(){
         if(usuarioActualLive.hasObservers()){
+            usuarioActualLive.value?.imagen?.run {
+                deleteImageFile(this)
+            }
             usuarioActualLive.removeObservers(this@DetallesPerfilActivity)
             usuarioViewModel.delete(usuarioActualLive.value!!)
             finish()
         }
+    }
+
+    private fun deleteImageFile(picturePath : String?){
+        val photoFile = File(picturePath)
+        val photoUri: Uri = FileProvider.getUriForFile(
+                this,
+                "com.kps.spart.android.fileprovider",
+                photoFile
+        )
+
+        this.contentResolver.delete(photoUri,null,null)
     }
 
     private fun setPic(mCurrentPhotoPath : String, targetW: Int, targetH: Int)  {
@@ -154,7 +161,5 @@ class DetallesPerfilActivity : AppCompatActivity() {
             //Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
 }
