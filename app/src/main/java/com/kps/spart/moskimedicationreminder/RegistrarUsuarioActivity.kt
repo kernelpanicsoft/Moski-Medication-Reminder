@@ -59,8 +59,6 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     var mRecoveryEmail : String? = null
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_usuario)
@@ -215,11 +213,16 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
         }
 
-        iconoUsuarioCV.setOnClickListener {
+        removerUserImageTV.setOnClickListener {
             val builder = AlertDialog.Builder(this@RegistrarUsuarioActivity)
-            builder.setTitle("¿Eliminar fotografía?")
+            builder.setTitle("¿Eliminar Imágen?")
                     .setPositiveButton("Eliminar"){ dialog, which ->
-                        Toast.makeText(this@RegistrarUsuarioActivity,"Estas eliminando la foto", Toast.LENGTH_SHORT).show()
+                        if(!mCurrentPhotoPath.isEmpty()){
+                            deleteImageFile()
+                            mCurrentPhotoPath = ""
+                            iconoUsuarioIV.setImageResource(R.drawable.ic_user)
+                        }
+                        hideShowDeletePic(false)
                     }
                     .setNegativeButton("Cancelar"){ dialog, which ->
 
@@ -438,7 +441,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     private fun displayPic(){
         BitmapFactory.decodeFile(mCurrentPhotoPath)?.also { scaledBitmap ->
             iconoUsuarioIV.setImageBitmap(scaledBitmap)
-           // pathFotografia.text = mCurrentPhotoPath
+            hideShowDeletePic(true)
         }
     }
 
@@ -506,6 +509,14 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     Toast.makeText(this@RegistrarUsuarioActivity,getString(R.string.es_necesario_pemitir_permisos_multimedia), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    fun hideShowDeletePic( isTextViewDisplayed : Boolean){
+        if(isTextViewDisplayed){
+            removerUserImageTV.visibility = View.VISIBLE
+        }else{
+            removerUserImageTV.visibility = View.GONE
         }
     }
 
