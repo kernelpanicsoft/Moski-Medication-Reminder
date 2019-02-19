@@ -1,12 +1,15 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.UsuarioViewModel
+import android.Manifest
 import elements.Usuario
 import android.app.Activity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
+import android.database.DatabaseUtils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -20,9 +23,12 @@ import android.os.Environment
 import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.text.Editable
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -33,7 +39,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 
 import model.CodigosDeSolicitud
-import model.MMDContract
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -46,12 +51,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     lateinit var usuarioViewModel : UsuarioViewModel
     private lateinit var usuarioActualLive : LiveData<Usuario>
     var mCurrentPhotoPath : String = ""
-    var mNombre : String = ""
-    var mApellido : String = ""
-    var mEdad : String = ""
-    var mGenero : String = ""
-    var mPassword : String = ""
-    var mRecoveryEmail : String = ""
+    var mNombre : String? = null
+    var mApellido : String? = null
+    var mEdad : String? = null
+    var mGenero : String? = null
+    var mPassword : String? = null
+    var mRecoveryEmail : String? = null
 
 
 
@@ -72,26 +77,26 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             usuarioActualLive.observe(this, android.arch.lifecycle.Observer {
 
 
-                if(!mNombre.isNullOrEmpty()){
+                if(mNombre != null){
                     nombreUsuarioET.setText(mNombre, TextView.BufferType.EDITABLE)
                 }else{
                     nombreUsuarioET.setText(it?.nombre, TextView.BufferType.EDITABLE)
                 }
 
-                if(!mApellido.isNullOrEmpty()){
+                if(mApellido != null){
                     apellidoUsuarioET.setText(mApellido, TextView.BufferType.EDITABLE)
                 }else{
                     apellidoUsuarioET.setText(it?.apellidos, TextView.BufferType.EDITABLE)
                 }
 
-                if(!mEdad.isNullOrEmpty()){
+                if(mEdad != null){
                     Edad.setText(mEdad, TextView.BufferType.EDITABLE)
                 }else{
                     Edad.setText(it?.edad.toString(),TextView.BufferType.EDITABLE)
                 }
 
                 val genero : String?
-                if(!mGenero.isNullOrEmpty()){
+                if(mGenero != null){
                     genero = mGenero
                 }else{
                     genero = it?.genero
@@ -103,7 +108,8 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     GeneroRadioGroup.check(R.id.femeninoRB)
                 }
 
-                if(!mPassword.isNullOrEmpty()){
+
+                if(mPassword != null){
                     usaPasswordCheckbox.isChecked = true
                     PasswordEditText.setText(mPassword,TextView.BufferType.EDITABLE)
 
@@ -114,16 +120,11 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                     PasswordEditText.setText(it?.password,TextView.BufferType.EDITABLE)
                 }
 
-                if(!mRecoveryEmail.isNullOrEmpty()){
+                if(mRecoveryEmail != null){
                     RecoveryET.setText(mRecoveryEmail,TextView.BufferType.EDITABLE)
                 }else{
                     RecoveryET.setText(it?.email_recuperacion,TextView.BufferType.EDITABLE)
                 }
-
-
-
-
-
 
 
                 if(!it?.imagen.isNullOrEmpty() && mCurrentPhotoPath.isNullOrEmpty()){
@@ -132,7 +133,6 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                         displayPic()
                     }
                 }
-
 
             })
 
@@ -165,6 +165,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 RecoveryET.visibility = View.GONE
                 PasswordEditText.text.clear()
                 RecoveryET.text.clear()
+
+                if(intent.hasExtra("USER_ID")){
+                    usuarioActualLive.value!!.password = null
+                    usuarioActualLive.value!!.email_recuperacion = null
+                }
+
             }
         }
 
@@ -237,7 +243,18 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                         .setItems(R.array.origen_imagen) { dialog, which ->
                             when(which){
                                 0 -> {
-                                    pickFromGallery()
+                                    if(ContextCompat.checkSelfPermission(this@RegistrarUsuarioActivity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                                        ActivityCompat.requestPermissions(this@RegistrarUsuarioActivity,
+                                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                                CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO)
+                                    }else{
+                                        if(!mCurrentPhotoPath.isEmpty()){
+                                            deleteImageFile()
+                                            mCurrentPhotoPath = ""
+                                            iconoUsuarioIV.setImageResource(R.drawable.ic_user)
+                                        }
+                                        pickFromGallery()
+                                    }
                                 }
                                 1 -> {
 
@@ -280,14 +297,12 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         }
         else if(requestCode == CodigosDeSolicitud.SELECCIONAR_IMAGEN && resultCode == Activity.RESULT_OK){
             val selectedImageUri = data?.data
-
             val filePathColum = arrayOf(MediaStore.Images.Media.DATA)
             val cursor = this.contentResolver.query(selectedImageUri, filePathColum,null, null, null)
             cursor.moveToFirst()
             val columnIndex = cursor.getColumnIndex(filePathColum[0])
             val imgDecodableString = cursor.getString(columnIndex)
             cursor.close()
-
 
             val bmOptions = BitmapFactory.Options().apply {
                 inJustDecodeBounds = true
@@ -302,8 +317,19 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 inPurgeable = true
             }
 
+            val imageFile : File? = try{
+                createImageFile()
+            } catch (ex : IOException){
+                null
+            }
+
+            val out = FileOutputStream(imageFile)
             val imageFromGallery = BitmapFactory.decodeFile(imgDecodableString, bmOptions)
-            iconoUsuarioIV.setImageBitmap(imageFromGallery)
+
+            imageFromGallery.compress(Bitmap.CompressFormat.JPEG,85,out)
+            out.close()
+           // iconoUsuarioIV.setImageBitmap(imageFromGallery)
+            displayPic()
 
         }
     }
@@ -437,6 +463,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
             putString("PassWordUsuarioActualizado", PasswordEditText.text.toString())
             putString("RecoveryEmailUsuarioActualizado", RecoveryET.text.toString())
+
         }
     }
 
@@ -467,6 +494,18 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             selectPictureIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             startActivityForResult(selectPictureIntent,CodigosDeSolicitud.SELECCIONAR_IMAGEN)
 
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO ->{
+                if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    pickFromGallery()
+                }else{
+                    Toast.makeText(this@RegistrarUsuarioActivity,getString(R.string.es_necesario_pemitir_permisos_multimedia), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

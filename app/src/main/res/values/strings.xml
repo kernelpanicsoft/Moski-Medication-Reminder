@@ -280,6 +280,7 @@
     <string name="editar_usuario">Editar usuario</string>
     <string name="usuario_actualizado_correctamente">Usuario actualizado correctamente</string>
     <string name="elegir_imagen_de_perfil">Elegir imagen de perfil desde:</string>
+    <string name="es_necesario_pemitir_permisos_multimedia">Es necesario permitir permisos de lectura de medios multimedia para abrir la galería</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
