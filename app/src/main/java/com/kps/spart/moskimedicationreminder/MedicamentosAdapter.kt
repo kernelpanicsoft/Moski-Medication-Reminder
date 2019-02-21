@@ -67,7 +67,10 @@ class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, Medicamen
             12-> {holder.icono.setImageResource(R.drawable.ic_syringe)}
         }
 
-        holder.icono.setColorFilter(medicamentoActual.color!!)
+        medicamentoActual.color?.run {
+            holder.icono.setColorFilter(medicamentoActual.color!!)
+        }
+
 
         holder.NombreGenerico.text = medicamentoActual.nombreGenerico
         holder.NombreComercial.text = medicamentoActual.nombreMedicamento

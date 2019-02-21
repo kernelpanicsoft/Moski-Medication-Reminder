@@ -73,6 +73,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         }
 
         var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
+        medicamento.color = selectedColor
         val colors = resources.getIntArray(R.array.default_rainbow)
 
         ColorMedicamentoButton.setOnClickListener{
@@ -95,10 +96,25 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             colorPickerDialog.show(fragmentManager,"color_picker_dialer")
         }
 
+
+        anadirMedicamentoFAB.setOnClickListener {
+
+            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicamentoActivity)
+            val usuarioID = sharedPref.getInt("actualUserID", -1)
+            medicamento.nombreMedicamento = CampoNombreComercial.text.toString()
+            medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
+            medicamento.dosis = CampoDosis.text.toString()
+            medicamento.nota = CampoNota.text.toString()
+
+            if(usuarioID != -1){
+                medicamento.usuarioID = usuarioID
+                saveMedicineToDB(medicamento)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_save, menu)
+        menuInflater.inflate(R.menu.menu_add_photo, menu)
         return true
     }
 
@@ -106,18 +122,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.itemSave -> {
 
-
-                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicamentoActivity)
-                val usuarioID = sharedPref.getInt("actualUserID", -1)
-                medicamento.nombreMedicamento = CampoNombreComercial.text.toString()
-                medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
-                medicamento.dosis = CampoDosis.text.toString()
-                medicamento.nota = CampoNota.text.toString()
-
-                if(usuarioID != -1){
-                    medicamento.usuarioID = usuarioID
-                    saveMedicineToDB(medicamento)
-                }
                 return true
             }
             android.R.id.home -> {

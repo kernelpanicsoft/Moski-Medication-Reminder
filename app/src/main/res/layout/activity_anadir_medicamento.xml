@@ -34,20 +34,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/medicinePicCV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image1" />
+            </android.support.v7.widget.CardView>
+
             <EditText
                 android:id="@+id/CampoNombreComercial"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:ems="10"
                 android:hint="@string/NombreComercial"
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView8"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/medicinePicCV" />
 
 
             <EditText
@@ -215,40 +235,29 @@
                 android:id="@+id/ColorMedicamentoButton"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button"
                 android:minHeight="40dp"
                 android:text="@string/colorDistintivo"
                 android:textColor="@color/blanco"
-                android:background="@drawable/rounded_button"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/SpinnerTipoMedicamento"
                 app:layout_constraintStart_toEndOf="@+id/colorIconoIV"
                 app:layout_constraintTop_toBottomOf="@+id/MedicamentoIconoTV" />
 
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/anadirFotoMedicamentoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
-                android:drawableStart="@drawable/ic_add_a_photo_white_24dp"
-                android:text="Añadir foto"
-                android:textColor="@color/blanco"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ColorMedicamentoButton" />
 
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/anadirMedicamentoFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_white_24dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"/>
 
 
 

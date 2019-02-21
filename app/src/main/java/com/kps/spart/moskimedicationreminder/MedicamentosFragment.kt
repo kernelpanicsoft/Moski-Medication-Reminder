@@ -77,7 +77,7 @@ class MedicamentosFragment : Fragment() {
             R.id.itemADD -> {
                 val nav = Intent(context, AnadirMedicamentoActivity::class.java)
                 //medicamentoViewModel.insert(Medicamento(0,"Propanolol","Inderalici","500mg","HOla","Capsula",2345,"NA",1))
-                //Toast.makeText(context, "Tamaño de lista: " +  RecViewMedicamentos.adapter.itemCount, Toast.LENGTH_SHORT).show()
+                ////Toast.makeText(context, "Tamaño de lista: " +  RecViewMedicamentos.adapter.itemCount, Toast.LENGTH_SHORT).show()
                 startActivity(nav)
                 return true
             }
