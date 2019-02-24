@@ -25,15 +25,15 @@ class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, Medicamen
         }
 
         override fun areContentsTheSame(oldItem: Medicamento, newItem: Medicamento): Boolean {
-            return oldItem.nombreMedicamento.equals(newItem.nombreMedicamento)
+            return oldItem.nombreMedicamento.equals(newItem.nombreMedicamento) && oldItem.nombreGenerico.equals(newItem.nombreGenerico)
         }
     }
 
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val icono: ImageView = v.findViewById(R.id.MedicamentoIconoTV)
-        val NombreComercial : TextView = v.findViewById(R.id.nombreMedicamento)
-        val NombreGenerico: TextView = v.findViewById(R.id.nombreComercialMedicamento)
+        val NombreGenerico : TextView = v.findViewById(R.id.nombreMedicamento)
+        val NombreComercial: TextView = v.findViewById(R.id.nombreComercialMedicamento)
 
     }
 

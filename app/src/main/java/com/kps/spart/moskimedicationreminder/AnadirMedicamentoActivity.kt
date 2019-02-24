@@ -2,13 +2,22 @@ package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.MedicamentoViewModel
 import android.app.Activity
+import android.app.AlertDialog
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
+import android.net.Uri
 import elements.Medicamento
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.preference.PreferenceManager
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.FileProvider
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -17,8 +26,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_anadir_medicamento.*
-import model.MMDContract
 import org.xdty.preference.colorpicker.ColorPickerDialog
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
 
 
 class AnadirMedicamentoActivity : AppCompatActivity() {
@@ -76,21 +90,21 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         medicamento.color = selectedColor
         val colors = resources.getIntArray(R.array.default_rainbow)
 
-        ColorMedicamentoButton.setOnClickListener{
-           val colorPickerDialog = ColorPickerDialog.newInstance(R.string.colorDistintivo,
-                   colors,
-                   selectedColor,
-                   5,
-                   ColorPickerDialog.SIZE_SMALL,
-                   true
-                   )
-            
+        MedicamentoIconoTV.setOnClickListener {
+            val colorPickerDialog = ColorPickerDialog.newInstance(R.string.colorDistintivo,
+                    colors,
+                    selectedColor,
+                    5,
+                    ColorPickerDialog.SIZE_SMALL,
+                    true
+            )
+
             colorPickerDialog.setOnColorSelectedListener { color ->
                 selectedColor = color
                 MedicamentoIconoTV.setColorFilter(selectedColor)
                 medicamento.color = selectedColor
 
-             //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
+                //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }
 
             colorPickerDialog.show(fragmentManager,"color_picker_dialer")
@@ -107,10 +121,35 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             medicamento.nota = CampoNota.text.toString()
 
             if(usuarioID != -1){
-                medicamento.usuarioID = usuarioID
-                saveMedicineToDB(medicamento)
+
+                if(!CampoNombreComercial.text.isEmpty() || !CampoNombreGenerico.text.isEmpty()){
+                    medicamento.usuarioID = usuarioID
+                    saveMedicineToDB(medicamento)
+                }else{
+
+                    Snackbar.make(it,getString(R.string.es_necesario_especificar_nombre_comercial_generico), Snackbar.LENGTH_LONG).show()
+                }
+
             }
         }
+
+        eliminarImagenTV.setOnClickListener {
+            val builder = AlertDialog.Builder(this@AnadirMedicamentoActivity)
+            builder.setTitle(R.string.eliminar_imagen_pregunta)
+                    .setPositiveButton(R.string.eliminar){ dialog, which ->
+
+                    }
+                    .setNegativeButton(R.string.cancelar){ dialog, which ->
+
+                    }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -120,8 +159,23 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.itemSave -> {
+            R.id.add_photo_item -> {
+                val builder = AlertDialog.Builder(this@AnadirMedicamentoActivity)
+                        .setTitle(getString(R.string.elegir_imagen_perfil_desde))
+                        .setItems(R.array.origen_imagen){ dialog, which ->
+                            when(which) {
+                                0 -> {
 
+                                }
+
+                                1 -> {
+
+                                }
+                            }
+                        }
+
+                val dialog = builder.create()
+                dialog.show()
                 return true
             }
             android.R.id.home -> {
@@ -140,4 +194,94 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
     }
 
 
+    @Throws(IOException::class)
+    private fun createImageFile() : File{
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir : File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+                "JPEG_${timeStamp}",
+                ".jpg",
+                storageDir
+        ).apply {
+            mCurrentPhotoPath = absolutePath
+        }
+
+    }
+
+    @Throws(IOException::class)
+    private fun deleteImageFile(){
+        val photoFile = File(mCurrentPhotoPath)
+        val photoUri: Uri = FileProvider.getUriForFile(
+                this,
+                "com.kps,spart.android.fileprovider",
+                photoFile
+        )
+
+        this.contentResolver.delete(photoUri, null, null)
+    }
+
+    private fun setPic(){
+        val bmOptions = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(mCurrentPhotoPath,this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            val scaleFactor : Int = Math.min(photoW / resources.getDimension(R.dimen.UserProfileImageSingle).toInt(), photoH / resources.getDimension(R.dimen.UserProfileImageSingle).toInt())
+
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+
+        val exif = ExifInterface(mCurrentPhotoPath)
+        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED)
+
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
+
+            var rotatedBitmap : Bitmap? = null
+            when(orientation){
+                ExifInterface.ORIENTATION_ROTATE_90 -> {
+                    rotatedBitmap = rotateImage(bitmap, 90f)
+                }
+                ExifInterface.ORIENTATION_ROTATE_180 -> {
+                    rotatedBitmap = rotateImage(bitmap, 180f)
+                }
+                ExifInterface.ORIENTATION_ROTATE_270 -> {
+                    rotatedBitmap = rotateImage(bitmap, 270f)
+                }
+                ExifInterface.ORIENTATION_NORMAL -> {
+                    rotatedBitmap = bitmap
+                }
+                else -> {
+                    rotatedBitmap = bitmap
+                }
+            }
+
+            rescaleImage(rotatedBitmap)
+        }
+    }
+
+    fun rotateImage(source : Bitmap, angle : Float) : Bitmap{
+        val matrix = Matrix()
+        matrix.postRotate(angle)
+
+        return Bitmap.createBitmap(source, 0,0, source.width, source.height,matrix, true)
+    }
+
+    @Throws(IOException::class)
+    private fun rescaleImage(scaleBitmap : Bitmap){
+        val photoFile = File(mCurrentPhotoPath)
+        val out = FileOutputStream(photoFile)
+        scaleBitmap.compress(Bitmap.CompressFormat.JPEG,85, out)
+        out.close()
+    }
+
+    fun hideShowDeletePic( isTextViewDisplayed : Boolean){
+        if(isTextViewDisplayed){
+
+        }else{
+
+        }
+    }
 }

@@ -23,4 +23,7 @@ interface MedicamentoDao {
 
     @Query("SELECT * FROM Medicamento WHERE Medicamento.id = :id")
     fun getMedicamento( id : Int? ) : LiveData<Medicamento>
+
+    @Query("SELECT * FROM Medicamento WHERE Medicamento.usuarioID = :id")
+    fun getUserMedicamentos(id : Int?) : LiveData<List<Medicamento>>
 }

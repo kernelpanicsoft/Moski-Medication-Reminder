@@ -39,6 +39,10 @@ class MedicamentoRepository (application: Application){
         return medicamentoDao.getMedicamento(id)
     }
 
+    fun getMedicamentosUsuario(id: Int) : LiveData<List<Medicamento>>{
+        return medicamentoDao.getUserMedicamentos(id)
+    }
+
     private class InsertMedicamentoAsyncTask constructor(private val medicamentoDao: MedicamentoDao) : AsyncTask<Medicamento, Void, Void>(){
         override fun doInBackground(vararg params: Medicamento): Void? {
             medicamentoDao.insert(params[0])

@@ -215,8 +215,8 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
         removerUserImageTV.setOnClickListener {
             val builder = AlertDialog.Builder(this@RegistrarUsuarioActivity)
-            builder.setTitle("¿Eliminar Imágen?")
-                    .setPositiveButton("Eliminar"){ dialog, which ->
+            builder.setTitle(getString(R.string.eliminar_imagen_pregunta))
+                    .setPositiveButton(R.string.eliminar){ dialog, which ->
                         if(!mCurrentPhotoPath.isEmpty()){
                             deleteImageFile()
                             mCurrentPhotoPath = ""
@@ -224,7 +224,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                         }
                         hideShowDeletePic(false)
                     }
-                    .setNegativeButton("Cancelar"){ dialog, which ->
+                    .setNegativeButton(R.string.cancelar){ dialog, which ->
 
                     }
             val dialog  = builder.create()
@@ -327,11 +327,37 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
             }
 
             val out = FileOutputStream(imageFile)
-            val imageFromGallery = BitmapFactory.decodeFile(imgDecodableString, bmOptions)
+            val exif = ExifInterface(imgDecodableString)
+            val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED)
 
-            imageFromGallery.compress(Bitmap.CompressFormat.JPEG,85,out)
+            BitmapFactory.decodeFile(imgDecodableString, bmOptions).also { bitmap ->
+
+                var rotatedBitmap : Bitmap? = null
+
+
+                when (orientation) {
+                    ExifInterface.ORIENTATION_ROTATE_90 -> {
+                        rotatedBitmap = rotateImage(bitmap,90f)
+                    }
+                    ExifInterface.ORIENTATION_ROTATE_180 -> {
+                        rotatedBitmap = rotateImage(bitmap,180f)
+                    }
+                    ExifInterface.ORIENTATION_ROTATE_270 -> {
+                        rotatedBitmap = rotateImage(bitmap, 270f)
+                    }
+                    ExifInterface.ORIENTATION_NORMAL -> {
+                        rotatedBitmap = bitmap
+                    }
+                    else -> {
+                        rotatedBitmap = bitmap
+                    }
+                }
+                rotatedBitmap?.compress(Bitmap.CompressFormat.JPEG,85,out)
+            }
+
             out.close()
-           // iconoUsuarioIV.setImageBitmap(imageFromGallery)
+
+
             displayPic()
 
         }
@@ -434,9 +460,11 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
                 }
             }
 
-                rescaleImage(rotatedBitmap)
+            rescaleImage(rotatedBitmap)
         }
     }
+
+
 
     private fun displayPic(){
         BitmapFactory.decodeFile(mCurrentPhotoPath)?.also { scaledBitmap ->

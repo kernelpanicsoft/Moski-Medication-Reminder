@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_medicamentos.*
 class MedicamentosFragment : Fragment() {
 
     lateinit var medicamentoViewModel : MedicamentoViewModel
-
+    lateinit var RV : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +33,19 @@ class MedicamentosFragment : Fragment() {
 
     }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_medicamentos, container, false)
 
-        val RV = v.findViewById<View>(R.id.RecViewMedicamentos) as RecyclerView
+        RV = v.findViewById<View>(R.id.RecViewMedicamentos) as RecyclerView
         RV.setHasFixedSize(true)
+
+        return v
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         RV.layoutManager = mLayoutManager
@@ -46,8 +55,11 @@ class MedicamentosFragment : Fragment() {
 
 
         val adapter = MedicamentosAdapter(context)
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val usuarioID = sharedPref.getInt("actualUserID", -1)
+
         medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
-        medicamentoViewModel.allMedicamentos.observe(this, Observer<List<Medicamento>>{
+        medicamentoViewModel.getMedicamentosUsuario(usuarioID).observe(this, Observer<List<Medicamento>>{
             adapter.submitList(it)
         })
 
@@ -61,10 +73,9 @@ class MedicamentosFragment : Fragment() {
         })
 
         RV.adapter = adapter
-
-
-        return v
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
