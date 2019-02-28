@@ -520,7 +520,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
     fun pickFromGallery(){
         Intent(Intent.ACTION_PICK).also { selectPictureIntent ->
-            selectPictureIntent.setType("image/*")
+            selectPictureIntent.type = "image/*"
             val mimeTypes = arrayOf("image/jpg", "image/png")
             selectPictureIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             startActivityForResult(selectPictureIntent,CodigosDeSolicitud.SELECCIONAR_IMAGEN)
@@ -531,7 +531,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode){
             CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO ->{
-                if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     pickFromGallery()
                 }else{
                     Toast.makeText(this@RegistrarUsuarioActivity,getString(R.string.es_necesario_pemitir_permisos_multimedia), Toast.LENGTH_SHORT).show()

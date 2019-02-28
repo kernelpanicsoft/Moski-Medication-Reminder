@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -118,8 +119,33 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
             fabIconoMedicamento.setColorFilter(medicamento?.color!!)
 
+            imagenMedicamentoIV
             contenidoNotaTV.text = medicamento.nota
+            val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
+            medicamento.fotografia?.also {
+                setPic(it,valueInPixels.toInt(),valueInPixels.toInt())
+            }
 
+
+
+    }
+
+    private fun setPic(mCurrentPhotoPath : String, targetW: Int, targetH: Int){
+        val bmpOptions = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(mCurrentPhotoPath, this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmpOptions)?.also {bitmap ->
+            imagenMedicamentoIV.setImageBitmap(bitmap)
+        }
     }
 
     private fun deleteMedicine(){

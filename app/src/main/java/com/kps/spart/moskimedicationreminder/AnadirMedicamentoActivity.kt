@@ -1,10 +1,13 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.MedicamentoViewModel
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -15,7 +18,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.preference.PreferenceManager
+import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.widget.Toolbar
@@ -26,13 +31,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_anadir_medicamento.*
+import model.CodigosDeSolicitud
 import org.xdty.preference.colorpicker.ColorPickerDialog
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.abs
+
 
 
 class AnadirMedicamentoActivity : AppCompatActivity() {
@@ -119,6 +125,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
             medicamento.dosis = CampoDosis.text.toString()
             medicamento.nota = CampoNota.text.toString()
+            medicamento.fotografia = mCurrentPhotoPath
 
             if(usuarioID != -1){
 
@@ -137,6 +144,11 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this@AnadirMedicamentoActivity)
             builder.setTitle(R.string.eliminar_imagen_pregunta)
                     .setPositiveButton(R.string.eliminar){ dialog, which ->
+                        if(!mCurrentPhotoPath.isEmpty()){
+                            deleteImageFile()
+                            mCurrentPhotoPath = ""
+                            hideShowDeletePic(false)
+                        }
 
                     }
                     .setNegativeButton(R.string.cancelar){ dialog, which ->
@@ -146,9 +158,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             val dialog = builder.create()
             dialog.show()
         }
-
-
-
 
     }
 
@@ -165,11 +174,32 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                         .setItems(R.array.origen_imagen){ dialog, which ->
                             when(which) {
                                 0 -> {
-
+                                    targetW = medicinePicCV.width
+                                    targetH = medicinePicCV.height
+                                    if(ContextCompat.checkSelfPermission(this@AnadirMedicamentoActivity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                                        ActivityCompat.requestPermissions(this@AnadirMedicamentoActivity,
+                                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                                CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO)
+                                    }else{
+                                        if(!mCurrentPhotoPath.isEmpty()){
+                                            deleteImageFile()
+                                            mCurrentPhotoPath = ""
+                                            imagenMedicamentoIV.setImageResource(R.drawable.no_photo_cardview)
+                                        }
+                                        pickFromGallery()
+                                    }
                                 }
 
                                 1 -> {
-
+                                    if(!mCurrentPhotoPath.isEmpty()){
+                                        deleteImageFile()
+                                        mCurrentPhotoPath = ""
+                                        medicinePicCV.visibility = View.GONE
+                                        eliminarImagenTV.visibility = View.GONE
+                                    }
+                                    targetW = medicinePicCV.width
+                                    targetH = medicinePicCV.height
+                                    dispatchTakePictureIntent()
                                 }
                             }
                         }
@@ -213,13 +243,12 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         val photoFile = File(mCurrentPhotoPath)
         val photoUri: Uri = FileProvider.getUriForFile(
                 this,
-                "com.kps,spart.android.fileprovider",
+                "com.kps.spart.android.fileprovider",
                 photoFile
         )
 
-        this.contentResolver.delete(photoUri, null, null)
+        this.contentResolver.delete(photoUri,null,null)
     }
-
     private fun setPic(){
         val bmOptions = BitmapFactory.Options().apply {
             inJustDecodeBounds = true
@@ -227,7 +256,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             val photoW: Int = outWidth
             val photoH: Int = outHeight
 
-            val scaleFactor : Int = Math.min(photoW / resources.getDimension(R.dimen.UserProfileImageSingle).toInt(), photoH / resources.getDimension(R.dimen.UserProfileImageSingle).toInt())
+            val scaleFactor : Int = Math.min(photoW / targetW, photoH / resources.getDimension(R.dimen.altoFotoMedicamento).toInt())
 
             inJustDecodeBounds = false
             inSampleSize = scaleFactor
@@ -277,11 +306,153 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         out.close()
     }
 
+    private fun displayPic(){
+        Toast.makeText(this@AnadirMedicamentoActivity,"Valor del mCurrentPath" + mCurrentPhotoPath, Toast.LENGTH_SHORT).show()
+        BitmapFactory.decodeFile(mCurrentPhotoPath)?.also {scaledBitmap ->
+            imagenMedicamentoIV.setImageBitmap(scaledBitmap)
+            hideShowDeletePic(true)
+
+        }
+    }
     fun hideShowDeletePic( isTextViewDisplayed : Boolean){
         if(isTextViewDisplayed){
-
+            eliminarImagenTV.visibility = View.VISIBLE
+            medicinePicCV.visibility = View.VISIBLE
         }else{
+            eliminarImagenTV.visibility = View.GONE
+            imagenMedicamentoIV.setImageResource(R.drawable.no_photo_cardview)
+        }
+    }
 
+    private fun dispatchTakePictureIntent(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    null
+                }
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                            this,
+                            "com.kps.spart.android.fileprovider",
+                            it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent,CodigosDeSolicitud.ANADIR_FOTOGRAFIA)
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == CodigosDeSolicitud.ANADIR_FOTOGRAFIA && resultCode == Activity.RESULT_OK){
+            setPic()
+            displayPic()
+        }
+        else if(requestCode == CodigosDeSolicitud.SELECCIONAR_IMAGEN && resultCode == Activity.RESULT_OK){
+            val selectedImageUri = data?.data
+            val filePathColum = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = this.contentResolver.query(selectedImageUri, filePathColum, null, null, null)
+            cursor.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColum[0])
+            val imgDecodableString = cursor.getString(columnIndex)
+            cursor.close()
+
+            val bmOptions = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+                BitmapFactory.decodeFile(imgDecodableString, this)
+                val photoW: Int = outWidth
+                val photoH: Int = outHeight
+
+                val scaleFactor : Int = Math.min(photoW / targetW, photoH / resources.getDimension(R.dimen.altoFotoMedicamento).toInt())
+
+                inJustDecodeBounds = false
+                inSampleSize = scaleFactor
+                inPurgeable = true
+            }
+
+            val imageFile : File? = try{
+                createImageFile()
+            }catch (ex : IOException){
+                null
+            }
+
+            val out = FileOutputStream(imageFile)
+            val exif = ExifInterface(imgDecodableString)
+            val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+
+            BitmapFactory.decodeFile(imgDecodableString, bmOptions).also { bitmap ->
+
+                var rotatedBitmap : Bitmap? = null
+
+
+                when (orientation) {
+                    ExifInterface.ORIENTATION_ROTATE_90 -> {
+                        rotatedBitmap = rotateImage(bitmap,90f)
+                    }
+                    ExifInterface.ORIENTATION_ROTATE_180 -> {
+                        rotatedBitmap = rotateImage(bitmap,180f)
+                    }
+                    ExifInterface.ORIENTATION_ROTATE_270 -> {
+                        rotatedBitmap = rotateImage(bitmap, 270f)
+                    }
+                    ExifInterface.ORIENTATION_NORMAL -> {
+                        rotatedBitmap = bitmap
+                    }
+                    else -> {
+                        rotatedBitmap = bitmap
+                    }
+                }
+                rotatedBitmap?.compress(Bitmap.CompressFormat.JPEG,85,out)
+            }
+
+            out.close()
+
+
+            displayPic()
+        }
+
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.run {
+            putString("ActualPhotoPath", mCurrentPhotoPath)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        savedInstanceState?.run {
+            mCurrentPhotoPath = getString("ActualPhotoPath")
+            if(!mCurrentPhotoPath.isEmpty()){
+                displayPic()
+            }
+        }
+    }
+
+    fun pickFromGallery(){
+        Intent(Intent.ACTION_PICK).also {  selectedPictureIntent ->
+            selectedPictureIntent.type = "image/*"
+            val mimeTypes = arrayOf("image/jpg", "image/png")
+            selectedPictureIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            startActivityForResult(selectedPictureIntent,CodigosDeSolicitud.SELECCIONAR_IMAGEN)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO -> {
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    pickFromGallery()
+                }else{
+                    Toast.makeText(this@AnadirMedicamentoActivity,getString(R.string.es_necesario_pemitir_permisos_multimedia), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

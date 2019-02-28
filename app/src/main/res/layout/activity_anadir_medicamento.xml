@@ -26,7 +26,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
 
         <android.support.constraint.ConstraintLayout
@@ -37,22 +38,30 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/medicinePicCV"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/altoFotoMedicamento"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="visible"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/cambiar_color_tv"
+                >
 
                 <ImageView
+                    android:id="@+id/imagenMedicamentoIV"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minWidth="100dp"
+                    android:minHeight="100dp"
+                    android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"
-                    android:visibility="gone" />
+                    android:src="@drawable/no_photo_cardview"
+                    android:visibility="visible" />
             </android.support.v7.widget.CardView>
 
             <TextView
@@ -60,10 +69,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/remover_im_gen"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/normal"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/medicinePicCV"
                 app:layout_constraintStart_toStartOf="@+id/medicinePicCV"
                 app:layout_constraintTop_toBottomOf="@+id/medicinePicCV" />
@@ -73,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:ems="10"
@@ -81,16 +92,16 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView8"
-                app:layout_constraintTop_toBottomOf="@+id/eliminarImagenTV" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <EditText
                 android:id="@+id/CampoNombreGenerico"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:hint="@string/NombreGenerico"
                 android:minHeight="40dp"
@@ -106,16 +117,15 @@
                 android:id="@+id/CampoDosis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:hint="@string/Dosis"
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/CampoNombreGenerico">
-            </EditText>
+                app:layout_constraintTop_toBottomOf="@+id/CampoNombreGenerico"></EditText>
 
             <ImageView
                 android:id="@+id/IconoNota"
@@ -131,15 +141,15 @@
                 android:id="@+id/CampoNota"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
+                android:gravity="top"
                 android:hint="@string/nota_o_indicaciones_especiales_para_este_medicamento"
                 android:lines="5"
                 android:minHeight="40dp"
                 android:minLines="5"
-                android:gravity="top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/IconoNota"
                 app:layout_constraintTop_toBottomOf="@+id/CampoDosis" />
@@ -177,10 +187,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
                 android:text="@string/toca_para_cambiar_el_color"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/MedicamentoIconoTV"
                 app:layout_constraintStart_toStartOf="@+id/MedicamentoIconoTV"
                 app:layout_constraintTop_toBottomOf="@+id/MedicamentoIconoTV" />
@@ -200,9 +208,9 @@
                 android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/CampoNombreComercial"
                 app:layout_constraintStart_toStartOf="parent"
@@ -213,9 +221,9 @@
                 android:id="@+id/imageView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/CampoNombreGenerico"
                 app:layout_constraintStart_toStartOf="parent"
@@ -226,22 +234,22 @@
                 android:id="@+id/imageView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/CampoDosis"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/CampoDosis"
-                app:srcCompat="@drawable/ic_bascula" />
+                app:srcCompat="@drawable/ic_scale" />
 
             <ImageView
                 android:id="@+id/iconoCategoriaMedicamentoIV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_category"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/SpinnerTipoMedicamento"

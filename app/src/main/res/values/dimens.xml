@@ -11,4 +11,7 @@
     <dimen name="listItemImagen">70dp</dimen>
     <dimen name="UserProfileImageSingle">150dp</dimen>
 
+    <dimen name="altoFotoMedicamento">300dp</dimen>
+
+
 </resources>
