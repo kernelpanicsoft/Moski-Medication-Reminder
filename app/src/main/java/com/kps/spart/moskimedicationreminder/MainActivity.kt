@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
-        title = getString(R.string.app_name)
+       // title = "Hola mundo"
 
 
         val bnve = findViewById<BottomNavigationViewEx>(R.id.bn_principal)

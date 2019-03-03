@@ -119,9 +119,9 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
             fabIconoMedicamento.setColorFilter(medicamento?.color!!)
 
-            imagenMedicamentoIV
             contenidoNotaTV.text = medicamento.nota
             val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
+
             medicamento.fotografia?.also {
                 setPic(it,valueInPixels.toInt(),valueInPixels.toInt())
             }

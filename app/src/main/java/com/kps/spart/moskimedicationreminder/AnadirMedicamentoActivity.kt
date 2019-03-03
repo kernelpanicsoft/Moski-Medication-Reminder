@@ -307,7 +307,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
     }
 
     private fun displayPic(){
-        Toast.makeText(this@AnadirMedicamentoActivity,"Valor del mCurrentPath" + mCurrentPhotoPath, Toast.LENGTH_SHORT).show()
+
         BitmapFactory.decodeFile(mCurrentPhotoPath)?.also {scaledBitmap ->
             imagenMedicamentoIV.setImageBitmap(scaledBitmap)
             hideShowDeletePic(true)
@@ -421,6 +421,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
         outState?.run {
             putString("ActualPhotoPath", mCurrentPhotoPath)
+            putInt("targetWidth", targetW)
         }
     }
 
@@ -429,6 +430,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
         savedInstanceState?.run {
             mCurrentPhotoPath = getString("ActualPhotoPath")
+            targetW = getInt("targetWidth")
             if(!mCurrentPhotoPath.isEmpty()){
                 displayPic()
             }
