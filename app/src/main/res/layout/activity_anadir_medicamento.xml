@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/ic_note"
+                android:src="@drawable/ic_simple_note"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/CampoNota" />
@@ -171,8 +171,8 @@
 
             <ImageView
                 android:id="@+id/MedicamentoIconoTV"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -215,7 +215,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/CampoNombreComercial"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/CampoNombreComercial"
-                app:srcCompat="@drawable/ic_caja_medicamento" />
+                app:srcCompat="@drawable/ic_medicine_name" />
 
             <ImageView
                 android:id="@+id/imageView9"
@@ -228,7 +228,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/CampoNombreGenerico"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/CampoNombreGenerico"
-                app:srcCompat="@drawable/ic_molecula" />
+                app:srcCompat="@drawable/ic_molecule" />
 
             <ImageView
                 android:id="@+id/imageView10"
@@ -241,7 +241,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/CampoDosis"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/CampoDosis"
-                app:srcCompat="@drawable/ic_scale" />
+                app:srcCompat="@drawable/ic_weight" />
 
             <ImageView
                 android:id="@+id/iconoCategoriaMedicamentoIV"
@@ -250,7 +250,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_category"
+                android:src="@drawable/ic_medicine_type"
                 android:tint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/SpinnerTipoMedicamento"
                 app:layout_constraintStart_toStartOf="parent"

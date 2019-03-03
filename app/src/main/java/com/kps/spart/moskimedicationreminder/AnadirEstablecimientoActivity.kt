@@ -1,7 +1,10 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.EstablecimientoViewModel
 import elements.Establecimiento
 import android.app.Activity
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +25,8 @@ import java.lang.Exception
 
 
 class AnadirEstablecimientoActivity : AppCompatActivity() {
+    lateinit var establecimientoViewModel : EstablecimientoViewModel
+    private lateinit var  establecimientoActualLive : LiveData<Establecimiento>
 
 
     lateinit var establecimiento: Establecimiento
@@ -38,12 +43,16 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
+        establecimientoViewModel = ViewModelProviders.of(this@AnadirEstablecimientoActivity).get(EstablecimientoViewModel::class.java)
+
+
+
         title = getString(R.string.anadir_establecimiento)
 
 
 
         establecimiento = Establecimiento(0)
-        establecimiento.nombre
+
 
         SpinnerTipoEstablecimiento.adapter = ArrayAdapter(this@AnadirEstablecimientoActivity, android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_establecimiento))
         SpinnerTipoEstablecimiento.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -53,6 +62,12 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 establecimiento.tipo = parent?.getItemAtPosition(position).toString()
+                when(position){
+                    0 -> {iconoEstablecimientoIV.setImageResource(R.drawable.ic_pharmacy)}
+                    1 -> {iconoEstablecimientoIV.setImageResource(R.drawable.ic_medic_lab)}
+                    2 -> {iconoEstablecimientoIV.setImageResource(R.drawable.ic_xray_lab)}
+                    3 -> {iconoEstablecimientoIV.setImageResource(R.drawable.ic_crutch)}
+                }
             }
         }
         anadirLocationButton.setOnClickListener{
@@ -156,7 +171,9 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
 
     private fun saveEstablishmentToDB(establecimiento: Establecimiento){
-
+        establecimientoViewModel.insert(establecimiento)
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

@@ -35,6 +35,19 @@
             android:layout_height="wrap_content"
             >
 
+            <ImageView
+                android:id="@+id/iconoEstablecimientoIV"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_pharmacy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@color/colorPrimary"/>
+
 
             <ImageView
                 android:id="@+id/imageView17"
@@ -53,17 +66,18 @@
                 android:id="@+id/NombreEstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:ems="10"
                 android:hint="@string/nombre_establecimiento"
                 android:inputType="textPersonName"
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView17"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/iconoEstablecimientoIV" />
 
             <ImageView
                 android:id="@+id/iconoTipoEstablecimiento"
@@ -192,7 +206,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/telefono1EstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/telefono1EstablecimientoTV"
-                app:srcCompat="@drawable/ic_phone_black_24dp" />
+                app:srcCompat="@drawable/ic_telephone_1" />
 
             <ImageView
                 android:id="@+id/imageView27"
@@ -205,7 +219,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/telefono2EstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/telefono2EstablecimientoTV"
-                app:srcCompat="@drawable/ic_phone_black_24dp" />
+                app:srcCompat="@drawable/ic_telephone_2" />
 
 
             <ImageView
