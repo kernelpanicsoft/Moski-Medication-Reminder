@@ -135,15 +135,38 @@
                         android:layout_marginBottom="2dp"
                         android:background="@color/colorPrimary" />
 
+                    <FrameLayout
+                        android:id="@+id/mapaAnadido"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone"
+                        android:background="@color/colorPrimary"
+                        android:layout_below="@id/divider1"
+                        />
+
                     <TextView
                         android:id="@+id/direccionEstablecimietoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/divider1"
-                        android:layout_marginTop="8dp"
+                        android:layout_below="@id/mapaAnadido"
+                        android:layout_marginTop="4dp"
                         android:text="Jardin de las palmas #106 la Cañada Apizaco, Tlaxcala"
                         android:textColor="@color/grisOscuro"
-                        android:textSize="@dimen/normal" />
+                        android:textSize="@dimen/normal"
+                        />
+
+                    <TextView
+                        android:id="@+id/abrirEnMapasTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/abrir_en_mapas"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/normal"
+                        android:layout_below="@id/direccionEstablecimietoTV"
+                        android:layout_alignParentEnd="true"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>

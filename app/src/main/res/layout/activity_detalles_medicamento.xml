@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Farmacias que la venden:"
+                android:text="@string/establecimiento_que_la_venden"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/subtitulos"
                 app:layout_constraintStart_toEndOf="@+id/imageView22"

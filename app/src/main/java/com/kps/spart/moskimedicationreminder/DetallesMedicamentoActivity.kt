@@ -6,8 +6,10 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -15,12 +17,15 @@ import android.view.MenuItem
 import android.widget.Toast
 import elements.Medicamento
 import kotlinx.android.synthetic.main.activity_detalles_medicamento.*
+import model.CodigosDeSolicitud
+import java.io.File
 
 
 class DetallesMedicamentoActivity : AppCompatActivity() {
     private var medicine_id : Int = -1
     lateinit var medicamentoViewModel : MedicamentoViewModel
     lateinit var medicamentoActualLive : LiveData<Medicamento>
+    var medicamento : Medicamento? = null
 
     private var iconsCollection: Array<String>? = null
 
@@ -42,7 +47,8 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
         medicamentoActualLive = medicamentoViewModel.getMedicamento(medicine_id)
         medicamentoActualLive.observe(this, Observer {
-            populateMedicineFieldsFromDB(it)
+            medicamento = it
+            populateMedicineFieldsFromDB(medicamento)
         })
 
     }
@@ -63,7 +69,7 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
                         0 -> {
                             val nav = Intent(this@DetallesMedicamentoActivity, AnadirMedicamentoActivity::class.java)
                             nav.putExtra("MEDICINE_ID", medicine_id)
-                            startActivityForResult(nav, 417)
+                            startActivityForResult(nav, CodigosDeSolicitud.EDITAR_MEDICAMENTO)
                         }
                         1 -> {
                             val innerBuilder = AlertDialog.Builder(this@DetallesMedicamentoActivity)
@@ -126,8 +132,17 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
                 setPic(it,valueInPixels.toInt(),valueInPixels.toInt())
             }
 
+    }
 
+    private fun deleteImageFile(picturePath : String){
+        val photoFile = File(picturePath)
+        val photoUri: Uri = FileProvider.getUriForFile(
+                this,
+                "com.kps.spart.android.fileprovider",
+                photoFile
+        )
 
+        this.contentResolver.delete(photoUri,null, null)
     }
 
     private fun setPic(mCurrentPhotoPath : String, targetW: Int, targetH: Int){
@@ -150,6 +165,9 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
     private fun deleteMedicine(){
         if(medicamentoActualLive.hasObservers()){
+            medicamentoActualLive.value?.fotografia?.run{
+                deleteImageFile(this)
+            }
             medicamentoActualLive.removeObservers(this@DetallesMedicamentoActivity)
                 medicamentoViewModel.delete(medicamentoActualLive.value!!)
                 finish()

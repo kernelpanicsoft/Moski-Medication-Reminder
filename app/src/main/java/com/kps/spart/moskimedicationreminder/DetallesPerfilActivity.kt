@@ -142,7 +142,6 @@ class DetallesPerfilActivity : AppCompatActivity() {
         }
 
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
-
             PerfilIV.setImageBitmap(bitmap)
         }
     }

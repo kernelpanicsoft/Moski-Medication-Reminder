@@ -27,6 +27,7 @@ object CodigosDeSolicitud{
     const val ELIMINAR_USUARIO = 1003
     const val SELECCIONAR_IMAGEN = 1004
     const val SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO = 1005
+    const val EDITAR_MEDICAMENTO = 1006
 
 
 }

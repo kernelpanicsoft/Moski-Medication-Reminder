@@ -153,6 +153,7 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             val markerLocation = LatLng(lat, lng)
             it.addMarker(MarkerOptions().position(markerLocation))
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation, 15.0f))
+            it.uiSettings.isScrollGesturesEnabled = false
         }
     }
 
