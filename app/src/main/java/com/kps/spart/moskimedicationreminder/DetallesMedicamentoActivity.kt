@@ -130,6 +130,7 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
             medicamento.fotografia?.also {
                 setPic(it,valueInPixels.toInt(),valueInPixels.toInt())
+
             }
 
     }

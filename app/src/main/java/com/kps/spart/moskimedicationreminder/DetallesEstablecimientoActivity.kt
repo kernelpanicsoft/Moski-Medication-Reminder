@@ -1,19 +1,37 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.EstablecimientoViewModel
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import elements.Establecimiento
 import kotlinx.android.synthetic.main.activity_detalles_establecimiento.*
+import model.CodigosDeSolicitud
 import model.MMDContract
+import java.util.*
+
 
 class DetallesEstablecimientoActivity : AppCompatActivity() {
     private var establishment_id : Int = -1
+    lateinit var establecimientoViewModel : EstablecimientoViewModel
+    lateinit var establecimientoActualLive : LiveData<Establecimiento>
+
+    private var iconsCollection: Array<String>? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +46,13 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
 
 
         establishment_id = intent.getIntExtra("ESTABLISHMENT_ID", -1)
-        populateEstablishmentFieldsFromDB()
+        iconsCollection = this@DetallesEstablecimientoActivity.resources.getStringArray(R.array.tipo_establecimiento)
+
+        establecimientoViewModel = ViewModelProviders.of(this).get(EstablecimientoViewModel::class.java)
+        establecimientoActualLive = establecimientoViewModel.getEstablecimiento(establishment_id)
+        establecimientoActualLive.observe(this, Observer {
+            populateEstablishmentFieldsFromDB(it)
+        })
 
     }
 
@@ -51,7 +75,7 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
                         0 ->{
                             val nav = Intent(this@DetallesEstablecimientoActivity,AnadirEstablecimientoActivity::class.java)
                             nav.putExtra("ESTABLISHMENT_ID", establishment_id )
-                            startActivityForResult(nav, 241)
+                            startActivityForResult(nav, CodigosDeSolicitud.EDITAR_ESTABLECIMIENTO)
                         }
                         1 ->{
                             val innerBuilder = AlertDialog.Builder(this@DetallesEstablecimientoActivity)
@@ -81,27 +105,60 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun populateEstablishmentFieldsFromDB(){
-
-
-/*
-        if(cursor.moveToFirst()){
-            nombreEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_ESTABLECIMIENTO))
-            tipoEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TIPO_ESTABLECIMIENTO))
-            direccionEstablecimietoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.DIRECCION_ESTABLECIMIENTO))
-            telefono1EstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TELEFONO1_ESTABLECIMIENTO))
-            telefono2EstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TELEFONO2_ESTABLECIMIENTO))
-            emailEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.EMAIL_ESTABLECIMIENTO))
-            sitioWebEstablecimientoTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.WEB_ESTABLECIMIENTO))
-
+    private fun populateEstablishmentFieldsFromDB(establecimiento: Establecimiento?){
+        when(iconsCollection?.indexOf(establecimiento?.tipo)){
+            0 -> {iconoEstablecimiento.setImageResource(R.drawable.ic_pharmacy)}
+            1 -> {iconoEstablecimiento.setImageResource(R.drawable.ic_medic_lab)}
+            2 -> {iconoEstablecimiento.setImageResource(R.drawable.ic_xray_lab)}
+            3 -> {iconoEstablecimiento.setImageResource(R.drawable.ic_crutch)}
         }
-        */
+
+        nombreEstablecimientoTV.text = establecimiento?.nombre
+        tipoEstablecimientoTV.text = establecimiento?.tipo
+        direccionEstablecimietoTV.text = establecimiento?.direccion
+        telefono1EstablecimientoTV.text = establecimiento?.telefono1
+        telefono2EstablecimientoTV.text = establecimiento?.telefono2
+        emailEstablecimientoTV.text = establecimiento?.email
+        sitioWebEstablecimientoTV.text = establecimiento?.sitioWeb
+
+        establecimiento?.latitud?.run {
+            addMapFragment(establecimiento.latitud!!,establecimiento.longitud!!)
+            abrirEnMapasTV.visibility = View.VISIBLE
+            abrirEnMapasTV.setOnClickListener {
+                val uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)", establecimiento.latitud, establecimiento.longitud, "Prueba")
+                //val uri = "geo:0,0?q=34.99,-106.61(Treasure)"
+                //Toast.makeText(this@DetallesEstablecimientoActivity, "Valor de cadena: " + uri, Toast.LENGTH_SHORT).show()
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                startActivity(intent)
+            }
+        }
     }
 
     private fun deleteEstablishment(){
+        if(establecimientoActualLive.hasObservers()){
+            establecimientoActualLive.removeObservers(this@DetallesEstablecimientoActivity)
+                establecimientoViewModel.delete(establecimientoActualLive.value!!)
+                finish()
+        }
 
     }
 
 
+    private fun addMapFragment(lat : Double, lng: Double){
+        mapaAnadido.visibility = View.VISIBLE
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val mapFragment = MapFragment()
+        fragmentTransaction.add(R.id.mapaAnadido, mapFragment)
+        fragmentTransaction.commit()
+
+        mapFragment.getMapAsync{
+            val markerLocation = LatLng(lat,lng)
+            it.addMarker(MarkerOptions().position(markerLocation))
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation,15.0f))
+            it.uiSettings.isScrollGesturesEnabled = false
+        }
+    }
 
 }

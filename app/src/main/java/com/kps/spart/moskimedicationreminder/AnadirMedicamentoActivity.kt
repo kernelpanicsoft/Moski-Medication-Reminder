@@ -41,8 +41,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-
 class AnadirMedicamentoActivity : AppCompatActivity() {
 
     lateinit var medicamentoViewModel: MedicamentoViewModel
@@ -89,7 +87,11 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 Toast.makeText(this@AnadirMedicamentoActivity,"El valor del medicamento live es: " + medicamento.nombreGenerico, Toast.LENGTH_SHORT).show()
             })
 
-            Snackbar.make(LayoutConstrain,"El valor del medicamento live externo: " + medicamentoActualLive.value?.nombreGenerico, Snackbar.LENGTH_SHORT).show()
+
+            if(medicamentoActualLive.hasObservers()){
+                Snackbar.make(LayoutConstrain,"El valor del medicamento live externo: " + medicamentoActualLive.value?.nombreGenerico, Snackbar.LENGTH_SHORT).show()
+
+            }
 
         }else{
             title = getString(R.string.AnadirMedicamento)

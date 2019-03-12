@@ -165,12 +165,7 @@
         <item>Inyección</item>
     </array>
 
-    <array name="Establecimientos">
-        <item>Farmacia</item>
-        <item>Laboratorio Análisis clínicos</item>
-        <item>Laboratorio de Imágenes medicas</item>
 
-    </array>
 
     <string name="tomato">Tomato</string>
     <string name="tangerine">Tangerine</string>

@@ -43,6 +43,8 @@ class EstablecimientosFragment : Fragment() {
 
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesEstablecimientoActivity::class.java)
+            val establecimientoSeleccionado = adapter.getEstablecimientoAt(RV.getChildAdapterPosition(it))
+            nav.putExtra("ESTABLISHMENT_ID", establecimientoSeleccionado.id)
 
             startActivity(nav)
         })

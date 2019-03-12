@@ -20,7 +20,6 @@ import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_anadir_establecimiento.*
-import model.MMDContract
 import java.lang.Exception
 
 
@@ -45,12 +44,19 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
         establecimientoViewModel = ViewModelProviders.of(this@AnadirEstablecimientoActivity).get(EstablecimientoViewModel::class.java)
 
+        if(intent.hasExtra("ESTABLISHMENT_ID")){
+            establecimientoActualLive = establecimientoViewModel.getEstablecimiento(intent.getIntExtra("ESTABLISHMENT_ID", -1))
+            establecimientoActualLive.observe(this, android.arch.lifecycle.Observer {
+             //   Toast.makeText(this@AnadirEstablecimientoActivity, "Datos del establecimiento live: " + establecimientoActualLive.value?.nombre,Toast.LENGTH_SHORT).show()
+            })
 
+        }
+
+        testFab.setOnClickListener {
+            Toast.makeText(this@AnadirEstablecimientoActivity, "Datos del establecimiento live: " + establecimientoActualLive.value?.nombre,Toast.LENGTH_SHORT).show()
+        }
 
         title = getString(R.string.anadir_establecimiento)
-
-
-
         establecimiento = Establecimiento(0)
 
 
@@ -119,6 +125,8 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
                 establecimiento.telefono2 = telefono2EstablecimientoTV.text.toString()
                 establecimiento.email = emailEstablecimientoTV.text.toString()
                 establecimiento.sitioWeb = SitioWebEstablecimeintoTV.text.toString()
+                establecimiento.latitud = latitud
+                establecimiento.longitud = longitud
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirEstablecimientoActivity)
 
