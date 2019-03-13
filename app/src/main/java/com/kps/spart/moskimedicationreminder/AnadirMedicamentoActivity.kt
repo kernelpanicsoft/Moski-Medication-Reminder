@@ -44,11 +44,13 @@ import java.util.*
 class AnadirMedicamentoActivity : AppCompatActivity() {
 
     lateinit var medicamentoViewModel: MedicamentoViewModel
-    lateinit var medicamento: Medicamento
     lateinit var medicamentoActualLive : LiveData<Medicamento>
     var mCurrentPhotoPath: String = ""
     var targetW: Int = 0
     var targetH: Int = 0
+
+    var colorMedicamento: Int = 0
+    var tipoMedicamento: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,8 +62,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
-        medicamento = Medicamento(0)
-
+        var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
 
         medicamentoViewModel = ViewModelProviders.of(this@AnadirMedicamentoActivity).get(MedicamentoViewModel::class.java)
 
@@ -78,23 +79,19 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 val MedicineTypeIndex =  this.resources.getStringArray(R.array.TipoMedicamento).indexOf(it!!.tipo)
                 SpinnerTipoMedicamento.setSelection(MedicineTypeIndex)
 
+                selectedColor = it.color!!
                 MedicamentoIconoTV.setColorFilter(it.color!!)
 
                 mCurrentPhotoPath = it.fotografia!!
                 displayPic()
 
-                medicamento = it
-                Toast.makeText(this@AnadirMedicamentoActivity,"El valor del medicamento live es: " + medicamento.nombreGenerico, Toast.LENGTH_SHORT).show()
+
             })
 
 
-            if(medicamentoActualLive.hasObservers()){
-                Snackbar.make(LayoutConstrain,"El valor del medicamento live externo: " + medicamentoActualLive.value?.nombreGenerico, Snackbar.LENGTH_SHORT).show()
-
-            }
-
         }else{
             title = getString(R.string.AnadirMedicamento)
+
         }
 
 
@@ -107,7 +104,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-                medicamento.tipo = parent?.getItemAtPosition(position).toString()
+                tipoMedicamento = parent?.getItemAtPosition(position).toString()
                 //Toast.makeText(this@AnadirMedicamentoActivity, "Elemento seleccionado: " + position.toString() + " : " + parent?.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
                 when (position){
                     0 -> { MedicamentoIconoTV.setImageResource(R.drawable.ic_roundpill) }
@@ -127,8 +124,8 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             }
         }
 
-        var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
-        medicamento.color = selectedColor
+
+        colorMedicamento = selectedColor
         val colors = resources.getIntArray(R.array.default_rainbow)
 
         MedicamentoIconoTV.setOnClickListener {
@@ -143,8 +140,8 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             colorPickerDialog.setOnColorSelectedListener { color ->
                 selectedColor = color
                 MedicamentoIconoTV.setColorFilter(selectedColor)
-                medicamento.color = selectedColor
-
+               // medicamento.color = selectedColor
+                colorMedicamento = selectedColor
                 //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }
 
@@ -152,36 +149,38 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         }
 
         anadirMedicamentoFAB.setOnClickListener {
-            if(intent.hasExtra("MEDICINE_ID")) {
-                title = getString(R.string.editar_medicamento)
-                medicamentoActualLive = medicamentoViewModel.getMedicamento(intent.getIntExtra("MEDICINE_ID", -1))
+            val medicamento : Medicamento
+            var usuarioID = -1
 
-                Toast.makeText(this@AnadirMedicamentoActivity, "Datos: " +  medicamentoActualLive.value!!.nombreMedicamento + " | " +  medicamentoActualLive.value!!.nombreGenerico, Toast.LENGTH_SHORT).show()
+            if(intent.hasExtra("MEDICINE_ID")) {
+              //  Toast.makeText(this@AnadirMedicamentoActivity,"Valores del medicamento live dentro de fab: " + medicamentoActualLive.value?.nombreGenerico, Toast.LENGTH_SHORT).show()
+                medicamento = medicamentoActualLive.value!!
+
+            }else {
+                medicamento = Medicamento(0)
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicamentoActivity)
+                usuarioID = sharedPref.getInt("actualUserID", -1)
+                medicamento.usuarioID = usuarioID
             }
 
-            /*
-            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicamentoActivity)
-            val usuarioID = sharedPref.getInt("actualUserID", -1)
-            medicamento.nombreMedicamento = CampoNombreComercial.text.toString()
-            medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
-            medicamento.dosis = CampoDosis.text.toString()
-            medicamento.nota = CampoNota.text.toString()
-            medicamento.fotografia = mCurrentPhotoPath
+                medicamento.nombreMedicamento = CampoNombreComercial.text.toString()
+                medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
+                medicamento.dosis = CampoDosis.text.toString()
+                medicamento.nota = CampoNota.text.toString()
+                medicamento.color = colorMedicamento
+                medicamento.tipo = tipoMedicamento
+                medicamento.fotografia = mCurrentPhotoPath
 
-            if(usuarioID != -1){
-
-                if(!CampoNombreComercial.text.isEmpty() || !CampoNombreGenerico.text.isEmpty()){
-                    medicamento.usuarioID = usuarioID
-                    saveMedicineToDB(medicamento)
-                }else{
-
-                    Snackbar.make(it,getString(R.string.es_necesario_especificar_nombre_comercial_generico), Snackbar.LENGTH_LONG).show()
+                if(medicamento.usuarioID != -1){
+                    if(!CampoNombreComercial.text.isEmpty() || !CampoNombreGenerico.text.isEmpty()){
+                        saveMedicineToDB(medicamento)
+                    }else{
+                        Snackbar.make(it,getString(R.string.es_necesario_especificar_nombre_comercial_generico), Snackbar.LENGTH_LONG).show()
+                    }
                 }
 
-            }
-            */
-        }
 
+        }
         eliminarImagenTV.setOnClickListener {
             val builder = AlertDialog.Builder(this@AnadirMedicamentoActivity)
             builder.setTitle(R.string.eliminar_imagen_pregunta)
@@ -260,7 +259,11 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
     }
 
     fun saveMedicineToDB(medicamento: Medicamento){
-        medicamentoViewModel.insert(medicamento)
+        if(intent.hasExtra("MEDICINE_ID")){
+            medicamentoViewModel.update(medicamento)
+        }else{
+            medicamentoViewModel.insert(medicamento)
+        }
         setResult(Activity.RESULT_OK)
         finish()
     }
@@ -499,7 +502,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
 }
