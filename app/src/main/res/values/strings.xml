@@ -282,6 +282,7 @@
     <string name="establecimiento_que_la_venden">Establecimiento que la venden:</string>
     <string name="editar_medicamento">Editar medicamento</string>
     <string name="abrir_en_mapas">Abrir en Mapas</string>
+    <string name="editar_establecimiento">Editar establecimiento</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>

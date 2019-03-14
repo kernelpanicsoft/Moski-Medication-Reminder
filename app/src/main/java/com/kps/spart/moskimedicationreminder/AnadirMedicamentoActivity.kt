@@ -51,7 +51,13 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
     var colorMedicamento: Int = 0
     var tipoMedicamento: String = ""
+    var selectedColor = 0
 
+    var mNombreComercial: String? = null
+    var mNombreGenerico: String? = null
+    var mDosis: String? = null
+    var mNota: String? = null
+    var mColor: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +68,11 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
-        var selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity,R.color.blueberry)
-
+        if(savedInstanceState == null) {
+            selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity, R.color.blueberry)
+        }else{
+            selectedColor = savedInstanceState.getInt("ColorActualizado")
+        }
         medicamentoViewModel = ViewModelProviders.of(this@AnadirMedicamentoActivity).get(MedicamentoViewModel::class.java)
 
 
@@ -71,18 +80,51 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             title = getString(R.string.editar_medicamento)
             medicamentoActualLive = medicamentoViewModel.getMedicamento(intent.getIntExtra("MEDICINE_ID",-1))
             medicamentoActualLive.observe(this, android.arch.lifecycle.Observer {
-                CampoNombreComercial.setText(it!!.nombreMedicamento,TextView.BufferType.EDITABLE)
-                CampoNombreGenerico.setText(it!!.nombreGenerico,TextView.BufferType.EDITABLE)
-                CampoDosis.setText(it!!.dosis,TextView.BufferType.EDITABLE)
-                CampoNota.setText(it!!.nota,TextView.BufferType.EDITABLE)
 
-                val MedicineTypeIndex =  this.resources.getStringArray(R.array.TipoMedicamento).indexOf(it!!.tipo)
-                SpinnerTipoMedicamento.setSelection(MedicineTypeIndex)
+                if(mNombreComercial != null){
+                    CampoNombreComercial.setText(mNombreComercial, TextView.BufferType.EDITABLE)
+                }else{
+                    CampoNombreComercial.setText(it?.nombreMedicamento, TextView.BufferType.EDITABLE)
+                }
 
-                selectedColor = it.color!!
-                MedicamentoIconoTV.setColorFilter(it.color!!)
+                if(mNombreGenerico != null){
+                    CampoNombreGenerico.setText(mNombreGenerico,TextView.BufferType.EDITABLE)
+                }else{
+                    CampoNombreGenerico.setText(it?.nombreGenerico,TextView.BufferType.EDITABLE)
+                }
 
-                mCurrentPhotoPath = it.fotografia!!
+                if(mDosis != null){
+                    CampoDosis.setText(mDosis, TextView.BufferType.EDITABLE)
+                }else{
+                    CampoDosis.setText(it?.dosis,TextView.BufferType.EDITABLE)
+                }
+
+                if(mNota != null){
+                    CampoNota.setText(mNota, TextView.BufferType.EDITABLE)
+                }else{
+                    CampoNota.setText(it?.nota,TextView.BufferType.EDITABLE)
+                }
+
+
+
+                if(savedInstanceState == null) {
+                    val MedicineTypeIndex =  this.resources.getStringArray(R.array.TipoMedicamento).indexOf(it!!.tipo)
+                   SpinnerTipoMedicamento.setSelection(MedicineTypeIndex)
+                }else{
+                    val type = savedInstanceState.getInt("IndexTipo")
+                    SpinnerTipoMedicamento.setSelection(type)
+                }
+
+
+                if(mColor != 0){
+                    selectedColor = mColor
+                }else{
+                    selectedColor = it?.color!!
+                }
+
+                MedicamentoIconoTV.setColorFilter(selectedColor)
+
+                mCurrentPhotoPath = it?.fotografia!!
                 displayPic()
 
 
@@ -467,6 +509,17 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         outState?.run {
             putString("ActualPhotoPath", mCurrentPhotoPath)
             putInt("targetWidth", targetW)
+
+            putString("NombreComercialActualizado", CampoNombreComercial.text.toString())
+            putString("NombreGenericoActualizado", CampoNombreGenerico.text.toString())
+            putString("DosisActualizado", CampoDosis.text.toString())
+            putString("NotaActualizado", CampoNota.text.toString())
+            putInt("ColorActualizado", selectedColor)
+            putInt("IndexTipo", SpinnerTipoMedicamento.selectedItemPosition)
+
+       //     Toast.makeText(this@AnadirMedicamentoActivity,"Color en onSave " + selectedColor, Toast.LENGTH_SHORT).show()
+
+
         }
     }
 
@@ -479,6 +532,16 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             if(!mCurrentPhotoPath.isEmpty()){
                 displayPic()
             }
+
+            mNombreComercial = getString("NombreComercialActualizado")
+            mNombreGenerico = getString("NombreGenericoActualizado")
+            mDosis = getString("DosisActualizado")
+            mNota = getString("NotaActualizado")
+            mColor = getInt("ColorActualizado")
+            MedicamentoIconoTV.setColorFilter(mColor)
+         //   Toast.makeText(this@AnadirMedicamentoActivity,"Color en onRestore " + mColor, Toast.LENGTH_SHORT).show()
+
+
         }
     }
 

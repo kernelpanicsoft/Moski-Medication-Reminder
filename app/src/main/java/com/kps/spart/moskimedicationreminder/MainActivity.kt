@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
-       // title = "Hola mundo"
+        title = getString(R.string.title_home)
 
 
         val bnve = findViewById<BottomNavigationViewEx>(R.id.bn_principal)
@@ -57,21 +57,25 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home -> {
                     transaction.replace(R.id.content, HoyFragment(), getString(R.string.fragmentoHoy)).commit()
                     currentSectionID = item.itemId
+                    title = getString(R.string.title_home)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_tratamientos -> {
                     transaction.replace(R.id.content, TratamientosFragment(), getString(R.string.fragmentoTratamientos)).commit()
                     currentSectionID = item.itemId
+                    title = getString(R.string.title_tratamientos)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_medicamentos -> {
                     transaction.replace(R.id.content, MedicamentosFragment(), getString(R.string.fragmentoMedicamentos)).commit()
                     currentSectionID = item.itemId
+                    title = getString(R.string.title_medicamentos)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_citas -> {
                     transaction.replace(R.id.content, CitasMedicasFragment(), getString(R.string.fragmentoCitas)).commit()
                     currentSectionID = item.itemId
+                    title = getString(R.string.title_citas)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_directorio -> {
@@ -79,6 +83,7 @@ class MainActivity : AppCompatActivity() {
 
                     transaction.replace(R.id.content, directorioFragment, getString(R.string.fragmentoDirectorio)).commit()
                     currentSectionID = item.itemId
+                    title = getString(R.string.title_directorio)
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -100,23 +105,29 @@ class MainActivity : AppCompatActivity() {
         when (currentSectionID){
             R.id.navigation_home -> {
                 transaction.replace(R.id.content, HoyFragment(), getString(R.string.fragmentoHoy)).commit()
+                title = getString(R.string.title_home)
             }
             R.id.navigation_tratamientos -> {
                 transaction.replace(R.id.content, TratamientosFragment(), getString(R.string.fragmentoTratamientos)).commit()
+                title = getString(R.string.title_tratamientos)
             }
             R.id.navigation_medicamentos -> {
                 transaction.replace(R.id.content, MedicamentosFragment(), getString(R.string.fragmentoMedicamentos)).commit()
+                title = getString(R.string.title_medicamentos)
             }
             R.id.navigation_citas -> {
                 transaction.replace(R.id.content, CitasMedicasFragment(), getString(R.string.fragmentoCitas)).commit()
+                title = getString(R.string.title_citas)
             }
             R.id.navigation_directorio -> {
                 val directorioFragment = DirectorioFragment()
                 transaction.replace(R.id.content, directorioFragment, getString(R.string.fragmentoDirectorio)).commit()
+                title = getString(R.string.title_directorio)
             }
 
             else ->{
                 transaction.replace(R.id.content, HoyFragment(), getString(R.string.fragmentoHoy)).commit()
+                title = getString(R.string.title_home)
             }
         }
 

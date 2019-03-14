@@ -16,6 +16,7 @@ import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import elements.Usuario
 import kotlinx.android.synthetic.main.activity_detalles_perfil.*
 import model.CodigosDeSolicitud
@@ -102,7 +103,13 @@ class DetallesPerfilActivity : AppCompatActivity() {
             GeneroUsuarioTV.text = usuario?.genero
             EdadUsuarioTV.text = usuario?.edad.toString()
             val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
-            setPic(usuario?.imagen!!,valueInPixels.toInt(),valueInPixels.toInt())
+
+            if(usuario?.imagen.isNullOrEmpty()){
+                PerfilIV.setImageResource(R.drawable.ic_user)
+            }else{
+                setPic(usuario?.imagen!!,valueInPixels.toInt(),valueInPixels.toInt())
+            }
+
 
     }
 
@@ -157,7 +164,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == CodigosDeSolicitud.EDITAR_USUARIO && resultCode == Activity.RESULT_OK){
-            //Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@DetallesPerfilActivity,getString(R.string.usuario_actualizado_correctamente), Toast.LENGTH_SHORT).show()
         }
     }
 

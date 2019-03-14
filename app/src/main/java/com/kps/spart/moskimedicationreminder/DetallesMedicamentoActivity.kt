@@ -128,10 +128,13 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
             contenidoNotaTV.text = medicamento.nota
             val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
 
-            medicamento.fotografia?.also {
-                setPic(it,valueInPixels.toInt(),valueInPixels.toInt())
 
+            if(medicamento.fotografia.isNullOrEmpty()){
+                imagenMedicamentoIV.setImageResource(R.drawable.no_photo_cardview)
+            }else{
+                setPic(medicamento.fotografia!!,valueInPixels.toInt(),valueInPixels.toInt())
             }
+
 
     }
 

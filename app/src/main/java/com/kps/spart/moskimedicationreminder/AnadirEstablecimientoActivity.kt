@@ -27,11 +27,15 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
     lateinit var establecimientoViewModel : EstablecimientoViewModel
     private lateinit var  establecimientoActualLive : LiveData<Establecimiento>
 
-
     lateinit var establecimiento: Establecimiento
     var latitud : Double = 0.0
     var longitud : Double = 0.0
-
+    var mNombre : String? = null
+    var mDireccion : String? = null
+    var mTelefono1 : String? = null
+    var mTelefono2 : String? = null
+    var mEmail : String? = null
+    var mSitioWeb : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +49,21 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         establecimientoViewModel = ViewModelProviders.of(this@AnadirEstablecimientoActivity).get(EstablecimientoViewModel::class.java)
 
         if(intent.hasExtra("ESTABLISHMENT_ID")){
+            title = getString(R.string.editar_establecimiento)
             establecimientoActualLive = establecimientoViewModel.getEstablecimiento(intent.getIntExtra("ESTABLISHMENT_ID", -1))
             establecimientoActualLive.observe(this, android.arch.lifecycle.Observer {
              //   Toast.makeText(this@AnadirEstablecimientoActivity, "Datos del establecimiento live: " + establecimientoActualLive.value?.nombre,Toast.LENGTH_SHORT).show()
             })
 
+        }else{
+            title = getString(R.string.anadir_establecimiento)
         }
 
         testFab.setOnClickListener {
             Toast.makeText(this@AnadirEstablecimientoActivity, "Datos del establecimiento live: " + establecimientoActualLive.value?.nombre,Toast.LENGTH_SHORT).show()
         }
 
-        title = getString(R.string.anadir_establecimiento)
+
         establecimiento = Establecimiento(0)
 
 
@@ -188,8 +195,21 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-        outState?.putDouble("latitud", latitud)
-        outState?.putDouble("longitud", longitud)
+        outState?.run {
+            putDouble("latitud", latitud)
+            putDouble("longitud", longitud)
+            putString("nombreEstablecimientoActualizado", NombreEstablecimientoTV.text.toString() )
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        savedInstanceState?.run {
+            mNombre = getString("nombreEstablecimientoActualizado")
+            latitud = getDouble("latitud")
+            longitud = getDouble("longitud")
+        }
     }
 
 
