@@ -40,6 +40,10 @@ class EstablecimientoRepository (application : Application){
         return establecimientoDao.getEstablecimiento(id)
     }
 
+    fun getEstablecimientosUsuario(id : Int) : LiveData<List<Establecimiento>>{
+        return establecimientoDao.getUserEstablecimientos(id)
+    }
+
     private class InsertEstablecimientoAsyncTask constructor(private val establecimientoDao: EstablecimientoDao) : AsyncTask<Establecimiento, Void, Void>(){
         override fun doInBackground(vararg params: Establecimiento): Void? {
             establecimientoDao.insert(params[0])

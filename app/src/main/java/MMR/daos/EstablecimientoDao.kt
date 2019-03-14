@@ -23,4 +23,7 @@ interface EstablecimientoDao {
 
     @Query("SELECT * FROM Establecimiento WHERE Establecimiento.id = :id" )
     fun getEstablecimiento(id : Int?) : LiveData<Establecimiento>
+
+    @Query("SELECT * FROM Establecimiento WHERE Establecimiento.usuarioID = :id")
+    fun getUserEstablecimientos(id: Int?) : LiveData<List<Establecimiento>>
 }

@@ -33,4 +33,9 @@ class EstablecimientoViewModel (application : Application) : AndroidViewModel(ap
     fun getEstablecimiento(id : Int) : LiveData<Establecimiento>{
         return repository.getEstablecimiento(id)
     }
+
+    fun getEstablecimientosUsuario(id : Int) : LiveData<List<Establecimiento>>{
+        return repository.getEstablecimientosUsuario(id)
+    }
+
 }
