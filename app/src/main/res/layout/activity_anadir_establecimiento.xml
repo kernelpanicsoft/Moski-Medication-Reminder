@@ -122,7 +122,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/SpinnerTipoEstablecimiento" />
 
             <EditText
-                android:id="@+id/telefono1EstablecimientoTV"
+                android:id="@+id/Telefono1EstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -138,7 +138,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DireccionEstablecimientoTV" />
 
             <EditText
-                android:id="@+id/telefono2EstablecimientoTV"
+                android:id="@+id/Telefono2EstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -151,10 +151,10 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView27"
-                app:layout_constraintTop_toBottomOf="@+id/telefono1EstablecimientoTV" />
+                app:layout_constraintTop_toBottomOf="@+id/Telefono1EstablecimientoTV" />
 
             <EditText
-                android:id="@+id/emailEstablecimientoTV"
+                android:id="@+id/EmailEstablecimientoTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -167,7 +167,7 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView25"
-                app:layout_constraintTop_toBottomOf="@+id/telefono2EstablecimientoTV" />
+                app:layout_constraintTop_toBottomOf="@+id/Telefono2EstablecimientoTV" />
 
             <ImageView
                 android:id="@+id/imageView24"
@@ -190,9 +190,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/emailEstablecimientoTV"
+                app:layout_constraintBottom_toBottomOf="@+id/EmailEstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/emailEstablecimientoTV"
+                app:layout_constraintTop_toTopOf="@+id/EmailEstablecimientoTV"
                 app:srcCompat="@drawable/ic_email" />
 
             <ImageView
@@ -203,9 +203,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/telefono1EstablecimientoTV"
+                app:layout_constraintBottom_toBottomOf="@+id/Telefono1EstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/telefono1EstablecimientoTV"
+                app:layout_constraintTop_toTopOf="@+id/Telefono1EstablecimientoTV"
                 app:srcCompat="@drawable/ic_telephone_1" />
 
             <ImageView
@@ -216,9 +216,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/telefono2EstablecimientoTV"
+                app:layout_constraintBottom_toBottomOf="@+id/Telefono2EstablecimientoTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/telefono2EstablecimientoTV"
+                app:layout_constraintTop_toTopOf="@+id/Telefono2EstablecimientoTV"
                 app:srcCompat="@drawable/ic_telephone_2" />
 
 
@@ -247,7 +247,7 @@
                 android:minHeight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView28"
-                app:layout_constraintTop_toBottomOf="@+id/emailEstablecimientoTV" />
+                app:layout_constraintTop_toBottomOf="@+id/EmailEstablecimientoTV" />
 
             <Button
                 android:id="@+id/anadirLocationButton"

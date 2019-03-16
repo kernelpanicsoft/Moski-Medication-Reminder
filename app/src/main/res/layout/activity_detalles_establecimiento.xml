@@ -222,7 +222,7 @@
                         android:background="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/telefono1EstablecimientoTV"
+                        android:id="@+id/Telefono1EstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider2"
@@ -237,10 +237,10 @@
                         android:autoLink="phone"/>
 
                     <TextView
-                        android:id="@+id/telefono2EstablecimientoTV"
+                        android:id="@+id/Telefono2EstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/telefono1EstablecimientoTV"
+                        android:layout_below="@id/Telefono1EstablecimientoTV"
                         android:layout_marginTop="8dp"
                         android:text="2414176496"
                         android:textColor="@color/grisOscuro"
@@ -359,7 +359,7 @@
                         android:background="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/emailEstablecimientoTV"
+                        android:id="@+id/EmailEstablecimientoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider5"

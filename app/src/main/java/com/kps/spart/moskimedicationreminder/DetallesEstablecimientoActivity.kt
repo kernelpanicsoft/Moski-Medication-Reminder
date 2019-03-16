@@ -21,7 +21,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import elements.Establecimiento
 import kotlinx.android.synthetic.main.activity_detalles_establecimiento.*
 import model.CodigosDeSolicitud
-import model.MMDContract
 import java.util.*
 
 
@@ -116,13 +115,13 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
         nombreEstablecimientoTV.text = establecimiento?.nombre
         tipoEstablecimientoTV.text = establecimiento?.tipo
         direccionEstablecimietoTV.text = establecimiento?.direccion
-        telefono1EstablecimientoTV.text = establecimiento?.telefono1
-        telefono2EstablecimientoTV.text = establecimiento?.telefono2
-        emailEstablecimientoTV.text = establecimiento?.email
+        Telefono1EstablecimientoTV.text = establecimiento?.telefono1
+        Telefono2EstablecimientoTV.text = establecimiento?.telefono2
+        EmailEstablecimientoTV.text = establecimiento?.email
         sitioWebEstablecimientoTV.text = establecimiento?.sitioWeb
 
-        establecimiento?.latitud?.run {
-            addMapFragment(establecimiento.latitud!!,establecimiento.longitud!!)
+        if(establecimiento?.latitud?.compareTo(0.0) != 0 || establecimiento?.longitud?.compareTo(0.0) != 0){
+            addMapFragment(establecimiento?.latitud!!,establecimiento?.longitud!!)
             abrirEnMapasTV.visibility = View.VISIBLE
             abrirEnMapasTV.setOnClickListener {
                 val uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)", establecimiento.latitud, establecimiento.longitud, "Prueba")
@@ -131,7 +130,11 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                 startActivity(intent)
             }
+        }else{
+            abrirEnMapasTV.visibility = View.GONE
+            mapaAnadido.visibility = View.GONE
         }
+
     }
 
     private fun deleteEstablishment(){

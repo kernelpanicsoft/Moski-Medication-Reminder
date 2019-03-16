@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapFragment
@@ -27,7 +28,8 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
     lateinit var establecimientoViewModel : EstablecimientoViewModel
     private lateinit var  establecimientoActualLive : LiveData<Establecimiento>
 
-    lateinit var establecimiento: Establecimiento
+   // lateinit var establecimiento: Establecimiento
+    var tipoEstablecimiento : String = ""
     var latitud : Double = 0.0
     var longitud : Double = 0.0
     var mNombre : String? = null
@@ -53,6 +55,24 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             establecimientoActualLive = establecimientoViewModel.getEstablecimiento(intent.getIntExtra("ESTABLISHMENT_ID", -1))
             establecimientoActualLive.observe(this, android.arch.lifecycle.Observer {
              //   Toast.makeText(this@AnadirEstablecimientoActivity, "Datos del establecimiento live: " + establecimientoActualLive.value?.nombre,Toast.LENGTH_SHORT).show()
+
+                NombreEstablecimientoTV.setText(it?.nombre,TextView.BufferType.EDITABLE)
+                DireccionEstablecimientoTV.setText(it?.direccion,TextView.BufferType.EDITABLE)
+                Telefono1EstablecimientoTV.setText(it?.telefono1,TextView.BufferType.EDITABLE)
+                Telefono2EstablecimientoTV.setText(it?.telefono2,TextView.BufferType.EDITABLE)
+                EmailEstablecimientoTV.setText(it?.email,TextView.BufferType.EDITABLE)
+                SitioWebEstablecimeintoTV.setText(it?.sitioWeb,TextView.BufferType.EDITABLE)
+
+                val EstablishmentTypeIndex = this.resources.getStringArray(R.array.tipo_establecimiento).indexOf(it?.tipo)
+                SpinnerTipoEstablecimiento.setSelection(EstablishmentTypeIndex)
+
+                latitud = it?.latitud!!
+                longitud = it?.longitud!!
+                if(latitud != 0.0 && longitud != 0.0){
+                    addMapFragment(latitud,longitud)
+                    anadirLocationButton.text = getString(R.string.eliminar_ubicacion)
+                }
+
             })
 
         }else{
@@ -64,7 +84,7 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         }
 
 
-        establecimiento = Establecimiento(0)
+
 
 
         SpinnerTipoEstablecimiento.adapter = ArrayAdapter(this@AnadirEstablecimientoActivity, android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_establecimiento))
@@ -74,7 +94,7 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                establecimiento.tipo = parent?.getItemAtPosition(position).toString()
+                tipoEstablecimiento = parent?.getItemAtPosition(position).toString()
                 when(position){
                     0 -> {iconoEstablecimientoIV.setImageResource(R.drawable.ic_pharmacy)}
                     1 -> {iconoEstablecimientoIV.setImageResource(R.drawable.ic_medic_lab)}
@@ -102,8 +122,6 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
         }catch (e : Exception){}
 
-       // Toast.makeText(this@AnadirEstablecimientoActivity,"Valores recuperados en rotacion: " + latitud + " " + longitud, Toast.LENGTH_SHORT).show()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -124,23 +142,33 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val establecimiento : Establecimiento
+
+        if(intent.hasExtra("ESTABLISHMENT_ID")){
+            establecimiento = establecimientoActualLive.value!!
+        }else{
+            establecimiento = Establecimiento(0)
+            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirEstablecimientoActivity)
+
+            val usuarioID = sharedPref.getInt("actualUserID",-1)
+            establecimiento.usuarioID = usuarioID
+
+        }
         when (item.itemId) {
             R.id.itemSave -> {
                 establecimiento.nombre  = NombreEstablecimientoTV.text.toString()
+                establecimiento.tipo = tipoEstablecimiento
                 establecimiento.direccion = DireccionEstablecimientoTV.text.toString()
-                establecimiento.telefono1 = telefono1EstablecimientoTV.text.toString()
-                establecimiento.telefono2 = telefono2EstablecimientoTV.text.toString()
-                establecimiento.email = emailEstablecimientoTV.text.toString()
+                establecimiento.telefono1 = Telefono1EstablecimientoTV.text.toString()
+                establecimiento.telefono2 = Telefono2EstablecimientoTV.text.toString()
+                establecimiento.email = EmailEstablecimientoTV.text.toString()
                 establecimiento.sitioWeb = SitioWebEstablecimeintoTV.text.toString()
                 establecimiento.latitud = latitud
                 establecimiento.longitud = longitud
 
-                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirEstablecimientoActivity)
 
-                val usuarioID = sharedPref.getInt("actualUserID",-1)
+                if(establecimiento.usuarioID != -1){
 
-                if(usuarioID != -1){
-                    establecimiento.usuarioID = usuarioID
                     saveEstablishmentToDB(establecimiento)
                 }
 
@@ -187,7 +215,12 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
 
 
     private fun saveEstablishmentToDB(establecimiento: Establecimiento){
-        establecimientoViewModel.insert(establecimiento)
+        if(intent.hasExtra("ESTABLISHMENT_ID")){
+            establecimientoViewModel.update(establecimiento)
+        }else{
+            establecimientoViewModel.insert(establecimiento)
+        }
+
         setResult(Activity.RESULT_OK)
         finish()
     }
@@ -209,6 +242,10 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             mNombre = getString("nombreEstablecimientoActualizado")
             latitud = getDouble("latitud")
             longitud = getDouble("longitud")
+
+            if(latitud != 0.0 && longitud != 0.0){
+                anadirLocationButton.text = getString(R.string.eliminar_ubicacion)
+            }
         }
     }
 
