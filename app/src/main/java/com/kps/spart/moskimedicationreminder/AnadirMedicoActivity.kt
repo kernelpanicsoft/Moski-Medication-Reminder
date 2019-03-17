@@ -1,5 +1,9 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicoViewModel
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProviders
 import elements.FichaContacto
 import elements.Medico
 import android.support.v7.app.AppCompatActivity
@@ -23,6 +27,9 @@ class AnadirMedicoActivity : AppCompatActivity() {
     private lateinit var adapter : FichaDeContactoCompactaAdapter
     private var fichas = ArrayList<FichaContacto>()
 
+    lateinit var medicoViewModel : MedicoViewModel
+    lateinit var medicoActualLive : LiveData<Medico>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anadir_medico)
@@ -34,6 +41,8 @@ class AnadirMedicoActivity : AppCompatActivity() {
         setTitle(R.string.anadirMedico)
 
 
+        medicoViewModel = ViewModelProviders.of(this@AnadirMedicoActivity).get(MedicoViewModel::class.java)
+        medico = Medico(0)
 
 
         spinnerTitulo.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TituloMedico))

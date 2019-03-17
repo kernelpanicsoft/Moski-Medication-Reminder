@@ -68,11 +68,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
-        if(savedInstanceState == null) {
-            selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity, R.color.blueberry)
-        }else{
-            selectedColor = savedInstanceState.getInt("ColorActualizado")
-        }
+        selectedColor = ContextCompat.getColor(this@AnadirMedicamentoActivity, R.color.blueberry)
         medicamentoViewModel = ViewModelProviders.of(this@AnadirMedicamentoActivity).get(MedicamentoViewModel::class.java)
 
 
@@ -183,7 +179,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 selectedColor = color
                 MedicamentoIconoTV.setColorFilter(selectedColor)
                // medicamento.color = selectedColor
-                colorMedicamento = selectedColor
                 //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }
 
@@ -209,7 +204,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                 medicamento.nombreGenerico = CampoNombreGenerico.text.toString()
                 medicamento.dosis = CampoDosis.text.toString()
                 medicamento.nota = CampoNota.text.toString()
-                medicamento.color = colorMedicamento
+                medicamento.color = selectedColor
                 medicamento.tipo = tipoMedicamento
                 medicamento.fotografia = mCurrentPhotoPath
 
@@ -495,8 +490,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             }
 
             out.close()
-
-
+            
             displayPic()
         }
 
@@ -538,9 +532,8 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             mDosis = getString("DosisActualizado")
             mNota = getString("NotaActualizado")
             mColor = getInt("ColorActualizado")
-            MedicamentoIconoTV.setColorFilter(mColor)
+         //   MedicamentoIconoTV.setColorFilter(mColor)
          //   Toast.makeText(this@AnadirMedicamentoActivity,"Color en onRestore " + mColor, Toast.LENGTH_SHORT).show()
-
 
         }
     }
@@ -565,6 +558,5 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }

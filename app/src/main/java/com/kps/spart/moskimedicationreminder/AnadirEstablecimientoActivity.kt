@@ -79,13 +79,6 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
             title = getString(R.string.anadir_establecimiento)
         }
 
-        testFab.setOnClickListener {
-            Toast.makeText(this@AnadirEstablecimientoActivity, "Datos del establecimiento live: " + establecimientoActualLive.value?.nombre,Toast.LENGTH_SHORT).show()
-        }
-
-
-
-
 
         SpinnerTipoEstablecimiento.adapter = ArrayAdapter(this@AnadirEstablecimientoActivity, android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_establecimiento))
         SpinnerTipoEstablecimiento.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
