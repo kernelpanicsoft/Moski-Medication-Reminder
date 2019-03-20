@@ -1,7 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
 import android.content.Context
-import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import elements.Medico
 
 class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
+    private val iconCollection = context?.resources?.getStringArray(R.array.especialidades)
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<Medico>(){
         override fun areItemsTheSame(oldItem: Medico, newItem: Medico): Boolean {
@@ -48,11 +48,17 @@ class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.Vi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val medicoActual = getItem(position)
 
-        holder.icono.setImageResource(R.drawable.ic_capsula)
-        holder.icono.setColorFilter(medicoActual.colorIcono!!)
         holder.titulo.text = medicoActual.titulo
         holder.nombre.text = medicoActual.nombre
         holder.especialidad.text = medicoActual.especialidad
+
+        when(iconCollection?.indexOf(medicoActual.especialidad)){
+            0 -> {holder.icono.setImageResource(R.drawable.ic_doctor)}
+            1 -> {holder.icono.setImageResource(R.drawable.ic_alergologo)}
+            2 -> {holder.icono.setImageResource(R.drawable.ic_anestesiologo)}
+            3 -> {holder.icono.setImageResource(R.drawable.ic_angiologo)}
+            4 -> {holder.icono.setImageResource(R.drawable.ic_dermatologo)}
+        }
 
     }
 

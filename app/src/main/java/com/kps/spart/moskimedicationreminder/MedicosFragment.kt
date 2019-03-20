@@ -50,9 +50,9 @@ class MedicosFragment : Fragment() {
         })
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context,DetallesMedicoActivity::class.java)
-           // nav.putExtra("MEDIC_ID", adapter.getMedicID(RV.getChildAdapterPosition(it)))
+            val medicoSeleccionado = adapter.getMedicAt(RecViewMedicos.getChildAdapterPosition(it))
+            nav.putExtra("MEDIC_ID", medicoSeleccionado.id)
             startActivity(nav)
-
         })
 
         RecViewMedicos.adapter = adapter

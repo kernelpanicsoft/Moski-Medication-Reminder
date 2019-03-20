@@ -1,6 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.FichaContactoViewModel
 import MMR.viewModels.MedicoViewModel
+import android.app.Activity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
@@ -9,7 +11,6 @@ import elements.Medico
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
@@ -18,7 +19,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_anadir_medico.*
-import org.xdty.preference.colorpicker.ColorPickerDialog
 
 
 class AnadirMedicoActivity : AppCompatActivity() {
@@ -29,6 +29,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
     lateinit var medicoViewModel : MedicoViewModel
     lateinit var medicoActualLive : LiveData<Medico>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,35 +73,11 @@ class AnadirMedicoActivity : AppCompatActivity() {
         adapter = FichaDeContactoCompactaAdapter(this@AnadirMedicoActivity, fichas)
 
         RecViewfichasContacto.setHasFixedSize(true)
-        val mLAyoutManager = LinearLayoutManager(this@AnadirMedicoActivity,LinearLayoutManager.VERTICAL, false)
+        val mLayoutManager = LinearLayoutManager(this@AnadirMedicoActivity,LinearLayoutManager.VERTICAL, false)
 
-        RecViewfichasContacto.layoutManager = mLAyoutManager
+        RecViewfichasContacto.layoutManager = mLayoutManager
         RecViewfichasContacto.adapter = adapter
 
-        var selectedColor = ContextCompat.getColor(this@AnadirMedicoActivity,R.color.blueberry)
-        medico.colorIcono = selectedColor
-
-        val colors = resources.getIntArray(R.array.default_rainbow)
-        iconoMedicoIV.setOnClickListener{
-
-            val colorPickerDialog = ColorPickerDialog.newInstance(R.string.colorDistintivo,
-                    colors,
-                    selectedColor,
-                    5,
-                    ColorPickerDialog.SIZE_SMALL,
-                    true
-            )
-
-            colorPickerDialog.setOnColorSelectedListener { color ->
-                selectedColor = color
-                iconoMedicoIV.setColorFilter(selectedColor)
-                medico.colorIcono = selectedColor
-            }
-
-            colorPickerDialog.show(fragmentManager,"color_picker_dialer")
-
-
-        }
 
         addFichaContactoButton.setOnClickListener{
             val builder = AlertDialog.Builder(this@AnadirMedicoActivity)
@@ -139,10 +116,7 @@ class AnadirMedicoActivity : AppCompatActivity() {
                         adapter.notifyDataSetChanged()
                         dialog.dismiss()
                     }
-
-
             }
-
 
             }
             dialog.show()
@@ -166,8 +140,14 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
                 if(usuarioID != -1){
                     medico.usuarioID = usuarioID
-                    saveMedicToBD()
+                    saveMedicToBD(medico)
+                    if(!fichas.isEmpty()){
+                        fichas.forEach {
 
+                        }
+                    }
+                    setResult(Activity.RESULT_OK)
+                    finish()
                 }
                 return true
             }
@@ -180,11 +160,11 @@ class AnadirMedicoActivity : AppCompatActivity() {
 
     }
 
-    private fun saveMedicToBD(){
-
+    private fun saveMedicToBD(medico: Medico){
+        medicoViewModel.insert(medico)
     }
 
-    private fun saveContactCardsToBD(adapter : FichaDeContactoCompactaAdapter){
+    private fun saveContactCardsToBD(fichaContacto: FichaContacto){
 
     }
 
@@ -208,6 +188,11 @@ class AnadirMedicoActivity : AppCompatActivity() {
         RecViewfichasContacto.layoutManager = mLAyoutManager
 
         RecViewfichasContacto.adapter = adapter
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        Toast.makeText(this@AnadirMedicoActivity,"Hola desde el back pressed", Toast.LENGTH_SHORT).show()
     }
 }

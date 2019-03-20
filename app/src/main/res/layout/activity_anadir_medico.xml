@@ -114,21 +114,11 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="16dp"
                     android:minHeight="40dp"
-                    android:src="@drawable/ic_anestesiologo"
+                    android:src="@drawable/ic_doctor"
                     android:tint="@color/blueberry"
                     app:layout_constraintBottom_toBottomOf="@+id/SpinnerEspecialidad"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/SpinnerEspecialidad" />
-
-                <TextView
-                    android:id="@+id/colorMedicoButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/toca_para_cambiar_el_color"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="@+id/iconoMedicoIV"
-                    app:layout_constraintStart_toStartOf="@+id/iconoMedicoIV"
-                    app:layout_constraintTop_toBottomOf="@+id/iconoMedicoIV" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline"
@@ -142,15 +132,15 @@
                     android:id="@+id/addFichaContactoButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/rounded_button"
                     android:text="@string/anadir_ficha_de_contacto"
                     android:textColor="@color/blanco"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/colorMedicoButton"
-                    app:layout_constraintTop_toBottomOf="@+id/SpinnerEspecialidad" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iconoMedicoIV" />
 
 
                 <TextView

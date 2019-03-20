@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/edit_item"
+        android:title="@string/editar"
+        android:icon="@drawable/ic_edit_white_24dp"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/add_contact_card"
+        android:title="@string/a_adir_ficha_de_contacto"
+        android:icon="@drawable/ic_account_card_details"
+        app:showAsAction="always"/>
+
+
+</menu>

@@ -1,5 +1,10 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicamentoViewModel
+import MMR.viewModels.MedicoViewModel
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,12 +15,20 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import elements.Medico
 import kotlinx.android.synthetic.main.activity_detalles_medico.*
 import model.MMDContract
 
 
 class DetallesMedicoActivity : AppCompatActivity() {
     private var medic_id : Int = -1
+    lateinit var medicoViewModel : MedicoViewModel
+    lateinit var medicoActualLive : LiveData<Medico>
+    lateinit var iconsCollection : Array<String>
+
+
+    lateinit var medicamentoViewModel : MedicamentoViewModel
+    lateinit var medicamentoActualLive : LiveData<Medico>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +40,36 @@ class DetallesMedicoActivity : AppCompatActivity() {
         ab!!.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.detalles_de_medico)
 
+        iconsCollection = this@DetallesMedicoActivity.resources?.getStringArray(R.array.especialidades)!!
+
         medic_id = intent.getIntExtra("MEDIC_ID", -1)
-        populateMedicFieldFromDB()
+
+        medicoViewModel = ViewModelProviders.of(this).get(MedicoViewModel::class.java)
+
+        medicoActualLive = medicoViewModel.getMedico(medic_id)
+        medicoActualLive.observe(this, Observer {
+            populateMedicFieldFromDB(it)
+        })
+
+
+        medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
+
         populateMedicContactCards()
 
     }
 
-    private fun populateMedicFieldFromDB() {
-        /*
-            TituloDoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_DOCTOR))
-            NombreDoctorTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.NOMBRE_DOCTOR))
-            EspecialidadTV.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.ESPECIALIDAD_DOCTOR))
-        */
+    private fun populateMedicFieldFromDB(medico : Medico?) {
+            TituloDoctorTV.text = medico?.titulo
+            NombreDoctorTV.text = medico?.nombre
+            EspecialidadTV.text = medico?.especialidad
+            when(iconsCollection.indexOf(medico?.especialidad)){
+                0 -> {iconoMedico.setImageResource(R.drawable.ic_doctor)}
+                1 -> (iconoMedico.setImageResource(R.drawable.ic_alergologo))
+                2 -> (iconoMedico.setImageResource(R.drawable.ic_anestesiologo))
+                3 -> (iconoMedico.setImageResource(R.drawable.ic_angiologo))
+                4 -> (iconoMedico.setImageResource(R.drawable.ic_dermatologo))
+            }
+
     }
 
     private fun populateMedicContactCards(){
@@ -53,7 +84,7 @@ class DetallesMedicoActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{
-        menuInflater.inflate(R.menu.menu_edit,menu)
+        menuInflater.inflate(R.menu.menu_edit_add_card,menu)
         return true
     }
 
@@ -89,6 +120,10 @@ class DetallesMedicoActivity : AppCompatActivity() {
                 val dialog = builder.create()
                 dialog.show()
                 return true
+            }
+            R.id.add_contact_card ->{
+                val addContactCardNav = Intent(this@DetallesMedicoActivity, AnadirFichaContactoActivity::class.java)
+                startActivity(addContactCardNav)
             }
             android.R.id.home -> {
                 onBackPressed()

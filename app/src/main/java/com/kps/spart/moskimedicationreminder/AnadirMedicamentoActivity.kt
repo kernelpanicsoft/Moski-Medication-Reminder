@@ -490,7 +490,7 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
             }
 
             out.close()
-            
+
             displayPic()
         }
 

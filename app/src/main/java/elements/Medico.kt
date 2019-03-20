@@ -17,7 +17,6 @@ import model.MMDContract
 class Medico (@PrimaryKey(autoGenerate = true) var id: Int,
               var nombre: String? = null,
               var especialidad: String? = null,
-              var colorIcono: Int? = null,
               var titulo: String? = null,
               var usuarioID : Int? = null
               )

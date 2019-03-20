@@ -29,8 +29,6 @@
     <string name="FormaFarmaceutica">Forma farmacéutica</string>
 
 
-
-
     <!-- Cadenas del fragmento Directorio -->
     <string name="Farmacias">Farmacias</string>
     <string name="Establecimientos">Establecimientos</string>
@@ -148,7 +146,7 @@
         <item>Urólogo</item>
         <item>Traumatólogo</item>
     </array>
-    
+
     <array name="TipoMedicamento">
         <item>Pastillas/Comprimidos</item>
         <item>Tabletas</item>
@@ -164,7 +162,6 @@
         <item>Intravenosa</item>
         <item>Inyección</item>
     </array>
-
 
 
     <string name="tomato">Tomato</string>
@@ -283,6 +280,8 @@
     <string name="editar_medicamento">Editar medicamento</string>
     <string name="abrir_en_mapas">Abrir en Mapas</string>
     <string name="editar_establecimiento">Editar establecimiento</string>
+    <string name="a_adir_ficha_de_contacto">Añadir ficha de contacto</string>
+    <string name="anadir_ficha_contacto">Añadir ficha de contacto</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
