@@ -78,10 +78,11 @@ class DetallesMedicoActivity : AppCompatActivity() {
         val mLayoutManager = LinearLayoutManager(this@DetallesMedicoActivity,LinearLayoutManager.VERTICAL, false)
         RecViewFichasContactoMedico.layoutManager = mLayoutManager
 
-
-        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity)
-        val medic_id = intent.getIntExtra("MEDIC_ID",-1)
         fichasContactoViewModel = ViewModelProviders.of(this).get(FichaContactoViewModel::class.java)
+
+        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,fichasContactoViewModel)
+        val medic_id = intent.getIntExtra("MEDIC_ID",-1)
+
         fichasContactoViewModel.getFichasContacto(medic_id).observe(this, Observer<List<FichaContacto>> {
             adapter.submitList(it)
         })

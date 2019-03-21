@@ -101,8 +101,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                     CampoNota.setText(it?.nota,TextView.BufferType.EDITABLE)
                 }
 
-
-
                 if(savedInstanceState == null) {
                     val MedicineTypeIndex =  this.resources.getStringArray(R.array.TipoMedicamento).indexOf(it!!.tipo)
                    SpinnerTipoMedicamento.setSelection(MedicineTypeIndex)
@@ -110,7 +108,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                     val type = savedInstanceState.getInt("IndexTipo")
                     SpinnerTipoMedicamento.setSelection(type)
                 }
-
 
                 if(mColor != 0){
                     selectedColor = mColor
@@ -122,7 +119,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
 
                 mCurrentPhotoPath = it?.fotografia!!
                 displayPic()
-
 
             })
 

@@ -282,6 +282,9 @@
     <string name="editar_establecimiento">Editar establecimiento</string>
     <string name="a_adir_ficha_de_contacto">Añadir ficha de contacto</string>
     <string name="anadir_ficha_contacto">Añadir ficha de contacto</string>
+    <string name="eliminar_ficha_de_contacto">Eliminar ficha de contacto</string>
+    <string name="esta_seguro_que_desea_eliminar_ficha_contacto">¿Está seguro que desea eliminar esta ficha de contacto?</string>
+    <string name="es_necesario_especificar_el_titulo_de_la_ficha">Es necesario especificar al menos el titulo de la ficha de contacto antes de guardarla</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
