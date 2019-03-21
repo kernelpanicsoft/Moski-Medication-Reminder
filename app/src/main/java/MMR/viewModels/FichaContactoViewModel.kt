@@ -8,12 +8,12 @@ import elements.FichaContacto
 
 class FichaContactoViewModel (application: Application) : AndroidViewModel(application) {
     val repository : FichaContactoRepository = FichaContactoRepository(application)
-    val allFichas : LiveData<List<FichaContacto>>
+  /*  val allFichas : LiveData<List<FichaContacto>>
 
     init{
         allFichas = repository.getAllFichasContacto(0)
     }
-
+*/
     fun insert(fichaContacto: FichaContacto){
         repository.insert(fichaContacto)
     }

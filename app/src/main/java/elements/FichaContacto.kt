@@ -10,10 +10,10 @@ import android.arch.persistence.room.PrimaryKey
         onDelete = ForeignKey.CASCADE)))
 class FichaContacto (@PrimaryKey(autoGenerate = true) var id: Int,
                      var titulo : String? = null,
-                     var direccion : String = "",
-                     var telefono : String = "",
-                     var celular : String = "",
-                     var email : String = "",
-                     var sitioweb : String = "",
-                     var accesoRapido : Boolean = false,
-                     var medico_ficha_id : Int = 0)
+                     var direccion : String? = null,
+                     var telefono : String? = null,
+                     var celular : String? = null,
+                     var email : String? = null,
+                     var sitioweb : String? = null,
+                     var accesoRapido : Boolean? = false,
+                     var medico_ficha_id : Int? = null)

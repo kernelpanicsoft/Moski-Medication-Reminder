@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.FichaContactoViewModel
 import MMR.viewModels.MedicamentoViewModel
 import MMR.viewModels.MedicoViewModel
 import android.arch.lifecycle.LiveData
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import elements.FichaContacto
 import elements.Medico
 import kotlinx.android.synthetic.main.activity_detalles_medico.*
 import model.MMDContract
@@ -26,9 +28,9 @@ class DetallesMedicoActivity : AppCompatActivity() {
     lateinit var medicoActualLive : LiveData<Medico>
     lateinit var iconsCollection : Array<String>
 
+    lateinit var fichasContactoViewModel : FichaContactoViewModel
 
-    lateinit var medicamentoViewModel : MedicamentoViewModel
-    lateinit var medicamentoActualLive : LiveData<Medico>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,6 @@ class DetallesMedicoActivity : AppCompatActivity() {
         })
 
 
-        medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
 
         populateMedicContactCards()
 
@@ -78,9 +79,15 @@ class DetallesMedicoActivity : AppCompatActivity() {
         RecViewFichasContactoMedico.layoutManager = mLayoutManager
 
 
-      //  val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,cursor)
+        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity)
+        val medic_id = intent.getIntExtra("MEDIC_ID",-1)
+        fichasContactoViewModel = ViewModelProviders.of(this).get(FichaContactoViewModel::class.java)
+        fichasContactoViewModel.getFichasContacto(medic_id).observe(this, Observer<List<FichaContacto>> {
+            adapter.submitList(it)
+        })
 
-     //   RecViewFichasContactoMedico.adapter = adapter
+
+        RecViewFichasContactoMedico.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{
@@ -123,6 +130,7 @@ class DetallesMedicoActivity : AppCompatActivity() {
             }
             R.id.add_contact_card ->{
                 val addContactCardNav = Intent(this@DetallesMedicoActivity, AnadirFichaContactoActivity::class.java)
+                addContactCardNav.putExtra("MEDIC_ID", medic_id)
                 startActivity(addContactCardNav)
             }
             android.R.id.home -> {

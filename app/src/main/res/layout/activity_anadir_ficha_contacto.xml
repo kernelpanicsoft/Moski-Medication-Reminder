@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:elevation="0dp"
         >
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -119,6 +118,7 @@
                 android:hint="@string/sitio_web"
                 android:inputType="textWebEditText"
                 android:minHeight="40dp"
+                android:singleLine="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"

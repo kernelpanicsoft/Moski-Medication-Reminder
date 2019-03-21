@@ -51,12 +51,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="14A Sur 6703, Colonia Villa Universitaria Puebla, Puebla"
                 android:textColor="@color/grisOscuro"
                 android:textSize="@dimen/normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iconoDireccion"
-                app:layout_constraintTop_toTopOf="@+id/iconoDireccion" />
+                app:layout_constraintTop_toTopOf="@+id/iconoDireccion"
+                android:autoLink="map"/>
 
 
             <ImageView
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="16dp"
 
                 android:src="@drawable/ic_phone_black_24dp"
                 android:tint="@color/colorPrimary"
@@ -76,12 +76,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="2414176496"
+
                 android:textColor="@color/grisOscuro"
                 android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/Iconotelefono1IV"
                 app:layout_constraintStart_toEndOf="@+id/Iconotelefono1IV"
-                app:layout_constraintTop_toTopOf="@+id/Iconotelefono1IV" />
+                app:layout_constraintTop_toTopOf="@+id/Iconotelefono1IV"
+                android:autoLink="phone"/>
 
             <ImageView
                 android:id="@+id/Iconotelefono2IV"
@@ -99,12 +100,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="2229261293"
                 android:textColor="@color/grisOscuro"
                 android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/Iconotelefono2IV"
                 app:layout_constraintStart_toEndOf="@+id/Iconotelefono2IV"
-                app:layout_constraintTop_toTopOf="@+id/Iconotelefono2IV" />
+                app:layout_constraintTop_toTopOf="@+id/Iconotelefono2IV"
+                android:autoLink="phone"/>
 
 
             <ImageView
@@ -124,12 +125,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="c.eduardo.corona@gmail.com"
+
                 android:textColor="@color/grisOscuro"
                 android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/iconoEmail"
                 app:layout_constraintStart_toEndOf="@+id/iconoEmail"
-                app:layout_constraintTop_toTopOf="@+id/iconoEmail" />
+                app:layout_constraintTop_toTopOf="@+id/iconoEmail"
+                android:autoLink="email"/>
 
             <ImageView
                 android:id="@+id/iconoWebSite"
@@ -149,12 +151,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="http://kernelpanicsoft.com"
                 android:textColor="@color/grisOscuro"
                 android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/iconoWebSite"
                 app:layout_constraintStart_toEndOf="@+id/iconoWebSite"
-                app:layout_constraintTop_toTopOf="@+id/iconoWebSite" />
+                app:layout_constraintTop_toTopOf="@+id/iconoWebSite"
+                android:autoLink="web"/>
 
             <ImageView
                 android:id="@+id/imageView23"
@@ -165,7 +167,8 @@
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_star_black_24dp" />
+                app:srcCompat="@drawable/ic_star_black_24dp"
+                />
         </android.support.constraint.ConstraintLayout>
 
 

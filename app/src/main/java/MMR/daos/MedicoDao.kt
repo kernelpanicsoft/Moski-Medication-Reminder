@@ -24,4 +24,6 @@ interface MedicoDao {
     @Query("SELECT * FROM Medico WHERE Medico.id = :id")
     fun getMedico( id : Int? ) : LiveData<Medico>
 
+    @Query("SELECT * FROM Medico WHERE Medico.usuarioID = :id")
+    fun getUserMedicos( id : Int? ) : LiveData<List<Medico>>
 }

@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ import elements.Medico
 class MedicosFragment : Fragment() {
 
     lateinit var medicoViewModel : MedicoViewModel
+    lateinit var RV: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,36 +33,36 @@ class MedicosFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater!!.inflate(R.layout.fragment_medicos, container, false)
 
-        val RecViewMedicos = v.findViewById<RecyclerView>(R.id.RecViewMedicos)
-        RecViewMedicos.setHasFixedSize(true)
+        RV = v.findViewById<RecyclerView>(R.id.RecViewMedicos)
+        RV.setHasFixedSize(true)
+        return v
+    }
+
+    override fun onResume(){
+        super.onResume()
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        RecViewMedicos.layoutManager = mLayoutManager
+        RV.layoutManager = mLayoutManager
 
-        val dividerItemDecoration = DividerItemDecoration(RecViewMedicos.context, LinearLayout.VERTICAL)
-        RecViewMedicos.addItemDecoration(dividerItemDecoration)
-
-
-
+        val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
+        RV.addItemDecoration(dividerItemDecoration)
 
         val adapter = MedicosAdapter(context)
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val usuarioID = sharedPref.getInt("actualUserID",-1)
         medicoViewModel = ViewModelProviders.of(this).get(MedicoViewModel::class.java)
-        medicoViewModel.allMedicos.observe(this, Observer {
+        medicoViewModel.getMedicosUsuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
         })
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context,DetallesMedicoActivity::class.java)
-            val medicoSeleccionado = adapter.getMedicAt(RecViewMedicos.getChildAdapterPosition(it))
+            val medicoSeleccionado = adapter.getMedicAt(RV.getChildAdapterPosition(it))
             nav.putExtra("MEDIC_ID", medicoSeleccionado.id)
             startActivity(nav)
         })
 
-        RecViewMedicos.adapter = adapter
-    //    medicoViewModel.insert(Medico(0,"Prueba","Cardiologo",344534,"Dr.",1))
-
-        return v
+        RV.adapter = adapter
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_sort, menu)

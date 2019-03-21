@@ -2,6 +2,8 @@ package com.kps.spart.moskimedicationreminder
 
 import android.content.Context
 import android.database.Cursor
+import android.support.v7.recyclerview.extensions.ListAdapter
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 
@@ -9,12 +11,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import elements.FichaContacto
 import model.MMDContract
 
-class FichasContactoAdapter (private val context: Context?, private val cursor: Cursor) : RecyclerView.Adapter<FichasContactoAdapter.ViewHolder>(), View.OnClickListener {
+class FichasContactoAdapter (private val context: Context) : ListAdapter<FichaContacto, FichasContactoAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
 
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<FichaContacto>(){
+        override fun areItemsTheSame(oldItem: FichaContacto, newItem: FichaContacto): Boolean {
+            return oldItem.id == newItem.id
+        }
 
+        override fun areContentsTheSame(oldItem: FichaContacto, newItem: FichaContacto): Boolean {
+            return oldItem.titulo.equals(newItem.titulo) &&
+                    oldItem.direccion.equals(newItem.direccion) &&
+                    oldItem.telefono.equals(newItem.telefono) &&
+                    oldItem.celular.equals(newItem.celular) &&
+                    oldItem.email.equals(newItem.email) &&
+                    oldItem.sitioweb.equals(newItem.sitioweb)
+        }
+    }
     private var listener: View.OnClickListener? = null
+
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val titulo = v.findViewById<TextView>(R.id.tituloFichaContactoTV)
@@ -37,13 +54,16 @@ class FichasContactoAdapter (private val context: Context?, private val cursor: 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        cursor.moveToPosition(position)
-        holder.titulo.text = cursor.getString(cursor.getColumnIndexOrThrow(MMDContract.columnas.TITULO_FICHA_CONTACTO))
+        val fichaActual = getItem(position)
+
+        holder.titulo.text = fichaActual.titulo
+        holder.direccion.text = fichaActual.direccion
+        holder.telefono.text = fichaActual.telefono
+        holder.celular.text = fichaActual.celular
+        holder.email.text = fichaActual.email
+        holder.sitioWeb.text = fichaActual.sitioweb
     }
 
-    override fun getItemCount(): Int {
-        return cursor.count
-    }
 
     fun setOnClickListener(listener: View.OnClickListener){
         this.listener = listener
