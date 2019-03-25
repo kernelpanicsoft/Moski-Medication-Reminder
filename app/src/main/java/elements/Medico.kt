@@ -18,5 +18,6 @@ class Medico (@PrimaryKey(autoGenerate = true) var id: Int,
               var nombre: String? = null,
               var especialidad: String? = null,
               var titulo: String? = null,
+              var fichaContactoAR: Int = -1,
               var usuarioID : Int? = null
               )

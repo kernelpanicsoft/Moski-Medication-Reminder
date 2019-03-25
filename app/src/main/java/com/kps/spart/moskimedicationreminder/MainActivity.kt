@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
         title = getString(R.string.title_home)
 
+        ab.elevation = 4.0f
 
         val bnve = findViewById<BottomNavigationViewEx>(R.id.bn_principal)
         bnve.enableAnimation(true)
@@ -58,29 +59,33 @@ class MainActivity : AppCompatActivity() {
                     transaction.replace(R.id.content, HoyFragment(), getString(R.string.fragmentoHoy)).commit()
                     currentSectionID = item.itemId
                     title = getString(R.string.title_home)
+                    ab.elevation = 4.0f
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_tratamientos -> {
                     transaction.replace(R.id.content, TratamientosFragment(), getString(R.string.fragmentoTratamientos)).commit()
                     currentSectionID = item.itemId
                     title = getString(R.string.title_tratamientos)
+                    ab.elevation = 4.0f
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_medicamentos -> {
                     transaction.replace(R.id.content, MedicamentosFragment(), getString(R.string.fragmentoMedicamentos)).commit()
                     currentSectionID = item.itemId
                     title = getString(R.string.title_medicamentos)
+                    ab.elevation = 4.0f
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_citas -> {
                     transaction.replace(R.id.content, CitasMedicasFragment(), getString(R.string.fragmentoCitas)).commit()
                     currentSectionID = item.itemId
                     title = getString(R.string.title_citas)
+                    ab.elevation = 4.0f
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_directorio -> {
                     val directorioFragment = DirectorioFragment()
-
+                    ab.elevation = 0.0f
                     transaction.replace(R.id.content, directorioFragment, getString(R.string.fragmentoDirectorio)).commit()
                     currentSectionID = item.itemId
                     title = getString(R.string.title_directorio)

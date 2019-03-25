@@ -11,6 +11,7 @@ import elements.Medico
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
@@ -23,13 +24,13 @@ import kotlinx.android.synthetic.main.activity_anadir_medico.*
 
 class AnadirMedicoActivity : AppCompatActivity() {
 
-    private lateinit var medico : Medico
-    private lateinit var adapter : FichaDeContactoCompactaAdapter
-    private var fichas = ArrayList<FichaContacto>()
+   // private lateinit var medico : Medico
 
     lateinit var medicoViewModel : MedicoViewModel
     lateinit var medicoActualLive : LiveData<Medico>
 
+    var tituloDR : String = ""
+    var especialidadDR : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +40,26 @@ class AnadirMedicoActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
-        setTitle(R.string.anadirMedico)
 
 
         medicoViewModel = ViewModelProviders.of(this@AnadirMedicoActivity).get(MedicoViewModel::class.java)
-        medico = Medico(0)
+       // medico = Medico(0)
+
+        if(intent.hasExtra("MEDIC_ID")){
+            title = getString(R.string.editar_medico)
+            medicoActualLive = medicoViewModel.getMedico(intent.getIntExtra("MEDIC_ID", -1))
+            medicoActualLive.observe(this@AnadirMedicoActivity, android.arch.lifecycle.Observer {
+                val tituloTypeIndex = this.resources.getStringArray(R.array.TituloMedico).indexOf(it?.titulo)
+                spinnerTitulo.setSelection(tituloTypeIndex)
+
+                val especialidadTypeIndex = this.resources.getStringArray(R.array.especialidades).indexOf(it?.especialidad)
+                SpinnerEspecialidad.setSelection(especialidadTypeIndex)
+                textInputLayoutNombre.setText(it?.nombre, TextView.BufferType.EDITABLE)
+
+            })
+        }else{
+           title = getString(R.string.anadirMedico)
+        }
 
 
         spinnerTitulo.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.TituloMedico))
@@ -53,7 +69,9 @@ class AnadirMedicoActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                medico.titulo = parent?.getItemAtPosition(position).toString()
+                tituloDR = parent?.getItemAtPosition(position).toString()
+
+
             }
         }
 
@@ -64,93 +82,53 @@ class AnadirMedicoActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                medico.especialidad = parent?.getItemAtPosition(position).toString()
+                especialidadDR = parent?.getItemAtPosition(position).toString()
+
+                when(position){
+                    0 -> { iconoMedicoIV.setImageResource(R.drawable.ic_doctor)}
+                    1 -> { iconoMedicoIV.setImageResource(R.drawable.ic_alergologo)}
+                    2 -> { iconoMedicoIV.setImageResource(R.drawable.ic_anestesiologo)}
+                    3 -> { iconoMedicoIV.setImageResource(R.drawable.ic_angiologo)}
+                    4 -> { iconoMedicoIV.setImageResource(R.drawable.ic_cardiologo)}
+                    5 -> { iconoMedicoIV.setImageResource(R.drawable.ic_dermatologo)}
+                    6 -> { iconoMedicoIV.setImageResource(R.drawable.ic_endocrinologo)}
+                    7 -> { iconoMedicoIV.setImageResource(R.drawable.ic_fisioterapeuta)}
+                    8 -> { iconoMedicoIV.setImageResource(R.drawable.ic_gastroenterologo)}
+                }
+            }
+        }
+
+        guardarMedicoFAB.setOnClickListener {
+            val medico : Medico
+            if(intent.hasExtra("MEDIC_ID")){
+                medico = medicoActualLive.value!!
+            }else{
+                medico = Medico(0)
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicoActivity)
+                val usuarioID = sharedPref.getInt("actualUserID", -1)
+                medico.usuarioID = usuarioID
+
+            }
+            medico.titulo = tituloDR
+            medico.nombre = textInputLayoutNombre.text.toString()
+            medico.especialidad = especialidadDR
+
+
+            if(medico.usuarioID != -1){
+               if(!medico.nombre.isNullOrEmpty()){
+                   saveMedicToBD(medico)
+               }else{
+                   Snackbar.make(it,getString(R.string.es_necesario_especificar_nombre_medico),Snackbar.LENGTH_LONG).show()
+               }
+
 
             }
         }
 
-
-        adapter = FichaDeContactoCompactaAdapter(this@AnadirMedicoActivity, fichas)
-
-        RecViewfichasContacto.setHasFixedSize(true)
-        val mLayoutManager = LinearLayoutManager(this@AnadirMedicoActivity,LinearLayoutManager.VERTICAL, false)
-
-        RecViewfichasContacto.layoutManager = mLayoutManager
-        RecViewfichasContacto.adapter = adapter
-
-
-        addFichaContactoButton.setOnClickListener{
-            val builder = AlertDialog.Builder(this@AnadirMedicoActivity)
-            val inflatedView = layoutInflater.inflate(R.layout.list_item_ficha_contacto, null)
-            builder.setTitle(getString(R.string.anadir_ficha_de_contacto))
-                    .setView(inflatedView)
-                    .setPositiveButton(getString(R.string.guardar), null)
-                    .setNegativeButton(getString(R.string.cancelar)) { dialog, which ->
-
-                    }
-
-            val dialog = builder.create()
-            dialog.setOnShowListener{
-                val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                positiveButton.setOnClickListener{
-                    val fichaContacto = FichaContacto(0)
-                    val tituloFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTituloficha)
-                    val direccionFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutDireccion)
-                    val telefonoFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTelefono)
-                    val celularFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutTelefono)
-                    val emailFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutEmail)
-                    val sitioWebFichaContactoET = inflatedView.findViewById<EditText>(R.id.textInputLayoutWebSite)
-
-                    fichaContacto.titulo = tituloFichaContactoET.text.toString()
-                    fichaContacto.direccion = direccionFichaContactoET.text.toString()
-                    fichaContacto.telefono = telefonoFichaContactoET.text.toString()
-                    fichaContacto.celular = celularFichaContactoET.text.toString()
-                    fichaContacto.email = emailFichaContactoET.text.toString()
-                    fichaContacto.sitioweb = sitioWebFichaContactoET.text.toString()
-
-
-                    if(fichaContacto.titulo.isNullOrEmpty() && (fichaContacto.direccion.isNullOrEmpty() || fichaContacto.telefono.isNullOrEmpty() || fichaContacto.celular.isNullOrEmpty() || fichaContacto.email.isNullOrEmpty() || fichaContacto.sitioweb.isNullOrEmpty())){
-                        Toast.makeText(this@AnadirMedicoActivity,getString(R.string.es_necesario_especificar_el_titulo_y_otro_campo),Toast.LENGTH_LONG).show()
-                    }else{
-                        fichas.add(fichaContacto)
-                        adapter.notifyDataSetChanged()
-                        dialog.dismiss()
-                    }
-            }
-
-            }
-            dialog.show()
-        }
-
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_save, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.itemSave -> {
-                medico.nombre = textInputLayoutNombre.text.toString()
-
-                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirMedicoActivity)
-                val usuarioID = sharedPref.getInt("actualUserID", -1)
-
-                if(usuarioID != -1){
-                    medico.usuarioID = usuarioID
-                    saveMedicToBD(medico)
-                    if(!fichas.isEmpty()){
-                        fichas.forEach {
-
-                        }
-                    }
-                    setResult(Activity.RESULT_OK)
-                    finish()
-                }
-                return true
-            }
             android.R.id.home -> {
                 onBackPressed()
                 return true
@@ -161,38 +139,16 @@ class AnadirMedicoActivity : AppCompatActivity() {
     }
 
     private fun saveMedicToBD(medico: Medico){
-        medicoViewModel.insert(medico)
+        if(intent.hasExtra("MEDIC_ID")){
+            medicoViewModel.update(medico)
+        }else{
+            medicoViewModel.insert(medico)
+        }
+
+
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
-    private fun saveContactCardsToBD(fichaContacto: FichaContacto){
 
-    }
-
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-
-       // outState?.putParcelableArrayList("contactCards",fichas)
-
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        //fichas = savedInstanceState!!.getParcelableArrayList("contactCards")
-        adapter = FichaDeContactoCompactaAdapter(this@AnadirMedicoActivity, fichas)
-
-        RecViewfichasContacto.setHasFixedSize(true)
-        val mLAyoutManager = LinearLayoutManager(this@AnadirMedicoActivity,LinearLayoutManager.VERTICAL, false)
-
-        RecViewfichasContacto.layoutManager = mLAyoutManager
-
-        RecViewfichasContacto.adapter = adapter
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        Toast.makeText(this@AnadirMedicoActivity,"Hola desde el back pressed", Toast.LENGTH_SHORT).show()
-    }
 }

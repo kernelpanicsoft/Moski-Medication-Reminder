@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -42,7 +43,6 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.detalles_establecimiento)
-
 
         establishment_id = intent.getIntExtra("ESTABLISHMENT_ID", -1)
         iconsCollection = this@DetallesEstablecimientoActivity.resources.getStringArray(R.array.tipo_establecimiento)

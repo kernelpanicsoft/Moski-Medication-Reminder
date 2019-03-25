@@ -20,18 +20,15 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-        <android.support.v4.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/LayoutConstrain"
@@ -98,10 +95,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="32dp"
                     android:background="@drawable/background_spinner"
                     android:hint="@string/especialidad"
                     android:minHeight="40dp"
                     android:spinnerMode="dialog"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iconoMedicoIV"
                     app:layout_constraintTop_toBottomOf="@+id/textViewEspecialidad" />
@@ -114,7 +113,7 @@
                     android:layout_marginStart="16dp"
                     android:minHeight="40dp"
                     android:src="@drawable/ic_doctor"
-                    android:tint="@color/blueberry"
+                    android:tint="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/SpinnerEspecialidad"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/SpinnerEspecialidad" />
@@ -127,52 +126,22 @@
                     app:layout_constraintGuide_percent=".5" />
 
 
-                <Button
-                    android:id="@+id/addFichaContactoButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/rounded_button"
-                    android:text="@string/anadir_ficha_de_contacto"
-                    android:textColor="@color/blanco"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iconoMedicoIV" />
-
-
-                <TextView
-                    android:id="@+id/FichasDeContactoTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/fichas_de_contacto"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addFichaContactoButton" />
-
-
             </android.support.constraint.ConstraintLayout>
 
-        </android.support.v4.widget.NestedScrollView>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/RecViewfichasContacto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null" />
+        </LinearLayout>
+
+    </ScrollView>
 
 
-    </LinearLayout>
-
-
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/guardarMedicoFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_white_24dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

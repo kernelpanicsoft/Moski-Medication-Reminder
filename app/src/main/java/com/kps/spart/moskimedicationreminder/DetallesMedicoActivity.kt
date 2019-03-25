@@ -30,8 +30,6 @@ class DetallesMedicoActivity : AppCompatActivity() {
 
     lateinit var fichasContactoViewModel : FichaContactoViewModel
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_medico)
@@ -51,11 +49,10 @@ class DetallesMedicoActivity : AppCompatActivity() {
         medicoActualLive = medicoViewModel.getMedico(medic_id)
         medicoActualLive.observe(this, Observer {
             populateMedicFieldFromDB(it)
+            populateMedicContactCards(it)
         })
 
 
-
-        populateMedicContactCards()
 
     }
 
@@ -73,21 +70,21 @@ class DetallesMedicoActivity : AppCompatActivity() {
 
     }
 
-    private fun populateMedicContactCards(){
+    private fun populateMedicContactCards(medico: Medico?){
         RecViewFichasContactoMedico.setHasFixedSize(true)
         val mLayoutManager = LinearLayoutManager(this@DetallesMedicoActivity,LinearLayoutManager.VERTICAL, false)
         RecViewFichasContactoMedico.layoutManager = mLayoutManager
 
         fichasContactoViewModel = ViewModelProviders.of(this).get(FichaContactoViewModel::class.java)
 
-        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,fichasContactoViewModel)
-        val medic_id = intent.getIntExtra("MEDIC_ID",-1)
+        val adapter = FichasContactoAdapter(this@DetallesMedicoActivity,fichasContactoViewModel, medicoViewModel)
 
         fichasContactoViewModel.getFichasContacto(medic_id).observe(this, Observer<List<FichaContacto>> {
             adapter.submitList(it)
+
         })
 
-
+        adapter.setCurrentMedic(medico!!)
         RecViewFichasContactoMedico.adapter = adapter
     }
 

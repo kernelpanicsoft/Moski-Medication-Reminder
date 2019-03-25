@@ -53,11 +53,15 @@ class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.Vi
         holder.especialidad.text = medicoActual.especialidad
 
         when(iconCollection?.indexOf(medicoActual.especialidad)){
-            0 -> {holder.icono.setImageResource(R.drawable.ic_doctor)}
-            1 -> {holder.icono.setImageResource(R.drawable.ic_alergologo)}
-            2 -> {holder.icono.setImageResource(R.drawable.ic_anestesiologo)}
-            3 -> {holder.icono.setImageResource(R.drawable.ic_angiologo)}
-            4 -> {holder.icono.setImageResource(R.drawable.ic_dermatologo)}
+            0 -> { holder.icono.setImageResource(R.drawable.ic_doctor)}
+            1 -> { holder.icono.setImageResource(R.drawable.ic_alergologo)}
+            2 -> { holder.icono.setImageResource(R.drawable.ic_anestesiologo)}
+            3 -> { holder.icono.setImageResource(R.drawable.ic_angiologo)}
+            4 -> { holder.icono.setImageResource(R.drawable.ic_cardiologo)}
+            5 -> { holder.icono.setImageResource(R.drawable.ic_dermatologo)}
+            6 -> { holder.icono.setImageResource(R.drawable.ic_endocrinologo)}
+            7 -> { holder.icono.setImageResource(R.drawable.ic_fisioterapeuta)}
+            8 -> { holder.icono.setImageResource(R.drawable.ic_gastroenterologo)}
         }
 
     }

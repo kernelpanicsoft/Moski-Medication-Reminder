@@ -1,10 +1,13 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.FichaContactoViewModel
+import MMR.viewModels.MedicoViewModel
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.support.v7.app.AlertDialog
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
@@ -18,8 +21,10 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import elements.FichaContacto
+import elements.Medico
 
-class FichasContactoAdapter (private val context: Context, private val fichasViewModel : FichaContactoViewModel) : ListAdapter<FichaContacto, FichasContactoAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
+class FichasContactoAdapter (private val context: Context, private val fichasViewModel : FichaContactoViewModel, private val medicosViewModel : MedicoViewModel) : ListAdapter<FichaContacto, FichasContactoAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
+
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<FichaContacto>(){
         override fun areItemsTheSame(oldItem: FichaContacto, newItem: FichaContacto): Boolean {
@@ -36,7 +41,7 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
         }
     }
     private var listener: View.OnClickListener? = null
-
+    private lateinit var medicoActual: Medico
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val titulo = v.findViewById<TextView>(R.id.tituloFichaContactoTV)
@@ -47,6 +52,7 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
         val sitioWeb = v.findViewById<TextView>(R.id.websiteTV)
         val accesoRapido = v.findViewById<ImageView>(R.id.imageView23)
         val moreDots = v.findViewById<ImageView>(R.id.optionsContactCardIcon)
+        val scheduleAppointment = v.findViewById<ImageView>(R.id.agendarCitaContactCardIcon)
 
     }
 
@@ -75,13 +81,18 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
 
             popup.setOnMenuItemClickListener { menuItem ->
                  when(menuItem.itemId){
-                    R.id.edit_card ->{
+                     R.id.set_favorite_card ->{
+                         medicoActual.fichaContactoAR = position
+                         medicosViewModel.update(medicoActual)
+                        true
+                     }
+                     R.id.edit_card ->{
                         val editCard = Intent(context,AnadirFichaContactoActivity::class.java)
                         editCard.putExtra("CARD_ID", getItem(position).id)
                         context.startActivity(editCard)
                         true
-                    }
-                    R.id.delete_card ->{
+                     }
+                     R.id.delete_card ->{
                         val builder = AlertDialog.Builder(context)
                         builder.setTitle(context.getString(R.string.eliminar_ficha_de_contacto))
                                 .setMessage(context.getString(R.string.esta_seguro_que_desea_eliminar_ficha_contacto))
@@ -97,6 +108,9 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
                 }
             }
             popup.show()
+        }
+        holder.scheduleAppointment.setOnClickListener {
+            Toast.makeText(context,"Estas agendando cita", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -116,7 +130,8 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
         }
     }
 
-
-
+    fun setCurrentMedic(medico: Medico){
+        medicoActual = medico
+    }
 
 }

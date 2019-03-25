@@ -285,6 +285,9 @@
     <string name="eliminar_ficha_de_contacto">Eliminar ficha de contacto</string>
     <string name="esta_seguro_que_desea_eliminar_ficha_contacto">¿Está seguro que desea eliminar esta ficha de contacto?</string>
     <string name="es_necesario_especificar_el_titulo_de_la_ficha">Es necesario especificar al menos el titulo de la ficha de contacto antes de guardarla</string>
+    <string name="establecer_como_contacto_rapido">Establecer como contacto rápido</string>
+    <string name="editar_medico">Editar médico</string>
+    <string name="es_necesario_especificar_nombre_medico">Es necesario especificar el nombre del médico antes de guardarlo</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>

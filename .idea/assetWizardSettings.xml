@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="c30700" />
-                            <entry key="outputName" value="ic_more_vert_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\account-card-details.svg" />
+                            <entry key="outputName" value="ic_calendar" />
+                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\calendar.svg" />
                           </map>
                         </option>
                       </PersistentState>
