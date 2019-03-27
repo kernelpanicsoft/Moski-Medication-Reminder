@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -22,8 +23,9 @@ import model.MMDContract
 
 class CitasMedicasFragment : Fragment() {
     lateinit var citaMedicasViewModel : CitaMedicaViewModel
+    private var cita_id : Int = -1
 
-
+    lateinit var RV : RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -33,8 +35,16 @@ class CitasMedicasFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val v = inflater!!.inflate(R.layout.fragment_citas_medicas, container, false)
-        val RV = v.findViewById<View>(R.id.RecViewCitas) as RecyclerView
+        RV = v.findViewById<View>(R.id.RecViewCitas) as RecyclerView
         RV.setHasFixedSize(true)
+
+
+        return v
+    }
+
+
+    override fun onResume() {
+        super.onResume()
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         RV.layoutManager = mLayoutManager
@@ -42,27 +52,25 @@ class CitasMedicasFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-
-
         val adapter = CitasAdapter(context)
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val usuarioID = sharedPref.getInt("actualUserID", -1)
         citaMedicasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
-        citaMedicasViewModel.allCitasMedicas.observe(this, Observer{
+        citaMedicasViewModel.getCitasUsuario(usuarioID).observe(this, Observer{
             adapter.submitList(it)
         })
 
         adapter.setOnItemClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesCitaMedicaActivity::class.java)
-
+            val citaSelecciona = adapter.getCitaMedicaAt(RV.getChildAdapterPosition(it))
+            nav.putExtra("CITA_ID", citaSelecciona.id)
             startActivity(nav)
 
         })
 
         RV.adapter = adapter
-        // Inflate the layout for this fragment
-        return v
+
     }
-
-
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

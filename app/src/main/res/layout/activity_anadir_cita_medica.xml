@@ -71,7 +71,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/FechaYHoraEspecificadaTV"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/FechaYHoraEspecificadaTV"
-                    app:srcCompat="@drawable/ic_calendar_date" />
+                    app:srcCompat="@drawable/ic_calendar" />
 
                 <ImageView
                     android:id="@+id/imageView20"
@@ -84,7 +84,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/NombreMedicoET"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/NombreMedicoET"
-                    app:srcCompat="@drawable/ic_doctor" />
+                    app:srcCompat="@drawable/ic_doctor_v2" />
 
                 <ImageView
                     android:id="@+id/imageView21"
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_doctor"
+                    android:src="@drawable/ic_stethoscope"
                     android:tint="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/EspecialidadCitaET"
                     app:layout_constraintStart_toStartOf="parent"
@@ -298,7 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_color_bucket"
+                    android:src="@drawable/ic_paint_bucket"
                     android:tint="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/colorDistintivoButton"
                     app:layout_constraintStart_toStartOf="parent"

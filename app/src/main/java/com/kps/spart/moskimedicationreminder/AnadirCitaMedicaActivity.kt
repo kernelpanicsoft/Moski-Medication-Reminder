@@ -1,8 +1,12 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.CitaMedicaViewModel
+import android.app.Activity
 import elements.CitaMedica
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -22,6 +26,8 @@ import java.util.*
 
 
 class AnadirCitaMedicaActivity : AppCompatActivity() {
+    lateinit var citaViewModel : CitaMedicaViewModel
+    private lateinit var citaActualLive : LiveData<CitaMedica>
 
     val calendario = Calendar.getInstance()
     val sdf = SimpleDateFormat.getDateTimeInstance()
@@ -38,6 +44,8 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
+
+        citaViewModel = ViewModelProviders.of(this@AnadirCitaMedicaActivity).get(CitaMedicaViewModel::class.java)
 
         title = getString(R.string.anadirCita)
         FechaYHoraEspecificadaTV.text = sdf.format(calendario.time)
@@ -151,6 +159,10 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     }
 
     private fun saveAppointmentToDB(cita : CitaMedica){
+        citaViewModel.insert(cita)
+
+        setResult(Activity.RESULT_OK)
+        finish()
 
     }
 

@@ -22,6 +22,8 @@ interface CitaMedicaDao {
     fun getAllCitasMedicas() : LiveData<List<CitaMedica>>
 
     @Query("SELECT * FROM CitaMedica WHERE CitaMedica.id = :id")
-    fun getCitaMEdica(id : Int?) : LiveData<CitaMedica>
+    fun getCitaMedica(id : Int?) : LiveData<CitaMedica>
 
+    @Query("SELECT * FROM CitaMedica WHERE CitaMedica.usuarioID = :id")
+    fun getCitasUsuario(id : Int?) : LiveData<List<CitaMedica>>
 }

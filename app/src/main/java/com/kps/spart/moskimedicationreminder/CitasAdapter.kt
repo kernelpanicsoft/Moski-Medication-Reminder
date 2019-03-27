@@ -30,7 +30,7 @@ class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,Cita
         }
 
         override fun areContentsTheSame(oldItem: CitaMedica, newItem: CitaMedica): Boolean {
-            return oldItem.titulo.equals(newItem.titulo)
+            return oldItem.titulo.equals(newItem.titulo) && oldItem.fechaYhora.equals(newItem.fechaYhora)
         }
 
     }
@@ -38,9 +38,6 @@ class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,Cita
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val esfera: ImageView = v.findViewById(R.id.imageView4)
-        val iconoUbicacion: ImageView = v.findViewById(R.id.imageView5)
-        val iconoDoctor: ImageView = v.findViewById(R.id.imageView6)
-        val iconoFecha: ImageView = v.findViewById(R.id.imageView7)
         val TituloTV: TextView = v.findViewById(R.id.textView4)
         val DoctorTV: TextView = v.findViewById(R.id.medictoCitaTV)
         val DireccionTV: TextView =  v.findViewById(R.id.direccionCitaTV)
@@ -62,6 +59,7 @@ class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,Cita
         holder.TituloTV.text = citaMedicaActual.titulo
         holder.DoctorTV.text = citaMedicaActual.doctor
         holder.DireccionTV.text = citaMedicaActual.ubicacion
+        holder.FechaTV.text = citaMedicaActual.fechaYhora
         //        holder.FechaTV.text = sdf.format(items[position].fechaYhora)
 
     }

@@ -36,7 +36,11 @@ class CitaMedicaRepository (application: Application) {
     }
 
     fun getCitaMedica(id : Int) : LiveData<CitaMedica>{
-        return citaMedicoDao.getCitaMEdica(id)
+        return citaMedicoDao.getCitaMedica(id)
+    }
+
+    fun getCitasUsuario(id : Int) : LiveData<List<CitaMedica>>{
+        return citaMedicoDao.getCitasUsuario(id)
     }
 
     private class InsertCitaMedicaAsyncTask constructor(private val citaMedicaDao: CitaMedicaDao) : AsyncTask<CitaMedica, Void, Void>(){

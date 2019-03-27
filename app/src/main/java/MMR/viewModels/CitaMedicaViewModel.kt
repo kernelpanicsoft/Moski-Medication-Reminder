@@ -8,11 +8,7 @@ import elements.CitaMedica
 
 class CitaMedicaViewModel (application: Application) : AndroidViewModel(application) {
     val repository : CitaMedicaRepository = CitaMedicaRepository(application)
-    val allCitasMedicas : LiveData<List<CitaMedica>>
 
-    init{
-        allCitasMedicas = repository.getAllCitasMedicas()
-    }
 
     fun insert(citaMedica: CitaMedica){
         repository.insert(citaMedica)
@@ -30,8 +26,11 @@ class CitaMedicaViewModel (application: Application) : AndroidViewModel(applicat
         repository.deleteAllCitasMedicas()
     }
 
-    fun getMedico(id : Int) : LiveData<CitaMedica>{
+    fun getCitaMedica(id : Int) : LiveData<CitaMedica>{
         return repository.getCitaMedica(id)
     }
 
+    fun getCitasUsuario(id : Int) : LiveData<List<CitaMedica>>{
+        return repository.getCitasUsuario(id)
+    }
 }

@@ -29,57 +29,43 @@
             android:layout_height="wrap_content"
             >
 
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/CardView9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="0dp"
-                app:contentPadding="16dp"
+            <ImageView
+                android:id="@+id/iconoCitaMedica"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_selectorcolor"
+                android:tint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp">
-
-                    <ImageView
-                        android:id="@+id/iconoCitaMedica"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_selectorcolor"
-                        android:tint="@color/blanco" />
-
-                    <TextView
-                        android:id="@+id/tituloCitaMedica"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Remoción de las muelas del juicio"
-                        android:textAlignment="center"
-                        android:textColor="@color/blanco"
-                        android:textSize="@dimen/titulos" />
-
-                </LinearLayout>
-
-
-            </android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/tituloCitaMedica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulos"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iconoCitaMedica" />
 
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:minHeight="100dp"
                 app:cardBackgroundColor="@color/blanco"
                 app:cardCornerRadius="4dp"
@@ -87,7 +73,7 @@
                 app:contentPadding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/CardView9">
+                app:layout_constraintTop_toBottomOf="@+id/tituloCitaMedica">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -116,7 +102,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tagMedicoTV"
                         android:layout_marginTop="2dp"
-                        android:text="Dr. Parra Guirre Garay esta es una cadena larga para probar el funcionamiento del layout con cadenas que son demaciado grandes como para caber"
                         android:textColor="@color/grisOscuro"
                         android:textSize="@dimen/normal" />
 
@@ -166,7 +151,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider2"
-                        android:text="05/04/2018 11:35 am"
                         android:textColor="@color/grisOscuro"
                         android:textSize="@dimen/normal" />
 
@@ -217,7 +201,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider3"
-                        android:text="Llevar muestra de orina de la primera mision de la mañana y un ayuno de unos 3 días"
                         android:textColor="@color/grisOscuro"
                         android:textSize="@dimen/normal" />
 
@@ -267,7 +250,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider4"
-                        android:text="43A sur 4904 Colonia Estrellas del Sur"
                         android:textColor="@color/grisOscuro"
                         android:textSize="@dimen/normal" />
 
@@ -319,7 +301,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/divider6"
-                        android:text="Llevar muestra de orina de la primera mision de la mañana y un ayuno de unos 3 días"
                         android:textColor="@color/grisOscuro"
                         android:textSize="@dimen/normal" />
 
