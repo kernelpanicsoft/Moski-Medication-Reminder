@@ -7,15 +7,21 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_anadir_cita_medica.*
 import model.MMDContract
 import model.TipoRecordatorio
@@ -28,6 +34,9 @@ import java.util.*
 class AnadirCitaMedicaActivity : AppCompatActivity() {
     lateinit var citaViewModel : CitaMedicaViewModel
     private lateinit var citaActualLive : LiveData<CitaMedica>
+
+    var latitud : Double = 0.0
+    var longitud : Double = 0.0
 
     val calendario = Calendar.getInstance()
     val sdf = SimpleDateFormat.getDateTimeInstance()
@@ -120,10 +129,27 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
             colorPickerDialog.show(fragmentManager,"color_picker_dialer")
         }
 
-
+        anadirUbicacionCitaButton.setOnClickListener {
+            if(latitud == 0.0 && longitud == 0.0){
+                val nav = Intent(this@AnadirCitaMedicaActivity, MapsActivity::class.java)
+                startActivityForResult(nav, 6832)
+            }else{
+                disableMapFragment()
+            }
+        }
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 6832){
+            if(resultCode == Activity.RESULT_OK){
+                latitud = data?.getDoubleExtra("lat", 0.0)!!
+                longitud = data.getDoubleExtra("lng",0.0)
+                addMapFragment(latitud,longitud)
+                anadirUbicacionCitaButton.text = getString(R.string.eliminar_ubicacion)
+            }
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_save, menu)
@@ -143,9 +169,11 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirCitaMedicaActivity)
                 val usuarioID = sharedPref.getInt("actualUserID", -1)
 
-                if(usuarioID != -1){
+                if(usuarioID != -1 && !CitaMedica.titulo.isNullOrEmpty()){
                     CitaMedica.usuarioID = usuarioID
                     saveAppointmentToDB(CitaMedica)
+                }else{
+                    Snackbar.make(TituloCitaET,getString(R.string.es_necesario_especificar_titulo_cita), Snackbar.LENGTH_LONG).show()
                 }
                 return true
             }
@@ -163,7 +191,34 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
 
         setResult(Activity.RESULT_OK)
         finish()
+    }
 
+    private fun addMapFragment(lat : Double, lng : Double){
+        mapaAnadido.visibility = View.VISIBLE
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        val mapFragment = MapFragment()
+        fragmentTransaction.add(R.id.mapaAnadido,mapFragment)
+        fragmentTransaction.commit()
+
+        mapFragment.getMapAsync{
+            val marketLocation = LatLng(lat,lng)
+            it.addMarker(MarkerOptions().position(marketLocation))
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(marketLocation,15.0f))
+            it.uiSettings.isScrollGesturesEnabled = false
+        }
+    }
+
+    private fun disableMapFragment(){
+        val mapFragment = fragmentManager.findFragmentById(R.id.mapaAnadido)
+        if(mapFragment != null){
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.remove(mapFragment).commit()
+        }
+
+        mapaAnadido.visibility = View.GONE
+        latitud = 0.0
+        longitud = 0.0
+        anadirUbicacionCitaButton.text = getString(R.string.a_adir_ubicaci_n_en_mapa)
     }
 
 }

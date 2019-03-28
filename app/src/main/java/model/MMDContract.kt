@@ -28,8 +28,11 @@ object CodigosDeSolicitud{
     const val SELECCIONAR_IMAGEN = 1004
     const val SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO = 1005
     const val EDITAR_MEDICAMENTO = 1006
-    const val EDITAR_ESTABLECIMIENTO = 1007
-
+    const val ELIMINAR_MEDICAMENTO = 1007
+    const val EDITAR_ESTABLECIMIENTO = 1008
+    const val ELIMINAR_ESTABLECIMIENTO = 1009
+    const val EDITAR_CITA = 1010
+    const val ELIMINAR_CITA = 1011
 
 }
 

@@ -4,14 +4,18 @@ import MMR.viewModels.CitaMedicaViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import elements.CitaMedica
 import kotlinx.android.synthetic.main.activity_detalles_cita_medica.*
+import kotlinx.android.synthetic.main.activity_registrar_usuario.*
+import model.CodigosDeSolicitud
 import model.MMDContract
 
 class DetallesCitaMedicaActivity : AppCompatActivity() {
@@ -53,7 +57,37 @@ class DetallesCitaMedicaActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean{
         when(item.itemId){
-            R.id.edit_item -> return true
+            R.id.edit_item ->{
+                val builder = AlertDialog.Builder(this@DetallesCitaMedicaActivity)
+                builder.setItems(R.array.dialogo_editar_eliminar){
+                    _, which ->
+                    when(which){
+                        0 -> {
+                            val nav = Intent(this@DetallesCitaMedicaActivity, AnadirCitaMedicaActivity::class.java)
+                            nav.putExtra("CITA_ID", citaID)
+                            startActivityForResult(nav, CodigosDeSolicitud.EDITAR_CITA)
+                        }
+                        1 -> {
+                            val innerBuilder = AlertDialog.Builder(this@DetallesCitaMedicaActivity)
+                            innerBuilder.setTitle(getString(R.string.eliminar_cita))
+                                    .setMessage(getString(R.string.esta_seguro_que_eliminar_cita))
+                                    .setPositiveButton(getString(R.string.si)){ dialog, id ->
+                                        deleteCita()
+                                    }
+                                    .setNegativeButton(getString(R.string.no)){ dialog, id ->
+
+                                    }
+                            val innerDialog = innerBuilder.create()
+                            innerDialog.show()
+                        }
+                    }
+                }
+
+                val dialog = builder.create()
+                dialog.show()
+                return true
+            }
+
             android.R.id.home -> {
                 onBackPressed()
                 return true
@@ -71,6 +105,14 @@ class DetallesCitaMedicaActivity : AppCompatActivity() {
             notasCitaTV.text = cita?.nota
             DireccionCitaTV.text = cita?.ubicacion
             iconoCitaMedica.setColorFilter(cita?.color!!)
+    }
+
+    private fun deleteCita(){
+        if(citaMedicaActualLive.hasObservers()){
+            citaMedicaActualLive.removeObservers(this@DetallesCitaMedicaActivity)
+            citaMedicaViewModel.delete(citaMedicaActualLive.value!!)
+            finish()
+        }
     }
 
 }

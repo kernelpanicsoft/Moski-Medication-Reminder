@@ -84,7 +84,6 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
                                       deleteEstablishment()
                                     }
                                     .setNegativeButton(getString(R.string.no)){ dialog, id ->
-                                        Toast.makeText(this@DetallesEstablecimientoActivity,"Estas no eliminas el establecimiento" + id,Toast.LENGTH_SHORT).show()
                                     }
 
                             val innerDialog = innerBuilder.create()

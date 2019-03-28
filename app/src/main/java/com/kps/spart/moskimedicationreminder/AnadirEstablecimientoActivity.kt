@@ -203,7 +203,7 @@ class AnadirEstablecimientoActivity : AppCompatActivity() {
         mapaAnadido.visibility = View.GONE
         latitud = 0.0
         longitud = 0.0
-        anadirLocationButton.text=getString(R.string.a_adir_ubicaci_n_en_mapa)
+        anadirLocationButton.text = getString(R.string.a_adir_ubicaci_n_en_mapa)
     }
 
 
