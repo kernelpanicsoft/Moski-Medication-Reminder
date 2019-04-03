@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Alarmas y notificaciones"
+        android:key="pref_key_alerts_settings">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Respaldo"
+        android:key="pref_key_backup">
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

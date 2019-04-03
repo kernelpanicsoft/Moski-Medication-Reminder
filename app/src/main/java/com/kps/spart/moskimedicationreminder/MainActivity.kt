@@ -155,7 +155,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_settings -> {
-
+                    val nav = Intent(this@MainActivity, settingsManager.SettingsActivity::class.java)
+                    startActivity(nav)
                 }
 
             }
