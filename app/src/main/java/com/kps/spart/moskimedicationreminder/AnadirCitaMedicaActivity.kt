@@ -17,13 +17,15 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_anadir_cita_medica.*
-import model.MMDContract
+
+
 import model.TipoRecordatorio
 
 import org.xdty.preference.colorpicker.ColorPickerDialog
@@ -35,6 +37,8 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     lateinit var citaViewModel : CitaMedicaViewModel
     private lateinit var citaActualLive : LiveData<CitaMedica>
 
+    var selectedColor: Int = 0
+
     var latitud : Double = 0.0
     var longitud : Double = 0.0
 
@@ -42,8 +46,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     val sdf = SimpleDateFormat.getDateTimeInstance()
 
 
-    lateinit var CitaMedica : CitaMedica
-
+    var mTipoRecordatorio = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +57,51 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
 
+        selectedColor = ContextCompat.getColor(this@AnadirCitaMedicaActivity,R.color.blueberry)
         citaViewModel = ViewModelProviders.of(this@AnadirCitaMedicaActivity).get(CitaMedicaViewModel::class.java)
 
-        title = getString(R.string.anadirCita)
+        if(intent.hasExtra("CITA_ID")){
+            title = getString(R.string.editar_cita)
+            citaActualLive = citaViewModel.getCitaMedica(intent.getIntExtra("CITA_ID",-1))
+            citaActualLive.observe(this@AnadirCitaMedicaActivity, android.arch.lifecycle.Observer {
+
+                TituloCitaET.setText(it?.titulo, TextView.BufferType.EDITABLE)
+                NombreMedicoET.setText(it?.doctor, TextView.BufferType.EDITABLE)
+                EspecialidadCitaET.setText(it?.especialidad, TextView.BufferType.EDITABLE)
+                NotaET.setText(it?.nota,TextView.BufferType.EDITABLE)
+                FechaYHoraEspecificadaTV.text = it?.fechaYhora
+                UbicacionET.setText(it?.ubicacion, TextView.BufferType.EDITABLE)
+
+                when(it?.tipoRecordatorio){
+                    TipoRecordatorio.NOTIFICACION ->{
+                        AlertRadioButtonGroup.check(R.id.radio_notificacion)
+                    }
+                    TipoRecordatorio.ALARMA ->{
+                        AlertRadioButtonGroup.check(R.id.radio_alarma)
+                    }
+                    TipoRecordatorio.NINGUNO ->{
+                        AlertRadioButtonGroup.check(R.id.radio_ninguna)
+                    }
+                }
+
+                selectedColor = it?.color!!
+                iconoCita.setColorFilter(selectedColor)
+
+                latitud = it?.latitud!!
+                longitud = it?.longitud!!
+
+                if(latitud != 0.0 && longitud != 0.0){
+                    addMapFragment(latitud, longitud)
+                    anadirUbicacionCitaButton.text = getString(R.string.eliminar_ubicacion)
+                }
+            })
+        }else{
+            title = getString(R.string.anadirCita)
+        }
+
         FechaYHoraEspecificadaTV.text = sdf.format(calendario.time)
 
-        CitaMedica = CitaMedica(0)
+
 
 
 
@@ -88,23 +130,23 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
 
         }
 
-        CitaMedica.tipoRecordatorio = TipoRecordatorio.NOTIFICACION
-        RadioButtonGroup.setOnCheckedChangeListener { group, checkedId ->
+        mTipoRecordatorio = TipoRecordatorio.NOTIFICACION
+        AlertRadioButtonGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.radio_notificacion ->{
-                    CitaMedica.tipoRecordatorio = TipoRecordatorio.NOTIFICACION
+                    mTipoRecordatorio = TipoRecordatorio.NOTIFICACION
                 }
                 R.id.radio_alarma ->{
-                    CitaMedica.tipoRecordatorio = TipoRecordatorio.ALARMA
+                    mTipoRecordatorio = TipoRecordatorio.ALARMA
                 }
                 R.id.radio_ninguna ->{
-                    CitaMedica.tipoRecordatorio = TipoRecordatorio.NINGUNO
+                    mTipoRecordatorio = TipoRecordatorio.NINGUNO
                 }
             }
         }
 
-        var selectedColor = ContextCompat.getColor(this@AnadirCitaMedicaActivity,R.color.blueberry)
-        CitaMedica.color = selectedColor
+
+    //    CitaMedica.color = selectedColor
 
         val colors = resources.getIntArray(R.array.default_rainbow)
 
@@ -121,7 +163,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
                 selectedColor = color
                 iconoCita.setColorFilter(selectedColor)
 
-                CitaMedica.color = selectedColor
+              //  CitaMedica.color = selectedColor
 
                 //   Toast.makeText(this@AnadirMedicamentoActivity,"Color seleccionado: " + color + " Valor del recurso: "+ String.format("#%06x",(0xFFFFFF and selectedColor)), Toast.LENGTH_SHORT).show()
             }
@@ -159,19 +201,34 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.itemSave -> {
-                CitaMedica.titulo = TituloCitaET.text.toString()
-                CitaMedica.doctor = NombreMedicoET.text.toString()
-                CitaMedica.especialidad = EspecialidadCitaET.text.toString()
-                CitaMedica.nota = editTextNota.text.toString()
-                CitaMedica.fechaYhora = FechaYHoraEspecificadaTV.text.toString()
-                CitaMedica.ubicacion = UbicacionET.text.toString()
+                val cita : CitaMedica
+                var usuarioID = -1
+
+                if(intent.hasExtra("CITA_ID")){
+                    cita = citaActualLive.value!!
+                }else{
+                    cita = CitaMedica(0)
+                    val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirCitaMedicaActivity)
+                    usuarioID = sharedPref.getInt("actualUserID", -1)
+                    cita.usuarioID = usuarioID
+                }
+
+                cita.titulo = TituloCitaET.text.toString()
+                cita.doctor = NombreMedicoET.text.toString()
+                cita.especialidad = EspecialidadCitaET.text.toString()
+                cita.nota = NotaET.text.toString()
+                cita.fechaYhora = FechaYHoraEspecificadaTV.text.toString()
+                cita.ubicacion = UbicacionET.text.toString()
+                cita.tipoRecordatorio = mTipoRecordatorio
+                cita.color = selectedColor
+                cita.latitud = latitud
+                cita.longitud = longitud
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirCitaMedicaActivity)
-                val usuarioID = sharedPref.getInt("actualUserID", -1)
+                usuarioID = sharedPref.getInt("actualUserID", -1)
 
-                if(usuarioID != -1 && !CitaMedica.titulo.isNullOrEmpty()){
-                    CitaMedica.usuarioID = usuarioID
-                    saveAppointmentToDB(CitaMedica)
+                if(usuarioID != -1 && !cita.titulo.isNullOrEmpty()){
+                    saveAppointmentToDB(cita)
                 }else{
                     Snackbar.make(TituloCitaET,getString(R.string.es_necesario_especificar_titulo_cita), Snackbar.LENGTH_LONG).show()
                 }
@@ -187,7 +244,12 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
     }
 
     private fun saveAppointmentToDB(cita : CitaMedica){
-        citaViewModel.insert(cita)
+        if(intent.hasExtra("CITA_ID")){
+            citaViewModel.update(cita)
+        }else{
+            citaViewModel.insert(cita)
+        }
+
 
         setResult(Activity.RESULT_OK)
         finish()

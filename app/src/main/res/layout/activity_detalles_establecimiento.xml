@@ -125,7 +125,8 @@
                         android:layout_toEndOf="@id/iconoLocFarmacia"
                         android:text="@string/direccionFarmacia"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/subtitulos" />
+                        android:textSize="@dimen/subtitulos"
+                        />
 
                     <View
                         android:id="@+id/divider1"
@@ -140,7 +141,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_marginTop="8dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:background="@color/colorPrimary"
                         android:layout_below="@id/divider1"
                         />

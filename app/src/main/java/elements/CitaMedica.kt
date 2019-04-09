@@ -25,4 +25,5 @@ class CitaMedica(@PrimaryKey(autoGenerate = true) var id: Int,
                  var color: Int? = null,
                  var latitud : Double? = null,
                  var longitud : Double? = null,
+                 var statusCita : Int? = null,
                  var usuarioID : Int? = null)

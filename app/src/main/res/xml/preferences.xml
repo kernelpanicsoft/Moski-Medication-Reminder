@@ -12,4 +12,10 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="Ayudanos a mejorar"
+        android:key="pref_key_help_us">
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

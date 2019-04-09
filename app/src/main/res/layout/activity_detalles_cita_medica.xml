@@ -79,14 +79,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/icono_medico_IV"
+                        android:src="@drawable/ic_doctor_v2"
+                        android:layout_alignParentTop="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:tint="@color/colorPrimary"/>
+
                     <TextView
                         android:id="@+id/tagMedicoTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/icono_medico_IV"
                         android:layout_marginBottom="2dp"
+                        android:layout_marginStart="4dp"
                         android:text="@string/medicoCita"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/subtitulos" />
+                        android:textSize="@dimen/subtitulos"
+                        />
 
                     <View
                         android:id="@+id/divider1"
@@ -113,9 +124,9 @@
                 android:id="@+id/cardView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:minHeight="60dp"
                 app:cardBackgroundColor="@color/blanco"
                 app:cardCornerRadius="4dp"
@@ -129,11 +140,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/icono_calendario_IV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar"
+                        android:tint="@color/colorPrimary" />
+
                     <TextView
                         android:id="@+id/tagHoraYFechaTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:layout_marginBottom="2dp"
+                        android:layout_toEndOf="@id/icono_calendario_IV"
                         android:text="@string/fechaHoraCita"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/subtitulos" />
@@ -164,9 +184,9 @@
                 android:id="@+id/cardView6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:minHeight="60dp"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
@@ -179,11 +199,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/nota_IV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_simple_note"
+                        android:tint="@color/colorPrimary" />
+
                     <TextView
                         android:id="@+id/tagNotasTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
                         android:layout_marginBottom="2dp"
+                        android:layout_toEndOf="@id/nota_IV"
                         android:text="@string/notas"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/subtitulos" />
@@ -212,14 +241,16 @@
                 android:id="@+id/cardView7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:minHeight="60dp"
                 app:cardBackgroundColor="@color/blanco"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
                 app:contentPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView6">
@@ -228,11 +259,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/direccion_IV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_placeholder"
+                        android:tint="@color/colorPrimary" />
+
                     <TextView
                         android:id="@+id/tagDireccionTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
                         android:layout_marginBottom="2dp"
+                        android:layout_toEndOf="@id/direccion_IV"
                         android:text="@string/direccionFarmacia"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/subtitulos" />
@@ -245,67 +285,40 @@
                         android:layout_marginBottom="2dp"
                         android:background="@color/colorPrimary" />
 
+                    <FrameLayout
+                        android:id="@+id/mapaAnadido"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_below="@id/divider4"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorPrimary"
+                        android:visibility="gone" />
+
                     <TextView
                         android:id="@+id/DireccionCitaTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/divider4"
+                        android:layout_below="@id/mapaAnadido"
+                        android:layout_marginTop="4dp"
                         android:textColor="@color/grisOscuro"
                         android:textSize="@dimen/normal" />
 
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/blanco"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp"
-                app:contentPadding="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView7">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
                     <TextView
-                        android:id="@+id/tagUbicacionTV"
+                        android:id="@+id/abrirEnMapasTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/ubicacionCita"
+                        android:layout_below="@id/DireccionCitaTV"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/abrir_en_mapas"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/subtitulos" />
-
-                    <View
-                        android:id="@+id/divider6"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@id/tagUbicacionTV"
-                        android:layout_marginBottom="2dp"
-                        android:background="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/UnicacionCitaTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/divider6"
-                        android:textColor="@color/grisOscuro"
-                        android:textSize="@dimen/normal" />
+                        android:textSize="@dimen/normal"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
+
+
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

@@ -140,8 +140,11 @@ class DetallesMedicoActivity : AppCompatActivity() {
     }
 
     private fun deleteMedic(){
+        if(medicoActualLive.hasObservers()){
+            medicoActualLive.removeObservers(this@DetallesMedicoActivity)
+            medicoViewModel.delete(medicoActualLive.value!!)
 
-
+        }
     }
 
 

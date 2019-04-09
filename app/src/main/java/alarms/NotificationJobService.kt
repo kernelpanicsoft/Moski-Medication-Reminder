@@ -1,0 +1,4 @@
+package alarms
+
+class NotificationJobService {
+}

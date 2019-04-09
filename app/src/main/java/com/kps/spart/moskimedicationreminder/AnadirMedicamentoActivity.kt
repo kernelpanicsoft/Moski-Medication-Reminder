@@ -211,8 +211,6 @@ class AnadirMedicamentoActivity : AppCompatActivity() {
                         Snackbar.make(it,getString(R.string.es_necesario_especificar_nombre_comercial_generico), Snackbar.LENGTH_LONG).show()
                     }
                 }
-
-
         }
         eliminarImagenTV.setOnClickListener {
             val builder = AlertDialog.Builder(this@AnadirMedicamentoActivity)

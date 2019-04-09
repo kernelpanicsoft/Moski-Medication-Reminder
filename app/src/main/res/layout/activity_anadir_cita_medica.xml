@@ -166,8 +166,8 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/fechaHoraCita"
                     android:textSize="@dimen/normal"
-                    app:layout_constraintStart_toStartOf="@+id/editTextNota"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextNota" />
+                    app:layout_constraintStart_toStartOf="@+id/NotaET"
+                    app:layout_constraintTop_toBottomOf="@+id/NotaET" />
 
                 <TextView
                     android:id="@+id/FechaYHoraEspecificadaTV"
@@ -220,7 +220,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/FechaCitaButton" />
 
                 <RadioGroup
-                    android:id="@+id/RadioButtonGroup"
+                    android:id="@+id/AlertRadioButtonGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -273,10 +273,10 @@
                     android:src="@drawable/ic_simple_note"
                     android:tint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editTextNota" />
+                    app:layout_constraintTop_toTopOf="@+id/NotaET" />
 
                 <EditText
-                    android:id="@+id/editTextNota"
+                    android:id="@+id/NotaET"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -312,7 +312,7 @@
                     android:text="@string/colorDistintivo"
                     android:textSize="@dimen/normal"
                     app:layout_constraintStart_toStartOf="@+id/colorDistintivoButton"
-                    app:layout_constraintTop_toBottomOf="@+id/RadioButtonGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/AlertRadioButtonGroup" />
 
                 <Button
                     android:id="@+id/colorDistintivoButton"

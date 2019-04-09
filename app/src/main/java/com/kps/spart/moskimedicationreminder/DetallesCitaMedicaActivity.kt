@@ -5,18 +5,25 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import elements.CitaMedica
 import kotlinx.android.synthetic.main.activity_detalles_cita_medica.*
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 import model.CodigosDeSolicitud
 import model.MMDContract
+import java.util.*
 
 class DetallesCitaMedicaActivity : AppCompatActivity() {
     var citaID : Int = -1
@@ -105,6 +112,36 @@ class DetallesCitaMedicaActivity : AppCompatActivity() {
             notasCitaTV.text = cita?.nota
             DireccionCitaTV.text = cita?.ubicacion
             iconoCitaMedica.setColorFilter(cita?.color!!)
+
+        if(cita.latitud?.compareTo(0.0) != 0 || cita.latitud?.compareTo(0.0) != 0){
+            addMapFragment(cita.latitud!!,cita.longitud!!)
+            abrirEnMapasTV.visibility = View.VISIBLE
+            abrirEnMapasTV.setOnClickListener {
+                val uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)", cita.latitud, cita.longitud, cita.titulo)
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                startActivity(intent)
+            }
+        }else{
+            abrirEnMapasTV.visibility = View.GONE
+            mapaAnadido.visibility = View.GONE
+        }
+    }
+
+    private fun addMapFragment(lat : Double, lng: Double){
+        mapaAnadido.visibility = View.VISIBLE
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val mapFragment = MapFragment()
+        fragmentTransaction.add(R.id.mapaAnadido, mapFragment)
+        fragmentTransaction.commit()
+
+        mapFragment.getMapAsync{
+            val markerLocation = LatLng(lat,lng)
+            it.addMarker(MarkerOptions().position(markerLocation))
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation,15.0f))
+            it.uiSettings.isScrollGesturesEnabled = false
+        }
     }
 
     private fun deleteCita(){

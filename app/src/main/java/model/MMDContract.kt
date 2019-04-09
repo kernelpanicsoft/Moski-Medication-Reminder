@@ -19,6 +19,12 @@ object ContinuidadTratamiento{
     const val INDEFINIDO = 1
 }
 
+object EstatusCita{
+    const val PENDIENTE = 1
+    const val ATENDIDA = 2
+    const val PASADA = 3
+}
+
 
 object CodigosDeSolicitud{
     const val ANADIR_FOTOGRAFIA = 1000

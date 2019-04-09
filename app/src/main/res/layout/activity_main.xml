@@ -58,20 +58,6 @@
 
         </RelativeLayout>
 
-        <!--
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_element_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_white_24dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="68dp"
-
-            />
-        -->
-
-
 
     </android.support.design.widget.CoordinatorLayout>
 

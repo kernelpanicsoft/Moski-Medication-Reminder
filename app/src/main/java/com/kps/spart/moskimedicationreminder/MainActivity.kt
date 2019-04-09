@@ -1,11 +1,9 @@
 package com.kps.spart.moskimedicationreminder
 
-import android.content.Context
+import MMR.viewModels.UsuarioViewModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -15,15 +13,19 @@ import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+import elements.Usuario
+import kotlinx.android.synthetic.main.nav_header.*
 
 
 class MainActivity : AppCompatActivity() {
     private var currentSectionID: Int = 0
     var currentDirectoryID: Int = 0
+    private lateinit var usuarioViewModel: UsuarioViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +40,15 @@ class MainActivity : AppCompatActivity() {
 
         ab.elevation = 4.0f
 
+        usuarioViewModel = ViewModelProviders.of(this).get(UsuarioViewModel::class.java)
+
         val bnve = findViewById<BottomNavigationViewEx>(R.id.bn_principal)
         bnve.enableAnimation(true)
         bnve.enableShiftingMode(false)
         bnve.enableItemShiftingMode(false)
-
-
+        bnve.setTextSize(10.0f)
 
         currentDirectoryID = savedInstanceState?.getInt("currentDirectoryId") ?: 0
-
-
 
         bnve.setOnNavigationItemSelectedListener { item ->
             val manager = supportFragmentManager
@@ -160,15 +161,19 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-
-
             true
         }
 
 
-
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        usuarioViewModel.getUsuario(getCurrentUserID()).observe(this, Observer {
+            updateDrawerLabels(it)
+        })
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -192,6 +197,12 @@ class MainActivity : AppCompatActivity() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
          return sharedPref.getInt("actualUserID", -1)
 
+    }
+
+    fun updateDrawerLabels(usuario: Usuario?){
+        val header_nav_view = nav_view.getHeaderView(0)
+        val nombreUsuarioActual = header_nav_view.findViewById<TextView>(R.id.currentUserNameTV)
+        nombreUsuarioActual.text = usuario?.nombre + " " + usuario?.apellidos
     }
 
 

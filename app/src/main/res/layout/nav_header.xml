@@ -11,19 +11,24 @@
 
     <ImageView
         android:id="@+id/currentUserIV"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/ic_user"
         android:tint="@color/colorPrimaryLight"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="left"
         />
-    <!--
+
     <TextView
+        android:id="@+id/currentUserNameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My header title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/blanco"
+        android:textSize="@dimen/titulos"
+        android:layout_marginTop="16dp"/>
 
-        -->
+
+
 
 </LinearLayout>

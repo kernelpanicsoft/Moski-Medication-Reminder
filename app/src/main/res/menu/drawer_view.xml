@@ -19,10 +19,6 @@
             android:title="@string/configuraci_n"
             />
 
-
-
-
-
     </group>
 
 </menu>

@@ -123,7 +123,7 @@ class DetallesEstablecimientoActivity : AppCompatActivity() {
             addMapFragment(establecimiento?.latitud!!,establecimiento?.longitud!!)
             abrirEnMapasTV.visibility = View.VISIBLE
             abrirEnMapasTV.setOnClickListener {
-                val uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)", establecimiento.latitud, establecimiento.longitud, "Prueba")
+                val uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)", establecimiento.latitud, establecimiento.longitud, establecimiento.nombre)
                 //val uri = "geo:0,0?q=34.99,-106.61(Treasure)"
                 //Toast.makeText(this@DetallesEstablecimientoActivity, "Valor de cadena: " + uri, Toast.LENGTH_SHORT).show()
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
