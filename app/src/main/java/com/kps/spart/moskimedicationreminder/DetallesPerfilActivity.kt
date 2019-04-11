@@ -115,9 +115,11 @@ class DetallesPerfilActivity : AppCompatActivity() {
 
     private fun deleteUser(){
         if(usuarioActualLive.hasObservers()){
-            usuarioActualLive.value?.imagen?.run {
-                deleteImageFile(this)
+
+            if(!usuarioActualLive.value?.imagen!!.isEmpty()){
+                deleteImageFile(usuarioActualLive.value?.imagen)
             }
+
             usuarioActualLive.removeObservers(this@DetallesPerfilActivity)
             usuarioViewModel.delete(usuarioActualLive.value!!)
             finish()

@@ -138,7 +138,7 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
     }
 
-    private fun deleteImageFile(picturePath : String){
+    private fun deleteImageFile(picturePath : String?){
         val photoFile = File(picturePath)
         val photoUri: Uri = FileProvider.getUriForFile(
                 this,
@@ -169,8 +169,8 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
     private fun deleteMedicine(){
         if(medicamentoActualLive.hasObservers()){
-            medicamentoActualLive.value?.fotografia?.run{
-                deleteImageFile(this)
+          if(!medicamentoActualLive.value?.fotografia!!.isEmpty()){
+              deleteImageFile(medicamentoActualLive.value?.fotografia)
             }
             medicamentoActualLive.removeObservers(this@DetallesMedicamentoActivity)
                 medicamentoViewModel.delete(medicamentoActualLive.value!!)
