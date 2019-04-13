@@ -30,8 +30,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="c30700" />
-                            <entry key="outputName" value="ic_calendar" />
-                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\calendar.svg" />
+                            <entry key="outputName" value="ic_hourglass" />
+                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\hourglass.svg" />
                           </map>
                         </option>
                       </PersistentState>

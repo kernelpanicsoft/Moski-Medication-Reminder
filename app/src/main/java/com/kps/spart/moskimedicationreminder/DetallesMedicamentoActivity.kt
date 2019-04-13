@@ -102,7 +102,7 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
 
     private fun populateMedicineFieldsFromDB(medicamento: Medicamento?){
 
-            nombreComercialMedicamentoTV.text = medicamento?.nombreMedicamento
+            nombreComercialMedicamentoTV.text = medicamento?.nombreMedicamento + " " + medicamento?.id
             nombreGenericoMedicamentoTV.text = medicamento?.nombreGenerico
             dosisMedicamento.text = medicamento?.dosis
             val medicineType = medicamento?.tipo

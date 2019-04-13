@@ -33,17 +33,17 @@
                 android:id="@+id/bookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_bookmark"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/editText11"
+                app:layout_constraintBottom_toBottomOf="@+id/tituloTratamientoET"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText11" />
+                app:layout_constraintTop_toTopOf="@+id/tituloTratamientoET" />
 
             <EditText
-                android:id="@+id/editText11"
+                android:id="@+id/tituloTratamientoET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -57,38 +57,58 @@
                 app:layout_constraintStart_toEndOf="@+id/bookmark"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/icono_medicamento_IV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_drugs"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/medicamentoTratamientoTV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/medicamentoTratamientoTV" />
+
             <TextView
                 android:id="@+id/medicamentoTratamientoTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/medicamento"
                 android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText11" />
+                app:layout_constraintStart_toEndOf="@+id/icono_medicamento_IV"
+                app:layout_constraintTop_toBottomOf="@+id/tituloTratamientoET" />
 
             <Spinner
                 android:id="@+id/chooseMedicamentoSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/background_spinner"
                 android:minHeight="40dp"
                 android:spinnerMode="dialog"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/medicamentoTratamientoTV"
                 app:layout_constraintTop_toBottomOf="@+id/medicamentoTratamientoTV" />
 
+            <ImageView
+                android:id="@+id/icono_nota_IV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_simple_note"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/notaTratamientoET" />
+
             <EditText
-                android:id="@+id/editText12"
+                android:id="@+id/notaTratamientoET"
                 android:layout_width="0dp"
                 android:layout_height="115dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/rounded_border_edittext"
                 android:gravity="top"
                 android:hint="@string/nota_o_indicaciones_adicionales"
@@ -97,7 +117,7 @@
                 android:minHeight="40dp"
                 android:minLines="5"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icono_nota_IV"
                 app:layout_constraintTop_toBottomOf="@+id/chooseMedicamentoSpinner" />
 
             <android.support.constraint.Guideline
@@ -107,119 +127,151 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".5" />
 
-            <TextView
-                android:id="@+id/tipoDeContinuidadTV"
+            <ImageView
+                android:id="@+id/continuidad_IV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="@dimen/normal" />
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_wall_clock"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView5" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/continuidad"
                 android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/continuidad_IV"
                 app:layout_constraintTop_toBottomOf="@+id/FechaInicioButton" />
 
             <Spinner
                 android:id="@+id/spinnerPeriodicidad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/background_spinner"
                 android:minHeight="40dp"
                 android:spinnerMode="dialog"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <ImageView
+                android:id="@+id/reminder_icon_IV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_alarm_bell"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tipoNotificacion" />
 
             <TextView
                 android:id="@+id/tipoNotificacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/tipo_de_recodatorio"
                 android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText12" />
+                app:layout_constraintStart_toEndOf="@+id/reminder_icon_IV"
+                app:layout_constraintTop_toBottomOf="@+id/notaTratamientoET" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tipoNotificacion"
                 app:layout_constraintTop_toBottomOf="@+id/tipoNotificacion">
 
                 <RadioButton
                     android:id="@+id/notificacionRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/normal"
+                    android:checked="true"
                     android:text="@string/notificaci_n"
-                    android:checked="true"/>
+                    android:textSize="@dimen/normal" />
 
                 <RadioButton
                     android:id="@+id/alarmaRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/normal"
-                    android:text="@string/alarma" />
+                    android:text="@string/alarma"
+                    android:textSize="@dimen/normal" />
 
 
             </RadioGroup>
 
 
+            <ImageView
+                android:id="@+id/fechaInicioIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_calendar"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/fechaDeInicioNotaTV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fechaDeInicioNotaTV" />
+
             <TextView
                 android:id="@+id/fechaDeInicioNotaTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/fecha_de_inicio"
                 android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/fechaInicioIV"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
 
 
             <Button
                 android:id="@+id/FechaInicioButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="13/09/2018"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/blanco"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_button"
-                android:textSize="@dimen/normal"
+                android:backgroundTint="@color/colorPrimary"
                 android:minHeight="56dp"
+                android:text="13/09/2018"
+                android:textColor="@color/blanco"
+                android:textSize="@dimen/normal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fechaDeInicioNotaTV"
                 app:layout_constraintTop_toBottomOf="@+id/fechaDeInicioNotaTV" />
+
+            <ImageView
+                android:id="@+id/continue_icon_IV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_hourglass"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/comoRegistrarLasTomasTV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/comoRegistrarLasTomasTV" />
 
             <TextView
                 android:id="@+id/comoRegistrarLasTomasTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/c_mo_desea_registrar_sus_tomas"
                 android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/continue_icon_IV"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodicidad" />
 
 
@@ -228,38 +280,46 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/comoRegistrarLasTomasTV"
                 app:layout_constraintTop_toBottomOf="@+id/comoRegistrarLasTomasTV">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="@string/por_cada_x_horas"
-                    android:textSize="@dimen/subtitulos"
-                    android:checked="true"/>
+                    android:textSize="@dimen/normal" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/normal"
-                    android:text="@string/por_x_veces_al_d_a"/>
-
-
+                    android:text="@string/por_x_veces_al_d_a"
+                    android:textSize="@dimen/normal" />
 
             </RadioGroup>
+
+            <ImageView
+                android:id="@+id/sleep_icon_IM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_moon"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/HorarioDeSueñoTV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/HorarioDeSueñoTV" />
 
             <TextView
                 android:id="@+id/HorarioDeSueñoTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/incluir_horario_de_sue_o"
                 android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sleep_icon_IM"
                 app:layout_constraintTop_toBottomOf="@+id/RadibuttonComoRegistrarTomas" />
 
             <CheckBox

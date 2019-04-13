@@ -8,11 +8,7 @@ import elements.Tratamiento
 
 class TratamientoViewModel (application: Application) : AndroidViewModel(application) {
     val repository : TratamientoRepository = TratamientoRepository(application)
-    val allTratamientos : LiveData<List<Tratamiento>>
 
-    init{
-        allTratamientos = repository.getAllTratamientos(0)
-    }
 
     fun insert(tratamiento: Tratamiento){
         repository.insert(tratamiento)

@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 
 import elements.Tratamiento
 
@@ -23,6 +25,7 @@ import elements.Tratamiento
 class TratamientosFragment : Fragment() {
 
     lateinit var tratamientoViewModel : TratamientoViewModel
+    lateinit var RV : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class TratamientosFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val v = inflater!!.inflate(R.layout.fragment_tratamientos, container, false)
-        val RV = v.findViewById<RecyclerView>(R.id.RecViewTratamientos)
+        RV = v.findViewById<RecyclerView>(R.id.RecViewTratamientos)
         RV.setHasFixedSize(true)
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -44,9 +47,12 @@ class TratamientosFragment : Fragment() {
 
 
         val adapter = TratamientosAdapter(context)
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val usuaarioID = sharedPref.getInt("actualUserID", -1)
         tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
-        tratamientoViewModel.allTratamientos.observe(this, Observer {
+        tratamientoViewModel.getAllTratamientosUsuario(usuaarioID).observe(this, Observer {
             adapter.submitList(it)
+            Toast.makeText(context,"Tamaño de lista: " + it?.size, Toast.LENGTH_SHORT).show()
         })
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesTratamientoActivity::class.java)
@@ -73,6 +79,10 @@ class TratamientosFragment : Fragment() {
             R.id.itemADD -> {
                 val nav = Intent(context, AnadirTratamientoActivity::class.java)
                 startActivity(nav)
+               // val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+               // val usuarioID = sharedPref.getInt("actualUserID", -1)
+               // var tratamiento = Tratamiento(0,"Tratamiento desde fragment",usuarioID,2 )
+               // tratamientoViewModel.insert(tratamiento)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

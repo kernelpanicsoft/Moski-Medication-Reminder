@@ -187,9 +187,9 @@
     <string name="tipo_de_recodatorio">Tipo de recodatorio:</string>
     <string name="fecha_de_inicio">Fecha de inicio:</string>
     <string name="c_mo_desea_registrar_sus_tomas">¿Cómo desea registrar sus tomas?</string>
-    <string name="por_cada_x_horas">Por cada x horas</string>
-    <string name="por_x_veces_al_d_a">Por x veces al día</string>
-    <string name="incluir_horario_de_sue_o">¿Incluir horario de sueño?</string>
+    <string name="por_cada_x_horas">Cada X horas</string>
+    <string name="por_x_veces_al_d_a">X veces al día</string>
+    <string name="incluir_horario_de_sue_o">¿Excluir horario de sueño?</string>
     <string name="hora_de_dormir">Hora de dormir:</string>
     <string name="hora_de_despertar">Hora de despertar:</string>
     <string name="hora_de_la_primera_toma">Hora de la primera toma:</string>
@@ -216,11 +216,6 @@
     <string name="contrasena_necesaria">Es necesario especificar una contraseña y un email de recuperación</string>
     <string name="error_crear_usuario">Ocurrió un problema durante la creación del usuario, intente de nuevo</string>
     <string name="usuario_creado_correctamente">Usuario registrado correctamente</string>
-    <array name="continuidad_tratamiento">
-        <item>Periodo</item>
-        <item>Indefinido</item>
-        <item>Hasta acabar medicamento</item>
-    </array>
     <string name="detalle_usuario">Detalles del usuario</string>
     <array name="origen_imagen">
         <item>Galería</item>
@@ -305,4 +300,10 @@
         <item>Editar</item>
         <item>Eliminar</item>
     </array>
+
+    <array name="continuidad_tratamiento">
+        <item>Periodo</item>
+        <item>Indefinido</item>
+    </array>
+
 </resources>

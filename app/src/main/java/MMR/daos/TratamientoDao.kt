@@ -21,7 +21,7 @@ interface TratamientoDao {
     @Query("DELETE FROM Tratamiento WHERE Tratamiento.usuarioID = :id")
     fun deleteAllTratamientosUsuario(id: Int?)
 
-    @Query("SELECT * FROM Tratamiento WHERE Tratamiento.medicamentoID = :usuarioID")
+    @Query("SELECT * FROM Tratamiento WHERE Tratamiento.usuarioID = :usuarioID")
     fun getTratamientosUsuario(usuarioID : Int) : LiveData<List<Tratamiento>>
 
     @Query("SELECT * FROM Tratamiento WHERE Tratamiento.id = :id")
