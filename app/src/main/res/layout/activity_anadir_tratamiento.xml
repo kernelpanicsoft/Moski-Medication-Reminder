@@ -79,19 +79,6 @@
                 app:layout_constraintStart_toEndOf="@+id/icono_medicamento_IV"
                 app:layout_constraintTop_toBottomOf="@+id/tituloTratamientoET" />
 
-            <Spinner
-                android:id="@+id/chooseMedicamentoSpinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/background_spinner"
-                android:minHeight="40dp"
-                android:spinnerMode="dialog"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/medicamentoTratamientoTV"
-                app:layout_constraintTop_toBottomOf="@+id/medicamentoTratamientoTV" />
-
             <ImageView
                 android:id="@+id/icono_nota_IV"
                 android:layout_width="wrap_content"
@@ -101,6 +88,75 @@
                 android:tint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/notaTratamientoET" />
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardViewMedicamentoTratamiento"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/medicamentoTratamientoTV"
+                app:layout_constraintTop_toBottomOf="@+id/medicamentoTratamientoTV"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/blanco">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/MedicamentoIconoTV"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/ic_capsula"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/nombreMedicamento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Proponolol"
+
+                        android:textSize="@dimen/subtitulos"
+                        app:layout_constraintStart_toEndOf="@+id/MedicamentoIconoTV"
+                        app:layout_constraintTop_toBottomOf="@+id/nombreComercialMedicamento" />
+
+                    <TextView
+                        android:id="@+id/nombreComercialMedicamento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Inderalici"
+                        android:textColor="@color/negro"
+                        android:textSize="@dimen/titulos"
+                        app:layout_constraintStart_toEndOf="@+id/MedicamentoIconoTV"
+                        app:layout_constraintTop_toTopOf="@+id/MedicamentoIconoTV" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <Button
+                android:id="@+id/elegirMedicamentoBT"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/elegir_medicamento"
+                android:textColor="@color/blanco"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/medicamentoTratamientoTV"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewMedicamentoTratamiento" />
 
             <EditText
                 android:id="@+id/notaTratamientoET"
@@ -118,7 +174,7 @@
                 android:minLines="5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/icono_nota_IV"
-                app:layout_constraintTop_toBottomOf="@+id/chooseMedicamentoSpinner" />
+                app:layout_constraintTop_toBottomOf="@+id/elegirMedicamentoBT" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline4"

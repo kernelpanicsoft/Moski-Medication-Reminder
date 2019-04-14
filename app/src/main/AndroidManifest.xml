@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ElegirMedicamentoActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -98,12 +98,12 @@
             android:name=".DetallesPerfilActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".AnadirFichaContactoActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="settingsManager.SettingsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AnadirFichaContactoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="settingsManager.SettingsActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
