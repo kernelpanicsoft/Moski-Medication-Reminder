@@ -50,7 +50,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_bookmark" />
+        app:srcCompat="@drawable/ic_bookmark"
+        android:tint="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/tagTratamientoTV"

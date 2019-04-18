@@ -105,6 +105,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
 
 
 
+
         FechaCitaButton.setOnClickListener{
             val datePickerFragment = DatePickerDialog(this@AnadirCitaMedicaActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 calendario.set(Calendar.YEAR, year)

@@ -19,6 +19,12 @@ object ContinuidadTratamiento{
     const val INDEFINIDO = 1
 }
 
+object EstatusTratamiento{
+    const val ACTIVO = 0
+    const val TERMINADO = 1
+    const val PAUSADO = 2
+}
+
 object EstatusCita{
     const val PENDIENTE = 1
     const val ATENDIDA = 2

@@ -59,7 +59,7 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<Tratamien
         val tratamientoActual = getItem(position)
         holder.bookmarkTV.text = tratamientoActual.titulo
         holder.medicamentoTV.text = tratamientoActual.medicamentoID.toString()
-        holder.statusTV.text = tratamientoActual.status
+        holder.statusTV.text = tratamientoActual.status.toString()
     }
 
     fun setOnClickListener(listener: View.OnClickListener){

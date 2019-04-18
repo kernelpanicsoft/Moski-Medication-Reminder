@@ -289,6 +289,10 @@
     <string name="configuracion">Configuración</string>
     <string name="editar_cita">Editar Cita</string>
     <string name="elegir_medicamento">Elegir médicamento</string>
+    <string name="seleccione_un_medicamento_registrado_para_poder_crear_el_tratamiento">Seleccione un medicamento registrado para poder crear el tratamiento.</string>
+    <string name="registrar_tratamiento_y_programar_tomas">Registrar tratamiento y programar tomas</string>
+    <string name="numero_de_dias">Número de días:</string>
+    <string name="fecha_de_finalizaci_n">Fecha de finalización:</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>
