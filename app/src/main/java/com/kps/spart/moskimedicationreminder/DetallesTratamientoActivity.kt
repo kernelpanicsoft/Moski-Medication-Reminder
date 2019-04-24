@@ -1,27 +1,29 @@
 package com.kps.spart.moskimedicationreminder
 
-import MMR.viewModels.MedicamentoViewModel
-import MMR.viewModels.TratamientoViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import elements.Medicamento
-import elements.Tratamiento
 import kotlinx.android.synthetic.main.activity_detalles_tratamiento.*
 
 class DetallesTratamientoActivity : AppCompatActivity() {
 
     private var tratamiento_id = -1
+
+    /*
     lateinit var tratamientoViewModel: TratamientoViewModel
     lateinit var tratamientoActualLive: LiveData<Tratamiento>
 
     lateinit var medicamentoViewModel: MedicamentoViewModel
     lateinit var mecidamentoActualLive: LiveData<Medicamento>
+*/
+  //  private var tabLayout: TabLayout? = null
+  //  private var viewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,16 +33,21 @@ class DetallesTratamientoActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Tratamiento"
 
+
+
         tratamiento_id = intent.getIntExtra("TRATAMIENTO_ID", -1)
 
+        setupViewPager(viewPagerTratamiento)
+        tabLayoutTratamiento!!.setupWithViewPager(viewPagerTratamiento)
+
+
+        /*
         tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
         tratamientoActualLive = tratamientoViewModel.getTratamiento(tratamiento_id)
         tratamientoActualLive.observe(this, Observer {
             populateTreatmentFieldsFromDB(it)
         })
-
-
-
+        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,6 +66,36 @@ class DetallesTratamientoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun setupViewPager(pager: ViewPager?){
+        val adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(DetallesTratamientoFragment(),"Detalles")
+        adapter.addFragment(TomasFragment(),"Tomas")
+        pager?.adapter = adapter
+    }
+
+    private inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager){
+        private val mFragmentList = ArrayList<Fragment>()
+        private val mFragmentTitleList = ArrayList<String>()
+
+        override fun getItem(position: Int) : Fragment{
+            return mFragmentList[position]
+        }
+
+        override fun getCount(): Int{
+            return mFragmentList.size
+        }
+
+        fun addFragment(fragment: Fragment, title: String){
+            mFragmentList.add(fragment)
+            mFragmentTitleList.add(title)
+        }
+
+        override fun getPageTitle(position: Int): CharSequence{
+            return mFragmentTitleList[position]
+        }
+    }
+
+    /*
     private fun populateTreatmentFieldsFromDB(tratamiento: Tratamiento?){
         TituloTratamientoTV.text = tratamiento?.titulo
         IndicacionesTratamientoTV.text = tratamiento?.indicaciones
@@ -91,6 +128,6 @@ class DetallesTratamientoActivity : AppCompatActivity() {
             NotasMedicamentoTV.text = it?.nota
 
         })
-    }
+    }}*/
 }
 
