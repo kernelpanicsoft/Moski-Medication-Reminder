@@ -1,5 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicamentoViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
@@ -18,6 +20,7 @@ import elements.Tratamiento
 
 class TratamientosAdapter(private val context: Context?) : ListAdapter<Tratamiento,TratamientosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
+
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<Tratamiento>(){
         override fun areItemsTheSame(oldItem: Tratamiento, newItem: Tratamiento): Boolean {

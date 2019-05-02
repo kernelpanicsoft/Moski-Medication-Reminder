@@ -37,4 +37,8 @@ class TratamientoViewModel (application: Application) : AndroidViewModel(applica
     fun getAllTratamientosUsuario(usuarioID: Int) : LiveData<List<Tratamiento>>{
         return repository.getAllTratamientos(usuarioID)
     }
+
+    fun getLastID() : LiveData<Long>{
+        return repository.getLastInsertedID()
+    }
 }

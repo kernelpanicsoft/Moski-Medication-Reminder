@@ -2,6 +2,7 @@ package com.kps.spart.moskimedicationreminder
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_anadir_tomas.*
 
 class AnadirTomasActivity : AppCompatActivity() {
@@ -13,7 +14,9 @@ class AnadirTomasActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
-        title = "Registrar tomas"
+        title = getString(R.string.registrar_toma)
+
+        Toast.makeText(this@AnadirTomasActivity,"Valor del ID del elemento: " + intent.getLongExtra("TREATMENT_ID", -1), Toast.LENGTH_SHORT).show()
 
 
     }

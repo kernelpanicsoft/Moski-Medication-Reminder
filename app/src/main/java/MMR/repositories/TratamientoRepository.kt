@@ -4,10 +4,14 @@ import MMR.daos.TratamientoDao
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import android.util.Log
+import android.widget.Toast
 import elements.Tratamiento
 import model.MMRDataBase
 
+
 class TratamientoRepository (application: Application) {
+
     val tratamientoDao : TratamientoDao
 
     init{
@@ -15,9 +19,10 @@ class TratamientoRepository (application: Application) {
         tratamientoDao = database.tratamientoDao()
     }
 
-    fun insert(tratamiento: Tratamiento){
+    fun insert(tratamiento: Tratamiento) {
         InsertTratamientoAsyncTask(tratamientoDao).execute(tratamiento)
     }
+
 
     fun update(tratamiento: Tratamiento){
         UpdateTratamientoAsyncTask(tratamientoDao).execute(tratamiento)
@@ -43,10 +48,13 @@ class TratamientoRepository (application: Application) {
         return tratamientoDao.getTratamiento(id)
     }
 
-    private class InsertTratamientoAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Tratamiento, Void, Void>(){
-        override fun doInBackground(vararg params: Tratamiento): Void?{
-            tratamientoDao.insert(params[0])
-            return null
+    fun getLastInsertedID() : LiveData<Long>{
+        return tratamientoDao.getLastID()
+    }
+
+    private class InsertTratamientoAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Tratamiento, Void, Long>(){
+        override fun doInBackground(vararg params: Tratamiento): Long?{
+            return tratamientoDao.insert(params[0])
         }
     }
 

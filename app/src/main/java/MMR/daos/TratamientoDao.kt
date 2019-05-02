@@ -7,7 +7,7 @@ import elements.Tratamiento
 @Dao
 interface TratamientoDao {
     @Insert
-    fun insert(tratamiento : Tratamiento)
+    fun insert(tratamiento : Tratamiento): Long
 
     @Update
     fun update(tratamiento: Tratamiento)
@@ -27,4 +27,6 @@ interface TratamientoDao {
     @Query("SELECT * FROM Tratamiento WHERE Tratamiento.id = :id")
     fun getTratamiento(id : Int?) : LiveData<Tratamiento>
 
+    @Query("SELECT max(id) FROM Tratamiento")
+    fun getLastID() : LiveData<Long>
 }

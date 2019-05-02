@@ -14,6 +14,7 @@ import android.preference.PreferenceManager
 import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -187,7 +188,8 @@ class AnadirTratamientoActivity : AppCompatActivity() {
             tratamientoViewModel.update(tratamiento)
         }else{
             tratamientoViewModel.insert(tratamiento)
-            Toast.makeText(this,"Tratamiento insertado", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this@AnadirTratamientoActivity,"ID del tratamiento anadido: " + resultado,Toast.LENGTH_LONG).show()
+            //Log.d("ID Tratamiento", resultado.toString())
         }
         setResult(Activity.RESULT_OK)
         finish()
