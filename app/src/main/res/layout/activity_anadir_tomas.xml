@@ -17,162 +17,17 @@
             android:background="?attr/colorPrimary"/>
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecViewAddTomas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"/>
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <ImageView
-                android:id="@+id/continue_icon_IV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_hourglass"
-                android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/comoRegistrarLasTomasTV"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/comoRegistrarLasTomasTV" />
-
-            <TextView
-                android:id="@+id/comoRegistrarLasTomasTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/c_mo_desea_registrar_sus_tomas"
-                android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toEndOf="@+id/continue_icon_IV"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <RadioGroup
-                android:id="@+id/RadibuttonComoRegistrarTomas"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/comoRegistrarLasTomasTV"
-                app:layout_constraintTop_toBottomOf="@+id/comoRegistrarLasTomasTV">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/por_cada_x_horas"
-                    android:textSize="@dimen/normal" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/por_x_veces_al_d_a"
-                    android:textSize="@dimen/normal" />
-
-            </RadioGroup>
-
-            <ImageView
-                android:id="@+id/sleep_icon_IM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_moon"
-                android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/HorarioDeSueñoTV"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/HorarioDeSueñoTV" />
-
-            <TextView
-                android:id="@+id/HorarioDeSueñoTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/incluir_horario_de_sue_o"
-                android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toEndOf="@+id/sleep_icon_IM"
-                app:layout_constraintTop_toBottomOf="@+id/RadibuttonComoRegistrarTomas" />
-
-            <CheckBox
-                android:id="@+id/HorarioDeSueñoCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/HorarioDeSueñoTV"
-                app:layout_constraintStart_toEndOf="@+id/HorarioDeSueñoTV"
-                app:layout_constraintTop_toTopOf="@+id/HorarioDeSueñoTV" />
-
-
-            <TextView
-                android:id="@+id/HoraInicioDormir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/hora_de_dormir"
-                android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="@+id/horaInicioSuenoButton"
-                app:layout_constraintTop_toBottomOf="@+id/HorarioDeSueñoTV" />
-
-
-            <Button
-                android:id="@+id/horaInicioSuenoButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorPrimary"
-                android:minHeight="56dp"
-                android:text="12:19"
-                android:textColor="@color/blanco"
-                android:textSize="@dimen/normal"
-                app:layout_constraintEnd_toStartOf="@+id/guideline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/HoraInicioDormir" />
-
-
-            <TextView
-                android:id="@+id/HoraFinDormir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/hora_de_despertar"
-                android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toStartOf="@+id/horaFinSuenoButton"
-                app:layout_constraintTop_toBottomOf="@+id/HorarioDeSueñoTV" />
-
-            <Button
-                android:id="@+id/horaFinSuenoButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorPrimary"
-                android:minHeight="56dp"
-                android:text="12:19"
-                android:textColor="@color/blanco"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline6"
-                app:layout_constraintTop_toBottomOf="@+id/HoraFinDormir" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="204dp" />
-
-
-        </android.support.constraint.ConstraintLayout>
-
-    </ScrollView>
-
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addShootFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white_24dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"/>
 </android.support.design.widget.CoordinatorLayout>

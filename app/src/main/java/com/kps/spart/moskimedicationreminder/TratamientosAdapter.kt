@@ -61,7 +61,7 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<Tratamien
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tratamientoActual = getItem(position)
         holder.bookmarkTV.text = tratamientoActual.titulo
-        holder.medicamentoTV.text = tratamientoActual.medicamentoID.toString()
+        holder.medicamentoTV.text = tratamientoActual.id.toString()
         holder.statusTV.text = tratamientoActual.status.toString()
     }
 

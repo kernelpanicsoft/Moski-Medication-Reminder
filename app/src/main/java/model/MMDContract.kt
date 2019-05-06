@@ -31,6 +31,12 @@ object EstatusCita{
     const val PASADA = 3
 }
 
+object EstatusToma{
+    const val PROGRAMADA = 1
+    const val TOMADA = 2
+    const val PASADA = 3
+}
+
 
 object CodigosDeSolicitud{
     const val ANADIR_FOTOGRAFIA = 1000
@@ -54,8 +60,6 @@ object MMDContract {
     object columnas : BaseColumns {
 
         const val TABLA_DOCTOR = "doctor"
-
-        const val TITULO_FICHA_CONTACTO = "titulo_ficha_contacto"
 
     }
 
