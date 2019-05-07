@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_detalles_tratamiento.*
 
 class DetallesTratamientoActivity : AppCompatActivity() {
 
-    private var tratamiento_id = -1
+     var tratamiento_id = -1
+
 
     /*
     lateinit var tratamientoViewModel: TratamientoViewModel
@@ -68,8 +69,8 @@ class DetallesTratamientoActivity : AppCompatActivity() {
 
     private fun setupViewPager(pager: ViewPager?){
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(DetallesTratamientoFragment(),"Detalles")
-        adapter.addFragment(TomasFragment(),"Tomas")
+        adapter.addFragment(DetallesTratamientoFragment(),getString(R.string.detalles))
+        adapter.addFragment(TomasFragment(),getString(R.string.tomas))
         pager?.adapter = adapter
     }
 
@@ -95,39 +96,6 @@ class DetallesTratamientoActivity : AppCompatActivity() {
         }
     }
 
-    /*
-    private fun populateTreatmentFieldsFromDB(tratamiento: Tratamiento?){
-        TituloTratamientoTV.text = tratamiento?.titulo
-        IndicacionesTratamientoTV.text = tratamiento?.indicaciones
 
-        medicamentoViewModel = ViewModelProviders.of(this@DetallesTratamientoActivity).get(MedicamentoViewModel::class.java)
-
-
-        val iconsCollection = resources?.getStringArray(R.array.TipoMedicamento)
-        medicamentoViewModel.getMedicamento(tratamiento?.medicamentoID!!).observe(this, Observer {
-            medicamentoTratamientoTV.text = it?.nombreMedicamento
-            val medicineType = it?.tipo
-            val iconsCollection = resources?.getStringArray(R.array.TipoMedicamento)
-            when(iconsCollection?.indexOf(medicineType)){
-                0 -> {IconoMedicamento.setImageResource(R.drawable.ic_roundpill)}
-                1 -> {IconoMedicamento.setImageResource(R.drawable.ic_tab)}
-                2 -> {IconoMedicamento.setImageResource(R.drawable.ic_capsula)}
-                3 -> {IconoMedicamento.setImageResource(R.drawable.ic_syrup)}
-                4 -> {IconoMedicamento.setImageResource(R.drawable.ic_drops)}
-                5 -> {IconoMedicamento.setImageResource(R.drawable.ic_eyedrops)}
-                6 -> {IconoMedicamento.setImageResource(R.drawable.ic_ointment)}
-                7 -> {IconoMedicamento.setImageResource(R.drawable.ic_powder)}
-                8 -> {IconoMedicamento.setImageResource(R.drawable.ic_gel)}
-                9 -> {IconoMedicamento.setImageResource(R.drawable.ic_inhalator)}
-                10-> {IconoMedicamento.setImageResource(R.drawable.ic_suppository)}
-                11-> {IconoMedicamento.setImageResource(R.drawable.ic_intravenous)}
-                12-> {IconoMedicamento.setImageResource(R.drawable.ic_syringe)}
-            }
-
-            IconoMedicamento.setColorFilter(it?.color!!)
-            NotasMedicamentoTV.text = it?.nota
-
-        })
-    }}*/
 }
 
