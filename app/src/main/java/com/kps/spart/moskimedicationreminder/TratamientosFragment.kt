@@ -69,10 +69,7 @@ class TratamientosFragment : Fragment() {
         return v
     }
 
-    override fun onDetach() {
-        super.onDetach()
 
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_add, menu)

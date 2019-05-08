@@ -7,11 +7,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.arch.lifecycle.Observer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import elements.Toma
@@ -45,21 +47,37 @@ class AnadirTomasActivity : AppCompatActivity() {
         val dividerItemDecoration = DividerItemDecoration(RecViewAddTomas.context, LinearLayout.VERTICAL)
         RecViewAddTomas.addItemDecoration(dividerItemDecoration)
 
-        val adapter = RegistrarTomasAdapter()
 
         tomasViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
-        tomasViewModel.getTomasTratamiento(1).observe(this, Observer{
+        val adapter = RegistrarTomasAdapter(tomasViewModel)
+        tomasViewModel.getTomasTratamiento(idTratamiento.toInt()).observe(this, Observer{
             adapter.submitList(it)
-         //   Toast.makeText(this,"Tamaño de la lista de tomas: " + it?.size, Toast.LENGTH_SHORT).show()
+        })
+
+        adapter.setOnItemClickListener(View.OnClickListener {
+            val builder = AlertDialog.Builder(this@AnadirTomasActivity)
+            builder.setTitle(getString(R.string.eliminar_toma))
+                    .setPositiveButton(getString(R.string.eliminar)){
+                        dialog, id ->
+                        tomasViewModel.delete(adapter.getShootAt(RecViewAddTomas.getChildAdapterPosition(it)))
+
+                    }
+                    .setNegativeButton(getString(R.string.cancelar)){
+                        dialog, id ->
+                    }
+
+            val dialog = builder.create()
+            dialog.show()
         })
 
         RecViewAddTomas.adapter = adapter
 
+
+
         addShootFAB.setOnClickListener {
-          /*  val timePickerFragment = TimePickerDialog(this@AnadirTomasActivity, TimePickerDialog.OnTimeSetListener{ view, hourOfDay, minute ->
+            val timePickerFragment = TimePickerDialog(this@AnadirTomasActivity, TimePickerDialog.OnTimeSetListener{ view, hourOfDay, minute ->
                 calendario.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendario.set(Calendar.MINUTE, minute)
-
 
                // Toast.makeText(this@AnadirTomasActivity,"Hora: " + sdf.format(calendario.time) + "ID Del tratamiento: " + idTratamiento,Toast.LENGTH_SHORT).show()
                 val nuevaToma = Toma(0,EstatusToma.PROGRAMADA,sdf.format(calendario.time),idTratamiento.toInt())
@@ -67,9 +85,7 @@ class AnadirTomasActivity : AppCompatActivity() {
             }, calendario.get(Calendar.HOUR_OF_DAY), calendario.get(Calendar.MINUTE), android.text.format.DateFormat.is24HourFormat(this@AnadirTomasActivity))
 
             timePickerFragment.show()
-*/
-            val nuevaToma = Toma(0,EstatusToma.PROGRAMADA,sdf.format(calendario.time),idTratamiento.toInt())
-            tomasViewModel.insert(nuevaToma)
+
         }
 
     }

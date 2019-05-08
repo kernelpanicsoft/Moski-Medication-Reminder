@@ -34,7 +34,7 @@ class TomasFragment : Fragment() {
 
         val adapter = HorarioAdapter()
         tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
-        tomaViewModel.getTomasTratamiento(1).observe(this, Observer {
+        tomaViewModel.getTomasTratamiento((activity as DetallesTratamientoActivity).tratamiento_id).observe(this, Observer {
             adapter.submitList(it)
         })
 
