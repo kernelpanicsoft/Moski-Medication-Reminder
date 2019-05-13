@@ -32,15 +32,12 @@ class TomasFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val adapter = HorarioAdapter()
+        val adapter = DetallesTomaAdapter()
         tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
         tomaViewModel.getTomasTratamiento((activity as DetallesTratamientoActivity).tratamiento_id).observe(this, Observer {
             adapter.submitList(it)
         })
 
-        adapter.setOnClickListener(View.OnClickListener {
-
-        })
 
         RV.adapter = adapter
 

@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.Toast
+import elements.JoinMedicamentoTratamientoData
 import elements.Tratamiento
 import model.MMRDataBase
 
@@ -52,6 +53,9 @@ class TratamientoRepository (application: Application) {
         return tratamientoDao.getLastID()
     }
 
+    fun getTratamientosUsuario(id: Int) : LiveData<List<JoinMedicamentoTratamientoData>>{
+        return tratamientoDao.getTratamientosConMedicamentoUsuario(id)
+    }
     private class InsertTratamientoAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Tratamiento, Void, Long>(){
         override fun doInBackground(vararg params: Tratamiento): Long?{
             return tratamientoDao.insert(params[0])

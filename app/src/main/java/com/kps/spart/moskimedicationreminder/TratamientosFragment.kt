@@ -53,14 +53,14 @@ class TratamientosFragment : Fragment() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val usuarioID = sharedPref.getInt("actualUserID", -1)
         tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
-        tratamientoViewModel.getAllTratamientosUsuario(usuarioID).observe(this, Observer {
+        tratamientoViewModel.getTratamientosUsuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
             Toast.makeText(context,"Tamaño lista: " + it?.size, Toast.LENGTH_SHORT).show()
         })
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesTratamientoActivity::class.java)
-            val tratamientoSeleccionado = adapter.getTratamientoAt(RV.getChildAdapterPosition(it))
-            nav.putExtra("TRATAMIENTO_ID", tratamientoSeleccionado.id)
+         //   val tratamientoSeleccionado = adapter.getTratamientoAt(RV.getChildAdapterPosition(it))
+         //   nav.putExtra("TRATAMIENTO_ID", tratamientoSeleccionado.id)
             startActivity(nav)
         })
 

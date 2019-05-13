@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import elements.JoinMedicamentoTratamientoData
 
 import elements.Tratamiento
 
@@ -18,17 +19,17 @@ import elements.Tratamiento
  * Created by spart on 20/12/2017.
  */
 
-class TratamientosAdapter(private val context: Context?) : ListAdapter<Tratamiento,TratamientosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
+class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedicamentoTratamientoData,TratamientosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
 
 
-    class DIFF_CALLBACK : DiffUtil.ItemCallback<Tratamiento>(){
-        override fun areItemsTheSame(oldItem: Tratamiento, newItem: Tratamiento): Boolean {
-            return oldItem.id == newItem.id
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinMedicamentoTratamientoData>(){
+        override fun areItemsTheSame(oldItem: JoinMedicamentoTratamientoData, newItem: JoinMedicamentoTratamientoData): Boolean {
+            return oldItem.titulo.equals(newItem.titulo)
         }
 
-        override fun areContentsTheSame(oldItem: Tratamiento, newItem: Tratamiento): Boolean {
-            return oldItem.titulo.equals(newItem.titulo) && oldItem.medicamentoID == newItem.medicamentoID
+        override fun areContentsTheSame(oldItem: JoinMedicamentoTratamientoData, newItem: JoinMedicamentoTratamientoData): Boolean {
+            return oldItem.titulo.equals(newItem.titulo) //&& oldItem.medicamentoID == newItem.medicamentoID
         }
     }
 
@@ -61,8 +62,8 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<Tratamien
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tratamientoActual = getItem(position)
         holder.bookmarkTV.text = tratamientoActual.titulo
-        holder.medicamentoTV.text = tratamientoActual.id.toString()
-        holder.statusTV.text = tratamientoActual.status.toString()
+        holder.medicamentoTV.text = tratamientoActual.medicamento
+        //holder.statusTV.text = tratamientoActual.status.toString()
     }
 
     fun setOnClickListener(listener: View.OnClickListener){
@@ -73,7 +74,7 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<Tratamien
         listener!!.onClick(v)
     }
 
-    fun getTratamientoAt(position: Int) : Tratamiento{
+    fun getTratamientoAt(position: Int) : JoinMedicamentoTratamientoData{
         return getItem(position)
     }
 }

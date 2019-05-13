@@ -4,6 +4,7 @@ import MMR.repositories.TratamientoRepository
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import elements.JoinMedicamentoTratamientoData
 import elements.Tratamiento
 
 class TratamientoViewModel (application: Application) : AndroidViewModel(application) {
@@ -38,6 +39,9 @@ class TratamientoViewModel (application: Application) : AndroidViewModel(applica
         return repository.getAllTratamientos(usuarioID)
     }
 
+    fun getTratamientosUsuario(usuarioID: Int) : LiveData<List<JoinMedicamentoTratamientoData>>{
+        return repository.getTratamientosUsuario(usuarioID)
+    }
     fun getLastID() : LiveData<Long>{
         return repository.getLastInsertedID()
     }
