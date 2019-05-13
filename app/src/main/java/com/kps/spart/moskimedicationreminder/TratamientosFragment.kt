@@ -42,6 +42,13 @@ class TratamientosFragment : Fragment() {
         RV = v.findViewById<RecyclerView>(R.id.RecViewTratamientos)
         RV.setHasFixedSize(true)
 
+
+        return v
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         RV.layoutManager = mLayoutManager
 
@@ -59,16 +66,14 @@ class TratamientosFragment : Fragment() {
         })
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesTratamientoActivity::class.java)
-         //   val tratamientoSeleccionado = adapter.getTratamientoAt(RV.getChildAdapterPosition(it))
-         //   nav.putExtra("TRATAMIENTO_ID", tratamientoSeleccionado.id)
+            //   val tratamientoSeleccionado = adapter.getTratamientoAt(RV.getChildAdapterPosition(it))
+            //   nav.putExtra("TRATAMIENTO_ID", tratamientoSeleccionado.id)
             startActivity(nav)
         })
 
 
         RV.adapter = adapter
-        return v
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
