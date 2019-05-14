@@ -32,6 +32,6 @@ interface TratamientoDao {
     @Query("SELECT max(id) FROM Tratamiento")
     fun getLastID() : LiveData<Long>
 
-    @Query("SELECT titulo, nombreMedicamento FROM Medicamento JOIN Tratamiento WHERE Tratamiento.usuarioID = :usuarioID")
+    @Query("SELECT titulo, nombreMedicamento, color, tipo, Tratamiento.id FROM Medicamento JOIN Tratamiento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.usuarioID = :usuarioID")
     fun getTratamientosConMedicamentoUsuario(usuarioID: Int) : LiveData<List<JoinMedicamentoTratamientoData>>
 }

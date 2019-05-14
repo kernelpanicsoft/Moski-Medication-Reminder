@@ -15,12 +15,12 @@ import elements.JoinMedicamentoTratamientoData
 
 import elements.Tratamiento
 
-/**
- * Created by spart on 20/12/2017.
- */
+
 
 class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedicamentoTratamientoData,TratamientosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
+    private val iconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
+
 
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinMedicamentoTratamientoData>(){
@@ -61,9 +61,28 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedic
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tratamientoActual = getItem(position)
-        holder.bookmarkTV.text = tratamientoActual.titulo
+        holder.bookmarkTV.text = tratamientoActual.titulo + " " + tratamientoActual.tratamientoID
         holder.medicamentoTV.text = tratamientoActual.medicamento
+        holder.iconoMedicamentoIV.setColorFilter(tratamientoActual.color!!)
         //holder.statusTV.text = tratamientoActual.status.toString()
+
+        val medicineType = tratamientoActual.tipo
+
+        when(iconsCollection?.indexOf(medicineType)){
+            0 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_roundpill)}
+            1 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_tab)}
+            2 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_capsula)}
+            3 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_syrup)}
+            4 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_drops)}
+            5 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_eyedrops)}
+            6 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_ointment)}
+            7 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_powder)}
+            8 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_gel)}
+            9 -> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_inhalator)}
+            10-> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_suppository)}
+            11-> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_intravenous)}
+            12-> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_syringe)}
+        }
     }
 
     fun setOnClickListener(listener: View.OnClickListener){
