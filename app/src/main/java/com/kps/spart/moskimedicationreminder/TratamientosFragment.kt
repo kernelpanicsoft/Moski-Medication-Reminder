@@ -62,7 +62,7 @@ class TratamientosFragment : Fragment() {
         tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
         tratamientoViewModel.getTratamientosUsuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
-            Toast.makeText(context,"Tamaño lista: " + it?.size, Toast.LENGTH_SHORT).show()
+
         })
         adapter.setOnClickListener(View.OnClickListener {
             val nav = Intent(context, DetallesTratamientoActivity::class.java)

@@ -315,4 +315,9 @@
         <item>Indefinido</item>
     </array>
 
+    <array name="acciones_toma">
+        <item>Tomar</item>
+        <item>Saltar</item>
+        <item>Posponer</item>
+    </array>
 </resources>

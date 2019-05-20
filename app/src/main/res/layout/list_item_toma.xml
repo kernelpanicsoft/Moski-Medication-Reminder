@@ -24,7 +24,8 @@
         app:layout_constraintEnd_toEndOf="@+id/MedicamentoIconoTV"
         app:layout_constraintStart_toStartOf="@+id/MedicamentoIconoTV"
         app:layout_constraintTop_toBottomOf="@+id/MedicamentoIconoTV"
-        app:srcCompat="@drawable/ic_bookmark" />
+        app:srcCompat="@drawable/ic_bookmark"
+        android:tint="@color/colorPrimary"/>
 
     <ImageView
         android:id="@+id/iconoHoraToma"
@@ -36,36 +37,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewHoraToma"
         app:layout_constraintTop_toBottomOf="@+id/iconoTrataMiento"
-        app:srcCompat="@drawable/ic_alarm" />
+        app:srcCompat="@drawable/ic_alarm"
+        android:tint="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/textViewMedicamento"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="@color/negro"
         android:textSize="@dimen/subtitulos"
         app:layout_constraintBottom_toBottomOf="@+id/MedicamentoIconoTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/MedicamentoIconoTV"
-        app:layout_constraintTop_toTopOf="@+id/MedicamentoIconoTV"
-        tools:text="Dexometazona" />
+        app:layout_constraintTop_toTopOf="@+id/MedicamentoIconoTV" />
 
     <TextView
         android:id="@+id/textViewTratamiento"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
         android:textSize="@dimen/normal"
         app:layout_constraintBottom_toBottomOf="@+id/iconoTrataMiento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/iconoTrataMiento"
-        app:layout_constraintTop_toTopOf="@+id/iconoTrataMiento"
-        tools:text="Tratamiento por extracción Muela del juicio" />
+        app:layout_constraintStart_toStartOf="@+id/textViewMedicamento"
+        app:layout_constraintTop_toTopOf="@+id/iconoTrataMiento" />
 
     <TextView
         android:id="@+id/textViewHoraToma"

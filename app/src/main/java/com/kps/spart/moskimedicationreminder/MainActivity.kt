@@ -4,6 +4,7 @@ import MMR.viewModels.UsuarioViewModel
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -202,10 +204,41 @@ class MainActivity : AppCompatActivity() {
     fun updateDrawerLabels(usuario: Usuario?){
         val header_nav_view = nav_view.getHeaderView(0)
         val nombreUsuarioActual = header_nav_view.findViewById<TextView>(R.id.currentUserNameTV)
+        val imagenUsuarioActual = header_nav_view.findViewById<ImageView>(R.id.currentUserIV)
         nombreUsuarioActual.text = usuario?.nombre + " " + usuario?.apellidos
+
+        val valueInPixels = resources.getDimension(R.dimen.listItemImagen)
+        if(usuario?.imagen.isNullOrEmpty()){
+            imagenUsuarioActual.setImageResource(R.drawable.ic_user)
+        }else{
+            setPic(usuario?.imagen!!, valueInPixels.toInt(),valueInPixels.toInt(),imagenUsuarioActual)
+        }
+      /* usuario?.imagen?.let {
+           setPic(it, imagenUsuarioActual.width,imagenUsuarioActual.height,imagenUsuarioActual)
+           Toast.makeText(this,"La imagen no es null", Toast.LENGTH_SHORT).show()
+        }
+*/
+
     }
 
 
+    private fun setPic(mCurrentPhotoPath : String, targetW: Int, targetH: Int, userPic : ImageView)  {
+        val bmOptions = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(mCurrentPhotoPath,this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
+            userPic.setImageBitmap(bitmap)
+        }
+    }
 
 
 }

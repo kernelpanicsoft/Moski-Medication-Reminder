@@ -7,7 +7,9 @@ import android.arch.lifecycle.ViewModelProviders
 import elements.Toma
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -24,6 +26,7 @@ import android.widget.Toast
 class HoyFragment : Fragment() {
 
     lateinit var tomaViewModel : TomaViewModel
+    lateinit var RV: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +42,16 @@ class HoyFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater!!.inflate(R.layout.fragment_hoy, container, false)
 
-        val RV = v.findViewById<RecyclerView>(R.id.RecViewHoy)
+        RV = v.findViewById<RecyclerView>(R.id.RecViewHoy)
         RV.setHasFixedSize(true)
+
+
+
+        return v
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         RV.layoutManager = mLayoutManager
@@ -48,20 +59,38 @@ class HoyFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val usuarioID = sharedPref.getInt("actualUserID",-1)
 
-        val adapter = HorarioAdapter()
+        val adapter = HorarioAdapter(context)
         tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
-        tomaViewModel.allTomas.observe(this, Observer {
+        tomaViewModel.getTomasDelDiaUsusuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
         })
 
         adapter.setOnClickListener(View.OnClickListener {
+            val builder = AlertDialog.Builder(context!!)
+            builder.setTitle("Acciones de toma")
+                    .setItems(R.array.acciones_toma){ dialog, which ->
+                        when(which){
+                            0 -> {
 
+                            }
+                            1 -> {
+
+                            }
+
+                            2 -> {
+
+                            }
+                        }
+                    }
+
+            val dialog = builder.create()
+            dialog.show()
         })
 
         RV.adapter = adapter
-
-        return v
     }
 
 
@@ -75,8 +104,8 @@ class HoyFragment : Fragment() {
         when (item!!.itemId) {
             R.id.itemFilter -> {
                 Toast.makeText(context, "Estás haciendo click en el icono sort", Toast.LENGTH_SHORT).show()
-                val nav = Intent(context,RegistrarUsuarioActivity::class.java)
-                startActivity(nav)
+
+
                 return true
             }
         }

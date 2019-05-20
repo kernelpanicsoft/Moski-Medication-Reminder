@@ -61,7 +61,7 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedic
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tratamientoActual = getItem(position)
-        holder.bookmarkTV.text = tratamientoActual.titulo + " " + tratamientoActual.tratamientoID
+        holder.bookmarkTV.text = tratamientoActual.titulo
         holder.medicamentoTV.text = tratamientoActual.medicamento
         holder.iconoMedicamentoIV.setColorFilter(tratamientoActual.color!!)
         //holder.statusTV.text = tratamientoActual.status.toString()

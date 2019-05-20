@@ -4,6 +4,7 @@ import MMR.repositories.TomaRepository
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import elements.JoinTomasDelDia
 import elements.Toma
 
 class TomaViewModel (application: Application) : AndroidViewModel(application) {
@@ -42,5 +43,9 @@ class TomaViewModel (application: Application) : AndroidViewModel(application) {
 
     fun getTomasTratamiento( idTramiento : Int) : LiveData<List<Toma>>{
         return repository.getTomasTratamiento(idTramiento)
+    }
+
+    fun getTomasDelDiaUsusuario( id: Int) : LiveData<List<JoinTomasDelDia>>{
+        return repository.getTomasDelDiaUsuario(id)
     }
 }

@@ -4,6 +4,7 @@ import MMR.daos.TomaDao
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import elements.JoinTomasDelDia
 import elements.Toma
 import model.MMRDataBase
 
@@ -45,6 +46,10 @@ class TomaRepository(application: Application) {
 
     fun getTomasTratamiento( idTratamiento : Int) : LiveData<List<Toma>>{
         return tomaDao.getTomasTratamiento(idTratamiento)
+    }
+
+    fun getTomasDelDiaUsuario(id: Int) : LiveData<List<JoinTomasDelDia>>{
+        return tomaDao.getTomasDia(id)
     }
 
     private class InsertTomaAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Toma, Void, Void>(){

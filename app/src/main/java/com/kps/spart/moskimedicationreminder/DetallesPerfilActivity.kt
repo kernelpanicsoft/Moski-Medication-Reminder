@@ -102,7 +102,7 @@ class DetallesPerfilActivity : AppCompatActivity() {
             NombreApellidosUsuarioTV.text = "${usuario?.nombre} ${usuario?.apellidos}"
             GeneroUsuarioTV.text = usuario?.genero
             EdadUsuarioTV.text = usuario?.edad.toString()
-            val  valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
+            val valueInPixels = resources.getDimension(R.dimen.UserProfileImageSingle)
 
             if(usuario?.imagen.isNullOrEmpty()){
                 PerfilIV.setImageResource(R.drawable.ic_user)

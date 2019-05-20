@@ -2,6 +2,7 @@ package MMR.daos
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
+import elements.JoinTomasDelDia
 import elements.Toma
 
 @Dao
@@ -30,4 +31,6 @@ interface TomaDao {
     @Query("SELECT * FROM Toma WHERE Toma.tratamientoID = :id")
     fun getTomasTratamiento(id: Int?) : LiveData<List<Toma>>
 
+    @Query("SELECT statusToma, horaToma, nombreMedicamento, tipo, titulo, color FROM TOMA JOIN Tratamiento ON Tratamiento.id = Toma.tratamientoID JOIN Medicamento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.usuarioID = :id")
+    fun getTomasDia(id: Int?) :  LiveData<List<JoinTomasDelDia>>
 }
