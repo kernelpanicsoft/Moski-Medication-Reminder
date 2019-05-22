@@ -62,26 +62,26 @@ class HoyFragment : Fragment() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val usuarioID = sharedPref.getInt("actualUserID",-1)
 
-        val adapter = HorarioAdapter(context)
+
         tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
+        val adapter = HorarioAdapter(context, tomaViewModel)
         tomaViewModel.getTomasDelDiaUsusuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
         })
 
         adapter.setOnClickListener(View.OnClickListener {
             val builder = AlertDialog.Builder(context!!)
-            builder.setTitle("Acciones de toma")
+            builder.setTitle(getString(R.string.acciones_de_toma))
                     .setItems(R.array.acciones_toma){ dialog, which ->
                         when(which){
-                            0 -> {
-
-                            }
                             1 -> {
-
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),1)
                             }
-
                             2 -> {
-
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),2)
+                            }
+                            3 -> {
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),3)
                             }
                         }
                     }

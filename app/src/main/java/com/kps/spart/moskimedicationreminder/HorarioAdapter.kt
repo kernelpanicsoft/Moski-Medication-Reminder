@@ -1,19 +1,27 @@
 package com.kps.spart.moskimedicationreminder
+import MMR.viewModels.TomaViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import elements.Toma
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import elements.JoinTomasDelDia
+import model.EstatusToma
 
-class HorarioAdapter(private val context: Context?) : ListAdapter<JoinTomasDelDia,HorarioAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
+class HorarioAdapter(private val context: Context?, private val tomaViewModel: TomaViewModel) : ListAdapter<JoinTomasDelDia,HorarioAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
     private var listener : View.OnClickListener? = null
     private val iconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
+
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinTomasDelDia>(){
         override fun areItemsTheSame(oldItem: JoinTomasDelDia, newItem: JoinTomasDelDia): Boolean {
@@ -32,6 +40,7 @@ class HorarioAdapter(private val context: Context?) : ListAdapter<JoinTomasDelDi
         val nombreMedicamentoTV: TextView
         val nombreTratamientoTV: TextView
         val horaToma: TextView
+        val layoutStatusToma: FrameLayout
 
         init{
             iconoMedicamento = v.findViewById(R.id.MedicamentoIconoTV)
@@ -39,7 +48,7 @@ class HorarioAdapter(private val context: Context?) : ListAdapter<JoinTomasDelDi
             nombreTratamientoTV = v.findViewById(R.id.textViewTratamiento)
             nombreMedicamentoTV = v.findViewById(R.id.textViewMedicamento)
             horaToma = v.findViewById(R.id.textViewHoraToma)
-
+            layoutStatusToma = v.findViewById(R.id.frameLayourColorToma)
         }
 
     }
@@ -60,6 +69,17 @@ class HorarioAdapter(private val context: Context?) : ListAdapter<JoinTomasDelDi
         holder.nombreTratamientoTV.text = tomaActual.tituloTratamiento
         holder.nombreMedicamentoTV.text = tomaActual.medicamento
 
+        when(tomaActual.statusToma){
+            EstatusToma.PROGRAMADA->{
+                holder.layoutStatusToma.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryLight))
+            }
+            EstatusToma.TOMADA->{
+                holder.layoutStatusToma.setBackgroundColor(Color.GREEN)
+            }
+            EstatusToma.PASADA->{
+                holder.layoutStatusToma.setBackgroundColor(Color.RED)
+            }
+        }
 
         val medicineType = tomaActual.tipo
 
@@ -88,5 +108,12 @@ class HorarioAdapter(private val context: Context?) : ListAdapter<JoinTomasDelDi
         if (listener != null){
             listener!!.onClick(v)
             }
+    }
+
+    fun changeShotStatus(position: Int,status: Int){
+        val tomaActual = getItem(position)
+
+
+        tomaViewModel.updateTomaStatus(tomaActual.id!!,status)
     }
 }

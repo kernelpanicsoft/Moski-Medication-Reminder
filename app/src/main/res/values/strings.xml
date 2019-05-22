@@ -297,6 +297,7 @@
     <string name="detalles">Detalles</string>
     <string name="tomas">Tomas</string>
     <string name="eliminar_toma">¿Eliminar toma?</string>
+    <string name="acciones_de_toma">Acciones de toma</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>

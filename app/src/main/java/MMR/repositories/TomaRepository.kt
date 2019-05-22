@@ -52,6 +52,10 @@ class TomaRepository(application: Application) {
         return tomaDao.getTomasDia(id)
     }
 
+    fun updateTomaStatus(idToma: Int, status: Int){
+        tomaDao.updateTomaStatus(idToma,status)
+    }
+
     private class InsertTomaAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Toma, Void, Void>(){
         override fun doInBackground(vararg params: Toma): Void? {
             tomaDao.insert(params[0])

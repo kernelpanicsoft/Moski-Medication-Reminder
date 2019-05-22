@@ -48,4 +48,8 @@ class TomaViewModel (application: Application) : AndroidViewModel(application) {
     fun getTomasDelDiaUsusuario( id: Int) : LiveData<List<JoinTomasDelDia>>{
         return repository.getTomasDelDiaUsuario(id)
     }
+
+    fun updateTomaStatus(id:Int, status: Int){
+        repository.updateTomaStatus(id,status)
+    }
 }

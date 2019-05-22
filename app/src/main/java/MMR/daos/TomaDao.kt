@@ -31,6 +31,9 @@ interface TomaDao {
     @Query("SELECT * FROM Toma WHERE Toma.tratamientoID = :id")
     fun getTomasTratamiento(id: Int?) : LiveData<List<Toma>>
 
-    @Query("SELECT statusToma, horaToma, nombreMedicamento, tipo, titulo, color FROM TOMA JOIN Tratamiento ON Tratamiento.id = Toma.tratamientoID JOIN Medicamento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.usuarioID = :id")
+    @Query("SELECT Toma.id, statusToma, horaToma, nombreMedicamento, tipo, titulo, color FROM TOMA JOIN Tratamiento ON Tratamiento.id = Toma.tratamientoID JOIN Medicamento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.usuarioID = :id")
     fun getTomasDia(id: Int?) :  LiveData<List<JoinTomasDelDia>>
+
+    @Query("UPDATE Toma SET statusToma=:status WHERE id = :id")
+    fun updateTomaStatus(id: Int, status: Int)
 }
