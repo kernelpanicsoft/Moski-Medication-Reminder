@@ -69,15 +69,20 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
         holder.nombreTratamientoTV.text = tomaActual.tituloTratamiento
         holder.nombreMedicamentoTV.text = tomaActual.medicamento
 
+
+
         when(tomaActual.statusToma){
             EstatusToma.PROGRAMADA->{
                 holder.layoutStatusToma.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryLight))
             }
             EstatusToma.TOMADA->{
-                holder.layoutStatusToma.setBackgroundColor(Color.GREEN)
+                holder.layoutStatusToma.setBackgroundColor(ContextCompat.getColor(context!!,R.color.green))
             }
             EstatusToma.PASADA->{
-                holder.layoutStatusToma.setBackgroundColor(Color.RED)
+                holder.layoutStatusToma.setBackgroundColor(ContextCompat.getColor(context!!,R.color.red))
+            }
+            EstatusToma.POSPUESTA->{
+                holder.layoutStatusToma.setBackgroundColor(ContextCompat.getColor(context!!,R.color.orange))
             }
         }
 
@@ -112,8 +117,7 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
 
     fun changeShotStatus(position: Int,status: Int){
         val tomaActual = getItem(position)
-
-
+        Log.d("EstatusEnShotStatus", status.toString())
         tomaViewModel.updateTomaStatus(tomaActual.id!!,status)
     }
 }

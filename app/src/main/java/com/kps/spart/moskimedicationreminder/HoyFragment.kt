@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -21,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import model.EstatusToma
 
 
 class HoyFragment : Fragment() {
@@ -74,14 +76,17 @@ class HoyFragment : Fragment() {
             builder.setTitle(getString(R.string.acciones_de_toma))
                     .setItems(R.array.acciones_toma){ dialog, which ->
                         when(which){
+                            0 -> {
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
+                                Log.d("EstatusEnHoyFragment", EstatusToma.TOMADA.toString())
+                            }
                             1 -> {
-                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),1)
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
+                                Log.d("EstatusEnHoyFragment", EstatusToma.PASADA.toString())
                             }
                             2 -> {
-                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),2)
-                            }
-                            3 -> {
-                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),3)
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
+                                Log.d("EstatusEnHoyFragment", EstatusToma.POSPUESTA.toString())
                             }
                         }
                     }

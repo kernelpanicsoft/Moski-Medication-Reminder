@@ -35,6 +35,7 @@ object EstatusToma{
     const val PROGRAMADA = 1
     const val TOMADA = 2
     const val PASADA = 3
+    const val POSPUESTA = 4
 }
 
 
