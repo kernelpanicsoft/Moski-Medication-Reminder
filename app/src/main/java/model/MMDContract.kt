@@ -54,6 +54,7 @@ object CodigosDeSolicitud{
     const val ELIMINAR_CITA = 1011
     const val ELEGIR_MEDICAMENTO = 1012
     const val ANADIR_TRATAMIENTO = 1013
+    const val ANADIR_MEDICO = 1014
 }
 
 object MMDContract {

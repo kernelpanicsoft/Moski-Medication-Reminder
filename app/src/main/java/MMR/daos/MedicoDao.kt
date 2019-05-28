@@ -26,4 +26,7 @@ interface MedicoDao {
 
     @Query("SELECT * FROM Medico WHERE Medico.usuarioID = :id")
     fun getUserMedicos( id : Int? ) : LiveData<List<Medico>>
+
+    @Query("SELECT max(id) FROM Medico")
+    fun getLastID(): LiveData<Long>
 }

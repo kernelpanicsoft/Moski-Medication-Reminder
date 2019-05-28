@@ -41,7 +41,8 @@ class MedicosFragment : Fragment() {
     override fun onResume(){
         super.onResume()
 
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
+        mLayoutManager.stackFromEnd = true
         RV.layoutManager = mLayoutManager
 
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
@@ -70,13 +71,6 @@ class MedicosFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            R.id.itemADD -> {
-                val nav = Intent(context, AnadirTratamientoActivity::class.java)
-                startActivity(nav)
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
+        return super.onOptionsItemSelected(item)
     }
 }// Required empty public constructor

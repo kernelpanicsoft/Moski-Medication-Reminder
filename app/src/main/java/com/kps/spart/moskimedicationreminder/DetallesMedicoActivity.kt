@@ -7,6 +7,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
@@ -50,6 +51,7 @@ class DetallesMedicoActivity : AppCompatActivity() {
         medicoActualLive.observe(this, Observer {
             populateMedicFieldFromDB(it)
             populateMedicContactCards(it)
+
         })
 
 
@@ -81,12 +83,15 @@ class DetallesMedicoActivity : AppCompatActivity() {
 
         fichasContactoViewModel.getFichasContacto(medic_id).observe(this, Observer<List<FichaContacto>> {
             adapter.submitList(it)
-
         })
 
         adapter.setCurrentMedic(medico!!)
         RecViewFichasContactoMedico.adapter = adapter
+
     }
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{
         menuInflater.inflate(R.menu.menu_edit_add_card,menu)

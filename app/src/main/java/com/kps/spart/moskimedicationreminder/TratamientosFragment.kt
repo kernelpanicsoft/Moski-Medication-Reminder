@@ -49,7 +49,8 @@ class TratamientosFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
+        mLayoutManager.stackFromEnd = true
         RV.layoutManager = mLayoutManager
 
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
@@ -86,10 +87,6 @@ class TratamientosFragment : Fragment() {
             R.id.itemADD -> {
                 val nav = Intent(context, AnadirTratamientoActivity::class.java)
                 startActivityForResult(nav,CodigosDeSolicitud.ANADIR_TRATAMIENTO)
-               // val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-               // val usuarioID = sharedPref.getInt("actualUserID", -1)
-               // var tratamiento = Tratamiento(0,"Tratamiento desde fragment",usuarioID,2 )
-               // tratamientoViewModel.insert(tratamiento)
                 return true
             }
             R.id.itemSearch ->{

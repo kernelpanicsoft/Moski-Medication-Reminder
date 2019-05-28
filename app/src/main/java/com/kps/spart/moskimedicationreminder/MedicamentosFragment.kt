@@ -47,7 +47,8 @@ class MedicamentosFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
+        mLayoutManager.stackFromEnd = true
         RV.layoutManager = mLayoutManager
 
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)

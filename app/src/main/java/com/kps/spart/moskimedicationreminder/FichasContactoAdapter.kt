@@ -50,7 +50,6 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
         val celular = v.findViewById<TextView>(R.id.telefono2TV)
         val email = v.findViewById<TextView>(R.id.emailTV)
         val sitioWeb = v.findViewById<TextView>(R.id.websiteTV)
-        val accesoRapido = v.findViewById<ImageView>(R.id.imageView23)
         val moreDots = v.findViewById<ImageView>(R.id.optionsContactCardIcon)
         val scheduleAppointment = v.findViewById<ImageView>(R.id.agendarCitaContactCardIcon)
 

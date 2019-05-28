@@ -111,9 +111,6 @@
             android:id="@+id/RecViewFichasContactoMedico"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -122,100 +119,6 @@
 
 
     </android.support.constraint.ConstraintLayout>
-
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/cardView1"
-        app:layout_anchorGravity="bottom|center">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/quickActionPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="32dp"
-                android:src="@drawable/ic_phone_black_24dp"
-                android:tint="@color/colorPrimaryLight"
-                app:layout_constraintEnd_toStartOf="@+id/quickActionMail"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/quickActionMail" />
-
-            <ImageView
-                android:id="@+id/quickActionMail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="64dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_email"
-                android:tint="@color/colorPrimaryLight"
-                app:layout_constraintEnd_toStartOf="@+id/quickActionDate"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/quickActionPhone"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/quickActionDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_calendar_date"
-                android:tint="@color/colorPrimaryLight"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/quickActionMail"
-                app:layout_constraintTop_toTopOf="@+id/quickActionMail" />
-
-
-            <TextView
-                android:id="@+id/quickActionPhoneTV"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
-                android:text="Llamar"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/quickActionPhone"
-                app:layout_constraintStart_toStartOf="@+id/quickActionPhone"
-                app:layout_constraintTop_toBottomOf="@+id/quickActionPhone" />
-
-            <TextView
-                android:id="@+id/quickActionMailTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Enviar  Email"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/quickActionMail"
-                app:layout_constraintStart_toStartOf="@+id/quickActionMail"
-                app:layout_constraintTop_toBottomOf="@+id/quickActionMail" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
-                android:text="Agendar Cita"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/quickActionDate"
-                app:layout_constraintStart_toStartOf="@+id/quickActionDate"
-                app:layout_constraintTop_toBottomOf="@+id/quickActionDate" />
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v7.widget.CardView>
 
 
     <!--

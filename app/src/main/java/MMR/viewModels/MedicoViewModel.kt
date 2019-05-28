@@ -30,10 +30,15 @@ class MedicoViewModel (application: Application) : AndroidViewModel(application)
         repository.deleteAllMedicos()
     }
 
+    fun getLastInsertedID(): LiveData<Long>{
+        return repository.getLastInsertedID()
+    }
+
     fun getMedico(id : Int) : LiveData<Medico>{
         return repository.getMedico(id)
     }
     fun getMedicosUsuario(id : Int) : LiveData<List<Medico>>{
         return repository.getMedicosUsuario(id)
     }
+
 }

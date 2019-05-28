@@ -1,6 +1,11 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.MedicoViewModel
+import MMR.viewModels.TratamientoViewModel
+import android.app.Activity
 import android.app.AlertDialog
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -15,6 +20,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import model.CodigosDeSolicitud
 
 import java.util.ArrayList
 
@@ -99,7 +105,7 @@ class DirectorioFragment : Fragment() {
                             val nav: Intent
                             if (which == 0) {
                                 nav = Intent(context, AnadirMedicoActivity::class.java)
-                                startActivity(nav)
+                                startActivityForResult(nav,CodigosDeSolicitud.ANADIR_MEDICO)
                             } else if (which == 1) {
                                 nav = Intent(context, AnadirEstablecimientoActivity::class.java)
                                 startActivity(nav)
@@ -110,6 +116,20 @@ class DirectorioFragment : Fragment() {
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == CodigosDeSolicitud.ANADIR_MEDICO){
+            if(resultCode == Activity.RESULT_OK){
+                val medicosViewModel : MedicoViewModel = ViewModelProviders.of(this).get(MedicoViewModel::class.java)
+                medicosViewModel.getLastInsertedID().observe(this, Observer {
+                    val nav = Intent(context,AnadirFichaContactoActivity::class.java)
+                    nav.putExtra("MEDIC_ID", it?.toInt())
+                    startActivity(nav)
+                })
+
+            }
         }
     }
 

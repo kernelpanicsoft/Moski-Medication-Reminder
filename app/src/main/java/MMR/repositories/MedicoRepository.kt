@@ -44,6 +44,10 @@ class MedicoRepository (application : Application) {
         return medicoDao.getUserMedicos(id)
     }
 
+    fun getLastInsertedID(): LiveData<Long>{
+        return medicoDao.getLastID()
+    }
+
     private class InsertMedicoAsyncTask constructor(private val medicoDao: MedicoDao) : AsyncTask<Medico, Void, Void>(){
         override fun doInBackground(vararg params: Medico): Void? {
             medicoDao.insert(params[0])
