@@ -8,6 +8,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.media.Image
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AlertDialog
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
@@ -80,11 +81,6 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
 
             popup.setOnMenuItemClickListener { menuItem ->
                  when(menuItem.itemId){
-                     R.id.set_favorite_card ->{
-                         medicoActual.fichaContactoAR = position
-                         medicosViewModel.update(medicoActual)
-                        true
-                     }
                      R.id.edit_card ->{
                         val editCard = Intent(context,AnadirFichaContactoActivity::class.java)
                         editCard.putExtra("CARD_ID", getItem(position).id)
@@ -109,7 +105,13 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
             popup.show()
         }
         holder.scheduleAppointment.setOnClickListener {
-            Toast.makeText(context,"Estas agendando cita", Toast.LENGTH_SHORT).show()
+            val nav = Intent(context,AnadirCitaMedicaActivity::class.java)
+            nav.putExtra("nombreMedico", medicoActual.nombre)
+            nav.putExtra("tituloMedico", medicoActual.titulo)
+            nav.putExtra("especialidadMedico", medicoActual.especialidad)
+            nav.putExtra("direccionMedico", fichaActual.direccion)
+
+            context.startActivity(nav)
         }
 
 

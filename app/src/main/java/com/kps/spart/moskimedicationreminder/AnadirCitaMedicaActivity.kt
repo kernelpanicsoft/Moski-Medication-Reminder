@@ -60,6 +60,8 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         selectedColor = ContextCompat.getColor(this@AnadirCitaMedicaActivity,R.color.blueberry)
         citaViewModel = ViewModelProviders.of(this@AnadirCitaMedicaActivity).get(CitaMedicaViewModel::class.java)
 
+
+
         if(intent.hasExtra("CITA_ID")){
             title = getString(R.string.editar_cita)
             citaActualLive = citaViewModel.getCitaMedica(intent.getIntExtra("CITA_ID",-1))
@@ -97,6 +99,16 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
             })
         }else{
             title = getString(R.string.anadirCita)
+
+            if(intent.hasExtra("nombreMedico")){
+                val nombreMedico = intent.getStringExtra("tituloMedico") + " " + intent.getStringExtra("nombreMedico")
+                val especialidadMedico = intent.getStringExtra("especialidadMedico")
+                val direccionMedico = intent.getStringExtra("direccionMedico")
+
+                NombreMedicoET.setText(nombreMedico, TextView.BufferType.EDITABLE)
+                EspecialidadCitaET.setText(especialidadMedico, TextView.BufferType.EDITABLE)
+                UbicacionET.setText(direccionMedico, TextView.BufferType.EDITABLE)
+            }
         }
 
         FechaYHoraEspecificadaTV.text = sdf.format(calendario.time)

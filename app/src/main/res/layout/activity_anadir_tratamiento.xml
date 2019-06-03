@@ -242,24 +242,23 @@
                 android:id="@+id/numeroDiasTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="@string/numero_de_dias"
                 android:textSize="@dimen/normal"
+                app:layout_constraintBottom_toBottomOf="@+id/numberPicker"
                 app:layout_constraintStart_toStartOf="@+id/spinnerPeriodicidad"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodicidad" />
+                app:layout_constraintTop_toTopOf="@+id/numberPicker" />
 
-            <EditText
-                android:id="@+id/diasTratamientoET"
+            <NumberPicker
+                android:id="@+id/numberPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:background="@color/rounded_border_edittext"
-                android:hint="0"
-                android:inputType="number"
-                android:minHeight="40dp"
-                app:layout_constraintBottom_toBottomOf="@+id/numeroDiasTV"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/numeroDiasTV"
-                app:layout_constraintTop_toTopOf="@+id/numeroDiasTV" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodicidad" />
 
             <TextView
                 android:id="@+id/FechaFinTV"
@@ -269,7 +268,7 @@
                 android:text="@string/fecha_de_finalizaci_n"
                 android:textSize="@dimen/normal"
                 app:layout_constraintStart_toStartOf="@+id/numeroDiasTV"
-                app:layout_constraintTop_toBottomOf="@+id/diasTratamientoET" />
+                app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
 
             <TextView
                 android:id="@+id/fechaFinTratamientoTV"
@@ -369,7 +368,6 @@
                 android:id="@+id/FechaInicioButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/colorPrimary"
@@ -378,6 +376,7 @@
                 android:textColor="@color/blanco"
                 android:textSize="@dimen/normal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/fechaDeInicioNotaTV"
                 app:layout_constraintTop_toBottomOf="@+id/fechaDeInicioNotaTV" />
 

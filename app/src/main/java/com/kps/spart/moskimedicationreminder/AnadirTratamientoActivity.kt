@@ -27,7 +27,6 @@ import model.ContinuidadTratamiento
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AnadirTratamientoActivity : AppCompatActivity() {
     lateinit var tratamientoViewModel: TratamientoViewModel
     lateinit var tratamientoActualLive: LiveData<Tratamiento>
@@ -54,12 +53,10 @@ class AnadirTratamientoActivity : AppCompatActivity() {
         tratamientoViewModel = ViewModelProviders.of(this@AnadirTratamientoActivity).get(TratamientoViewModel::class.java)
         medicamentoViewModel = ViewModelProviders.of(this@AnadirTratamientoActivity).get(MedicamentoViewModel::class.java)
 
-
         elegirMedicamentoBT.setOnClickListener {
             val selectMedicineIntent = Intent(this@AnadirTratamientoActivity,ElegirMedicamentoActivity::class.java)
             startActivityForResult(selectMedicineIntent,CodigosDeSolicitud.ELEGIR_MEDICAMENTO)
         }
-
 
         FechaInicioButton.text = sdf.format(calendario.time)
         FechaInicioButton.setOnClickListener {
@@ -68,12 +65,12 @@ class AnadirTratamientoActivity : AppCompatActivity() {
                 calendario.set(Calendar.MONTH, month)
                 calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 FechaInicioButton.text = sdf.format(calendario.time)
-                fechaFinTratamientoTV.text = sdf.format(calendario.time)
+                //fechaFinTratamientoTV.text = sdf.format(calendario.time)
+                createDataBaseOnPicker(calendario)
                 calendarioAux = calendario
             }, calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH))
             datePickerFragment.show()
         }
-
 
         spinnerPeriodicidad.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.continuidad_tratamiento))
         spinnerPeriodicidad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -88,45 +85,40 @@ class AnadirTratamientoActivity : AppCompatActivity() {
                     //Periodo elegido
                     0->{
                         numeroDiasTV.visibility = View.VISIBLE
-                        diasTratamientoET.visibility = View.VISIBLE
+                      //  diasTratamientoET.visibility = View.VISIBLE
                         numeroDiasTV.visibility = View.VISIBLE
                         FechaFinTV.visibility = View.VISIBLE
                         fechaFinTratamientoTV.visibility = View.VISIBLE
+
+                        numeroDiasTV.visibility = View.VISIBLE
+                        numberPicker.visibility = View.VISIBLE
                     }
                     //Indefinido elegido
                     1->{
                         numeroDiasTV.visibility = View.GONE
-                        diasTratamientoET.visibility = View.GONE
+                      //  diasTratamientoET.visibility = View.GONE
                         numeroDiasTV.visibility = View.GONE
                         FechaFinTV.visibility = View.GONE
                         fechaFinTratamientoTV.visibility = View.GONE
+
+                        numeroDiasTV.visibility = View.GONE
+                        numberPicker.visibility = View.GONE
                     }
                 }
             }
         }
 
-        fechaFinTratamientoTV.text = sdf.format(calendarioAux.time)
-        diasTratamientoET.addTextChangedListener(object : TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-                if(diasTratamientoET.text.toString().isNotEmpty()) {
-                    calendarioAux = calendario
-                    calendarioAux.add(Calendar.DATE, diasTratamientoET.text.toString().toInt())
-                    fechaFinTratamientoTV.text = sdf.format(calendarioAux.time)
-                }else{
-                    fechaFinTratamientoTV.text = sdf.format(calendarioAux.time)
-                }
-            }
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 100
+        numberPicker.wrapSelectorWheel = true
+        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            calendarioAux = Calendar.getInstance()
+            calendarioAux.set(calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH),calendario.get(Calendar.DATE))
+            calendarioAux.add(Calendar.DAY_OF_MONTH,newVal)
+            fechaFinTratamientoTV.text = sdf.format(calendarioAux.time)
+        }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-        })
-
+        createDataBaseOnPicker(Calendar.getInstance())
 
         registrarTratamientoButton.setOnClickListener {
            // val nav = Intent(this@AnadirTratamientoActivity,AnadirTomasActivity::class.java)
@@ -142,23 +134,33 @@ class AnadirTratamientoActivity : AppCompatActivity() {
             tratamiento.medicamentoID = medicamentoID
             tratamiento.indicaciones = notaTratamientoET.text.toString()
 
-            val selectedRadioButton = findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+            val selectedRadioButton : RadioButton = findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
 
             tratamiento.recordatorio = radioGroup.indexOfChild(selectedRadioButton)
             tratamiento.fechaInicio = FechaInicioButton.text.toString()
 
+
             if(spinnerPeriodicidad.selectedItemPosition == 0){
                 tratamiento.fechaFin = fechaFinTratamientoTV.text.toString()
-                tratamiento.diasTratamiento = diasTratamientoET.text.toString().toInt()
+               // tratamiento.diasTratamiento = diasTratamientoET.text.toString().toInt()
+
+
             }else if(spinnerPeriodicidad.selectedItemPosition == 1){
                 tratamiento.fechaFin = "INDEFINIDO"
                 tratamiento.diasTratamiento = -1
-
             }
-
-
             saveTreatmentToDB(tratamiento)
         }
+    }
+
+    private fun createDataBaseOnPicker(cal: Calendar){
+
+        val calendarioAux2 = Calendar.getInstance()
+        calendarioAux2.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE))
+        calendarioAux2.add(Calendar.DAY_OF_MONTH,numberPicker.value)
+        Log.d("PICKER",numberPicker.value.toString())
+        fechaFinTratamientoTV.text = sdf.format(calendarioAux2.time)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -167,8 +169,6 @@ class AnadirTratamientoActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val tratamiento : Tratamiento
-        var usuarioID = -1
         when (item.itemId) {
             R.id.itemSave -> {
 
@@ -188,8 +188,6 @@ class AnadirTratamientoActivity : AppCompatActivity() {
             tratamientoViewModel.update(tratamiento)
         }else{
             tratamientoViewModel.insert(tratamiento)
-            //Toast.makeText(this@AnadirTratamientoActivity,"ID del tratamiento anadido: " + resultado,Toast.LENGTH_LONG).show()
-            //Log.d("ID Tratamiento", resultado.toString())
         }
         setResult(Activity.RESULT_OK)
         finish()
@@ -198,7 +196,6 @@ class AnadirTratamientoActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.ELEGIR_MEDICAMENTO){
             if(resultCode == Activity.RESULT_OK){
-               // Toast.makeText(this,"ID del medicamento: " + data?.getIntExtra("SELECTED_MEDICINE_ID",-1),Toast.LENGTH_SHORT).show()
                 populateSelectedMedicineCard(data?.getIntExtra("SELECTED_MEDICINE_ID",-1))
             }
         }
