@@ -45,4 +45,16 @@ class TratamientoViewModel (application: Application) : AndroidViewModel(applica
     fun getLastID() : LiveData<Long>{
         return repository.getLastInsertedID()
     }
+
+    fun incrementTomasATiempo(id: Int){
+        repository.incrementTomasATiempo(id)
+    }
+
+    fun incrementTomasPospuestas(id: Int){
+        repository.incrementTomasPospuestas(id)
+    }
+
+    fun incrementTomasOmitidas(id: Int){
+        repository.incre
+    }
 }

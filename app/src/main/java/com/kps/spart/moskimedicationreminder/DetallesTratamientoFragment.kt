@@ -7,6 +7,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +16,14 @@ import android.widget.TextView
 import android.widget.Toast
 import elements.Medicamento
 import elements.Tratamiento
+import kotlinx.android.synthetic.main.fragment_detalles_tratamiento.*
 
 class DetallesTratamientoFragment : Fragment() {
     lateinit var tratamientoViewModel: TratamientoViewModel
     lateinit var tratamientoActualLive: LiveData<Tratamiento>
 
     lateinit var medicamentoViewModel: MedicamentoViewModel
-    lateinit var mecidamentoActualLive: LiveData<Medicamento>
+    lateinit var medicamentoActualLive: LiveData<Medicamento>
 
     var TituloTratamientoTV : TextView? = null
     var IndicacionesTratamientoTV : TextView? = null
@@ -62,7 +64,6 @@ class DetallesTratamientoFragment : Fragment() {
         medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
 
 
-        val iconsCollection = resources?.getStringArray(R.array.TipoMedicamento)
         medicamentoViewModel.getMedicamento(tratamiento?.medicamentoID!!).observe(this, Observer {
             medicamentoTratamientoTV?.text = it?.nombreMedicamento
             val medicineType = it?.tipo
@@ -87,6 +88,35 @@ class DetallesTratamientoFragment : Fragment() {
             NotasMedicamentoTV?.text = it?.nota
 
         })
+
+        fechaInicioTratamientoActualTV.text = tratamiento.fechaInicio
+
+        val arrayContinuidad = context?.resources?.getStringArray(R.array.continuidad_tratamiento)
+        if(tratamiento.diasTratamiento == -1){
+            tipoTratamientoTV.text = arrayContinuidad?.get(1)
+            fechaFinTratamientoActualTV.text = arrayContinuidad?.get(1)
+        }else{
+            tipoTratamientoTV.text = arrayContinuidad?.get(0) + "\n" + getString(R.string.dias_restantes) + " " + tratamiento.diasTratamiento
+            fechaFinTratamientoActualTV.text = tratamiento.fechaFin
+        }
+
+
+
+        when(tratamiento.recordatorio){
+            0 -> tipoNotificacionTV.text = context?.getString(R.string.notificaci_n)
+            1 -> tipoNotificacionTV.text = context?.getString(R.string.alarma)
+            2 -> tipoNotificacionTV.text = context?.getString(R.string.ninguno)
+        }
+
+
     }
 
+
+    private fun deleteTreatment(){
+        if(tratamientoActualLive.hasActiveObservers()){
+            tratamientoViewModel.delete(tratamientoActualLive.value!!)
+            activity?.finish()
+
+        }
+    }
 }

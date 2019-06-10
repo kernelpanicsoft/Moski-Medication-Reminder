@@ -29,6 +29,18 @@ class TratamientoRepository (application: Application) {
         UpdateTratamientoAsyncTask(tratamientoDao).execute(tratamiento)
     }
 
+    fun incrementTomasATiempo(id: Int){
+        IncrementTomasATiempoAsyncTask(tratamientoDao).execute(id)
+    }
+
+    fun incrementTomasPospuestas(id: Int){
+        IncrementTomasPospuestasAsyncTask(tratamientoDao).execute(id)
+    }
+
+    fun incrementTomasOmitidas(id: Int){
+        IncrementTomasOmitidasAsyncTask(tratamientoDao).execute(id)
+    }
+
     fun delete(tratamiento: Tratamiento){
         DeleteTratamientoAsyncTask(tratamientoDao).execute(tratamiento)
     }
@@ -69,6 +81,27 @@ class TratamientoRepository (application: Application) {
         }
     }
 
+    private class IncrementTomasATiempoAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Int, Void, Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            tratamientoDao.incrementTomasATiempo(params[0]!!)
+            return null
+        }
+    }
+
+    private class IncrementTomasPospuestasAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Int, Void, Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            tratamientoDao.incrementTomasPospuestas(params[0]!!)
+            return null
+        }
+    }
+
+    private class IncrementTomasOmitidasAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Int, Void, Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            tratamientoDao.incrementTomasOmitidas(params[0]!!)
+            return null
+        }
+    }
+
     private class DeleteTratamientoAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Tratamiento, Void, Void>(){
         override fun doInBackground(vararg params: Tratamiento): Void? {
             tratamientoDao.delete(params[0])
@@ -89,4 +122,6 @@ class TratamientoRepository (application: Application) {
             return null
         }
     }
+
+
 }

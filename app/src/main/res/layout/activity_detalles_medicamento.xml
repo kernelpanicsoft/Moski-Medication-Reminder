@@ -169,22 +169,25 @@
                 android:id="@+id/cardViewFotograficaMedicamento"
                 android:layout_width="0dp"
                 android:layout_height="300dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fotografiaTV">
+                app:layout_constraintTop_toBottomOf="@+id/fotografiaTV"
+                app:layout_constraintVertical_bias="0.0">
 
                 <ImageView
                     android:id="@+id/imagenMedicamentoIV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:minWidth="100dp"
                     android:minHeight="100dp"
-                    android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/no_photo_cardview"
                     android:visibility="visible" />
@@ -192,38 +195,17 @@
             </android.support.v7.widget.CardView>
 
 
-            <TextView
-                android:id="@+id/puntosDeVentaTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/establecimiento_que_la_venden"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/subtitulos"
-                app:layout_constraintStart_toEndOf="@+id/imageView22"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewFotograficaMedicamento" />
-
-
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/puntosDeVentaTV">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/RecViewPuntosDeVenta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </android.support.v7.widget.CardView>
+                tools:layout_editor_absoluteY="663dp"/>
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -247,17 +229,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fotografiaTV"
                 app:srcCompat="@drawable/ic_photo" />
-
-            <ImageView
-                android:id="@+id/imageView22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/puntosDeVentaTV"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/puntosDeVentaTV"
-                app:srcCompat="@drawable/ic_pharmacy" />
 
         </android.support.constraint.ConstraintLayout>
 

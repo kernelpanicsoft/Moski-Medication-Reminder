@@ -134,7 +134,7 @@ class AnadirTratamientoActivity : AppCompatActivity() {
             tratamiento.medicamentoID = medicamentoID
             tratamiento.indicaciones = notaTratamientoET.text.toString()
 
-            val selectedRadioButton : RadioButton = findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+            val selectedRadioButton : RadioButton = findViewById(radioGroup.checkedRadioButtonId)
 
             tratamiento.recordatorio = radioGroup.indexOfChild(selectedRadioButton)
             tratamiento.fechaInicio = FechaInicioButton.text.toString()
@@ -142,7 +142,7 @@ class AnadirTratamientoActivity : AppCompatActivity() {
 
             if(spinnerPeriodicidad.selectedItemPosition == 0){
                 tratamiento.fechaFin = fechaFinTratamientoTV.text.toString()
-               // tratamiento.diasTratamiento = diasTratamientoET.text.toString().toInt()
+                tratamiento.diasTratamiento = numberPicker.value
 
 
             }else if(spinnerPeriodicidad.selectedItemPosition == 1){
@@ -163,17 +163,9 @@ class AnadirTratamientoActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_save, menu)
-        return true
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.itemSave -> {
-
-                return true
-            }
             android.R.id.home -> {
                 onBackPressed()
                 return true

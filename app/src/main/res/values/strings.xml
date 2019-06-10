@@ -301,6 +301,14 @@
     <string name="llamar">Llamar</string>
     <string name="enviar_email">Enviar Email</string>
     <string name="agendar_cita">Agendar Cita</string>
+    <string name="inicio">Inicio:</string>
+    <string name="fin">Fin:</string>
+    <string name="indicaci_nes">Indicaciónes:</string>
+    <string name="notas_del_medicamento">Notas del medicamento:</string>
+    <string name="a_tiempo">A tiempo</string>
+    <string name="pospuestas">Pospuestas</string>
+    <string name="omitidas">Omitidas</string>
+    <string name="dias_restantes">Días restantes:</string>
 
     <array name="tipo_establecimiento">
         <item>Farmacía</item>

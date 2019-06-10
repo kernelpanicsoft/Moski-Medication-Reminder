@@ -34,4 +34,13 @@ interface TratamientoDao {
 
     @Query("SELECT titulo, nombreMedicamento, color, tipo, Tratamiento.id FROM Medicamento JOIN Tratamiento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.usuarioID = :usuarioID")
     fun getTratamientosConMedicamentoUsuario(usuarioID: Int) : LiveData<List<JoinMedicamentoTratamientoData>>
+
+    @Query("UPDATE Tratamiento SET atiempo = atiempo + 1 WHERE Tratamiento.id = :id")
+    fun incrementTomasATiempo(id: Int)
+
+    @Query("UPDATE Tratamiento SET pospuestas = pospuestas + 1 WHERE Tratamiento.id = :id")
+    fun incrementTomasPospuestas(id: Int)
+
+    @Query("UPDATE Tratamiento SET omitidas = omitidas + 1 WHERE Tratamiento.id = :id")
+    fun incrementTomasOmitidas(id: Int)
 }
