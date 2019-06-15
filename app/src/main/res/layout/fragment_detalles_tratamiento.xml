@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -387,11 +388,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
+                        android:text="@string/estadisticas"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/subtitulos"
                         app:layout_constraintStart_toEndOf="@+id/statsIcono"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="@string/estadisticas"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/TomasPuntualesTV"
@@ -447,21 +448,22 @@
                         android:layout_marginBottom="16dp"
                         android:text="@string/pospuestas"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/TomasPasadasTV"
-                        app:layout_constraintStart_toStartOf="@+id/TomasPasadasTV"
-                        app:layout_constraintTop_toBottomOf="@+id/TomasPasadasTV" />
+                        app:layout_constraintEnd_toEndOf="@+id/TomasPospuestasTV"
+                        app:layout_constraintStart_toStartOf="@+id/TomasPospuestasTV"
+                        app:layout_constraintTop_toBottomOf="@+id/TomasPasadasTV"
+                        app:layout_constraintVertical_bias="1.0" />
 
                     <TextView
                         android:id="@+id/TOTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="16dp"
                         android:text="@string/omitidas"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/TomasPospuestasTV"
-                        app:layout_constraintStart_toStartOf="@+id/TomasPospuestasTV"
-                        app:layout_constraintTop_toBottomOf="@+id/TomasPospuestasTV" />
+                        app:layout_constraintEnd_toEndOf="@+id/TomasPasadasTV"
+                        app:layout_constraintStart_toStartOf="@+id/TomasPasadasTV"
+                        app:layout_constraintTop_toBottomOf="@+id/TomasPospuestasTV"
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </android.support.constraint.ConstraintLayout>
 

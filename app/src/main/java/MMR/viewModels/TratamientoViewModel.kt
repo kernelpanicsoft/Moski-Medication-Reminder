@@ -55,6 +55,6 @@ class TratamientoViewModel (application: Application) : AndroidViewModel(applica
     }
 
     fun incrementTomasOmitidas(id: Int){
-        repository.incre
+        repository.incrementTomasOmitidas(id)
     }
 }

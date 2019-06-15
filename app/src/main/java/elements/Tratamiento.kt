@@ -6,9 +6,6 @@ import android.arch.persistence.room.PrimaryKey
 import java.util.ArrayList
 import java.util.Date
 
-/**
- * Created by spart on 19/12/2017.
- */
 
 @Entity(foreignKeys =  arrayOf(
         ForeignKey(entity = Medicamento::class,
@@ -32,6 +29,6 @@ class Tratamiento (@PrimaryKey(autoGenerate = true) var id: Int,
                    var diasTratamiento: Int = 0,
                    var status: Int? = null,
                    var recordatorio: Int? = null,
-                   var atiempo: Int? = null,
-                   var pospuestas: Int? = null,
-                   var omitidas: Int? = null)
+                   var atiempo: Int = 0,
+                   var pospuestas: Int = 0,
+                   var omitidas: Int = 0)

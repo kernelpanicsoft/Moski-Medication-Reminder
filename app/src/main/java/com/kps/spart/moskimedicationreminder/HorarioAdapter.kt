@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 import MMR.viewModels.TomaViewModel
+import MMR.viewModels.TratamientoViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.graphics.Color
@@ -18,7 +19,7 @@ import android.widget.TextView
 import elements.JoinTomasDelDia
 import model.EstatusToma
 
-class HorarioAdapter(private val context: Context?, private val tomaViewModel: TomaViewModel) : ListAdapter<JoinTomasDelDia,HorarioAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
+class HorarioAdapter(private val context: Context?, private val tomaViewModel: TomaViewModel, private val tratamientoViewModel: TratamientoViewModel) : ListAdapter<JoinTomasDelDia,HorarioAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
     private var listener : View.OnClickListener? = null
     private val iconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
 
@@ -66,7 +67,7 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
         holder.iconoMedicamento.setColorFilter(tomaActual.color!!)
         holder.iconoTratamiento.setImageResource(R.drawable.ic_bookmark)
         holder.horaToma.text=tomaActual.horaToma
-        holder.nombreTratamientoTV.text = tomaActual.tituloTratamiento
+        holder.nombreTratamientoTV.text = tomaActual.tituloTratamiento + " ID: " + tomaActual.idTratamiento + " ID Toma:  " + tomaActual.id
         holder.nombreMedicamentoTV.text = tomaActual.medicamento
 
 
@@ -117,7 +118,15 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
 
     fun changeShotStatus(position: Int,status: Int){
         val tomaActual = getItem(position)
-        Log.d("EstatusEnShotStatus", status.toString())
         tomaViewModel.updateTomaStatus(tomaActual.id!!,status)
+        incrementShotsInTreatment(status,tomaActual.idTratamiento!!)
+    }
+
+    private fun incrementShotsInTreatment(status: Int, idTratamiento: Int){
+        when(status){
+            2 -> tratamientoViewModel.incrementTomasATiempo(idTratamiento)
+            3 -> tratamientoViewModel.incrementTomasOmitidas(idTratamiento)
+            4 -> tratamientoViewModel.incrementTomasPospuestas(idTratamiento)
+        }
     }
 }

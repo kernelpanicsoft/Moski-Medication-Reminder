@@ -1,6 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.TomaViewModel
+import MMR.viewModels.TratamientoViewModel
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -28,6 +29,7 @@ import model.EstatusToma
 class HoyFragment : Fragment() {
 
     lateinit var tomaViewModel : TomaViewModel
+    lateinit var tratamientoViewModel: TratamientoViewModel
     lateinit var RV: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +68,8 @@ class HoyFragment : Fragment() {
 
 
         tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
-        val adapter = HorarioAdapter(context, tomaViewModel)
+        tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
+        val adapter = HorarioAdapter(context, tomaViewModel,tratamientoViewModel)
         tomaViewModel.getTomasDelDiaUsusuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
         })

@@ -108,6 +108,9 @@ class DetallesTratamientoFragment : Fragment() {
             2 -> tipoNotificacionTV.text = context?.getString(R.string.ninguno)
         }
 
+        TomasPuntualesTV.text = tratamiento.atiempo.toString()
+        TomasPasadasTV.text = tratamiento.omitidas.toString()
+        TomasPospuestasTV.text = tratamiento.pospuestas.toString()
 
     }
 
