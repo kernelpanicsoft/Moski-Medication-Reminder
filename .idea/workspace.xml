@@ -13,8 +13,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Tratamiento" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
@@ -32,19 +31,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/MMR/daos/TomaDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/MMR/daos/TomaDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/MMR/viewModels/TratamientoViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/MMR/viewModels/TratamientoViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HorarioAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HorarioAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HoyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HoyFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/elements/JoinTomasDelDia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/elements/JoinTomasDelDia.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/elements/Tratamiento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/elements/Tratamiento.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_detalles_tratamiento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_detalles_tratamiento.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,46 +88,10 @@
     <favorites_list name="MoskiMedicationReminder" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.8526544">
+    <splitter split-orientation="vertical" split-proportion="0.59354836">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/MMR/viewModels/TratamientoViewModel.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="884">
-                  <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/MMR/repositories/TratamientoRepository.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1394">
-                  <caret line="90" column="52" selection-start-line="90" selection-start-column="52" selection-end-line="90" selection-end-column="52" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HoyFragment.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1139">
-                  <caret line="90" column="50" selection-start-line="90" selection-start-column="50" selection-end-line="90" selection-end-column="50" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1428">
-                  <caret line="100" column="9" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_detalles_tratamiento.xml">
               <provider selected="true" editor-type-id="android-designer2" />
               <provider editor-type-id="text-editor">
@@ -145,6 +99,30 @@
                   <caret line="421" column="58" selection-start-line="421" selection-start-column="41" selection-end-line="421" selection-end-column="58" />
                 </state>
               </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoActivity.kt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="114">
+                  <caret line="60" selection-start-line="60" selection-end-line="60" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesPerfilActivity.kt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-864">
+                  <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_edit.xml">
+              <provider editor-type-id="android-designer2" />
+              <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
@@ -223,7 +201,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/model/MMRDataBase.kt">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="29">
@@ -232,20 +210,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/test/java/com/kps/spart/moskimedicationreminder/ExampleUnitTest.java">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="5" selection-start-line="5" selection-end-line="5" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/kps/spart/moskimedicationreminder/ExampleInstrumentedTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+                <state relative-caret-position="39">
+                  <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
                 </state>
               </provider>
             </entry>
@@ -350,7 +319,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_detalles_tratamiento.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anadir_tomas.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/MedicosAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tomas.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_toma_anadida.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/RegistrarTomasAdapter.kt" />
@@ -394,9 +362,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/elements/JoinTomasDelDia.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HorarioAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/HoyFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/elements/Tratamiento.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_detalles_tratamiento.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt" />
       </list>
     </option>
   </component>
@@ -657,7 +626,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4924078" visible="true" weight="0.22814499" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4924078" visible="true" weight="0.22814499" />
       <window_info id="Structure" order="1" sideWeight="0.5108153" side_tool="true" weight="0.16791044" />
       <window_info id="Build Variants" order="2" sideWeight="0.5032538" side_tool="true" weight="0.15298508" />
       <window_info id="Capture Tool" order="3" />
@@ -674,8 +643,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32827735" />
-      <window_info anchor="bottom" id="Logcat" order="8" sideWeight="0.782516" weight="0.283857" />
-      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.5554371" visible="true" weight="0.1603467" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="8" sideWeight="0.782516" visible="true" weight="0.283857" />
+      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.5554371" weight="0.1603467" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49946696" visible="true" weight="0.32897604" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49946696" weight="0.032502707" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.4445629" side_tool="true" weight="0.18201517" />
@@ -832,31 +801,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/MMR/viewModels/MedicoViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/MMR/repositories/MedicoRepository.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_edit_delete.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-          <folding>
-            <element signature="e#234#250#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesCitaMedicaActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-595">
@@ -1067,13 +1011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="100" column="9" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/MMR/viewModels/TomaViewModel.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -1184,6 +1121,31 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="7157">
           <caret line="421" column="58" selection-start-line="421" selection-start-column="41" selection-end-line="421" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_edit.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesPerfilActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-864">
+          <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kps/spart/moskimedicationreminder/DetallesTratamientoFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
         </state>
       </provider>
     </entry>

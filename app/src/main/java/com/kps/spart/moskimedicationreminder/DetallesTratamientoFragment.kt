@@ -63,8 +63,8 @@ class DetallesTratamientoFragment : Fragment() {
 
         medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
 
-
-        medicamentoViewModel.getMedicamento(tratamiento?.medicamentoID!!).observe(this, Observer {
+        medicamentoActualLive =  medicamentoViewModel.getMedicamento(tratamiento?.medicamentoID!!)
+        medicamentoActualLive.observe(this, Observer {
             medicamentoTratamientoTV?.text = it?.nombreMedicamento
             val medicineType = it?.tipo
             val iconsCollection = resources?.getStringArray(R.array.TipoMedicamento)
@@ -115,8 +115,13 @@ class DetallesTratamientoFragment : Fragment() {
     }
 
 
-    private fun deleteTreatment(){
-        if(tratamientoActualLive.hasActiveObservers()){
+    fun deleteTreatment(){
+     //   Log.d("ELIMINAR_TRATAMIENTO", "Estas eliminado");
+        if(tratamientoActualLive.hasObservers()){
+            if(medicamentoActualLive.hasObservers()){
+                medicamentoActualLive.removeObservers(this)
+            }
+            tratamientoActualLive.removeObservers(this)
             tratamientoViewModel.delete(tratamientoActualLive.value!!)
             activity?.finish()
 

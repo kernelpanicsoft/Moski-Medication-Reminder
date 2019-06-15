@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_detalles_tratamiento.*
 
 class DetallesTratamientoActivity : AppCompatActivity() {
@@ -34,21 +35,11 @@ class DetallesTratamientoActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Tratamiento"
 
-
-
         tratamiento_id = intent.getIntExtra("TRATAMIENTO_ID", -1)
 
         setupViewPager(viewPagerTratamiento)
         tabLayoutTratamiento!!.setupWithViewPager(viewPagerTratamiento)
 
-
-        /*
-        tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
-        tratamientoActualLive = tratamientoViewModel.getTratamiento(tratamiento_id)
-        tratamientoActualLive.observe(this, Observer {
-            populateTreatmentFieldsFromDB(it)
-        })
-        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -61,6 +52,13 @@ class DetallesTratamientoActivity : AppCompatActivity() {
         when(item.itemId){
             android.R.id.home ->{
                 onBackPressed()
+                return true
+            }
+            R.id.edit_item ->{
+                Toast.makeText(this,"Hols desde", Toast.LENGTH_SHORT).show()
+                val adapter : ViewPagerAdapter = viewPagerTratamiento.adapter as ViewPagerAdapter
+                val fragment : DetallesTratamientoFragment = adapter.getItem(0) as DetallesTratamientoFragment
+                fragment.deleteTreatment()
                 return true
             }
         }
@@ -94,6 +92,7 @@ class DetallesTratamientoActivity : AppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence{
             return mFragmentTitleList[position]
         }
+
     }
 
 
