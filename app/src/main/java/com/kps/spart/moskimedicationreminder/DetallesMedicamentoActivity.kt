@@ -79,7 +79,7 @@ class DetallesMedicamentoActivity : AppCompatActivity() {
                                         dialog, id ->
                                         deleteMedicine()
                                     }
-                                    .setNegativeButton(getString(R.string.no)){ dialog, id ->
+                                    .setNegativeButton(getString(R.string.no)){ _, id ->
 
                                     }
                             val innerDialog = innerBuilder.create()

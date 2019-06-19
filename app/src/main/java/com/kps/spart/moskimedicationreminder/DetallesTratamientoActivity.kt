@@ -1,5 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -7,6 +9,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -55,10 +59,53 @@ class DetallesTratamientoActivity : AppCompatActivity() {
                 return true
             }
             R.id.edit_item ->{
-                Toast.makeText(this,"Hols desde", Toast.LENGTH_SHORT).show()
-                val adapter : ViewPagerAdapter = viewPagerTratamiento.adapter as ViewPagerAdapter
-                val fragment : DetallesTratamientoFragment = adapter.getItem(0) as DetallesTratamientoFragment
-                fragment.deleteTreatment()
+                val builder = AlertDialog.Builder(this)
+                    builder.setItems(R.array.dialogo_editar_eliminar) { _, which ->
+                        when(which){
+                            0->{
+                                val innerBuilderEdit = AlertDialog.Builder(this)
+                                innerBuilderEdit.setTitle(R.string.editar_elemento)
+                                innerBuilderEdit.setItems(R.array.dialogo_editar_tratamiento){_, innerWhich ->
+                                    when(innerWhich){
+                                        0 ->{
+                                            val editTreatment = Intent(this, AnadirTratamientoActivity::class.java)
+                                            startActivity(editTreatment)
+                                        }
+                                        1 ->{
+
+                                            val addShots = Intent(this,AnadirTomasActivity::class.java)
+                                            val bundle : Bundle = Bundle()
+
+                                            addShots.putExtra("TREATMENT_ID", tratamiento_id.toLong())
+                                            Log.d("IDDETALLES", tratamiento_id.toString())
+                                            startActivity(addShots)
+                                        }
+                                    }
+                                }
+                                val innerDialog = innerBuilderEdit.create()
+                                innerDialog.show()
+
+                            }
+                            1->{
+                                val innerBuilderDelete = AlertDialog.Builder(this)
+                                innerBuilderDelete.setTitle(getString(R.string.esta_seguro_eliminar_tratamiento))
+                                innerBuilderDelete.setMessage(getString(R.string.mensaje_eliminar_tratamiento_dialogo))
+                                innerBuilderDelete.setPositiveButton(getString(R.string.eliminar)){ dialog, id ->
+                                    val adapter : ViewPagerAdapter = viewPagerTratamiento.adapter as ViewPagerAdapter
+                                    val fragment : DetallesTratamientoFragment = adapter.getItem(0) as DetallesTratamientoFragment
+                                    fragment.deleteTreatment()
+                                }
+                                innerBuilderDelete.setNegativeButton(getString(R.string.cancelar)){
+                                    _, wich ->
+                                }
+                                val alertDialog = innerBuilderDelete.create()
+                                alertDialog.show()
+                            }
+                        }
+                    }
+
+                val alertDialog = builder.create()
+                alertDialog.show()
                 return true
             }
         }

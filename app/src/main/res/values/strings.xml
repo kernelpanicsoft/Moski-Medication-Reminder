@@ -322,6 +322,12 @@
         <item>Eliminar</item>
     </array>
 
+    <string name="editar_elemento">Editar:</string>
+    <array name="dialogo_editar_tratamiento">
+        <item>Tratamiento</item>
+        <item>Tomas</item>
+    </array>
+
     <array name="continuidad_tratamiento">
         <item>Periodo</item>
         <item>Indefinido</item>
@@ -332,4 +338,7 @@
         <item>Saltar</item>
         <item>Posponer</item>
     </array>
+
+    <string name="esta_seguro_eliminar_tratamiento">¿Está seguro de que desea eliminar el tratamiento? </string>
+    <string name="mensaje_eliminar_tratamiento_dialogo">También eliminarán todas las alertas, estadísticas y tomas relacionadas a este tratamiento, ¿Desea continuar?</string>
 </resources>

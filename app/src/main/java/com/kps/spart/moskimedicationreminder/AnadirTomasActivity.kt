@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
@@ -38,7 +39,7 @@ class AnadirTomasActivity : AppCompatActivity() {
         title = getString(R.string.registrar_toma)
 
         val idTratamiento = intent.getLongExtra("TREATMENT_ID", -1)
-
+        Log.d("IDTRATAMIENTO:", idTratamiento.toString())
         RecViewAddTomas.setHasFixedSize(true)
 
         val mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -97,6 +98,10 @@ class AnadirTomasActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            android.R.id.home ->{
+                onBackPressed()
+                return true
+            }
             R.id.itemSave -> {
                 setResult(Activity.RESULT_OK)
                 finish()
