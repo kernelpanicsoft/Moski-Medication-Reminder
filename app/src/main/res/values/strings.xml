@@ -341,4 +341,6 @@
 
     <string name="esta_seguro_eliminar_tratamiento">¿Está seguro de que desea eliminar el tratamiento? </string>
     <string name="mensaje_eliminar_tratamiento_dialogo">También eliminarán todas las alertas, estadísticas y tomas relacionadas a este tratamiento, ¿Desea continuar?</string>
+    <string name="editar_tratamiento">Editar tratamiento</string>
+    <string name="guardar_cambios_tratamiento">Guardar cambios en tratamiento</string>
 </resources>

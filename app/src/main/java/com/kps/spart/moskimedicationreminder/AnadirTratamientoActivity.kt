@@ -24,6 +24,7 @@ import elements.Tratamiento
 import kotlinx.android.synthetic.main.activity_anadir_tratamiento.*
 import model.CodigosDeSolicitud
 import model.ContinuidadTratamiento
+import model.TipoRecordatorio
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,10 +49,43 @@ class AnadirTratamientoActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.anadirTratamiento)
+
 
         tratamientoViewModel = ViewModelProviders.of(this@AnadirTratamientoActivity).get(TratamientoViewModel::class.java)
         medicamentoViewModel = ViewModelProviders.of(this@AnadirTratamientoActivity).get(MedicamentoViewModel::class.java)
+
+
+        if(intent.hasExtra("TREATMENT_ID")){
+            title = getString(R.string.editar_tratamiento)
+
+            registrarTratamientoButton.text = getString(R.string.guardar_cambios_tratamiento)
+            tratamientoActualLive = tratamientoViewModel.getTratamiento(intent.getIntExtra("TREATMENT_ID", -1))
+            tratamientoActualLive.observe(this@AnadirTratamientoActivity, android.arch.lifecycle.Observer {tratamiento ->
+                tituloTratamientoET.setText(tratamiento?.titulo, TextView.BufferType.EDITABLE)
+                notaTratamientoET.setText(tratamiento?.indicaciones, TextView.BufferType.EDITABLE)
+                populateSelectedMedicineCard(tratamiento?.medicamentoID)
+
+                when(tratamiento?.recordatorio){
+                    TipoRecordatorio.NOTIFICACION -> radioGroup.check(R.id.notificacionRadioButton)
+                    TipoRecordatorio.ALARMA -> radioGroup.check(R.id.alarmaRadioButton)
+                    TipoRecordatorio.NINGUNO -> radioGroup.check(R.id.ningunoRadioButton)
+                }
+
+                calendario.time = sdf.parse(tratamiento?.fechaInicio)
+                FechaInicioButton.text = sdf.format(calendario.time)
+
+                if(tratamiento?.diasTratamiento == -1){
+                    spinnerPeriodicidad.setSelection(1)
+                }else{
+                    spinnerPeriodicidad.setSelection(0)
+                    numberPicker.value = tratamiento?.diasTratamiento!!
+                }
+
+            })
+
+        }else{
+            title = getString(R.string.anadirTratamiento)
+        }
 
         elegirMedicamentoBT.setOnClickListener {
             val selectMedicineIntent = Intent(this@AnadirTratamientoActivity,ElegirMedicamentoActivity::class.java)
@@ -126,10 +160,15 @@ class AnadirTratamientoActivity : AppCompatActivity() {
             val tratamiento : Tratamiento
             var usuarioID = -1
 
-            tratamiento = Tratamiento(0)
-            val shaeredPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirTratamientoActivity)
-            usuarioID = shaeredPref.getInt("actualUserID", -1)
-            tratamiento.usuarioID = usuarioID
+            if(intent.hasExtra("TREATMENT_ID")){
+                tratamiento = tratamientoActualLive.value!!
+            }else{
+                tratamiento = Tratamiento(0)
+                val shaeredPref = PreferenceManager.getDefaultSharedPreferences(this@AnadirTratamientoActivity)
+                usuarioID = shaeredPref.getInt("actualUserID", -1)
+                tratamiento.usuarioID = usuarioID
+            }
+
             tratamiento.titulo = tituloTratamientoET.text.toString()
             tratamiento.medicamentoID = medicamentoID
             tratamiento.indicaciones = notaTratamientoET.text.toString()
@@ -176,7 +215,7 @@ class AnadirTratamientoActivity : AppCompatActivity() {
     }
 
     fun saveTreatmentToDB(tratamiento : Tratamiento){
-        if(intent.hasExtra("TREAT_ID")){
+        if(intent.hasExtra("TREATMENT_ID")){
             tratamientoViewModel.update(tratamiento)
         }else{
             tratamientoViewModel.insert(tratamiento)

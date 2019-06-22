@@ -69,13 +69,12 @@ class DetallesTratamientoActivity : AppCompatActivity() {
                                     when(innerWhich){
                                         0 ->{
                                             val editTreatment = Intent(this, AnadirTratamientoActivity::class.java)
+                                            editTreatment.putExtra("TREATMENT_ID", tratamiento_id)
                                             startActivity(editTreatment)
                                         }
                                         1 ->{
 
                                             val addShots = Intent(this,AnadirTomasActivity::class.java)
-                                            val bundle : Bundle = Bundle()
-
                                             addShots.putExtra("TREATMENT_ID", tratamiento_id.toLong())
                                             Log.d("IDDETALLES", tratamiento_id.toString())
                                             startActivity(addShots)
