@@ -61,7 +61,6 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         citaViewModel = ViewModelProviders.of(this@AnadirCitaMedicaActivity).get(CitaMedicaViewModel::class.java)
 
 
-
         if(intent.hasExtra("CITA_ID")){
             title = getString(R.string.editar_cita)
             citaActualLive = citaViewModel.getCitaMedica(intent.getIntExtra("CITA_ID",-1))
@@ -112,10 +111,6 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         }
 
         FechaYHoraEspecificadaTV.text = sdf.format(calendario.time)
-
-
-
-
 
 
         FechaCitaButton.setOnClickListener{

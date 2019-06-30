@@ -14,15 +14,12 @@ object TipoRecordatorio{
     const val NINGUNO = 2
 }
 
-object ContinuidadTratamiento{
-    const val PERIODO = 0
-    const val INDEFINIDO = 1
-}
 
 object EstatusTratamiento{
     const val ACTIVO = 0
     const val TERMINADO = 1
     const val PAUSADO = 2
+    const val PROGRAMADO = 3
 }
 
 object EstatusCita{

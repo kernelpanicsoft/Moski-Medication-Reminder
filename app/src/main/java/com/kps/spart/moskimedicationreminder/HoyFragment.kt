@@ -111,9 +111,8 @@ class HoyFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.itemFilter -> {
-                Toast.makeText(context, "Estás haciendo click en el icono sort", Toast.LENGTH_SHORT).show()
-
-
+                val restartShots = Intent(context,MMRReiniciarDiaService::class.java)
+                context?.startService(restartShots)
                 return true
             }
         }

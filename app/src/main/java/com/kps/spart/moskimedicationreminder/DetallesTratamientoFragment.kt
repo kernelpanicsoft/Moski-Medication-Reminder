@@ -7,6 +7,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import android.widget.Toast
 import elements.Medicamento
 import elements.Tratamiento
 import kotlinx.android.synthetic.main.fragment_detalles_tratamiento.*
+import model.EstatusTratamiento
 
 class DetallesTratamientoFragment : Fragment() {
     lateinit var tratamientoViewModel: TratamientoViewModel
@@ -30,6 +32,8 @@ class DetallesTratamientoFragment : Fragment() {
     var medicamentoTratamientoTV : TextView? = null
     var IconoMedicamento : ImageView? = null
     var NotasMedicamentoTV: TextView? = null
+    var estatusTratamientoTV: TextView? = null
+    var estatusTratamientoIV: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,10 @@ class DetallesTratamientoFragment : Fragment() {
         medicamentoTratamientoTV = v.findViewById(R.id.medicamentoTratamientoTV)
         IconoMedicamento = v.findViewById(R.id.IconoMedicamento)
         NotasMedicamentoTV = v.findViewById(R.id.NotasMedicamentoTV)
+
+        estatusTratamientoTV = v.findViewById(R.id.statusTratamientoTV)
+        estatusTratamientoIV = v.findViewById(R.id.imageViewEstatus)
+
 
         tratamientoActualLive.observe(this, Observer {
             populateTreatmentFieldsFromDB(it)
@@ -85,9 +93,30 @@ class DetallesTratamientoFragment : Fragment() {
             }
 
             IconoMedicamento?.setColorFilter(it?.color!!)
+
             NotasMedicamentoTV?.text = it?.nota
 
         })
+
+        when(tratamiento.status){
+            EstatusTratamiento.ACTIVO ->{
+                estatusTratamientoTV?.text = getString(R.string.activo)
+                //estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.verde))
+                estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.rojo))
+            }
+            EstatusTratamiento.TERMINADO -> {
+                estatusTratamientoTV?.text = getString(R.string.terminado)
+                estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.rojo))
+            }
+            EstatusTratamiento.PAUSADO -> {
+                estatusTratamientoTV?.text = getString(R.string.pausado)
+                estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.orange))
+            }
+            EstatusTratamiento.PROGRAMADO -> {
+                estatusTratamientoTV?.text = getString(R.string.programado)
+                estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.colorPrimaryLight))
+            }
+        }
 
         fechaInicioTratamientoActualTV.text = tratamiento.fechaInicio
 

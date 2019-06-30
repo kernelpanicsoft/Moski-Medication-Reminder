@@ -3,6 +3,7 @@ package com.kps.spart.moskimedicationreminder
 import MMR.viewModels.MedicamentoViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -14,7 +15,7 @@ import android.widget.TextView
 import elements.JoinMedicamentoTratamientoData
 
 import elements.Tratamiento
-
+import model.EstatusTratamiento
 
 
 class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedicamentoTratamientoData,TratamientosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
@@ -40,6 +41,7 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedic
          val bookmarkTV: TextView
          val medicamentoTV: TextView
          val statusTV: TextView
+         val estatusIV: ImageView
 
         init {
 
@@ -49,6 +51,7 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedic
             bookmarkTV = v.findViewById<View>(R.id.tagTratamientoTV) as TextView
             medicamentoTV = v.findViewById<View>(R.id.nombreMedicamento) as TextView
             statusTV = v.findViewById<View>(R.id.status_tratamientoTV) as TextView
+            estatusIV = v.findViewById(R.id.iconoStatus)
         }
 
     }
@@ -83,6 +86,28 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedic
             11-> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_intravenous)}
             12-> {holder.iconoMedicamentoIV.setImageResource(R.drawable.ic_syringe)}
         }
+
+     //   holder.statusTV.text = tratamientoActual.estatusTratamiento.toString()
+
+        when(tratamientoActual.estatusTratamiento){
+            EstatusTratamiento.ACTIVO ->{
+                holder.statusTV.text = context?.getString(R.string.activo)
+                holder.estatusIV.setColorFilter(ContextCompat.getColor(context!!,R.color.verde))
+            }
+            EstatusTratamiento.TERMINADO -> {
+                holder.statusTV.text = context?.getString(R.string.terminado)
+                holder.estatusIV.setColorFilter(ContextCompat.getColor(context!!,R.color.rojo))
+            }
+            EstatusTratamiento.PAUSADO -> {
+                holder.statusTV.text = context?.getString(R.string.pausado)
+                holder.estatusIV.setColorFilter(ContextCompat.getColor(context!!,R.color.orange))
+            }
+            EstatusTratamiento.PROGRAMADO -> {
+                holder.statusTV.text = context?.getString(R.string.programado)
+                holder.estatusIV.setColorFilter(ContextCompat.getColor(context!!,R.color.colorPrimaryLight))
+            }
+        }
+
     }
 
     fun setOnClickListener(listener: View.OnClickListener){

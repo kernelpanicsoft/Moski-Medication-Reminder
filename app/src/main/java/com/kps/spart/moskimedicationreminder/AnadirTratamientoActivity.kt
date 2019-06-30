@@ -23,7 +23,7 @@ import elements.Medicamento
 import elements.Tratamiento
 import kotlinx.android.synthetic.main.activity_anadir_tratamiento.*
 import model.CodigosDeSolicitud
-import model.ContinuidadTratamiento
+import model.EstatusTratamiento
 import model.TipoRecordatorio
 import java.text.SimpleDateFormat
 import java.util.*
@@ -188,6 +188,8 @@ class AnadirTratamientoActivity : AppCompatActivity() {
                 tratamiento.fechaFin = "INDEFINIDO"
                 tratamiento.diasTratamiento = -1
             }
+
+            tratamiento.status = determineTreatmentStatus(tratamiento)
             saveTreatmentToDB(tratamiento)
         }
     }
@@ -197,7 +199,7 @@ class AnadirTratamientoActivity : AppCompatActivity() {
         val calendarioAux2 = Calendar.getInstance()
         calendarioAux2.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE))
         calendarioAux2.add(Calendar.DAY_OF_MONTH,numberPicker.value)
-        Log.d("PICKER",numberPicker.value.toString())
+       // Log.d("PICKER",numberPicker.value.toString())
         fechaFinTratamientoTV.text = sdf.format(calendarioAux2.time)
 
     }
@@ -265,5 +267,27 @@ class AnadirTratamientoActivity : AppCompatActivity() {
                 medicamentoID = it.id
             })
         }
+    }
+
+    fun determineTreatmentStatus(tratamiento: Tratamiento) : Int{
+        val calendarioInterno = Calendar.getInstance()
+        val fechaActual = sdf.parse(sdf.format(calendarioInterno.time))
+
+        Log.d("Fechas", fechaActual.toString() + " | " + tratamiento.fechaInicio)
+        Log.d("Fechas",  fechaActual.compareTo(sdf.parse(tratamiento.fechaInicio)).toString())
+
+        when {
+            fechaActual.compareTo(sdf.parse(tratamiento.fechaInicio)) > 0 -> {
+                return EstatusTratamiento.TERMINADO
+            }
+            fechaActual.compareTo(sdf.parse(tratamiento.fechaInicio)) == 0 -> {
+                return EstatusTratamiento.ACTIVO
+            }
+            fechaActual.compareTo(sdf.parse(tratamiento.fechaInicio)) < 0 -> {
+                return EstatusTratamiento.PROGRAMADO
+            }
+            else-> return EstatusTratamiento.ACTIVO
+        }
+
     }
 }

@@ -115,6 +115,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <service android:name=".MMRReiniciarDiaService"
+            android:exported="false"/>
     </application>
 
 </manifest>
