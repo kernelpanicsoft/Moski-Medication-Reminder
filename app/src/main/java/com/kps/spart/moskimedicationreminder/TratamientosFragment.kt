@@ -105,16 +105,11 @@ class TratamientosFragment : Fragment() {
         if(requestCode == CodigosDeSolicitud.ANADIR_TRATAMIENTO){
             if(resultCode == Activity.RESULT_OK){
                 tratamientoViewModel.getLastID().observe(this, Observer {
-                    //Toast.makeText(context,"Ultimo ID: " + it?.toString(), Toast.LENGTH_LONG).show()
                     val addShots = Intent(context,AnadirTomasActivity::class.java)
                     addShots.putExtra("TREATMENT_ID", it)
-
                     startActivity(addShots)
 
                 })
-
-               // val addShots = Intent(context,AnadirTomasActivity::class.java)
-               // startActivity(addShots)
             }
         }
     }

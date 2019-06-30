@@ -56,6 +56,10 @@ class TomaRepository(application: Application) {
         UpdateStatusTomaAsyncTask(tomaDao,idToma,status).execute()
     }
 
+    fun resetAllTomasStatus(){
+        ResetStatusTomasAsyncTask(tomaDao).execute()
+    }
+
     private class InsertTomaAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Toma, Void, Void>(){
         override fun doInBackground(vararg params: Toma): Void? {
             tomaDao.insert(params[0])
@@ -73,6 +77,13 @@ class TomaRepository(application: Application) {
     private class UpdateStatusTomaAsyncTask constructor(private val tomaDao: TomaDao, private val idToma: Int,private val statusToma: Int) : AsyncTask<Int,Void,Void>(){
         override fun doInBackground(vararg params: Int?): Void? {
             tomaDao.updateTomaStatus(idToma,statusToma)
+            return null
+        }
+    }
+
+    private class ResetStatusTomasAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+            tomaDao.resetTomasStatus()
             return null
         }
     }

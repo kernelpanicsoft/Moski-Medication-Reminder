@@ -52,4 +52,8 @@ class TomaViewModel (application: Application) : AndroidViewModel(application) {
     fun updateTomaStatus(id:Int, status: Int){
         repository.updateTomaStatus(id,status)
     }
+
+    fun resetAllTomasStatus(){
+        repository.resetAllTomasStatus()
+    }
 }

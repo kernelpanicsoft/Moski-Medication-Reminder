@@ -5,6 +5,7 @@ import android.arch.persistence.room.*
 import elements.JoinMedicamentoTratamientoData
 import elements.Tratamiento
 import elements.Medicamento
+import model.EstatusTratamiento
 
 @Dao
 interface TratamientoDao {
@@ -43,5 +44,8 @@ interface TratamientoDao {
 
     @Query("UPDATE Tratamiento SET omitidas = omitidas + 1 WHERE Tratamiento.id = :id")
     fun incrementTomasOmitidas(id: Int)
+
+    @Query("UPDATE Tratamiento SET status = +" + EstatusTratamiento.TERMINADO +  "  WHERE Tratamiento.diasTratamiento = 0")
+    fun endsTreatments()
 
 }

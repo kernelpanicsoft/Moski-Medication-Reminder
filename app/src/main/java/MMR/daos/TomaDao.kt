@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import elements.JoinTomasDelDia
 import elements.Toma
+import model.EstatusToma
+
 
 @Dao
 interface TomaDao {
@@ -36,4 +38,7 @@ interface TomaDao {
 
     @Query("UPDATE Toma SET statusToma=:status WHERE id = :id")
     fun updateTomaStatus(id: Int, status: Int)
+
+    @Query("UPDATE Toma SET statusToma = " + EstatusToma.PROGRAMADA)
+    fun resetTomasStatus()
 }
