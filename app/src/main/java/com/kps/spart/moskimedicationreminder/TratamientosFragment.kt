@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -87,6 +88,7 @@ class TratamientosFragment : Fragment() {
                 return true
             }
             R.id.itemSearch ->{
+                Log.d("REDUCIR","Estas reduciendo los dias de tratamientos")
                 tratamientoViewModel.DecreaseTratramientoUnDia()
 
                 return true
