@@ -11,10 +11,3 @@ data class JoinMedicamentoTratamientoData(
         @ColumnInfo(name = "status") val estatusTratamiento: Int?
 
 )
-//{
-   // var tituloTratamiento : String? = null
-   // var medicamento : String? = null
-   // var colorMedicamento : Int? = null
-
-//
-// }

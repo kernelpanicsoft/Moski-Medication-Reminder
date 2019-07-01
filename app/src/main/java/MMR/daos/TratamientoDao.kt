@@ -45,7 +45,10 @@ interface TratamientoDao {
     @Query("UPDATE Tratamiento SET omitidas = omitidas + 1 WHERE Tratamiento.id = :id")
     fun incrementTomasOmitidas(id: Int)
 
-    @Query("UPDATE Tratamiento SET status = +" + EstatusTratamiento.TERMINADO +  "  WHERE Tratamiento.diasTratamiento = 0")
+    @Query("UPDATE Tratamiento SET status = " + EstatusTratamiento.TERMINADO +  "  WHERE Tratamiento.diasTratamiento = 0")
     fun endsTreatments()
+
+    @Query("UPDATE Tratamiento SET diasTratamiento = diasTratamiento - 1 WHERE diasTratamiento != -1")
+    fun decreaseTreatmentDays()
 
 }

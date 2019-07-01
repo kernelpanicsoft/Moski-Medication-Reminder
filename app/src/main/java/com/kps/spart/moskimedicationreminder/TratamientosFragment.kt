@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -19,9 +18,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 
-import elements.Tratamiento
 import model.CodigosDeSolicitud
 
 
@@ -90,11 +87,8 @@ class TratamientosFragment : Fragment() {
                 return true
             }
             R.id.itemSearch ->{
-                tratamientoViewModel.getLastID().observe(this, Observer {
-                  //  Toast.makeText(context,"Ultimo ID: " + it?.toString(), Toast.LENGTH_LONG).show()
-                    val nav = Intent(context,AnadirTomasActivity::class.java)
-                    startActivity(nav)
-                })
+                tratamientoViewModel.DecreaseTratramientoUnDia()
+
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

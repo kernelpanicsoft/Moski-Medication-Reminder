@@ -102,7 +102,7 @@ class DetallesTratamientoFragment : Fragment() {
             EstatusTratamiento.ACTIVO ->{
                 estatusTratamientoTV?.text = getString(R.string.activo)
                 //estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.verde))
-                estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.rojo))
+                estatusTratamientoIV?.setColorFilter(ContextCompat.getColor(context!!,R.color.verde))
             }
             EstatusTratamiento.TERMINADO -> {
                 estatusTratamientoTV?.text = getString(R.string.terminado)

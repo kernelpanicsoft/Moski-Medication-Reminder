@@ -57,4 +57,12 @@ class TratamientoViewModel (application: Application) : AndroidViewModel(applica
     fun incrementTomasOmitidas(id: Int){
         repository.incrementTomasOmitidas(id)
     }
+
+    fun finalizaTratamientos(){
+        repository.endsAllTratamientos()
+    }
+
+    fun DecreaseTratramientoUnDia(){
+        repository.decreaseTreatmentsOneDay()
+    }
 }

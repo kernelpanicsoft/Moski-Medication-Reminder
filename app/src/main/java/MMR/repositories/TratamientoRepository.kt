@@ -4,8 +4,6 @@ import MMR.daos.TratamientoDao
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
-import android.util.Log
-import android.widget.Toast
 import elements.JoinMedicamentoTratamientoData
 import elements.Tratamiento
 import model.MMRDataBase
@@ -23,7 +21,6 @@ class TratamientoRepository (application: Application) {
     fun insert(tratamiento: Tratamiento) {
         InsertTratamientoAsyncTask(tratamientoDao).execute(tratamiento)
     }
-
 
     fun update(tratamiento: Tratamiento){
         UpdateTratamientoAsyncTask(tratamientoDao).execute(tratamiento)
@@ -51,6 +48,14 @@ class TratamientoRepository (application: Application) {
 
     fun deleteAllTratamientosUsuario(usuarioID: Int){
         DeleteTratamientosDeUsuarioAsyncTask(tratamientoDao).execute(usuarioID)
+    }
+
+    fun endsAllTratamientos(){
+        EndsTratamientosAsyncTask(tratamientoDao).execute()
+    }
+
+    fun decreaseTreatmentsOneDay(){
+        DecreaseDiasTratamientoAsyncTask(tratamientoDao).execute()
     }
 
     fun getAllTratamientos(usuarioID: Int) : LiveData<List<Tratamiento>>{
@@ -119,6 +124,20 @@ class TratamientoRepository (application: Application) {
     private class DeleteTratamientosDeUsuarioAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Int, Void, Void>(){
         override fun doInBackground(vararg params: Int?) : Void? {
             tratamientoDao.deleteAllTratamientosUsuario(params[0])
+            return null
+        }
+    }
+
+    private class EndsTratamientosAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+            tratamientoDao.endsTreatments()
+            return null
+        }
+    }
+
+    private class DecreaseDiasTratamientoAsyncTask constructor(private val tratamientoDao: TratamientoDao) : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+            tratamientoDao.decreaseTreatmentDays()
             return null
         }
     }
