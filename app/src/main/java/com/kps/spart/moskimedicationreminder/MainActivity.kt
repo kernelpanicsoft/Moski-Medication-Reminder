@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.v4.view.GravityCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.view.MenuItem
@@ -28,6 +29,12 @@ class MainActivity : AppCompatActivity() {
     private var currentSectionID: Int = 0
     var currentDirectoryID: Int = 0
     private lateinit var usuarioViewModel: UsuarioViewModel
+
+    override fun onStart() {
+        super.onStart()
+        checkFirstRun()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -238,6 +245,29 @@ class MainActivity : AppCompatActivity() {
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
             userPic.setImageBitmap(bitmap)
         }
+    }
+
+    private fun checkFirstRun() : Boolean{
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if(sharedPref.getBoolean("firstrun",true)){
+            val builder = AlertDialog.Builder(this)
+            builder.setView(R.layout.welcome_dialog)
+            builder.setPositiveButton("Entendido"){ _, _ ->
+                sharedPref.edit().putBoolean("firstrun",false).apply()
+            }
+            val dialog = builder.create()
+          //  dialog.show()
+
+            val firstRunWelcome = Intent(this,welcome_screen::class.java)
+            startActivity(firstRunWelcome)
+
+
+        }
+
+
+        return true
+
     }
 
 

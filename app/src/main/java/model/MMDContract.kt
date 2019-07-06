@@ -8,6 +8,9 @@ import android.provider.BaseColumns
  *
  */
 
+const val REGISTRO_PRIMER_USUARIO = 2001
+
+
 object TipoRecordatorio{
     const val NOTIFICACION = 0
     const val ALARMA = 1

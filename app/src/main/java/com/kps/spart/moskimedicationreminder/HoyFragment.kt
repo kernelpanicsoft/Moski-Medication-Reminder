@@ -111,9 +111,9 @@ class HoyFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.itemFilter -> {
-            //    val restartShots = Intent(context,MMRReiniciarDiaService::class.java)
-            //    context?.startService(restartShots)
-                tomaViewModel.resetAllTomasStatus()
+               val restartShots = Intent(context,MMRReiniciarDiaService::class.java)
+               context?.startService(restartShots)
+             //   tomaViewModel.resetAllTomasStatus()
                 return true
             }
         }
