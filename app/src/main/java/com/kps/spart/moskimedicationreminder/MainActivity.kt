@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity() {
     var currentDirectoryID: Int = 0
     private lateinit var usuarioViewModel: UsuarioViewModel
 
-    override fun onStart() {
-        super.onStart()
-        checkFirstRun()
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         ab!!.setDisplayHomeAsUpEnabled(true)
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
         title = getString(R.string.title_home)
+
+        checkFirstRun()
+
 
         ab.elevation = 4.0f
 
@@ -251,17 +248,8 @@ class MainActivity : AppCompatActivity() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         if(sharedPref.getBoolean("firstrun",true)){
-            val builder = AlertDialog.Builder(this)
-            builder.setView(R.layout.welcome_dialog)
-            builder.setPositiveButton("Entendido"){ _, _ ->
-                sharedPref.edit().putBoolean("firstrun",false).apply()
-            }
-            val dialog = builder.create()
-          //  dialog.show()
-
             val firstRunWelcome = Intent(this,welcome_screen::class.java)
             startActivity(firstRunWelcome)
-
 
         }
 

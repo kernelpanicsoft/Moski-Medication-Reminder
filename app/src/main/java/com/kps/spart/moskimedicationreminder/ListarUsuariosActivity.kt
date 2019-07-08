@@ -48,13 +48,13 @@ class ListarUsuariosActivity : AppCompatActivity() {
         //Especificamos el escucha de eventos para definir el usuario activo de la aplicacion
         adapter.setOnClickListener( View.OnClickListener {
             val usuarioSeleccionado = adapter.getUsuarioAt(RecViewUsuarios.getChildAdapterPosition(it))
-            0
-            //usuarioViewModel.delete(usuarioSeleccionado)
+
+            //usuaorioViewModel.delete(usuarioSeleccionado)
 
             val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@ListarUsuariosActivity)
             with(sharedPref.edit()){
                 putInt("actualUserID",usuarioSeleccionado.uid)
-                commit()
+                apply()
             }
 
 

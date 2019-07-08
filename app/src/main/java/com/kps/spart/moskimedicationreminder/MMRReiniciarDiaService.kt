@@ -18,13 +18,4 @@ class MMRReiniciarDiaService : IntentService("MMRReiniciarDiaService"){
         
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show()
-        return super.onStartCommand(intent, flags, startId)
-    }
-
-    override fun onDestroy() {
-        Toast.makeText(this,"Servicio finalizado", Toast.LENGTH_SHORT).show()
-    }
-
 }

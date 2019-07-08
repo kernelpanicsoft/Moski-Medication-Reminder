@@ -3,6 +3,7 @@ package com.kps.spart.moskimedicationreminder
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_welcome_screen.*
 import model.REGISTRO_PRIMER_USUARIO
 
@@ -18,4 +19,6 @@ class welcome_screen : AppCompatActivity() {
             startActivity(registerFirstUser)
         }
     }
+
+
 }

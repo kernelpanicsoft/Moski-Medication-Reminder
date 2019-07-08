@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.os.PersistableBundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
@@ -174,6 +175,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
 
         savePerfilFAB.setOnClickListener{
             val usuario : Usuario
+
             if(intent.hasExtra("USER_ID")){
                  usuario = usuarioActualLive.value!!
             }else{
@@ -283,6 +285,21 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
     }
 
     private fun saveUserToDB(usuario: Usuario){
+        if(intent.hasExtra("PRIMER_USUARIO")){
+            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+
+            if(sharedPref.getBoolean("firstrun", true)){
+                val calendar = Calendar.getInstance()
+                val sdf = SimpleDateFormat.getDateInstance()
+
+                with(sharedPref.edit()){
+                    putString("firstrundate", sdf.format(calendar.time))
+                    putBoolean("firstrun", false)
+                    apply()
+                }
+            }
+        }
+
         if(intent.hasExtra("USER_ID")){
             usuarioViewModel.update(usuario)
 
@@ -502,7 +519,7 @@ class RegistrarUsuarioActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
 
         savedInstanceState?.run {
-            mCurrentPhotoPath = getString("ActualPhotoPath")
+            mCurrentPhotoPath = getString("ActualPhotoPath")!!
             if(!mCurrentPhotoPath.isEmpty()){
 
                 displayPic()
