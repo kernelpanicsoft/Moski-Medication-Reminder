@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         val fechaInicioUso = sharedPref.getString("firstrundate", "")
-        Toast.makeText(this, fechaInicioUso, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, fechaInicioUso, Toast.LENGTH_SHORT).show()
 
         val sdf = SimpleDateFormat.getDateInstance()
         val todayDate = Calendar.getInstance().time

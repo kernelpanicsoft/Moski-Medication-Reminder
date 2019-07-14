@@ -113,7 +113,9 @@ class HoyFragment : Fragment() {
         when (item!!.itemId) {
             R.id.itemFilter -> {
                 val notificationManager = NotificationsManager(context!!)
-                notificationManager.sendNotification("Hola","Mundo como estan")
+               // notificationManager.sendNotification("Hola","Mundo como estan")
+                notificationManager.createAlarmForNotifications(16,27)
+                Toast.makeText(context,"Alarma fijada", Toast.LENGTH_SHORT).show()
 
              //   tomaViewModel.resetAllTomasStatus()
                 return true

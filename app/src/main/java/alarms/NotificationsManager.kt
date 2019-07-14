@@ -5,10 +5,10 @@ import android.content.*
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.AsyncTask
 import android.support.v4.app.NotificationCompat
 import com.kps.spart.moskimedicationreminder.MainActivity
 import com.kps.spart.moskimedicationreminder.R
-import com.kps.spart.moskimedicationreminder.TreatmentBroadcastReceiver
 import model.ACTION_UPDATE_NOTIFICATION
 import model.CANAL_PRIMARIO_ID
 import model.NOTIFICACION_ID
@@ -66,27 +66,45 @@ class NotificationsManager(val context: Context) {
         mNotifyManager.cancel(NOTIFICACION_ID)
     }
 
-    fun createAlarmForNotifications(){
-        alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    fun requestShotsForDailyNotifications(){
         alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
             PendingIntent.getBroadcast(context,0,intent, 0)
         }
 
-        val calendar: Calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 8)
-            set(Calendar.MINUTE, 30)
+    }
+
+    fun createAlarmForNotifications(hourOfDay: Int, minute: Int){
+        alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
+            intent.putExtra("Tratamiento", "Para la tos")
+            PendingIntent.getBroadcast(context,0,intent, 0)
+
         }
 
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, hourOfDay)
+            set(Calendar.MINUTE, minute)
+        }
+
+        alarmMgr?.set(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                alarmItent
+        )
+        /*
         alarmMgr?.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
-                1000 * 60 * 20,
+                1000 * 60 * 1,
                 alarmItent
         )
+        */
+    }
 
-
-
+    fun cancelAlarm(){
+        alarmMgr?.cancel(alarmItent)
     }
 
     fun enableReceiver(){
@@ -111,4 +129,10 @@ class NotificationsManager(val context: Context) {
         )
     }
 
+    private inner class ScheduleAlarmsForShotsNotificationsAsyncTask : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+
+            return null
+        }
+    }
 }

@@ -1,4 +1,0 @@
-package alarms
-
-class NotificationJobService {
-}
