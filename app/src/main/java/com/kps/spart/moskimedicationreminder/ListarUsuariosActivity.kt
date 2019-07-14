@@ -57,7 +57,6 @@ class ListarUsuariosActivity : AppCompatActivity() {
                 apply()
             }
 
-
             finish()
         }
         )
@@ -92,6 +91,14 @@ class ListarUsuariosActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.REGISTRAR_USUARIO && resultCode == Activity.RESULT_OK){
+            usuarioViewModel.getLastUserID().observe(this, Observer {
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+                with(sharedPref.edit()){
+                    putInt("actualUserID",it!!.toInt())
+                    apply()
+                }
+                finish()
+            })
             Toast.makeText(this,  getString(R.string.usuario_creado_correctamente), Toast.LENGTH_SHORT).show()
         }else if (requestCode == CodigosDeSolicitud.ELIMINAR_USUARIO && resultCode == Activity.RESULT_OK){
 

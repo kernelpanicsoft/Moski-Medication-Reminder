@@ -5,6 +5,7 @@ import android.arch.persistence.room.*
 import elements.JoinTomasDelDia
 import elements.Toma
 import model.EstatusToma
+import model.TipoRecordatorio
 
 
 @Dao
@@ -41,4 +42,9 @@ interface TomaDao {
 
     @Query("UPDATE Toma SET statusToma = " + EstatusToma.PROGRAMADA)
     fun resetTomasStatus()
+
+    @Query("SELECT Toma.id, statusToma, horaToma, nombreMedicamento FROM Toma JOIN Tratamiento ON Tratamiento.id = Toma.tratamientoID JOIN Medicamento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.recordatorio = " + TipoRecordatorio.NOTIFICACION)
+    fun getTomasProgramadas() : LiveData<JoinTomasDelDia>
+
+
 }

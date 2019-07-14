@@ -20,6 +20,9 @@ class TreatmentBroadcastReceiver : BroadcastReceiver() {
                 Log.d(TAG, log)
             }
         }
+        if(intent.action == "android.intent.action.BOOT_COMPLETED"){
+            //
+        }
         Toast.makeText(context,"Estas invocando al broadcast",Toast.LENGTH_SHORT).show()
     }
 }

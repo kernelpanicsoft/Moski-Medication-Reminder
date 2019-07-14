@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
+import alarms.NotificationsManager
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -15,11 +16,14 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
-        val firstRun = !sharedPref.getBoolean("firstrun", true)
+       // val firstRun = !sharedPref.getBoolean("firstrun", true)
         if(!sharedPref.getBoolean("firstrun", true)){
             checkDateForRunService()
-            Log.d("EstasReiniciando","Estas iniciando la actualizacion de tomas " + firstRun.toString())
+          //  Log.d("EstasReiniciando","Estas iniciando la actualizacion de tomas " + firstRun.toString())
         }
+
+        val channelManager = NotificationsManager(this)
+        channelManager.createNotificationChannel()
 
         startActivity(Intent (this@SplashActivity,MainActivity::class.java))
         finish()
@@ -36,8 +40,9 @@ class SplashActivity : AppCompatActivity() {
         val todayDate = Calendar.getInstance().time
         val savedDate = sdf.parse(fechaInicioUso)
 
-        sdf.for
-        Log.d("ComparaFechas",todayDate.compareTo(savedDate).toString() + " " + todayDate.toString() + " : " + savedDate.toString())
+        val auxDate = sdf.parse(sdf.format(todayDate))
+       // Log.d("ComparaFechas",auxDate.compareTo(savedDate).toString() + " " + auxDate.time.toString() + " : " + savedDate.time.toString())
+       // Log.d("ComparaFechas", auxDate.toString().equals(savedDate.toString()).toString())
 
         if(todayDate.compareTo(savedDate) != 0){
             with(sharedPref.edit()){
@@ -47,9 +52,9 @@ class SplashActivity : AppCompatActivity() {
             val restartShots = Intent(this,MMRReiniciarDiaService::class.java)
             this.startService(restartShots)
 
-            Log.d("EstasReiniciando","Estas reiniciando el log")
+           // Log.d("EstasReiniciando","Estas reiniciando el log")
         }else if(todayDate.compareTo(savedDate) == 0){
-            Log.d("EstasReiniciando","Las fechas son iguales")
+           // Log.d("EstasReiniciando","Las fechas son iguales")
 
         }
 

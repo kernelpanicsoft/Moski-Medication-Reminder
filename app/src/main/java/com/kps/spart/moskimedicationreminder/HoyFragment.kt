@@ -2,6 +2,7 @@ package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.TomaViewModel
 import MMR.viewModels.TratamientoViewModel
+import alarms.NotificationsManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -111,8 +112,9 @@ class HoyFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.itemFilter -> {
-               val restartShots = Intent(context,MMRReiniciarDiaService::class.java)
-               context?.startService(restartShots)
+                val notificationManager = NotificationsManager(context!!)
+                notificationManager.sendNotification("Hola","Mundo como estan")
+
              //   tomaViewModel.resetAllTomasStatus()
                 return true
             }

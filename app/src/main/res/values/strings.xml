@@ -350,4 +350,7 @@
     <string name="bienvenido">Bienvenido</string>
     <string name="mensaje_bienvenida">Antes de comenzar a utilizar la aplicación es necesario registrar al primer usuario, con el cual podrá añadir tratamientos, medicamentos, médicos y registrar citas médicas. Podrá registrar usuarios adicionales posteriormente con elementos independientes.</string>
     <string name="comenzar">Comenzar</string>
+    <string name="tomar">Tomar</string>
+    <string name="saltar">Saltar</string>
+    <string name="posponer">Posponer</string>
 </resources>

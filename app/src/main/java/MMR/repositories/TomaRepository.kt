@@ -56,7 +56,7 @@ class TomaRepository(application: Application) {
         UpdateStatusTomaAsyncTask(tomaDao,idToma,status).execute()
     }
 
-    fun resetAllTomasStatus(){
+    fun  resetAllTomasStatus(){
         ResetStatusTomasAsyncTask(tomaDao).execute()
     }
 

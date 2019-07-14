@@ -14,7 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -122,9 +123,9 @@
 
         <receiver
             android:name=".TreatmentBroadcastReceiver"
-            android:exported="true">
+            android:exported="true"
+            android:enabled="false">
             <intent-filter>
-                <action android:name="android.intent.action.AIRPLANE_MODE" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

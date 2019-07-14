@@ -9,6 +9,10 @@ import android.provider.BaseColumns
  */
 
 const val REGISTRO_PRIMER_USUARIO = 2001
+const val CANAL_PRIMARIO_ID = "primary_notification_channel"
+const val NOTIFICACION_ID = 0
+const val ACTION_UPDATE_NOTIFICATION = "com.kps.spart.moskimedicationreminder"
+
 
 
 object TipoRecordatorio{
@@ -55,6 +59,7 @@ object CodigosDeSolicitud{
     const val ELEGIR_MEDICAMENTO = 1012
     const val ANADIR_TRATAMIENTO = 1013
     const val ANADIR_MEDICO = 1014
+    const val REGISTRAR_PRIMER_USUARIO = 1015
 }
 
 object MMDContract {

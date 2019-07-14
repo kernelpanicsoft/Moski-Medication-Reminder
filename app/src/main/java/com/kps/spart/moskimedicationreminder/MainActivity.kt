@@ -1,9 +1,13 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.UsuarioViewModel
+import alarms.NotificationsManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -23,12 +27,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import elements.Usuario
 import kotlinx.android.synthetic.main.nav_header.*
+import model.ACTION_UPDATE_NOTIFICATION
 
 
 class MainActivity : AppCompatActivity() {
     private var currentSectionID: Int = 0
     var currentDirectoryID: Int = 0
     private lateinit var usuarioViewModel: UsuarioViewModel
+
+    val mReceiver : NotificationReceiver = NotificationReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.title_home)
 
         checkFirstRun()
+
+        registerReceiver(mReceiver, IntentFilter(ACTION_UPDATE_NOTIFICATION))
 
 
         ab.elevation = 4.0f
@@ -259,4 +268,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun updateNotification(){
+
+    }
+
+
+    inner class NotificationReceiver : BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+            updateNotification()
+        }
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(mReceiver)
+        super.onDestroy()
+    }
 }
