@@ -10,5 +10,6 @@ data class JoinTomasDelDia(
         @ColumnInfo(name = "tipo") val tipo: String?,
         @ColumnInfo(name = "titulo") val tituloTratamiento: String?,
         @ColumnInfo(name = "color") val color: Int?,
-        @ColumnInfo(name = "tomaID") val idTratamiento: Int?
+        @ColumnInfo(name = "tomaID") val idTratamiento: Int?,
+        @ColumnInfo(name = "recordatorio") val tipoRecordatorio: Int?
 )

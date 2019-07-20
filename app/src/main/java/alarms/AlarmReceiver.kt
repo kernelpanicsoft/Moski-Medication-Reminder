@@ -9,8 +9,12 @@ import android.widget.Toast
 class AlarmReceiver : BroadcastReceiver(){
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Log.d("Alarma","Se disparo")
+        val tratamiento = intent?.getStringExtra("Tratamiento")
+        val medicamento = intent?.getStringExtra("Medicamento")
+        val idToma = intent?.getIntExtra("IDToma", -1)
+
+        Log.d("Alarma","Se disparo: " + tratamiento + " | " + medicamento + " | " + idToma)
         val notificationManager = NotificationsManager(context!!)
-        notificationManager.sendNotification("Hola",intent!!.getStringExtra("Tratamiento"))
+        notificationManager.sendNotification(tratamiento!!,medicamento!!, idToma!!)
     }
 }

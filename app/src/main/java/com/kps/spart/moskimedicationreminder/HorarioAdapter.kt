@@ -67,7 +67,7 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
         holder.iconoMedicamento.setColorFilter(tomaActual.color!!)
         holder.iconoTratamiento.setImageResource(R.drawable.ic_bookmark)
         holder.horaToma.text=tomaActual.horaToma
-        holder.nombreTratamientoTV.text = tomaActual.tituloTratamiento + " ID: " + tomaActual.idTratamiento + " ID Toma:  " + tomaActual.id
+        holder.nombreTratamientoTV.text = tomaActual.tituloTratamiento // + " ID: " + tomaActual.idTratamiento + " ID Toma:  " + tomaActual.id
         holder.nombreMedicamentoTV.text = tomaActual.medicamento
 
 

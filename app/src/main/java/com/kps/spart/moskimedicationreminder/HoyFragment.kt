@@ -2,6 +2,7 @@ package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.TomaViewModel
 import MMR.viewModels.TratamientoViewModel
+import alarms.AlarmHelper
 import alarms.NotificationsManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -25,6 +26,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import model.EstatusToma
+import android.media.RingtoneManager
+import android.media.Ringtone
+import java.util.*
 
 
 class HoyFragment : Fragment() {
@@ -47,7 +51,7 @@ class HoyFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater!!.inflate(R.layout.fragment_hoy, container, false)
 
-        RV = v.findViewById<RecyclerView>(R.id.RecViewHoy)
+        RV = v.findViewById(R.id.RecViewHoy)
         RV.setHasFixedSize(true)
 
 
@@ -112,12 +116,14 @@ class HoyFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.itemFilter -> {
-                val notificationManager = NotificationsManager(context!!)
-               // notificationManager.sendNotification("Hola","Mundo como estan")
-                notificationManager.createAlarmForNotifications(16,27)
+                val alarmHelper = AlarmHelper(context!!)
+                alarmHelper.createAlarmForNotifications(18,52, "Prueba", "DE notificacion", 1047)
+
                 Toast.makeText(context,"Alarma fijada", Toast.LENGTH_SHORT).show()
 
-             //   tomaViewModel.resetAllTomasStatus()
+               // tomaViewModel.scheduleShotsNotifications()
+
+
                 return true
             }
         }

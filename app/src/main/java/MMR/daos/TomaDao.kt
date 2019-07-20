@@ -46,5 +46,10 @@ interface TomaDao {
     @Query("SELECT Toma.id, statusToma, horaToma, nombreMedicamento FROM Toma JOIN Tratamiento ON Tratamiento.id = Toma.tratamientoID JOIN Medicamento ON Tratamiento.medicamentoID = Medicamento.id WHERE Tratamiento.recordatorio = " + TipoRecordatorio.NOTIFICACION)
     fun getTomasProgramadas() : LiveData<JoinTomasDelDia>
 
+    @Query("SELECT Toma.id, statusToma, horaToma, titulo, nombreMedicamento, recordatorio FROM Toma JOIN Tratamiento ON Tratamiento.id = Toma.tratamientoID JOIN Medicamento ON Tratamiento.medicamentoID = Medicamento.id")
+    fun getTomasProgramadasWithoutLiveData() : List<JoinTomasDelDia>
+
+
+
 
 }

@@ -56,4 +56,8 @@ class TomaViewModel (application: Application) : AndroidViewModel(application) {
     fun resetAllTomasStatus(){
         repository.resetAllTomasStatus()
     }
+
+    fun scheduleShotsNotifications() {
+        repository.scheduleAlarmsForShots()
+    }
 }

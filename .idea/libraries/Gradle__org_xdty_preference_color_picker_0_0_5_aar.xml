@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: org.xdty.preference:color-picker:0.0.5@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/265faa320cb57890862f1710f20a1a42/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/265faa320cb57890862f1710f20a1a42/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3963aeb76b3a6925d477f91c8dc836ff/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3963aeb76b3a6925d477f91c8dc836ff/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

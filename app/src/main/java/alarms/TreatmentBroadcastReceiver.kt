@@ -10,9 +10,6 @@ import java.lang.StringBuilder
 class TreatmentBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        if(intent.action == "android.intent.action.BOOT_COMPLETED"){
-            val notificationManager = NotificationsManager(context!!)
-            //notificationManager.createAlarmForNotifications()
-        }
+        Log.d("ReceiverTreatment", intent.getStringExtra("Toma"))
     }
 }

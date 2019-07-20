@@ -1,19 +1,26 @@
 package MMR.repositories
 
 import MMR.daos.TomaDao
+import alarms.AlarmHelper
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import android.util.Log
 import elements.JoinTomasDelDia
 import elements.Toma
 import model.MMRDataBase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.log
 
 class TomaRepository(application: Application) {
     val tomaDao : TomaDao
+    val alarmHelper : AlarmHelper
 
     init{
         val database = MMRDataBase.getInstance(application)
         tomaDao = database.tomaDao()
+        alarmHelper = AlarmHelper(application)
     }
 
     fun insert(toma : Toma){
@@ -58,6 +65,10 @@ class TomaRepository(application: Application) {
 
     fun  resetAllTomasStatus(){
         ResetStatusTomasAsyncTask(tomaDao).execute()
+    }
+
+    fun scheduleAlarmsForShots() {
+        scheduleAlarmsForShotsAsyncTask(tomaDao).execute()
     }
 
     private class InsertTomaAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Toma, Void, Void>(){
@@ -106,6 +117,28 @@ class TomaRepository(application: Application) {
     private class DeleteAllTomasTratamientoAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Int, Void, Void>(){
         override fun doInBackground(vararg params: Int?): Void? {
             tomaDao.deleteAllTomasTratamiento(params[0])
+            return null
+        }
+    }
+
+    private inner class scheduleAlarmsForShotsAsyncTask constructor(private val tomaDao: TomaDao) : AsyncTask<Int, Void, Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            val sdf = SimpleDateFormat("h:mm a")
+            var shotDate : Date
+            val cal = Calendar.getInstance()
+
+
+
+            for(shot in tomaDao.getTomasProgramadasWithoutLiveData()){
+                //Log.d("Tomas",sdf.parse(shot.horaToma).toString())
+                shotDate = sdf.parse(shot.horaToma)
+                cal.time = shotDate
+                Log.d("Tomas", shot.toString())
+                alarmHelper.createAlarmForNotifications(cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE), shot.tituloTratamiento, shot.medicamento, shot.id)
+               // alarmHelper.createAlarmForNotifications(22,12, shot.tituloTratamiento, shot.medicamento, shot.id)
+            }
+
+
             return null
         }
     }

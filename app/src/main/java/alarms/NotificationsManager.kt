@@ -5,8 +5,11 @@ import android.content.*
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.media.Ringtone
+import android.media.RingtoneManager
 import android.os.AsyncTask
 import android.support.v4.app.NotificationCompat
+import android.util.Log
 import com.kps.spart.moskimedicationreminder.MainActivity
 import com.kps.spart.moskimedicationreminder.R
 import model.ACTION_UPDATE_NOTIFICATION
@@ -16,9 +19,7 @@ import java.util.*
 
 class NotificationsManager(val context: Context) {
     lateinit var mNotifyManager : NotificationManager
-    lateinit var alarmItent: PendingIntent
-    var alarmMgr: AlarmManager? = null
-
+    lateinit var mRingtone : Ringtone
 
 
     fun createNotificationChannel(){
@@ -50,9 +51,12 @@ class NotificationsManager(val context: Context) {
         return notifyBuilder
     }
 
-    fun sendNotification(title: String, content: String){
-        val updateIntent = Intent(ACTION_UPDATE_NOTIFICATION)
-        val updatePendingIntent = PendingIntent.getBroadcast(context, NOTIFICACION_ID, updateIntent, PendingIntent.FLAG_ONE_SHOT)
+    fun sendNotification(title: String, content: String, tomaID: Int){
+        val updateIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
+            putExtra("Toma", tomaID)
+            Log.d("NotificationReceiver", "stas creando accion " + tomaID)
+        }
+        val updatePendingIntent = PendingIntent.getBroadcast(context, NOTIFICACION_ID, updateIntent, 0)
         val notifyBuilder = getNotificationBuilder(title,content)
         notifyBuilder.addAction(R.drawable.ic_capsula, context.getString(R.string.tomar), updatePendingIntent)
         notifyBuilder.addAction(R.drawable.ic_capsula,context.getString(R.string.saltar), updatePendingIntent)
@@ -66,73 +70,16 @@ class NotificationsManager(val context: Context) {
         mNotifyManager.cancel(NOTIFICACION_ID)
     }
 
-    fun requestShotsForDailyNotifications(){
-        alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
-            PendingIntent.getBroadcast(context,0,intent, 0)
-        }
+
+    fun triggerAlarmSound(){
+
+        val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALL)
+        mRingtone = RingtoneManager.getRingtone(context, notification)
+        mRingtone.play()
 
     }
 
-    fun createAlarmForNotifications(hourOfDay: Int, minute: Int){
-        alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
-            intent.putExtra("Tratamiento", "Para la tos")
-            PendingIntent.getBroadcast(context,0,intent, 0)
-
-        }
-
-        val calendar: Calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, hourOfDay)
-            set(Calendar.MINUTE, minute)
-        }
-
-        alarmMgr?.set(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                alarmItent
-        )
-        /*
-        alarmMgr?.setRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                1000 * 60 * 1,
-                alarmItent
-        )
-        */
-    }
-
-    fun cancelAlarm(){
-        alarmMgr?.cancel(alarmItent)
-    }
-
-    fun enableReceiver(){
-        val receiver = ComponentName(context, TreatmentBroadcastReceiver::class.java)
-
-        context.packageManager.setComponentEnabledSetting(
-                receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP
-
-        )
-    }
-
-    fun disableReceiver(){
-        val receiver = ComponentName(context, TreatmentBroadcastReceiver::class.java)
-
-        context.packageManager.setComponentEnabledSetting(
-                receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP
-
-        )
-    }
-
-    private inner class ScheduleAlarmsForShotsNotificationsAsyncTask : AsyncTask<Void, Void, Void>(){
-        override fun doInBackground(vararg params: Void?): Void? {
-
-            return null
-        }
+    fun stopAlarmSound(){
+        mRingtone.stop()
     }
 }
