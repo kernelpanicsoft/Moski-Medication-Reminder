@@ -117,7 +117,7 @@ class HoyFragment : Fragment() {
         when (item!!.itemId) {
             R.id.itemFilter -> {
                 val alarmHelper = AlarmHelper(context!!)
-                alarmHelper.createAlarmForNotifications(18,52, "Prueba", "DE notificacion", 1047)
+                alarmHelper.createAlarmForNotifications(19,51, "Prueba", "DE notificacion", 1047)
 
                 Toast.makeText(context,"Alarma fijada", Toast.LENGTH_SHORT).show()
 

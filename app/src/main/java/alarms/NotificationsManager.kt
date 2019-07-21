@@ -53,8 +53,10 @@ class NotificationsManager(val context: Context) {
 
     fun sendNotification(title: String, content: String, tomaID: Int){
         val updateIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
-            putExtra("Toma", tomaID)
-            Log.d("NotificationReceiver", "stas creando accion " + tomaID)
+         //   putExtra("TomaID", tomaID)
+         //   putExtra("PruebaPaso", "HAy que tonto")
+
+
         }
         val updatePendingIntent = PendingIntent.getBroadcast(context, NOTIFICACION_ID, updateIntent, 0)
         val notifyBuilder = getNotificationBuilder(title,content)

@@ -10,6 +10,8 @@ import java.lang.StringBuilder
 class TreatmentBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("ReceiverTreatment", intent.getStringExtra("Toma"))
+        val idToma = intent.getStringExtra("TomaID")
+        val cadena = intent.getStringExtra("Toma")
+        Log.d("EstasReciviendo", idToma + " " + cadena)
     }
 }
