@@ -12,10 +12,7 @@ import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.kps.spart.moskimedicationreminder.MainActivity
 import com.kps.spart.moskimedicationreminder.R
-import model.ACTION_UPDATE_NOTIFICATION
-import model.AccionNotificacion
-import model.CANAL_PRIMARIO_ID
-import model.NOTIFICACION_ID
+import model.*
 import java.util.*
 
 class NotificationsManager(val context: Context) {
@@ -55,21 +52,21 @@ class NotificationsManager(val context: Context) {
     fun sendNotification(title: String, content: String, tomaID: Int){
         val takeShotIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
             putExtra("TomaID", tomaID)
-            putExtra("AcctionToma", 0)
+            putExtra("AcctionToma", EstatusToma.TOMADA)
 
         }
         val takeShotPendingIntent = PendingIntent.getBroadcast(context, AccionNotificacion.TOMAR, takeShotIntent, PendingIntent.FLAG_ONE_SHOT)
 
         val skipShotIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
             putExtra("TomaID", tomaID)
-            putExtra("AcctionToma", 1)
+            putExtra("AcctionToma", EstatusToma.PASADA)
 
         }
         val skipShotPendingIntent = PendingIntent.getBroadcast(context, AccionNotificacion.SALTAR, skipShotIntent, PendingIntent.FLAG_ONE_SHOT)
 
         val postPoneShotIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
             putExtra("TomaID", tomaID)
-            putExtra("AcctionToma", 2)
+            putExtra("AcctionToma", EstatusToma.POSPUESTA)
         }
         val postPoneShotPendingIntent = PendingIntent.getBroadcast(context, AccionNotificacion.POSPONER, postPoneShotIntent, PendingIntent.FLAG_ONE_SHOT)
 

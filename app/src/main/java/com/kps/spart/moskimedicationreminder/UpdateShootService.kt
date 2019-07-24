@@ -16,7 +16,7 @@ class UpdateShootService : IntentService("UpdateShootService") {
             tomaRepository.updateTomaStatus(tomaID!!, tomaStatus!!)
         }
 
-        Log.d("ServicioReiniciaTomas", "Toma actualizada notificacion: " + tomaID)
+        Log.d("ServicioReiniciaTomas", "Toma actualizada notificacion: " + tomaID + " " + tomaStatus)
 
     }
 }
