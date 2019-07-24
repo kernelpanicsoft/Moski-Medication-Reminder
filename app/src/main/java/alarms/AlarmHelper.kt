@@ -21,7 +21,7 @@ class AlarmHelper (val context: Context) {
             intent.putExtra("Tratamiento", tratamiento)
             intent.putExtra("Medicamento", medicamento)
             intent.putExtra("IDToma", tomaID)
-            PendingIntent.getBroadcast(context,0,intent, 0)
+            PendingIntent.getBroadcast(context,tomaID!!,intent, PendingIntent.FLAG_ONE_SHOT)
 
         }
 

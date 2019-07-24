@@ -41,10 +41,10 @@ class SplashActivity : AppCompatActivity() {
         val savedDate = sdf.parse(fechaInicioUso)
 
         val auxDate = sdf.parse(sdf.format(todayDate))
-       // Log.d("ComparaFechas",auxDate.compareTo(savedDate).toString() + " " + auxDate.time.toString() + " : " + savedDate.time.toString())
+        Log.d("ComparaFechas",auxDate.compareTo(savedDate).toString() + " " + auxDate.time.toString() + " : " + savedDate.time.toString())
        // Log.d("ComparaFechas", auxDate.toString().equals(savedDate.toString()).toString())
 
-        if(todayDate.compareTo(savedDate) != 0){
+        if(auxDate.compareTo(savedDate) != 0){
             with(sharedPref.edit()){
                 putString("firstrundate", sdf.format(Calendar.getInstance().time))
                 apply()
@@ -52,7 +52,7 @@ class SplashActivity : AppCompatActivity() {
             val restartShots = Intent(this,MMRReiniciarDiaService::class.java)
             this.startService(restartShots)
 
-           // Log.d("EstasReiniciando","Estas reiniciando el log")
+            Log.d("ComparaFechas","Estas reiniciando tomas" + todayDate.compareTo(savedDate) + " @ " + todayDate.time.toString() + " : " + savedDate.time.toString())
         }else if(todayDate.compareTo(savedDate) == 0){
            // Log.d("EstasReiniciando","Las fechas son iguales")
 

@@ -133,7 +133,7 @@ class TomaRepository(application: Application) {
                 //Log.d("Tomas",sdf.parse(shot.horaToma).toString())
                 shotDate = sdf.parse(shot.horaToma)
                 cal.time = shotDate
-                Log.d("Tomas", shot.toString())
+                Log.d("Tomas", shot.toString() + " $ " + cal.get(Calendar.HOUR_OF_DAY) + " $ " + cal.get(Calendar.MINUTE) + " $ " + shot.id)
                 alarmHelper.createAlarmForNotifications(cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE), shot.tituloTratamiento, shot.medicamento, shot.id)
                // alarmHelper.createAlarmForNotifications(22,12, shot.tituloTratamiento, shot.medicamento, shot.id)
             }

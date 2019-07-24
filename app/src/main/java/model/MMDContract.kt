@@ -10,7 +10,7 @@ import android.provider.BaseColumns
 
 const val REGISTRO_PRIMER_USUARIO = 2001
 const val CANAL_PRIMARIO_ID = "primary_notification_channel"
-const val NOTIFICACION_ID = 0
+const val NOTIFICACION_ID = 6832
 const val ACTION_UPDATE_NOTIFICATION = "com.kps.spart.moskimedicationreminder"
 
 
@@ -19,6 +19,13 @@ object TipoRecordatorio{
     const val NOTIFICACION = 0
     const val ALARMA = 1
     const val NINGUNO = 2
+}
+
+object AccionNotificacion{
+    const val TOMAR = 500
+    const val SALTAR = 501
+    const val POSPONER = 502
+    const val PAUSAR_SONIDO = 503
 }
 
 

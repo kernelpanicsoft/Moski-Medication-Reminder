@@ -116,12 +116,12 @@ class HoyFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.itemFilter -> {
-                val alarmHelper = AlarmHelper(context!!)
-                alarmHelper.createAlarmForNotifications(19,51, "Prueba", "DE notificacion", 1047)
+                //val alarmHelper = AlarmHelper(context!!)
+                //alarmHelper.createAlarmForNotifications(22,22, "Prueba", "DE notificacion", 1049)
 
                 Toast.makeText(context,"Alarma fijada", Toast.LENGTH_SHORT).show()
 
-               // tomaViewModel.scheduleShotsNotifications()
+                tomaViewModel.scheduleShotsNotifications()
 
 
                 return true
