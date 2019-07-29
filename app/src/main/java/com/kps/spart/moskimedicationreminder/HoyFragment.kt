@@ -9,6 +9,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import elements.Toma
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
@@ -28,6 +29,7 @@ import android.widget.Toast
 import model.EstatusToma
 import android.media.RingtoneManager
 import android.media.Ringtone
+import android.os.CountDownTimer
 import java.util.*
 
 
@@ -116,12 +118,9 @@ class HoyFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.itemFilter -> {
-                //val alarmHelper = AlarmHelper(context!!)
-                //alarmHelper.createAlarmForNotifications(22,22, "Prueba", "DE notificacion", 1049)
-
-                Toast.makeText(context,"Alarma fijada", Toast.LENGTH_SHORT).show()
 
                 tomaViewModel.scheduleShotsNotifications()
+
 
 
                 return true

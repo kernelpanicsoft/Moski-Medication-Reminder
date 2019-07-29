@@ -35,6 +35,8 @@ class NotificationsManager(val context: Context) {
     }
 
     fun getNotificationBuilder(title: String, content: String) : NotificationCompat.Builder{
+
+
         val notificationIntent = Intent(context, MainActivity::class.java)
         val notificationPendingIntent = PendingIntent.getActivity(context, NOTIFICACION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val notifyBuilder = NotificationCompat.Builder(context, CANAL_PRIMARIO_ID)
@@ -45,6 +47,7 @@ class NotificationsManager(val context: Context) {
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
+
 
         return notifyBuilder
     }
@@ -75,25 +78,28 @@ class NotificationsManager(val context: Context) {
         notifyBuilder.addAction(R.drawable.ic_capsula, context.getString(R.string.tomar), takeShotPendingIntent)
         notifyBuilder.addAction(R.drawable.ic_capsula,context.getString(R.string.saltar), skipShotPendingIntent)
         notifyBuilder.addAction(R.drawable.ic_capsula,context.getString(R.string.posponer), postPoneShotPendingIntent)
+
+        mNotifyManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        mNotifyManager.notify(NOTIFICACION_ID, notifyBuilder.build())
+    }
+
+    fun sendNotificationForAlarm(title: String, content: String, tomaID: Int){
+
+
+
+
+        val postPoneShotIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
+            putExtra("TomaID", tomaID)
+        }
+        val silenceShootPendingIntent = PendingIntent.getBroadcast(context, AccionNotificacion.POSPONER, postPoneShotIntent, PendingIntent.FLAG_ONE_SHOT)
+
+        val notifyBuilder = getNotificationBuilder(title,content)
+       // notifyBuilder.addAction(R.drawable.ic_capsula, context.getString(R.string.tomar), silenceShootPendingIntent)
+
+
         mNotifyManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         mNotifyManager.notify(NOTIFICACION_ID, notifyBuilder.build())
     }
 
 
-    fun cancelNotification(){
-        mNotifyManager.cancel(NOTIFICACION_ID)
-    }
-
-
-    fun triggerAlarmSound(){
-
-        val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALL)
-        mRingtone = RingtoneManager.getRingtone(context, notification)
-        mRingtone.play()
-
-    }
-
-    fun stopAlarmSound(){
-        mRingtone.stop()
-    }
 }

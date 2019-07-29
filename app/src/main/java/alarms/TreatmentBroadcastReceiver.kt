@@ -26,7 +26,7 @@ class TreatmentBroadcastReceiver : BroadcastReceiver() {
 
 
 
-        var mNotifyManager : NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val mNotifyManager : NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         mNotifyManager.cancel(NOTIFICACION_ID)
 
     }

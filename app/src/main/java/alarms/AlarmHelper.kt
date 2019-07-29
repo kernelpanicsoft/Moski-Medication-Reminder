@@ -14,13 +14,14 @@ class AlarmHelper (val context: Context) {
     var alarmMgr: AlarmManager? = null
 
 
-    fun createAlarmForNotifications(hourOfDay: Int, minute: Int, tratamiento: String?, medicamento: String?, tomaID: Int?){
+    fun createAlarmForNotifications(hourOfDay: Int, minute: Int, tratamiento: String?, medicamento: String?, tomaID: Int?, recordatorio: Int?){
         alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
             intent.putExtra("Tratamiento", tratamiento)
             intent.putExtra("Medicamento", medicamento)
             intent.putExtra("IDToma", tomaID)
+            intent.putExtra("Recordatorio", recordatorio)
             PendingIntent.getBroadcast(context,tomaID!!,intent, PendingIntent.FLAG_ONE_SHOT)
 
         }
