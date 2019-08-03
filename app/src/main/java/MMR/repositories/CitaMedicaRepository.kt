@@ -4,6 +4,7 @@ import MMR.daos.CitaMedicaDao
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import android.util.Log
 import elements.CitaMedica
 import model.MMRDataBase
 
@@ -43,6 +44,10 @@ class CitaMedicaRepository (application: Application) {
         return citaMedicoDao.getCitasUsuario(id)
     }
 
+    fun scheduleAlarmsForAppointments(){
+        scheduleAlarmsForAppointmentsAsyncTask(citaMedicoDao).execute()
+    }
+
     private class InsertCitaMedicaAsyncTask constructor(private val citaMedicaDao: CitaMedicaDao) : AsyncTask<CitaMedica, Void, Void>(){
         override fun doInBackground(vararg params: CitaMedica): Void? {
             citaMedicaDao.insert(params[0])
@@ -67,6 +72,16 @@ class CitaMedicaRepository (application: Application) {
     private class DeleteAllCitasMedicasAsyncTask constructor(private val citaMedicaDao: CitaMedicaDao) : AsyncTask<Void, Void, Void>(){
         override fun doInBackground(vararg params: Void): Void? {
             citaMedicaDao.deleteAllCitasMedicas()
+            return null
+        }
+    }
+
+    private inner class scheduleAlarmsForAppointmentsAsyncTask constructor(private val citaMedicaDao: CitaMedicaDao) : AsyncTask<Int, Void, Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            for(appointment in citaMedicaDao.getCitasProgramadasWithoutLiveData()){
+               Log.d("CitaAgendada", appointment.fecha)
+            }
+
             return null
         }
     }

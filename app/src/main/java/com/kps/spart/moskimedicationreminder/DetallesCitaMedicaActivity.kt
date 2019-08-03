@@ -23,12 +23,16 @@ import kotlinx.android.synthetic.main.activity_detalles_cita_medica.*
 import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 import model.CodigosDeSolicitud
 import model.MMDContract
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DetallesCitaMedicaActivity : AppCompatActivity() {
     var citaID : Int = -1
     lateinit var citaMedicaViewModel: CitaMedicaViewModel
     lateinit var citaMedicaActualLive : LiveData<CitaMedica>
+
+    private val auxSDF = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val sdf = SimpleDateFormat.getDateTimeInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,9 +110,14 @@ class DetallesCitaMedicaActivity : AppCompatActivity() {
 
 
     private fun populateAppointmentFieldsFromDB(cita : CitaMedica?){
-            tituloCitaMedica.text = cita?.titulo
-            nombreMedicoCitaTV.text = cita?.doctor
-            fechaYHoraCitaTV.text = cita?.fechaYhora
+        tituloCitaMedica.text = cita?.titulo
+        nombreMedicoCitaTV.text = cita?.doctor
+
+        val auxDate =  auxSDF.parse(cita?.fecha +  " " + cita?.hora)
+        val auxDateString = sdf.format(auxDate)
+
+
+        fechaYHoraCitaTV.text = auxDateString
             notasCitaTV.text = cita?.nota
             DireccionCitaTV.text = cita?.ubicacion
             iconoCitaMedica.setColorFilter(cita?.color!!)

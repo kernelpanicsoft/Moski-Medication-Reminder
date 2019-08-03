@@ -21,7 +21,8 @@ import model.MMDContract
  */
 
 class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,CitasAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
-    private val sdf = SimpleDateFormat("dd/MM/yyyy, h:mm a")
+    private val auxSDF = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val sdf = SimpleDateFormat.getDateTimeInstance()
     var listener: View.OnClickListener? = null
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<CitaMedica>(){
@@ -30,7 +31,7 @@ class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,Cita
         }
 
         override fun areContentsTheSame(oldItem: CitaMedica, newItem: CitaMedica): Boolean {
-            return oldItem.titulo.equals(newItem.titulo) && oldItem.fechaYhora.equals(newItem.fechaYhora)
+            return oldItem.titulo.equals(newItem.titulo) && oldItem.fecha.equals(newItem.fecha) && oldItem.hora.equals(newItem.hora)
         }
 
     }
@@ -59,8 +60,10 @@ class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,Cita
         holder.TituloTV.text = citaMedicaActual.titulo
         holder.DoctorTV.text = citaMedicaActual.doctor
         holder.DireccionTV.text = citaMedicaActual.ubicacion
-        holder.FechaTV.text = citaMedicaActual.fechaYhora
-        //        holder.FechaTV.text = sdf.format(items[position].fechaYhora)
+
+        val auxDate =  auxSDF.parse(citaMedicaActual.fecha +  " " + citaMedicaActual.hora)
+        val auxDateString = sdf.format(auxDate)
+        holder.FechaTV.text = auxDateString
 
     }
 

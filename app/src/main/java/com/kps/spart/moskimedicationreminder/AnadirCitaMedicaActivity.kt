@@ -70,7 +70,7 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
                 NombreMedicoET.setText(it?.doctor, TextView.BufferType.EDITABLE)
                 EspecialidadCitaET.setText(it?.especialidad, TextView.BufferType.EDITABLE)
                 NotaET.setText(it?.nota,TextView.BufferType.EDITABLE)
-                FechaYHoraEspecificadaTV.text = it?.fechaYhora
+                FechaYHoraEspecificadaTV.text = it?.fecha + " " + it?.hora
                 UbicacionET.setText(it?.ubicacion, TextView.BufferType.EDITABLE)
 
                 when(it?.tipoRecordatorio){
@@ -225,7 +225,15 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
                 cita.doctor = NombreMedicoET.text.toString()
                 cita.especialidad = EspecialidadCitaET.text.toString()
                 cita.nota = NotaET.text.toString()
-                cita.fechaYhora = FechaYHoraEspecificadaTV.text.toString()
+
+                val SQLiteDateFormat = SimpleDateFormat("yyyy-MM-dd")
+                val sqliteDate =  SQLiteDateFormat.format(calendario.time)
+
+                val SQLiteTimeFormat = SimpleDateFormat("HH:mm:ss")
+                val sqliteTime = SQLiteTimeFormat.format(calendario.time)
+
+                cita.fecha = sqliteDate
+                cita.hora = sqliteTime
                 cita.ubicacion = UbicacionET.text.toString()
                 cita.tipoRecordatorio = mTipoRecordatorio
                 cita.color = selectedColor

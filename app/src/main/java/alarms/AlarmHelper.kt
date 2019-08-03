@@ -37,14 +37,32 @@ class AlarmHelper (val context: Context) {
                 calendar.timeInMillis,
                 alarmItent
         )
-        /*
-        alarmMgr?.setRepeating(
+
+    }
+
+    fun createAlarmForAppointments(hourOfDay: Int, minute: Int, titulo: String, doctor: String,especialidad : String, citaID: Int?){
+        alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
+            intent.putExtra("Titulo", titulo)
+            intent.putExtra("Doctor", doctor)
+            intent.putExtra("Especialidad", especialidad)
+            PendingIntent.getBroadcast(context,citaID!!,intent, PendingIntent.FLAG_ONE_SHOT)
+
+        }
+
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, hourOfDay)
+            set(Calendar.MINUTE, minute)
+        }
+
+        alarmMgr?.set(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
-                1000 * 60 * 1,
                 alarmItent
         )
-        */
+
     }
 
 

@@ -1,6 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.TomaViewModel
 import alarms.NotificationsManager
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -51,6 +53,9 @@ class SplashActivity : AppCompatActivity() {
             }
             val restartShots = Intent(this,MMRReiniciarDiaService::class.java)
             this.startService(restartShots)
+
+            val tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
+            tomaViewModel.scheduleShotsNotifications()
 
             Log.d("ComparaFechas","Estas reiniciando tomas" + todayDate.compareTo(savedDate) + " @ " + todayDate.time.toString() + " : " + savedDate.time.toString())
         }else if(todayDate.compareTo(savedDate) == 0){

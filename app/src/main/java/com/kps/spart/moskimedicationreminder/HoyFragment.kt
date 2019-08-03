@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.CitaMedicaViewModel
 import MMR.viewModels.TomaViewModel
 import MMR.viewModels.TratamientoViewModel
 import alarms.AlarmHelper
@@ -119,8 +120,10 @@ class HoyFragment : Fragment() {
         when (item!!.itemId) {
             R.id.itemFilter -> {
 
-                tomaViewModel.scheduleShotsNotifications()
+               // tomaViewModel.scheduleShotsNotifications()
 
+                val citasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
+                citasViewModel.scheduleCitasAlarms()
 
 
                 return true

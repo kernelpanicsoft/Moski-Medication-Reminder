@@ -33,4 +33,8 @@ class CitaMedicaViewModel (application: Application) : AndroidViewModel(applicat
     fun getCitasUsuario(id : Int) : LiveData<List<CitaMedica>>{
         return repository.getCitasUsuario(id)
     }
+
+    fun scheduleCitasAlarms(){
+        repository.scheduleAlarmsForAppointments()
+    }
 }
