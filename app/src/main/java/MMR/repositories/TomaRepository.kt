@@ -10,6 +10,7 @@ import elements.JoinTomasDelDia
 import elements.Toma
 import model.MMRDataBase
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 import kotlin.math.log
 
@@ -127,15 +128,18 @@ class TomaRepository(application: Application) {
             var shotDate : Date
             val cal = Calendar.getInstance()
 
+            val currentLocalTime = LocalTime.now()
 
 
             for(shot in tomaDao.getTomasProgramadasWithoutLiveData()){
-                //Log.d("Tomas",sdf.parse(shot.horaToma).toString())
                 shotDate = sdf.parse(shot.horaToma)
                 cal.time = shotDate
                 Log.d("Tomas", shot.toString() + " $ " + cal.get(Calendar.HOUR_OF_DAY) + " $ " + cal.get(Calendar.MINUTE) + " $ " + shot.id)
-                alarmHelper.createAlarmForNotifications(cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE), shot.tituloTratamiento, shot.medicamento, shot.id, shot.tipoRecordatorio)
-               // alarmHelper.createAlarmForNotifications(22,12, shot.tituloTratamiento, shot.medicamento, shot.id)
+                val shotTime = LocalTime.of(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
+                if(shotTime.isAfter(currentLocalTime)) {
+                    alarmHelper.createAlarmForNotifications(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), shot.tituloTratamiento, shot.medicamento, shot.id, shot.tipoRecordatorio)
+                }
+
             }
 
 

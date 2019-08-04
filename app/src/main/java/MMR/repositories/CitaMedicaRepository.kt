@@ -9,6 +9,7 @@ import android.util.Log
 import elements.CitaMedica
 import model.MMRDataBase
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 
 class CitaMedicaRepository (application: Application) {
@@ -83,15 +84,25 @@ class CitaMedicaRepository (application: Application) {
 
     private inner class scheduleAlarmsForAppointmentsAsyncTask constructor(private val citaMedicaDao: CitaMedicaDao) : AsyncTask<Int, Void, Void>(){
         override fun doInBackground(vararg params: Int?): Void? {
-            Log.d("AlarmaCita", "Estas invocando registro alarma")
+
             val sdf = SimpleDateFormat("HH:mm:ss")
             var appointmentDate : Date
             val cal = Calendar.getInstance()
+
+            val currentLocalTime = LocalTime.now()
+
             for(appointment in citaMedicaDao.getCitasProgramadasWithoutLiveData()){
                 appointmentDate = sdf.parse(appointment.hora)
                 cal.time = appointmentDate
                 Log.d("AlarmaCita",appointment.fecha + " " +  appointment.hora + " " + appointment.tipoRecordatorio)
-                alarmHelper.createAlarmForAppointments(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), appointment.titulo, appointment.doctor, appointment.especialidad, appointment.id, appointment.tipoRecordatorio)
+
+
+                val appointmentTime = LocalTime.of(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
+                if(appointmentTime.isAfter(currentLocalTime)){
+                    Log.d("AlarmaCita", "Estas invocando registro alarma despues de la hora actual " + currentLocalTime.toString())
+                    alarmHelper.createAlarmForAppointments(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), appointment.titulo, appointment.doctor, appointment.especialidad, appointment.id, appointment.tipoRecordatorio)
+
+                }
             }
 
             return null
