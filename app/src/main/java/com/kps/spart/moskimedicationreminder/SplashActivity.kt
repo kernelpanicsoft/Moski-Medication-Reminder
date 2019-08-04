@@ -1,5 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.CitaMedicaViewModel
 import MMR.viewModels.TomaViewModel
 import alarms.NotificationsManager
 import android.arch.lifecycle.ViewModelProviders
@@ -56,6 +57,9 @@ class SplashActivity : AppCompatActivity() {
 
             val tomaViewModel = ViewModelProviders.of(this).get(TomaViewModel::class.java)
             tomaViewModel.scheduleShotsNotifications()
+
+            val citasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
+            citasViewModel.scheduleCitasAlarms()
 
             Log.d("ComparaFechas","Estas reiniciando tomas" + todayDate.compareTo(savedDate) + " @ " + todayDate.time.toString() + " : " + savedDate.time.toString())
         }else if(todayDate.compareTo(savedDate) == 0){

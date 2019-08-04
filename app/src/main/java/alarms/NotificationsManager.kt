@@ -10,6 +10,7 @@ import android.media.RingtoneManager
 import android.os.AsyncTask
 import android.support.v4.app.NotificationCompat
 import android.util.Log
+import com.kps.spart.moskimedicationreminder.DetallesCitaMedicaActivity
 import com.kps.spart.moskimedicationreminder.MainActivity
 import com.kps.spart.moskimedicationreminder.R
 import model.*
@@ -35,8 +36,6 @@ class NotificationsManager(val context: Context) {
     }
 
     fun getNotificationBuilder(title: String, content: String) : NotificationCompat.Builder{
-
-
         val notificationIntent = Intent(context, MainActivity::class.java)
         val notificationPendingIntent = PendingIntent.getActivity(context, NOTIFICACION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val notifyBuilder = NotificationCompat.Builder(context, CANAL_PRIMARIO_ID)
@@ -47,7 +46,6 @@ class NotificationsManager(val context: Context) {
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
-
 
         return notifyBuilder
     }
@@ -83,19 +81,27 @@ class NotificationsManager(val context: Context) {
         mNotifyManager.notify(NOTIFICACION_ID, notifyBuilder.build())
     }
 
+    fun sendNotificationForAppointment(title: String, doctor: String, especialidad: String, idCita: Int){
+        val notificationIntent = Intent(context, DetallesCitaMedicaActivity::class.java)
+        notificationIntent.putExtra("CITA_ID", idCita)
+        val notificationPendingIntent = PendingIntent.getActivity(context, NOTIFICACION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val notifyBuilder = NotificationCompat.Builder(context, CANAL_PRIMARIO_ID)
+                .setContentTitle(title)
+                .setContentText(especialidad + " " + doctor)
+                .setSmallIcon(R.drawable.ic_notification_capsule)
+                .setContentIntent(notificationPendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+
+
+        mNotifyManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        mNotifyManager.notify(NOTIFICACION_ID, notifyBuilder.build())
+    }
+
     fun sendNotificationForAlarm(title: String, content: String, tomaID: Int){
 
-
-
-
-        val postPoneShotIntent = Intent(context, TreatmentBroadcastReceiver::class.java).apply {
-            putExtra("TomaID", tomaID)
-        }
-        val silenceShootPendingIntent = PendingIntent.getBroadcast(context, AccionNotificacion.POSPONER, postPoneShotIntent, PendingIntent.FLAG_ONE_SHOT)
-
         val notifyBuilder = getNotificationBuilder(title,content)
-       // notifyBuilder.addAction(R.drawable.ic_capsula, context.getString(R.string.tomar), silenceShootPendingIntent)
-
 
         mNotifyManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         mNotifyManager.notify(NOTIFICACION_ID, notifyBuilder.build())

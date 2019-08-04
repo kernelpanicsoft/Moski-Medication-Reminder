@@ -27,6 +27,6 @@ interface CitaMedicaDao {
     @Query("SELECT * FROM CitaMedica WHERE CitaMedica.usuarioID = :id")
     fun getCitasUsuario(id : Int?) : LiveData<List<CitaMedica>>
 
-    @Query("SELECT id, titulo, doctor,especialidad, fecha, hora FROM CitaMedica where fecha = date('now');")
+    @Query("SELECT id, titulo, doctor,especialidad, fecha, hora, tipoRecordatorio FROM CitaMedica WHERE fecha = date('now')")
     fun getCitasProgramadasWithoutLiveData() : List<CitaMedica>
 }

@@ -1,19 +1,24 @@
 package MMR.repositories
 
 import MMR.daos.CitaMedicaDao
+import alarms.AlarmHelper
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
 import android.util.Log
 import elements.CitaMedica
 import model.MMRDataBase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CitaMedicaRepository (application: Application) {
     val citaMedicoDao : CitaMedicaDao
+    val alarmHelper : AlarmHelper
 
     init{
         val database = MMRDataBase.getInstance(application)
         citaMedicoDao = database.citaMedicaDao()
+        alarmHelper = AlarmHelper(application)
     }
 
     fun insert(citaMedica : CitaMedica){
@@ -78,8 +83,15 @@ class CitaMedicaRepository (application: Application) {
 
     private inner class scheduleAlarmsForAppointmentsAsyncTask constructor(private val citaMedicaDao: CitaMedicaDao) : AsyncTask<Int, Void, Void>(){
         override fun doInBackground(vararg params: Int?): Void? {
+            Log.d("AlarmaCita", "Estas invocando registro alarma")
+            val sdf = SimpleDateFormat("HH:mm:ss")
+            var appointmentDate : Date
+            val cal = Calendar.getInstance()
             for(appointment in citaMedicaDao.getCitasProgramadasWithoutLiveData()){
-               Log.d("CitaAgendada", appointment.fecha)
+                appointmentDate = sdf.parse(appointment.hora)
+                cal.time = appointmentDate
+                Log.d("AlarmaCita",appointment.fecha + " " +  appointment.hora + " " + appointment.tipoRecordatorio)
+                alarmHelper.createAlarmForAppointments(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), appointment.titulo, appointment.doctor, appointment.especialidad, appointment.id, appointment.tipoRecordatorio)
             }
 
             return null

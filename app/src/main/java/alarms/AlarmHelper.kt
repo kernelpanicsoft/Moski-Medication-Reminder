@@ -2,6 +2,7 @@ package alarms
 
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -40,13 +41,15 @@ class AlarmHelper (val context: Context) {
 
     }
 
-    fun createAlarmForAppointments(hourOfDay: Int, minute: Int, titulo: String, doctor: String,especialidad : String, citaID: Int?){
+    fun createAlarmForAppointments(hourOfDay: Int, minute: Int, titulo: String?, doctor: String?,especialidad : String?, citaID: Int?, recordatorio: Int?){
         alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        alarmItent = Intent(context, AlarmReceiver::class.java).let{ intent ->
+        alarmItent = Intent(context, AppointmentAlarmReceiver::class.java).let{ intent ->
             intent.putExtra("Titulo", titulo)
             intent.putExtra("Doctor", doctor)
             intent.putExtra("Especialidad", especialidad)
+            intent.putExtra("Recordatorio", recordatorio)
+            intent.putExtra("IDCita", citaID)
             PendingIntent.getBroadcast(context,citaID!!,intent, PendingIntent.FLAG_ONE_SHOT)
 
         }

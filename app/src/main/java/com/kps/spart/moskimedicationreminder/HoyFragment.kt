@@ -124,7 +124,7 @@ class HoyFragment : Fragment() {
 
                 val citasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
                 citasViewModel.scheduleCitasAlarms()
-
+                Toast.makeText(context,"Estas creando alarma", Toast.LENGTH_SHORT).show()
 
                 return true
             }

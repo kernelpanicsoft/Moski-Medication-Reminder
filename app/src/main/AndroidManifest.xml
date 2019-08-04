@@ -131,13 +131,14 @@
             android:exported="false" />
 
 
-
-
         <receiver
             android:name="alarms.TreatmentBroadcastReceiver"
             android:exported="false" />
         <receiver
             android:name="alarms.AlarmReceiver"
+            android:exported="false" />
+
+        <receiver android:name="alarms.AppointmentAlarmReceiver"
             android:exported="false" />
     </application>
 
