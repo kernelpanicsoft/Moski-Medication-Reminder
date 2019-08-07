@@ -1,7 +1,6 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.UsuarioViewModel
-import alarms.NotificationsManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.BroadcastReceiver
@@ -11,22 +10,16 @@ import android.content.IntentFilter
 import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.v4.view.GravityCompat
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
-import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import elements.Usuario
-import kotlinx.android.synthetic.main.nav_header.*
 import model.ACTION_UPDATE_NOTIFICATION
 
 
@@ -257,7 +250,7 @@ class MainActivity : AppCompatActivity() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         if(sharedPref.getBoolean("firstrun",true)){
-            val firstRunWelcome = Intent(this,welcome_screen::class.java)
+            val firstRunWelcome = Intent(this,PantallaBienvenida::class.java)
             startActivity(firstRunWelcome)
 
         }

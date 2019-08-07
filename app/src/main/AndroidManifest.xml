@@ -27,7 +27,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
 
-        <activity android:name=".welcome_screen" />
+        <activity android:name=".PantallaBienvenida" />
         <activity android:name=".AnadirTomasActivity" />
         <activity android:name=".ElegirMedicamentoActivity" />
         <activity
@@ -130,6 +130,12 @@
             android:name=".UpdateShootService"
             android:exported="false" />
 
+        <service
+            android:name="alarms.CitasSchedulerService"
+            android:exported="false" />
+        <service
+            android:name="alarms.TomasSchedulerService"
+            android:exported="false"/>
 
         <receiver
             android:name="alarms.TreatmentBroadcastReceiver"
@@ -140,6 +146,14 @@
 
         <receiver android:name="alarms.AppointmentAlarmReceiver"
             android:exported="false" />
+
+        <receiver android:name="alarms.SetUpAlarmsOnReboot"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
