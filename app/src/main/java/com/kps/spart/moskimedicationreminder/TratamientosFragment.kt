@@ -1,6 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.TratamientoViewModel
+import alarms.TomasSchedulerService
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -103,9 +104,15 @@ class TratamientosFragment : Fragment() {
                 tratamientoViewModel.getLastID().observe(this, Observer {
                     val addShots = Intent(context,AnadirTomasActivity::class.java)
                     addShots.putExtra("TREATMENT_ID", it)
-                    startActivity(addShots)
+                    startActivityForResult(addShots, CodigosDeSolicitud.ANADIR_TOMAS)
 
                 })
+            }
+        }
+        if(requestCode == CodigosDeSolicitud.ANADIR_TOMAS){
+            if(resultCode == Activity.RESULT_OK){
+                val setupShoots = Intent(context,TomasSchedulerService::class.java)
+                context?.startService(setupShoots)
             }
         }
     }

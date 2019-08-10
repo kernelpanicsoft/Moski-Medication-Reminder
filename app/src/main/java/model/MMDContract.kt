@@ -36,11 +36,6 @@ object EstatusTratamiento{
     const val PROGRAMADO = 3
 }
 
-object EstatusCita{
-    const val PENDIENTE = 1
-    const val ATENDIDA = 2
-    const val PASADA = 3
-}
 
 object EstatusToma{
     const val PROGRAMADA = 1
@@ -67,6 +62,8 @@ object CodigosDeSolicitud{
     const val ANADIR_TRATAMIENTO = 1013
     const val ANADIR_MEDICO = 1014
     const val REGISTRAR_PRIMER_USUARIO = 1015
+    const val ANADIR_CITA_MEDICA = 1016
+    const val ANADIR_TOMAS = 1017
 }
 
 object MMDContract {

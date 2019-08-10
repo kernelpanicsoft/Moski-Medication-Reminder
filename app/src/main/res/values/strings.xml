@@ -353,4 +353,23 @@
     <string name="tomar">Tomar</string>
     <string name="saltar">Saltar</string>
     <string name="posponer">Posponer</string>
+    <string name="recordatorio_predeterminado_citas">Recordatorio predeterminado para las citas</string>
+    <string name="recordatorio_predeterminado_tratamientos">Recordatorio predeterminado para tratamientos</string>
+
+
+    <array name="recordatorio_preferido">
+        <item>Notificación</item>
+        <item>Alarma</item>
+        <item>Ninguno</item>
+    </array>
+    
+    <array name="anticipacion_toma">
+        <item>Sin anticipación</item>
+        <item>1 minuto</item>
+        <item>5 minutos</item>
+        <item>10 minutos</item>
+    </array>
+
+    <string name="sin_anticipacion">Sin anticipación</string>
 </resources>
+

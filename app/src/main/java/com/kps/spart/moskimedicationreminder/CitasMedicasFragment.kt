@@ -1,6 +1,8 @@
 package com.kps.spart.moskimedicationreminder
 
 import MMR.viewModels.CitaMedicaViewModel
+import alarms.CitasSchedulerService
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -17,6 +19,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import model.CodigosDeSolicitud
 
 import model.MMDContract
 
@@ -83,12 +86,21 @@ class CitasMedicasFragment : Fragment() {
         when (item!!.itemId) {
             R.id.itemADD -> {
                 val nav = Intent(context, AnadirCitaMedicaActivity::class.java)
-                startActivity(nav)
+                startActivityForResult(nav, CodigosDeSolicitud.ANADIR_CITA_MEDICA)
                 return true
             }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == CodigosDeSolicitud.ANADIR_CITA_MEDICA){
+            if(resultCode == Activity.RESULT_OK){
+                val setUpAppointments = Intent(context, CitasSchedulerService::class.java)
+                context?.startService(setUpAppointments)
+            }
+        }
     }
 
 }// Required empty public constructor

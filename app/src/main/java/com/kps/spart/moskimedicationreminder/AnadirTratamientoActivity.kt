@@ -54,6 +54,23 @@ class AnadirTratamientoActivity : AppCompatActivity() {
         tratamientoViewModel = ViewModelProviders.of(this@AnadirTratamientoActivity).get(TratamientoViewModel::class.java)
         medicamentoViewModel = ViewModelProviders.of(this@AnadirTratamientoActivity).get(MedicamentoViewModel::class.java)
 
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val reminder = sharedPrefs.getString("treatmentReminder", "NA")
+
+        val reminderTypes = resources?.getStringArray(R.array.recordatorio_preferido)
+
+        when(reminderTypes?.indexOf(reminder)){
+            0 ->{radioGroup.check(R.id.notificacionRadioButton)  } //Notificacion
+            1 ->{radioGroup.check(R.id.alarmaRadioButton) } //Alarma
+            2 ->{radioGroup.check(R.id.ningunoRadioButton) } //Ninguno
+        }
+
+
+
+
+
+
+
 
         if(intent.hasExtra("TREATMENT_ID")){
             title = getString(R.string.editar_tratamiento)

@@ -4,18 +4,36 @@
         android:title="Alarmas y notificaciones"
         android:key="pref_key_alerts_settings">
 
+        <ListPreference
+            android:title="@string/recordatorio_predeterminado_tratamientos"
+            android:key="treatmentReminder"
+            android:entries="@array/recordatorio_preferido"
+            android:entryValues="@array/recordatorio_preferido"
+            android:defaultValue="@string/notificaci_n">
+        </ListPreference>
+
+        <ListPreference
+            android:title="@string/recordatorio_predeterminado_citas"
+            android:key="appointmentReminder"
+            android:entries="@array/recordatorio_preferido"
+            android:entryValues="@array/recordatorio_preferido"
+            android:defaultValue="@string/notificaci_n">
+        </ListPreference>
+
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Respaldo"
-        android:key="pref_key_backup">
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="Ayudanos a mejorar"
-        android:key="pref_key_help_us">
-
+        android:title="Anticipación recordatorios"
+        android:key="pref_reminder_anticipation"
+        android:summary="Lanzar la con anticipación de ciertos minutos"
+        >
+        <ListPreference
+            android:defaultValue="@string/sin_anticipacion"
+            android:key="reminderAnticipation1"
+            android:title="Anticipación tomas"
+            android:entries="@array/anticipacion_toma"
+            android:entryValues="@array/anticipacion_toma"
+           />
     </PreferenceCategory>
 
 </PreferenceScreen>

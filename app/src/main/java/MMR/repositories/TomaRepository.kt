@@ -5,7 +5,9 @@ import alarms.AlarmHelper
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import android.preference.PreferenceManager
 import android.util.Log
+import com.kps.spart.moskimedicationreminder.R
 import elements.JoinTomasDelDia
 import elements.Toma
 import model.MMRDataBase
@@ -14,7 +16,7 @@ import java.time.LocalTime
 import java.util.*
 import kotlin.math.log
 
-class TomaRepository(application: Application) {
+class TomaRepository(val application: Application) {
     val tomaDao : TomaDao
     val alarmHelper : AlarmHelper
 
@@ -22,6 +24,8 @@ class TomaRepository(application: Application) {
         val database = MMRDataBase.getInstance(application)
         tomaDao = database.tomaDao()
         alarmHelper = AlarmHelper(application)
+
+
     }
 
     fun insert(toma : Toma){
@@ -130,10 +134,24 @@ class TomaRepository(application: Application) {
 
             val currentLocalTime = LocalTime.now()
 
+            val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(application)
+            val anticipation = sharedPrefs.getString("appointmentReminder", "NA")
+
+            val alarmAnticipation =  application.resources?.getStringArray(R.array.anticipacion_toma)
+
+
+
 
             for(shot in tomaDao.getTomasProgramadasWithoutLiveData()){
                 shotDate = sdf.parse(shot.horaToma)
                 cal.time = shotDate
+
+                when(alarmAnticipation?.indexOf(anticipation)){
+                    1 ->{ cal.add(Calendar.MINUTE, 1)}
+                    2 ->{ cal.add(Calendar.MINUTE, 5)}
+                    3 ->{ cal.add(Calendar.MINUTE, 10)}
+                }
+
                 Log.d("Tomas", shot.toString() + " $ " + cal.get(Calendar.HOUR_OF_DAY) + " $ " + cal.get(Calendar.MINUTE) + " $ " + shot.id)
                 val shotTime = LocalTime.of(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
                 if(shotTime.isAfter(currentLocalTime)) {

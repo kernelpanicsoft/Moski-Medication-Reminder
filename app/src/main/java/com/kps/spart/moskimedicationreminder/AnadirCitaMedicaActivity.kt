@@ -61,6 +61,19 @@ class AnadirCitaMedicaActivity : AppCompatActivity() {
         citaViewModel = ViewModelProviders.of(this@AnadirCitaMedicaActivity).get(CitaMedicaViewModel::class.java)
 
 
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val reminder = sharedPrefs.getString("appointmentReminder", "NA")
+
+        val reminderTypes = resources?.getStringArray(R.array.recordatorio_preferido)
+
+        when(reminderTypes?.indexOf(reminder)){
+            0 ->{AlertRadioButtonGroup.check(R.id.radio_notificacion)  } //Notificacion
+            1 ->{AlertRadioButtonGroup.check(R.id.radio_alarma) } //Alarma
+            2 ->{AlertRadioButtonGroup.check(R.id.radio_ninguna) } //Ninguno
+        }
+
+
+
         if(intent.hasExtra("CITA_ID")){
             title = getString(R.string.editar_cita)
             citaActualLive = citaViewModel.getCitaMedica(intent.getIntExtra("CITA_ID",-1))
