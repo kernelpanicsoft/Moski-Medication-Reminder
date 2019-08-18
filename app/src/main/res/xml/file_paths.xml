@@ -3,4 +3,8 @@
     <external-path
         name="MMRImages"
         path="Android/data/com.kps.spart.moskimedicationreminder/files/Pictures/" />
+
+    <external-path
+        name="MMRPasswords"
+        path="Android/data/com.kps.spart.moskimedicationreminder/files/DCIM/" />
 </paths>

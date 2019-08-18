@@ -205,7 +205,9 @@
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/usarContraseñaTV" />
+                        app:layout_constraintTop_toBottomOf="@+id/usarContraseñaTV"
+
+                        />
 
                     <TextView
                         android:id="@+id/emailRecuperacionTV"

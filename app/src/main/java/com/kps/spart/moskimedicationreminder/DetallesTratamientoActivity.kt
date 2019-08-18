@@ -1,5 +1,7 @@
 package com.kps.spart.moskimedicationreminder
 
+import alarms.TomasSchedulerService
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +17,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_detalles_tratamiento.*
+import model.CodigosDeSolicitud
 
 class DetallesTratamientoActivity : AppCompatActivity() {
 
@@ -77,7 +80,7 @@ class DetallesTratamientoActivity : AppCompatActivity() {
                                             val addShots = Intent(this,AnadirTomasActivity::class.java)
                                             addShots.putExtra("TREATMENT_ID", tratamiento_id.toLong())
                                             Log.d("IDDETALLES", tratamiento_id.toString())
-                                            startActivity(addShots)
+                                            startActivityForResult(addShots, CodigosDeSolicitud.ANADIR_TOMAS)
                                         }
                                     }
                                 }
@@ -139,6 +142,15 @@ class DetallesTratamientoActivity : AppCompatActivity() {
             return mFragmentTitleList[position]
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == CodigosDeSolicitud.ANADIR_TOMAS){
+            if(resultCode == Activity.RESULT_OK){
+                val setupShoots = Intent(this, TomasSchedulerService::class.java)
+                startService(setupShoots)
+            }
+        }
     }
 
 

@@ -371,5 +371,15 @@
     </array>
 
     <string name="sin_anticipacion">Sin anticipación</string>
+    <string name="ingresar_contrasena">Ingresar contraseña:</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="recuperar_contrasena">Recuperar Contraseña</string>
+    <string name="contrasena_enviada">Contraseña enviada</string>
+    <string name="se_ha_enviado_contrasena">Se ha enviado la contraseña al email de recuperación de este perfil</string>
+    <string name="contrasena_incorrecta">Contraseña incorrecta</string>
+    <string name="MMR_Recuperar_Contrasena">Moski Medication Reminder: Recuperar Contraseña</string>
+    <string name="enviar_email_recuperacion">Enviar email de recuperación</string>
+    <string name="es_necesario_permitir_permisos_archivos">Es necesario permitir permiso de lectura y escritura de archivos para enviar la contraseña</string>
+    <string name="su_contrasena_archivo_adjunto">Su contraseña de usuario está dentro del archivo adjunto</string>
 </resources>
 

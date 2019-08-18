@@ -25,7 +25,6 @@ object AccionNotificacion{
     const val TOMAR = 500
     const val SALTAR = 501
     const val POSPONER = 502
-    const val PAUSAR_SONIDO = 503
 }
 
 
@@ -64,6 +63,7 @@ object CodigosDeSolicitud{
     const val REGISTRAR_PRIMER_USUARIO = 1015
     const val ANADIR_CITA_MEDICA = 1016
     const val ANADIR_TOMAS = 1017
+    const val RECUPERAR_CONTRASENA = 1018
 }
 
 object MMDContract {

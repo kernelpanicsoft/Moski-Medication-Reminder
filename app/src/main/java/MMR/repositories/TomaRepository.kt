@@ -156,6 +156,7 @@ class TomaRepository(val application: Application) {
                 val shotTime = LocalTime.of(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
                 if(shotTime.isAfter(currentLocalTime)) {
                     alarmHelper.createAlarmForNotifications(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), shot.tituloTratamiento, shot.medicamento, shot.id, shot.tipoRecordatorio)
+
                 }
 
             }
