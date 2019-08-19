@@ -8,7 +8,7 @@ data class JoinTomasDelDia(
         @ColumnInfo(name = "statusToma") var statusToma: Int?,
         @ColumnInfo(name = "nombreMedicamento") val medicamento: String?,
         @ColumnInfo(name = "tipo") val tipo: String?,
-        @ColumnInfo(name = "titulo") val tituloTratamiento: String?,
+        @ColumnInfo(name = "titulo") var tituloTratamiento: String?,
         @ColumnInfo(name = "color") val color: Int?,
         @ColumnInfo(name = "tomaID") val idTratamiento: Int?,
         @ColumnInfo(name = "recordatorio") val tipoRecordatorio: Int?

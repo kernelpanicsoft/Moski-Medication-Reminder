@@ -43,21 +43,15 @@ class HoyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        activity?.actionBar?.title = "Horario"
-
+        activity?.actionBar?.title = getString(R.string.horario)
 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-
-        // Inflate the layout for this fragment
         val v = inflater!!.inflate(R.layout.fragment_hoy, container, false)
 
         RV = v.findViewById(R.id.RecViewHoy)
         RV.setHasFixedSize(true)
-
-
 
         return v
     }
@@ -88,15 +82,18 @@ class HoyFragment : Fragment() {
                     .setItems(R.array.acciones_toma){ dialog, which ->
                         when(which){
                             0 -> {
-                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
+                              //  adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
+                                adapter.updateShotJoin(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
                                 Log.d("EstatusEnHoyFragment", EstatusToma.TOMADA.toString())
                             }
                             1 -> {
-                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
+                              //  adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
+                                adapter.updateShotJoin(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
                                 Log.d("EstatusEnHoyFragment", EstatusToma.PASADA.toString())
                             }
                             2 -> {
-                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
+                               // adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
+                                adapter.updateShotJoin(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
                                 Log.d("EstatusEnHoyFragment", EstatusToma.POSPUESTA.toString())
                             }
                         }
@@ -104,12 +101,14 @@ class HoyFragment : Fragment() {
 
             val dialog = builder.create()
             dialog.show()
+
+           // adapter.updateShotJoin(RV.getChildAdapterPosition(it),3)
+
+
         })
 
         RV.adapter = adapter
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_sort, menu)
@@ -131,7 +130,5 @@ class HoyFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 
 }// Required empty public constructor

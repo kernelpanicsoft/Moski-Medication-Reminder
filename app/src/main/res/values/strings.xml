@@ -381,5 +381,6 @@
     <string name="enviar_email_recuperacion">Enviar email de recuperación</string>
     <string name="es_necesario_permitir_permisos_archivos">Es necesario permitir permiso de lectura y escritura de archivos para enviar la contraseña</string>
     <string name="su_contrasena_archivo_adjunto">Su contraseña de usuario está dentro del archivo adjunto</string>
+    <string name="horario">Horario</string>
 </resources>
 

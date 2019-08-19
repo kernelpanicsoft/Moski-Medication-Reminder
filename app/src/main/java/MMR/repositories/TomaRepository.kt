@@ -68,6 +68,10 @@ class TomaRepository(val application: Application) {
         UpdateStatusTomaAsyncTask(tomaDao,idToma,status).execute()
     }
 
+    fun updateJoinTomaStatus(idTome: Int, status: Int){
+
+    }
+
     fun  resetAllTomasStatus(){
         ResetStatusTomasAsyncTask(tomaDao).execute()
     }

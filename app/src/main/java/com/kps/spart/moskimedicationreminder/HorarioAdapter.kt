@@ -18,6 +18,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import elements.JoinTomasDelDia
 import model.EstatusToma
+import model.EstatusToma.PASADA
+import model.EstatusToma.TOMADA
 
 class HorarioAdapter(private val context: Context?, private val tomaViewModel: TomaViewModel, private val tratamientoViewModel: TratamientoViewModel) : ListAdapter<JoinTomasDelDia,HorarioAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
     private var listener : View.OnClickListener? = null
@@ -26,11 +28,11 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinTomasDelDia>(){
         override fun areItemsTheSame(oldItem: JoinTomasDelDia, newItem: JoinTomasDelDia): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.id == newItem.id && oldItem.tituloTratamiento.equals(newItem.tituloTratamiento)
         }
 
         override fun areContentsTheSame(oldItem: JoinTomasDelDia, newItem: JoinTomasDelDia): Boolean {
-            return oldItem.horaToma.equals(newItem.horaToma) && oldItem.tituloTratamiento.equals(newItem.tituloTratamiento)
+            return oldItem.statusToma == newItem.statusToma && oldItem.tituloTratamiento.equals(newItem.tituloTratamiento)
         }
     }
 
@@ -122,11 +124,29 @@ class HorarioAdapter(private val context: Context?, private val tomaViewModel: T
         incrementShotsInTreatment(status,tomaActual.idTratamiento!!)
     }
 
+    fun changeShotStatusJoin(position: Int, status: Int){
+        val tomaActual = getItem(position)
+        tomaActual.statusToma = status
+        tomaActual.tituloTratamiento = "Hola desde el tap"
+
+        Log.d("Cambios", "Estas tocando el item " + tomaActual.toString())
+
+
+
+    }
     private fun incrementShotsInTreatment(status: Int, idTratamiento: Int){
         when(status){
             2 -> tratamientoViewModel.incrementTomasATiempo(idTratamiento)
             3 -> tratamientoViewModel.incrementTomasOmitidas(idTratamiento)
             4 -> tratamientoViewModel.incrementTomasPospuestas(idTratamiento)
         }
+    }
+
+    fun updateShotJoin(position: Int, status: Int){
+        val tomaActual = getItem(position)
+        val toma = Toma(tomaActual.id!!, status,tomaActual.horaToma,tomaActual.idTratamiento)
+        tomaViewModel.update(toma)
+
+        Log.d("ActualizaToma", "Toma actualizada " + toma.id.toString() + "|" + toma.tratamientoID.toString())
     }
 }
