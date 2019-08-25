@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iconoMedico"
+                    android:id="@+id/iconoMedicoIV"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_centerHorizontal="true"
@@ -60,7 +60,7 @@
                     android:id="@+id/NombreDoctorTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/iconoMedico"
+                    android:layout_below="@id/iconoMedicoIV"
                     android:layout_centerHorizontal="true"
                     android:text="Eduardo Corona Díaz"
                     android:textColor="@color/blanco"
@@ -68,7 +68,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/TituloDoctorTV"
-                    app:layout_constraintTop_toBottomOf="@+id/iconoMedico" />
+                    app:layout_constraintTop_toBottomOf="@+id/iconoMedicoIV" />
 
                 <TextView
                     android:id="@+id/TituloDoctorTV"
@@ -82,7 +82,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iconoMedico" />
+                    app:layout_constraintTop_toBottomOf="@+id/iconoMedicoIV" />
 
                 <TextView
                     android:id="@+id/EspecialidadTV"

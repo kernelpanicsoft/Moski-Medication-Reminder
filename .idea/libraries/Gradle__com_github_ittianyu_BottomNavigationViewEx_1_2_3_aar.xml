@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.ittianyu:BottomNavigationViewEx:1.2.3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e18ad665364dd55a27e324aa9e6ae376/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e18ad665364dd55a27e324aa9e6ae376/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eaaf9224ee93b9d8cb3fb1fe36ba82dc/BottomNavigationViewEx-1.2.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eaaf9224ee93b9d8cb3fb1fe36ba82dc/BottomNavigationViewEx-1.2.3/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ittianyu/BottomNavigationViewEx/1.2.3/aee399d6f5d7313d884f69698d828120566c6c7/BottomNavigationViewEx-1.2.3-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ittianyu/BottomNavigationViewEx/1.2.3/b36ba74b3df0e27c042b35571b87e91a3c9d1f2e/BottomNavigationViewEx-1.2.3-sources.jar!/" />
     </SOURCES>

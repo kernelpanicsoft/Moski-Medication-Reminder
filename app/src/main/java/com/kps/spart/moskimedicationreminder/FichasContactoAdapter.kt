@@ -8,6 +8,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.media.Image
+import android.opengl.Visibility
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AlertDialog
 import android.support.v7.recyclerview.extensions.ListAdapter
@@ -17,10 +18,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import elements.FichaContacto
 import elements.Medico
 
@@ -54,6 +52,12 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
         val moreDots = v.findViewById<ImageView>(R.id.optionsContactCardIcon)
         val scheduleAppointment = v.findViewById<ImageView>(R.id.agendarCitaContactCardIcon)
 
+        val direccionLayout = v.findViewById<LinearLayout>(R.id.DireccionLY)
+        val telefonoLayout = v.findViewById<LinearLayout>(R.id.telefonoLY)
+        val celularLayout = v.findViewById<LinearLayout>(R.id.celularLY)
+        val emailLayout = v.findViewById<LinearLayout>(R.id.emailLY)
+        val webLayout = v.findViewById<LinearLayout>(R.id.webSiteLY)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -68,12 +72,39 @@ class FichasContactoAdapter (private val context: Context, private val fichasVie
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fichaActual = getItem(position)
 
+
         holder.titulo.text = fichaActual.titulo
-        holder.direccion.text = fichaActual.direccion
-        holder.telefono.text = fichaActual.telefono
-        holder.celular.text = fichaActual.celular
-        holder.email.text = fichaActual.email
-        holder.sitioWeb.text = fichaActual.sitioweb
+        if(!fichaActual.direccion.isNullOrEmpty()){
+            holder.direccion.text = fichaActual.direccion
+        }else{
+            holder.direccionLayout.visibility = View.GONE
+        }
+
+        if(!fichaActual.telefono.isNullOrEmpty()){
+            holder.telefono.text = fichaActual.telefono
+        }else{
+            holder.telefonoLayout.visibility = View.GONE
+        }
+
+        if(!fichaActual.celular.isNullOrEmpty()){
+            holder.celular.text = fichaActual.celular
+        }else{
+            holder.celularLayout.visibility = View.GONE
+        }
+
+        if(!fichaActual.email.isNullOrEmpty()){
+            holder.email.text = fichaActual.email
+        }else{
+            holder.emailLayout.visibility = View.GONE
+        }
+
+        if(!fichaActual.sitioweb.isNullOrEmpty()){
+            holder.sitioWeb.text = fichaActual.sitioweb
+        }else{
+            holder.webLayout.visibility = View.GONE
+        }
+
+
         holder.moreDots.setOnClickListener {
             val popup = PopupMenu(holder.moreDots.context,it)
             val inflater = popup.menuInflater

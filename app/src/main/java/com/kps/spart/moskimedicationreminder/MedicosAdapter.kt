@@ -30,7 +30,7 @@ class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.Vi
     }
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val icono = v.findViewById<View>(R.id.iconoMedico) as ImageView
+        val icono = v.findViewById<View>(R.id.iconoMedicoIV) as ImageView
         val titulo = v.findViewById<View>(R.id.TituloDoctorTV) as TextView
         val nombre = v.findViewById<View>(R.id.NombreDoctorTV) as TextView
         val especialidad = v.findViewById<View>(R.id.EspecialidadTV) as TextView
@@ -62,6 +62,27 @@ class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.Vi
             6 -> { holder.icono.setImageResource(R.drawable.ic_endocrinologo)}
             7 -> { holder.icono.setImageResource(R.drawable.ic_fisioterapeuta)}
             8 -> { holder.icono.setImageResource(R.drawable.ic_gastroenterologo)}
+            9 -> { holder.icono.setImageResource(R.drawable.ic_geriatra)}
+            10 -> { holder.icono.setImageResource(R.drawable.ic_ginecologo)}
+            11 -> { holder.icono.setImageResource(R.drawable.ic_hematologo)}
+            12 -> { holder.icono.setImageResource(R.drawable.ic_homeopata)}
+            13 -> { holder.icono.setImageResource(R.drawable.ic_infectologo)}
+            14 -> { holder.icono.setImageResource(R.drawable.ic_internista)}
+            15 -> { holder.icono.setImageResource(R.drawable.ic_inmunologo)}
+            16 -> { holder.icono.setImageResource(R.drawable.ic_nefrologo)}
+            17 -> { holder.icono.setImageResource(R.drawable.ic_neumologo)}
+            18 -> { holder.icono.setImageResource(R.drawable.ic_neurologo)}
+            19 -> { holder.icono.setImageResource(R.drawable.ic_nutriologo)}
+            20 -> { holder.icono.setImageResource(R.drawable.ic_oftalmologo)}
+            21 -> { holder.icono.setImageResource(R.drawable.ic_ortopedista)}
+            22 -> { holder.icono.setImageResource(R.drawable.ic_otorrinolaringologo)}
+            23 -> { holder.icono.setImageResource(R.drawable.ic_pediatra)}
+            24 -> { holder.icono.setImageResource(R.drawable.ic_psiquiatra)}
+            25 -> { holder.icono.setImageResource(R.drawable.ic_proctologo)}
+            26 -> { holder.icono.setImageResource(R.drawable.ic_radiologo)}
+            27 -> { holder.icono.setImageResource(R.drawable.ic_reumatologo)}
+            28 -> { holder.icono.setImageResource(R.drawable.ic_urologo)}
+            29 -> { holder.icono.setImageResource(R.drawable.ic_traumatologo)}
         }
 
     }

@@ -94,6 +94,28 @@ class AnadirMedicoActivity : AppCompatActivity() {
                     6 -> { iconoMedicoIV.setImageResource(R.drawable.ic_endocrinologo)}
                     7 -> { iconoMedicoIV.setImageResource(R.drawable.ic_fisioterapeuta)}
                     8 -> { iconoMedicoIV.setImageResource(R.drawable.ic_gastroenterologo)}
+                    9 -> { iconoMedicoIV.setImageResource(R.drawable.ic_geriatra)}
+                    10 -> { iconoMedicoIV.setImageResource(R.drawable.ic_ginecologo)}
+                    11 -> { iconoMedicoIV.setImageResource(R.drawable.ic_hematologo)}
+                    12 -> { iconoMedicoIV.setImageResource(R.drawable.ic_homeopata)}
+                    13 -> { iconoMedicoIV.setImageResource(R.drawable.ic_infectologo)}
+                    14 -> { iconoMedicoIV.setImageResource(R.drawable.ic_internista)}
+                    15 -> { iconoMedicoIV.setImageResource(R.drawable.ic_inmunologo)}
+                    16 -> { iconoMedicoIV.setImageResource(R.drawable.ic_nefrologo)}
+                    17 -> { iconoMedicoIV.setImageResource(R.drawable.ic_neumologo)}
+                    18 -> { iconoMedicoIV.setImageResource(R.drawable.ic_neurologo)}
+                    19 -> { iconoMedicoIV.setImageResource(R.drawable.ic_nutriologo)}
+                    20 -> { iconoMedicoIV.setImageResource(R.drawable.ic_oftalmologo)}
+                    21 -> { iconoMedicoIV.setImageResource(R.drawable.ic_ortopedista)}
+                    22 -> { iconoMedicoIV.setImageResource(R.drawable.ic_otorrinolaringologo)}
+                    23 -> { iconoMedicoIV.setImageResource(R.drawable.ic_pediatra)}
+                    24 -> { iconoMedicoIV.setImageResource(R.drawable.ic_psiquiatra)}
+                    25 -> { iconoMedicoIV.setImageResource(R.drawable.ic_proctologo)}
+                    26 -> { iconoMedicoIV.setImageResource(R.drawable.ic_radiologo)}
+                    27 -> { iconoMedicoIV.setImageResource(R.drawable.ic_reumatologo)}
+                    28 -> { iconoMedicoIV.setImageResource(R.drawable.ic_urologo)}
+                    29 -> { iconoMedicoIV.setImageResource(R.drawable.ic_traumatologo)}
+
                 }
             }
         }

@@ -161,9 +161,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_delete_white_24dp" />
-                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\clock.svg" />
+                            <entry key="outputName" value="ic_traumatologo" />
+                            <entry key="sourceFile" value="C:\Users\CEdua\Downloads\knee.svg" />
                           </map>
                         </option>
                       </PersistentState>
