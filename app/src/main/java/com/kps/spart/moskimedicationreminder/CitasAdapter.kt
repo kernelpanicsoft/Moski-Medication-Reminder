@@ -16,9 +16,6 @@ import android.support.v7.recyclerview.extensions.ListAdapter
 import elements.CitaMedica
 import model.MMDContract
 
-/**
- * Created by spart on 15/12/2017.
- */
 
 class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,CitasAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener{
     private val auxSDF = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -81,6 +78,9 @@ class CitasAdapter(private val context : Context?) : ListAdapter<CitaMedica,Cita
     }
 
 
-
+    fun updateList(search : List<CitaMedica>){
+        submitList(search)
+        notifyDataSetChanged()
+    }
 
 }

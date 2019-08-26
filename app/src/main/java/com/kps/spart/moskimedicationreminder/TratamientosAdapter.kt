@@ -121,4 +121,9 @@ class TratamientosAdapter(private val context: Context?) : ListAdapter<JoinMedic
     fun getTratamientoAt(position: Int) : JoinMedicamentoTratamientoData{
         return getItem(position)
     }
+
+    fun updateList(search : List<JoinMedicamentoTratamientoData>){
+        submitList(search)
+        notifyDataSetChanged()
+    }
 }

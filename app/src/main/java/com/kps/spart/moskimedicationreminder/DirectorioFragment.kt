@@ -92,6 +92,8 @@ class DirectorioFragment : Fragment() {
 
     }
 
+
+    /*
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_add, menu)
     }
@@ -118,6 +120,9 @@ class DirectorioFragment : Fragment() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
+
+     */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CodigosDeSolicitud.ANADIR_MEDICO){

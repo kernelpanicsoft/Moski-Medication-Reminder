@@ -110,6 +110,7 @@ class HoyFragment : Fragment() {
         RV.adapter = adapter
     }
 
+    /*
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_sort, menu)
 
@@ -131,4 +132,6 @@ class HoyFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-}// Required empty public constructor
+     */
+
+}

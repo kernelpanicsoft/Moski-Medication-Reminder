@@ -16,8 +16,8 @@ import elements.Medicamento
 
 class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, MedicamentosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
-
     private val iconsCollection = context?.resources?.getStringArray(R.array.TipoMedicamento)
+
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<Medicamento>(){
         override fun areItemsTheSame(oldItem: Medicamento, newItem: Medicamento): Boolean {
@@ -89,6 +89,11 @@ class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, Medicamen
 
     fun getMedicamentoAt(position : Int) : Medicamento{
         return getItem(position)
+    }
+
+    fun updateList(search : List<Medicamento>){
+        submitList(search)
+        notifyDataSetChanged()
     }
 
 }

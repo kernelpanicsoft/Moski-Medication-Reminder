@@ -18,11 +18,6 @@ import android.support.v7.recyclerview.extensions.ListAdapter
 import elements.Establecimiento
 import model.MMDContract
 
-/**
- * Created by spart on 03/11/2017.
-
- */
-
 
 class EstablecimientoAdapter (context: Context?) : ListAdapter<Establecimiento,EstablecimientoAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
@@ -84,6 +79,11 @@ class EstablecimientoAdapter (context: Context?) : ListAdapter<Establecimiento,E
         listener?.onClick(v)
     }
 
+
+    fun updateList(search: List<Establecimiento>){
+        submitList(search)
+        notifyDataSetChanged()
+    }
 
 }
 

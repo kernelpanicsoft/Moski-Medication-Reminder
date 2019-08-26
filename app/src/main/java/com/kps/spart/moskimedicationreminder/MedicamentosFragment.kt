@@ -5,11 +5,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,15 +19,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.support.v7.widget.SearchView
 import android.widget.Toast
 import elements.Medicamento
 import kotlinx.android.synthetic.main.fragment_medicamentos.*
 
 
-class MedicamentosFragment : Fragment() {
+class MedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
 
     lateinit var medicamentoViewModel : MedicamentoViewModel
     lateinit var RV : RecyclerView
+    var medicamentos : List<Medicamento>? = null
+    lateinit var adapter: MedicamentosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +67,7 @@ class MedicamentosFragment : Fragment() {
         medicamentoViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
         medicamentoViewModel.getMedicamentosUsuario(usuarioID).observe(this, Observer<List<Medicamento>>{
             adapter.submitList(it)
+            medicamentos = it
         })
 
 
@@ -80,12 +86,17 @@ class MedicamentosFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.menu_add, menu)
+        inflater!!.inflate(R.menu.menu_search, menu)
+
+        val menuItem = menu?.findItem(R.id.itemSearch)
+        val searchView : SearchView = menuItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
+            R.id.itemSearch -> { }
             R.id.itemADD -> {
                 val nav = Intent(context, AnadirMedicamentoActivity::class.java)
                 //medicamentoViewModel.insert(Medicamento(0,"Propanolol","Inderalici","500mg","HOla","Capsula",2345,"NA",1))
@@ -93,7 +104,27 @@ class MedicamentosFragment : Fragment() {
                 startActivity(nav)
                 return true
             }
-            else -> return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        Log.d("Medicamento", newText)
+        val userInput = newText?.toLowerCase()
+        val newList = arrayListOf<Medicamento>()
+
+
+        for(medicamento: Medicamento in medicamentos!!){
+            if(medicamento.nombreMedicamento?.toLowerCase()?.contains(userInput)!!){
+                newList.add(medicamento)
+            }
+        }
+
+        adapter.updateList(newList)
+        return true
     }
 }// Required empty public constructor

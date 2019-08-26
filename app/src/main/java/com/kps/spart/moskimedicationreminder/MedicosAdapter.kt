@@ -11,9 +11,7 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.recyclerview.extensions.ListAdapter
 import elements.Medico
 
-/**
- * Created by spart on 20/11/2017.
- */
+
 
 class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
@@ -99,4 +97,10 @@ class MedicosAdapter(context : Context?) : ListAdapter<Medico, MedicosAdapter.Vi
     fun getMedicAt(position: Int) : Medico {
         return getItem(position)
     }
+
+    fun updateList(search : List<Medico>){
+        submitList(search)
+        notifyDataSetChanged()
+    }
+
 }

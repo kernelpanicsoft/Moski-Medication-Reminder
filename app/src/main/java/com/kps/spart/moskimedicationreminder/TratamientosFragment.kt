@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -20,14 +21,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import elements.JoinMedicamentoTratamientoData
 
 import model.CodigosDeSolicitud
 
 
-class TratamientosFragment : Fragment() {
+class TratamientosFragment : Fragment(), SearchView.OnQueryTextListener {
+
 
     lateinit var tratamientoViewModel : TratamientoViewModel
     lateinit var RV : RecyclerView
+    var tratamientos : List<JoinMedicamentoTratamientoData>? = null
+    lateinit var adapter: TratamientosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +61,13 @@ class TratamientosFragment : Fragment() {
         RV.addItemDecoration(dividerItemDecoration)
 
 
-        val adapter = TratamientosAdapter(context)
+        adapter = TratamientosAdapter(context)
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val usuarioID = sharedPref.getInt("actualUserID", -1)
         tratamientoViewModel = ViewModelProviders.of(this).get(TratamientoViewModel::class.java)
         tratamientoViewModel.getTratamientosUsuario(usuarioID).observe(this, Observer {
             adapter.submitList(it)
+            tratamientos = it
 
         })
         adapter.setOnClickListener(View.OnClickListener {
@@ -77,7 +83,11 @@ class TratamientosFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.menu_add, menu)
+        inflater!!.inflate(R.menu.menu_search, menu)
+
+        val menuItem = menu?.findItem(R.id.itemSearch)
+        val searchView : SearchView = menuItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
 
     }
 
@@ -116,5 +126,23 @@ class TratamientosFragment : Fragment() {
             }
         }
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        val userInput = newText?.toLowerCase()
+        val newList = arrayListOf<JoinMedicamentoTratamientoData>()
+
+
+        for(tratamiento: JoinMedicamentoTratamientoData in tratamientos!!){
+            if(tratamiento.titulo?.toLowerCase()?.contains(userInput)!!){
+                newList.add(tratamiento)
+            }
+        }
+
+        adapter.updateList(newList)
+        return true    }
 
 }

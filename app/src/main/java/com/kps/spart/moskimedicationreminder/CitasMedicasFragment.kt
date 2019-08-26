@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -19,14 +20,19 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import elements.CitaMedica
 import model.CodigosDeSolicitud
 
 import model.MMDContract
 
 
-class CitasMedicasFragment : Fragment() {
+class CitasMedicasFragment : Fragment(), SearchView.OnQueryTextListener {
+
     lateinit var citaMedicasViewModel : CitaMedicaViewModel
     private var cita_id : Int = -1
+    var citasMedicas : List<CitaMedica>? = null
+    lateinit var adapter: CitasAdapter
+
 
     lateinit var RV : RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,12 +62,13 @@ class CitasMedicasFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(RV.context, LinearLayout.VERTICAL)
         RV.addItemDecoration(dividerItemDecoration)
 
-        val adapter = CitasAdapter(context)
+        adapter = CitasAdapter(context)
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val usuarioID = sharedPref.getInt("actualUserID", -1)
         citaMedicasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
         citaMedicasViewModel.getCitasUsuario(usuarioID).observe(this, Observer{
             adapter.submitList(it)
+            citasMedicas = it
         })
 
         adapter.setOnItemClickListener(View.OnClickListener {
@@ -78,12 +85,17 @@ class CitasMedicasFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.menu_add, menu)
+        inflater!!.inflate(R.menu.menu_search, menu)
+
+        val menuItem = menu?.findItem(R.id.itemSearch)
+        val searchView : android.support.v7.widget.SearchView = menuItem?.actionView as android.support.v7.widget.SearchView
+        searchView.setOnQueryTextListener(this)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
+            R.id.itemSearch -> {}
             R.id.itemADD -> {
                 val nav = Intent(context, AnadirCitaMedicaActivity::class.java)
                 startActivityForResult(nav, CodigosDeSolicitud.ANADIR_CITA_MEDICA)
@@ -103,4 +115,21 @@ class CitasMedicasFragment : Fragment() {
         }
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        val userInput = newText?.toLowerCase()
+        val newList = arrayListOf<CitaMedica>()
+
+
+        for(citaMedica: CitaMedica in citasMedicas!!){
+            if(citaMedica.titulo?.toLowerCase()?.contains(userInput)!!){
+                newList.add(citaMedica)
+            }
+        }
+
+        adapter.updateList(newList)
+        return true    }
 }// Required empty public constructor
