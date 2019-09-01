@@ -161,48 +161,48 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/NMedicamentosTV"
+                        android:id="@+id/NMedicosTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="@string/Medicos"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/NumeroMedicamentosTV"
-                        app:layout_constraintStart_toStartOf="@+id/NumeroMedicamentosTV"
-                        app:layout_constraintTop_toBottomOf="@+id/NumeroMedicamentosTV" />
+                        app:layout_constraintEnd_toEndOf="@+id/NumeroMedicosTV"
+                        app:layout_constraintStart_toStartOf="@+id/NumeroMedicosTV"
+                        app:layout_constraintTop_toBottomOf="@+id/NumeroMedicosTV" />
 
                     <TextView
-                        android:id="@+id/NumeroEstablecimientosTV"
+                        android:id="@+id/NumeroMedicamentosTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="23"
+                        android:text="0"
                         android:textSize="36sp"
                         app:layout_constraintEnd_toStartOf="@+id/NumeroCitasTV"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/NumeroMedicamentosTV"
-                        app:layout_constraintTop_toTopOf="@+id/NumeroMedicamentosTV" />
+                        app:layout_constraintStart_toEndOf="@+id/NumeroMedicosTV"
+                        app:layout_constraintTop_toTopOf="@+id/NumeroMedicosTV" />
 
                     <TextView
-                        android:id="@+id/NEstablecimientosTV"
+                        android:id="@+id/NMedicamentosTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Establecimientos"
-                        app:layout_constraintEnd_toEndOf="@+id/NumeroEstablecimientosTV"
-                        app:layout_constraintStart_toStartOf="@+id/NumeroEstablecimientosTV"
-                        app:layout_constraintTop_toBottomOf="@+id/NumeroEstablecimientosTV" />
+                        android:text="@string/title_medicamentos"
+                        app:layout_constraintEnd_toEndOf="@+id/NumeroMedicamentosTV"
+                        app:layout_constraintStart_toStartOf="@+id/NumeroMedicamentosTV"
+                        app:layout_constraintTop_toBottomOf="@+id/NumeroMedicamentosTV" />
 
                     <TextView
                         android:id="@+id/NumeroCitasTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="89"
+                        android:text="0"
                         android:textSize="36sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/NumeroEstablecimientosTV"
-                        app:layout_constraintTop_toTopOf="@+id/NumeroEstablecimientosTV" />
+                        app:layout_constraintStart_toEndOf="@+id/NumeroMedicamentosTV"
+                        app:layout_constraintTop_toTopOf="@+id/NumeroMedicamentosTV" />
 
                     <TextView
                         android:id="@+id/NCitasTV"
@@ -214,13 +214,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/NumeroCitasTV" />
 
                     <TextView
-                        android:id="@+id/NumeroMedicamentosTV"
+                        android:id="@+id/NumeroMedicosTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="45"
+                        android:text="0"
                         android:textSize="36sp"
-                        app:layout_constraintEnd_toStartOf="@+id/NumeroEstablecimientosTV"
+                        app:layout_constraintEnd_toStartOf="@+id/NumeroMedicamentosTV"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView6" />

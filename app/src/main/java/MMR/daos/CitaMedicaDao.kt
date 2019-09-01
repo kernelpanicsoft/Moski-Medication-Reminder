@@ -29,4 +29,7 @@ interface CitaMedicaDao {
 
     @Query("SELECT id, titulo, doctor,especialidad, fecha, hora, tipoRecordatorio FROM CitaMedica WHERE fecha = date('now')")
     fun getCitasProgramadasWithoutLiveData() : List<CitaMedica>
+
+    @Query("SELECT COUNT(*) FROM CitaMedica WHERE CitaMedica.usuarioID = :id")
+    fun getCitasCount( id : Int? ) : LiveData<Int>
 }

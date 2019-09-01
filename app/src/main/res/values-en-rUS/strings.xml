@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Moski M.R</string>
+    <string name="AnadirMedicamento">Add new medicine</string>
+    <string name="ColorIconoMedicamento">Icon color:</string>
+    <string name="Dosis">Dose/Presentation</string>
+    <string name="Entendido">Understood</string>
+    <string name="Establecimientos">Establishments</string>
+    <string name="Farmacias">Drugstores</string>
+    <string name="FormaFarmaceutica">Dosage form</string>
+    <string name="IconoMedicamento">Icon</string>
+    <string name="MMR_Recuperar_Contrasena">Moski Medication Reminder: Password recovery</string>
+    <string name="Medicos">Medics</string>
+    <string name="NombreComercial">Commercial name</string>
+    <string name="NombreGenerico">Generic name</string>
+    <string name="Porque_usar_contrasena">What is the password used for?</string>
+    <string name="SeleccionAnadir">Add new:</string>
+    <string name="a_adir_ficha_de_contacto">Add contact card</string>
+    <string name="a_adir_otra_ficha_de_contacto">Add another contact card</string>
+    <string name="a_adir_ubicaci_n_en_mapa">Add location in map</string>
+    <string name="a_tiempo">In time</string>
+    <string name="abrir_en_mapas">Open in maps</string>
+    <string name="acciones_de_toma">Shot actions</string>
+    <string name="activo">Active</string>
+    <string name="agendar_cita">Schedule appointment</string>
+    <string name="alarma">Alarm</string>
+    <string name="alertaFichaVacia">It\'s neccesary add a title and at least other contact field before try to add another contact card</string>
+    <string name="anadir">Add</string>
+    <string name="anadirCita">New medical appointment</string>
+    <string name="anadirFarmacia">Add drugstore</string>
+    <string name="anadirMedico">Add medic:</string>
+    <string name="anadirTratamiento">New treatment</string>
+    <string name="anadir_establecimiento">Add establishment</string>
+    <string name="anadir_ficha_contacto">Add contact card</string>
+    <string name="anadir_ficha_de_contacto">Add contact card</string>
+    <string name="apellidos">Last name</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="buscar">Search</string>
+    <string name="c_mo_desea_registrar_sus_tomas">How would do you like register your shoots?</string>
+    <string name="cambiar_usuario">Change user</string>
+    <string name="cancelar">Cancel</string>
+    <string name="celular">Cellphone</string>
+    <string name="cita_registrada_correctamente">Appointment registered successfully</string>
+    <string name="colorDistintivo">Distinctive color</string>
+    <string name="comenzar">Start</string>
+    <string name="configuraci_n">Settings</string>
+    <string name="configuracion">Settings</string>
+    <string name="continuidad">Continuity</string>
+    <string name="contrase_a">Password</string>
+    <string name="contrasena_enviada">Password sent</string>
+    <string name="contrasena_incorrecta">Incorrect password</string>
+    <string name="contrasena_necesaria">Is necessary specify a password and recovery email</string>
+    <string name="default_color">Default color</string>
+    <string name="detalle_usuario">User details</string>
+    <string name="detalles">Details</string>
+    <string name="detalles_cita_medica">Medical appointment details</string>
+    <string name="detalles_de_medico">Medic details</string>
+    <string name="detalles_establecimiento">Establishment details</string>
+    <string name="detalles_farmacia">Drugstore details</string>
+    <string name="detalles_medicamento">Medicine details</string>
+    <string name="dias_restantes">Remain days:</string>
+    <string name="direccion1">Address 1</string>
+    <string name="direccion2">Address 2</string>
+    <string name="direccionFarmacia">Address</string>
+    <string name="doctor_registrado_correctamente">Medic saved successfully</string>
+    <string name="edad">Age</string>
+    <string name="usuarios_registrados">Registered users</string>
+    <string name="usuario_eliminado_correctamente">User deleted successfully</string>
+    <string name="usuario_creado_correctamente">User registered successfully</string>
+    <string name="usuario_actualizado_correctamente">User updated successfully</string>
+    <string name="usar_contrase_a">Use password?</string>
+    <string name="ubicacionCita">Location</string>
+    <string name="tomas">Shots</string>
+    <string name="tomar">Take</string>
+    <string name="toca_para_cambiar_el_color">Touch to change color</string>
+    <string name="titulo_tratamiento">Treatment title</string>
+    <string name="tituloMedico">Title:</string>
+    <string name="tituloCita">Title/apointment reason</string>
+    <string name="title_tratamientos">Treatment</string>
+    <string name="title_medicamentos">Medicines</string>
+    <string name="title_home">Schedule</string>
+    <string name="title_directorio">Directory</string>
+    <string name="title_citas">Appointments</string>
+    <string name="title_activity_maps">Add location</string>
+    <string name="tipo_medicamento">Medicine type:</string>
+    <string name="editar">Edit</string>
+    <string name="editar_cita">Edit appointment</string>
+    <string name="editar_elemento">Edit:</string>
+    <string name="editar_establecimiento">Edit establishment</string>
+    <string name="editar_ficha_contacto">Edit contact card</string>
+    <string name="editar_medicamento">Edit medicine</string>
+    <string name="edad_necesaria">It\'s nec</string>
+    <string name="editar_medico">Edit medic</string>
+    <string name="editar_tratamiento">Edit treatment</string>
+    <string name="editar_usuario">Edit user</string>
+    <string name="elegir_imagen_de_perfil">Choose profile pic from:</string>
+    <string name="elegir_imagen_perfil_desde">Choose profile pic from:</string>
+    <string name="elegir_medicamento">Choose medicine</string>
+    <string name="elegir_ubicacion_en_el_mapa">Set location in map</string>
+    <string name="eliminar">Delete</string>
+    <string name="eliminar_cita">Delete appointment</string>
+    <string name="eliminar_establecimiento">Delete establishment</string>
+    <string name="eliminar_ficha_de_contacto">Delete contact card</string>
+    <string name="eliminar_imagen_pregunta">Delete picture?</string>
+    <string name="eliminar_medicamento">Delete medicine</string>
+    <string name="eliminar_medico">Delete medic</string>
+    <string name="eliminar_toma">Delete shoot?</string>
+    <string name="eliminar_ubicacion">Delete location</string>
+    <string name="eliminar_usuario">Delete user</string>
+    <string name="email">Email</string>
+    <string name="email_de_recuperaci_n">Recovery email:</string>
+    <string name="enviar_email">Send email</string>
+    <string name="enviar_email_recuperacion">Send  recovery email</string>
+    <string name="tipo_de_recordatorio">Reminder type:</string>
+    <string name="tipo_de_recodatorio">Reminder type:</string>
+    <string name="terminado">Fininshed</string>
+    <string name="telefono2Farmacia">Phone 2</string>
+    <string name="telefono1Farmacia">Phone 1</string>
+    <string name="telefono">Phone</string>
+    <string name="t_tulo">Title</string>
+    <string name="su_contrasena_archivo_adjunto">Your password is inside the attached file</string>
+    <string name="sitio_web">Website</string>
+    <string name="sin_anticipacion">Without anticipation</string>
+    <string name="si">Yes</string>
+    <string name="seleccione_un_medicamento_registrado_para_poder_crear_el_tratamiento">Select a registered medicine to create the treatment</string>
+    <string name="seleccionar_esta_ubicaci_n">Choose this location</string>
+    <string name="se_ha_enviado_contrasena">The password has been sent to the recovery email</string>
+    <string name="saltar">Skip</string>
+    <string name="remover_im_gen">Remove picture</string>
+    <string name="remover">Remove</string>
+    <string name="registros">Registers:</string>
+    <string name="registrar_usuario">Register user</string>
+    <string name="registrar_tratamiento_y_programar_tomas">Register treatment and schedule shoots</string>
+    <string name="registrar_toma">Register shoots</string>
+    <string name="recuperar_contrasena">Recover password</string>
+    <string name="recordatorio_predeterminado_tratamientos">Default reminder for treatments</string>
+    <string name="recordatorio_predeterminado_citas">Default reminder for appointments</string>
+    <string name="programar_tomas">Schedule shoots:</string>
+    <string name="programado">scheduled</string>
+    <string name="pospuestas">Postponed</string>
+    <string name="posponer">Postpone</string>
+    <string name="por_x_veces_al_d_a">X times at day</string>
+    <string name="por_cada_x_horas">Every X hours</string>
+    <string name="pausado">Paused</string>
+    <string name="omitidas">Skipped</string>
+    <string name="ocurrio_un_problema_nuevo_doctor">There was a problem while saving the new Doctor</string>
+    <string name="ocurrio_un_problema_durante_la_creacion_cita">There was a problem while saving the new medical appointment</string>
+    <string name="ocurrio_un_problema_crear_medicamento">There was a problem while the saving of the new medicine</string>
+    <string name="numero_de_dias">Number of days:</string>
+    <string name="notificaci_n">Notification</string>
+    <string name="notas_del_medicamento">Medicine notes</string>
+    <string name="error_crear_establecimiento">There was a proble while the saving of the new establishment, try again</string>
+    <string name="error_crear_usuario">There was a problem while the creation of the new user, try again</string>
+    <string name="es_necesario_especificar_el_titulo_de_la_ficha">At least the title of the title card is needed to save the contact card</string>
+    <string name="notas">Notes</string>
+    <string name="nota_o_indicaciones_especiales_para_este_medicamento">Notes or special indications for this medicine</string>
+    <string name="nota_o_indicaciones_adicionales">Notes or special indications</string>
+    <string name="nombre_establecimiento">Establishment name</string>
+    <string name="nombre_apellido_necesario">It\'s necessary specify first name, last name and age to register a new user</string>
+    <string name="nombreMedico">Name</string>
+    <string name="nombreFarmacia">Drugstore name</string>
+    <string name="nombre">Name</string>
+    <string name="no_se_pudo_cargar_usuario">The usser cannot be created</string>
+    <string name="no_es_posible_eliminar_medico">There is not possible delete the medic</string>
+    <string name="no_es_posible_eliminar_medicamento">There is not possible delete the medecine</string>
+    <string name="es_necesario_especificar_el_titulo_y_otro_campo">The title and at leat another contact field is needed</string>
+    <string name="es_necesario_especificar_nombre_comercial_generico">It\'s necessary specify at leat the commercial or generic name of the medicine</string>
+    <string name="es_necesario_especificar_nombre_medico">It\'s necessary specify the medic\'s name before to save it.</string>
+    <string name="es_necesario_especificar_titulo_cita">It\'s necessary specify the appointment title to save it.</string>
+    <string name="no_es_posible_eliminar_establecimiento">There is not possible delete the establishment</string>
+    <string name="no_es_posible_eliminar_al_usuario">There is not possible delete the user</string>
+    <string name="no">No</string>
+    <string name="ninguno">None</string>
+    <string name="mi_perfil">My profile</string>
+    <string name="es_necesario_pemitir_permisos_multimedia">It\'s necessary enable the multimedia access permissions to open the gallery</string>
+    <string name="es_necesario_permitir_permisos_archivos">It\'s necessary enable read and write of files permissions to send the password</string>
+    <string name="especialidad">Specialty:</string>
+    <string name="especialidadCita">Specialty</string>
+    <string name="mensaje_eliminar_tratamiento_dialogo">All alarms, statics and shoots related to this treatment are going to be deleted also, Do you want to continue\'</string>
+    <string name="mensaje_bienvenida">To start using this apps it\'s necessary register the first user, with which you can add treatments, medications, doctors and record medical appointments. You can register additional users later with independent items.</string>
+    <string name="medico_eliminado_correctamente">Medic deleted successfully</string>
+    <string name="medicoCita">Medic</string>
+    <string name="medicamento_registrado_correctamente">Medic registered successfully</string>
+    <string name="medicamento_eliminado_correctamente">Medicine deleted successfully</string>
+    <string name="medicamento">Medicine:</string>
+    <string name="masculino">Masculine</string>
+    <string name="llamar">Call</string>
+    <string name="inicio">Start:</string>
+    <string name="ingresar_contrasena">Insert password:</string>
+    <string name="ingresar">Login</string>
+    <string name="indicaci_nes">Indications:</string>
+    <string name="incluir_horario_de_sue_o">Exclude sleep time?</string>
+    <string name="icono">Icon</string>
+    <string name="horario">Schedule</string>
+    <string name="hora_de_la_primera_toma">First shoot hour:</string>
+    <string name="hora_de_dormir">Sleep hour:</string>
+    <string name="esta_seguro_eliminar_tratamiento">Are you sure you want to eliminate the treatment?</string>
+    <string name="esta_seguro_que_desea_eliminar_al_medico">Are you sure you want to eliminate this medic?</string>
+    <string name="esta_seguro_que_desea_eliminar_el_establecimiento">Are you sure you want to eliminate the establishment?</string>
+    <string name="esta_seguro_que_desea_eliminar_el_medicamento">Are you sure you want to eliminate the establishment?</string>
+    <string name="hora_de_despertar">Wake up hour:</string>
+    <string name="hora">Hour</string>
+    <string name="guardar_cambios_tratamiento">Save treatment changes</string>
+    <string name="guardar">Save</string>
+    <string name="genero">Gender:</string>
+    <string name="fotografia">Picture:</string>
+    <string name="fin">Ending:</string>
+    <string name="filtrar">Filter</string>
+    <string name="fichas_de_contacto">Contact cards:</string>
+    <string name="femenino">Femenine</string>
+    <string name="fecha_de_inicio">Start date:</string>
+    <string name="fecha_de_finalizaci_n">End date:</string>
+    <string name="fechaHoraCita">Date and time of the appointment:</string>
+    <string name="fecha">Date</string>
+    <string name="esta_seguro_que_desea_eliminar_ficha_contacto">Are you sure you want to eliminate this contact card?</string>
+    <string name="esta_seguro_que_desea_eliminar_usuario">Are you sure you want to eliminate this user?, Doing this also eliminates their elements: medicines, medics, treatments, medical appointments and establishments.</string>
+    <string name="esta_seguro_que_eliminar_cita">Are you sure you want to eliminate the medical appointment?</string>
+    <string name="establecer_como_contacto_rapido">Set as quick contact</string>
+    <string name="establecimiento_creado_correctamente">Establishment registered successfully</string>
+    <string name="establecimiento_eliminado_correctamente">Establishment deleted successfully</string>
+    <string name="establecimiento_que_la_venden">Establishment that sells this medicine:</string>
+    <string name="estadisticas">Statics:</string>
+    <string name="esteblecer_como_acceso_rapido">Set as quick contact</string>
+    <string name="explicacion_contrasena">When a password is used, this is required to change the active profile. It\'s necessary specify an email to which it will be sent the password in case it is forgotten.</string>
+
+
+    <array name="anadirnuevo">
+        <item>Medic</item>
+        <item>Establishment</item>
+    </array>
+
+    <array name="TituloMedico">
+        <item>Dr.</item>
+        <item>MS.</item>
+    </array>
+
+    <array name="especialidades">
+        <item>Family doctor</item>
+        <item>Allergist</item>
+        <item>Anesthesiologist</item>
+        <item>Angiologist</item>
+        <item>Cardiologist</item>
+        <item>Dermatologist</item>
+        <item>Endocrinologist</item>
+        <item>Physiotherapist</item>
+        <item>Gastroenterologist</item>
+        <item>Geriatrician</item>
+        <item>Gynecologist</item>
+        <item>Hematologist</item>
+        <item>Homeopath</item>
+        <item>Infectologist</item>
+        <item>Internist</item>
+        <item>Immunologist</item>
+        <item>Nephrologist</item>
+        <item>Pulmonologist</item>
+        <item>Neurologist</item>
+        <item>Nutritionist</item>
+        <item>Ophthalmologist</item>
+        <item>Orthopedist</item>
+        <item>Otolaryngologist</item>
+        <item>Pedriatrician</item>
+        <item>Psychiatrist</item>
+        <item>Proctologist</item>
+        <item>Radiologist</item>
+        <item>Rheumatologist</item>
+        <item>Urologis</item>
+        <item>Traumatologist</item>
+    </array>
+
+    <array name="TipoMedicamento">
+        <item>Pills</item>
+        <item>Tablets</item>
+        <item>Capsules</item>
+        <item>Syrup</item>
+        <item>Drops</item>
+        <item>Eye drops</item>
+        <item>Ointments</item>
+        <item>Powder</item>
+        <item>Gels</item>
+        <item>Inhaler</item>
+        <item>Suppositories</item>
+        <item>Intravenous</item>
+        <item>Injection</item>
+    </array>
+
+    <array name="origen_imagen">
+        <item>Gallery</item>
+        <item>Camera</item>
+    </array>
+
+    <array name="tipo_establecimiento">
+        <item>Drugstore</item>
+        <item>Laboratory</item>
+        <item>X-Ray Lab</item>
+        <item>Orthopedic Opaquets Store</item>
+    </array>
+
+    <array name="dialogo_editar_eliminar">
+        <item>Edit</item>
+        <item>Delete</item>
+    </array>
+
+    <array name="dialogo_editar_tratamiento">
+        <item>Treatment</item>
+        <item>Shots</item>
+    </array>
+
+    <array name="continuidad_tratamiento">
+        <item>Period</item>
+        <item>Undefined</item>
+    </array>
+
+    <array name="acciones_toma">
+        <item>Take</item>
+        <item>Skip</item>
+        <item>Postpone</item>
+    </array>
+
+    <array name="recordatorio_preferido">
+        <item>Notification</item>
+        <item>Alarm</item>
+        <item>None</item>
+    </array>
+
+    <array name="anticipacion_toma">
+        <item>Without anticipation</item>
+        <item>1 minute</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+    </array>
+
+</resources>

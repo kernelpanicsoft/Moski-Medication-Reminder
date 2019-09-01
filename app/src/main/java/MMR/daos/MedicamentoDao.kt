@@ -26,4 +26,7 @@ interface MedicamentoDao {
 
     @Query("SELECT * FROM Medicamento WHERE Medicamento.usuarioID = :id")
     fun getUserMedicamentos(id : Int?) : LiveData<List<Medicamento>>
+
+    @Query("SELECT COUNT(*) FROM Medicamento WHERE Medicamento.usuarioID = :id")
+    fun getMedicinesCount( id : Int? ) : LiveData<Int>
 }

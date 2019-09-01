@@ -39,4 +39,8 @@ class MedicamentoViewModel (application: Application) : AndroidViewModel(applica
     fun getMedicamentosUsuario(id : Int) : LiveData<List<Medicamento>>{
         return repository.getMedicamentosUsuario(id)
     }
+
+    fun getCuentaMedicamentos(id: Int) : LiveData<Int>{
+        return repository.getMedicamentosCount(id)
+    }
 }

@@ -29,4 +29,7 @@ interface MedicoDao {
 
     @Query("SELECT max(id) FROM Medico")
     fun getLastID(): LiveData<Long>
+
+    @Query( "SELECT COUNT(*) FROM Medico WHERE Medico.usuarioID = :id")
+    fun getMedicsCount( id : Int?) : LiveData<Int>
 }

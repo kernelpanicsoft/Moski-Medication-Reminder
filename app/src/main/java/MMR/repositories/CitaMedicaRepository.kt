@@ -50,6 +50,10 @@ class CitaMedicaRepository (application: Application) {
         return citaMedicoDao.getCitasUsuario(id)
     }
 
+    fun getCitasCount(id : Int ) : LiveData<Int>{
+        return citaMedicoDao.getCitasCount(id)
+    }
+
     fun scheduleAlarmsForAppointments(){
         scheduleAlarmsForAppointmentsAsyncTask(citaMedicoDao).execute()
     }

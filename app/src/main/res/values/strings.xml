@@ -2,8 +2,8 @@
     <string name="app_name">Moski M.R</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main_activityg">MainActivityg</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_main_activityg" translatable="false">MainActivityg</string>
     <string name="title_home">Horario</string>
     <string name="title_tratamientos">Tratamientos</string>
     <string name="title_medicamentos">Medicamentos</string>
@@ -13,11 +13,11 @@
     <string name="anadir">Añadir</string>
 
     <!-- Nombre de los fragmentos -->
-    <string name="fragmentoHoy">FragmentoHoy</string>
-    <string name="fragmentoTratamientos">FragmentoTratamientos</string>
-    <string name="fragmentoMedicamentos">FragmentoMedicamentos</string>
-    <string name="fragmentoDirectorio">FragmentoDirectorio</string>
-    <string name="fragmentoCitas">FragmentoCitas</string>
+    <string name="fragmentoHoy" translatable="false">FragmentoHoy</string>
+    <string name="fragmentoTratamientos" translatable="false">FragmentoTratamientos</string>
+    <string name="fragmentoMedicamentos" translatable="false">FragmentoMedicamentos</string>
+    <string name="fragmentoDirectorio" translatable="false">FragmentoDirectorio</string>
+    <string name="fragmentoCitas" translatable="false">FragmentoCitas</string>
 
     <!-- Cadenas de la actividad Añadir Medicamentos -->
     <string name="AnadirMedicamento">Añadir medicamento nuevo</string>
@@ -111,7 +111,6 @@
     <string name="eliminar">Eliminar</string>
     <string name="remover">Remover</string>
     <string name="fichas_de_contacto">Fichas de contacto:</string>
-    <string name="alertaFichaVacia">Es necesario añadir un título y al menos otro dato de contacto antes de añadir otra ficha de contacto</string>
 
 
     <array name="especialidades">
@@ -164,17 +163,17 @@
     </array>
 
 
-    <string name="tomato">Tomato</string>
-    <string name="tangerine">Tangerine</string>
-    <string name="banana">Banana</string>
-    <string name="basil">Basil</string>
-    <string name="sage">Sage</string>
-    <string name="peacock">Peacock</string>
-    <string name="blueberry">Blueberry</string>
-    <string name="lavender">Lavender</string>
-    <string name="grape">Grape</string>
-    <string name="flamingo">Flamingo</string>
-    <string name="graphite">Graphite</string>
+    <string name="tomato" translatable="false">Tomato</string>
+    <string name="tangerine" translatable="false">Tangerine</string>
+    <string name="banana" translatable="false">Banana</string>
+    <string name="basil" translatable="false">Basil</string>
+    <string name="sage" translatable="false">Sage</string>
+    <string name="peacock" translatable="false">Peacock</string>
+    <string name="blueberry" translatable="false">Blueberry</string>
+    <string name="lavender" translatable="false">Lavender</string>
+    <string name="grape" translatable="false">Grape</string>
+    <string name="flamingo" translatable="false">Flamingo</string>
+    <string name="graphite" translatable="false">Graphite</string>
     <string name="default_color">Default color</string>
     <string name="title_activity_maps">Añadir ubicación</string>
     <string name="nota_o_indicaciones_adicionales">Nota o indicaciones adicionales</string>
@@ -210,7 +209,7 @@
     <string name="email_de_recuperaci_n">Email de recuperación:</string>
     <string name="Entendido">Entendido</string>
     <string name="Porque_usar_contrasena">¿Para que se usa la contraseña?</string>
-    <string name="explicacion_contrasena">Al usar una contraseña esta será solicitada para registrar o eliminar tratamientos, medicamentos y elementos en el directorio. \n\nPodrá cambiar las capacidades de la contraseña desde la configuración de la aplicación. \n\nDebe especificar un correo electrónico al cual se enviará la contraseña en caso de que esta sea olvidada.</string>
+    <string name="explicacion_contrasena">Al usar una contraseña esta será solicitada para cambiar de perfil.  Debe especificar un correo electrónico al cual se enviará la contraseña en caso de que esta sea olvidada.</string>
     <string name="edad_necesaria">Es necesario especificar la edad del usuario</string>
     <string name="nombre_apellido_necesario">Es necesario especificar el nombre, apellidos y edad para poder registrar un usuario nuevo</string>
     <string name="contrasena_necesaria">Es necesario especificar una contraseña y un email de recuperación</string>
@@ -300,7 +299,7 @@
     <string name="acciones_de_toma">Acciones de toma</string>
     <string name="llamar">Llamar</string>
     <string name="enviar_email">Enviar Email</string>
-    <string name="agendar_cita">Agendar Cita</string>
+    <string name="agendar_cita">Agendar cita</string>
     <string name="inicio">Inicio:</string>
     <string name="fin">Fin:</string>
     <string name="indicaci_nes">Indicaciónes:</string>
@@ -340,7 +339,7 @@
     </array>
 
     <string name="esta_seguro_eliminar_tratamiento">¿Está seguro de que desea eliminar el tratamiento? </string>
-    <string name="mensaje_eliminar_tratamiento_dialogo">También eliminarán todas las alertas, estadísticas y tomas relacionadas a este tratamiento, ¿Desea continuar?</string>
+    <string name="mensaje_eliminar_tratamiento_dialogo">También se eliminarán todas las alertas, estadísticas y tomas relacionadas a este tratamiento, ¿Desea continuar?</string>
     <string name="editar_tratamiento">Editar tratamiento</string>
     <string name="guardar_cambios_tratamiento">Guardar cambios en tratamiento</string>
     <string name="activo">Activo</string>
@@ -382,5 +381,6 @@
     <string name="es_necesario_permitir_permisos_archivos">Es necesario permitir permiso de lectura y escritura de archivos para enviar la contraseña</string>
     <string name="su_contrasena_archivo_adjunto">Su contraseña de usuario está dentro del archivo adjunto</string>
     <string name="horario">Horario</string>
+    <string name="alertaFichaVacia">Es necesario añadir un título y al menos otro dato de contacto antes de añadir otra ficha de contacto</string>
 </resources>
 

@@ -1,9 +1,13 @@
 package com.kps.spart.moskimedicationreminder
 
+import MMR.viewModels.CitaMedicaViewModel
+import MMR.viewModels.MedicamentoViewModel
+import MMR.viewModels.MedicoViewModel
 import MMR.viewModels.UsuarioViewModel
 import android.app.Activity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Bitmap
@@ -48,6 +52,20 @@ class DetallesPerfilActivity : AppCompatActivity() {
 
         })
 
+        val medicoViewModel = ViewModelProviders.of(this).get(MedicoViewModel::class.java)
+        medicoViewModel.getCuentaMedicos(user_id).observe( this, Observer {
+            NumeroMedicosTV.text = it.toString()
+        })
+
+        val medicamentosViewModel = ViewModelProviders.of(this).get(MedicamentoViewModel::class.java)
+        medicamentosViewModel.getCuentaMedicamentos(user_id).observe(this, Observer {
+            NumeroMedicamentosTV.text = it.toString()
+        })
+
+        val citasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
+        citasViewModel.getCuentaCitas(user_id).observe(this, Observer {
+            NumeroCitasTV.text = it.toString()
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

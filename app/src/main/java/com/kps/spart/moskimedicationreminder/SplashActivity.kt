@@ -22,7 +22,9 @@ class SplashActivity : AppCompatActivity() {
        // val firstRun = !sharedPref.getBoolean("firstrun", true)
         if(!sharedPref.getBoolean("firstrun", true)){
             checkDateForRunService()
-          //  Log.d("EstasReiniciando","Estas iniciando la actualizacion de tomas " + firstRun.toString())
+            Log.d("EstasReiniciando","Estas iniciando la actualizacion de tomas ")
+        }else{
+            Log.d("EstasReiniciando", "no se está reiniciando")
         }
 
         val channelManager = NotificationsManager(this)
@@ -43,13 +45,16 @@ class SplashActivity : AppCompatActivity() {
         val savedDate = sdf.parse(fechaInicioUso)
 
         val auxDate = sdf.parse(sdf.format(todayDate))
-        Log.d("ComparaFechas",auxDate.compareTo(savedDate).toString() + " " + auxDate.time.toString() + " : " + savedDate.time.toString())
+        Log.d("ComparaFechas",auxDate.compareTo(savedDate).toString() + " # " + auxDate.time.toString() + " : " + savedDate.time.toString())
 
         if(auxDate.compareTo(savedDate) != 0){
+            Log.d("ComparaFechas","Las fechas no son iguales")
             with(sharedPref.edit()){
                 putString("firstrundate", sdf.format(Calendar.getInstance().time))
                 apply()
             }
+
+            Log.d("ComparaFechas","Estas invocando el servicio")
             val restartShots = Intent(this,MMRReiniciarDiaService::class.java)
             this.startService(restartShots)
 
@@ -59,10 +64,12 @@ class SplashActivity : AppCompatActivity() {
             val citasViewModel = ViewModelProviders.of(this).get(CitaMedicaViewModel::class.java)
             citasViewModel.scheduleCitasAlarms()
 
-            Log.d("ComparaFechas","Estas reiniciando tomas" + todayDate.compareTo(savedDate) + " @ " + todayDate.time.toString() + " : " + savedDate.time.toString())
-        }else if(todayDate.compareTo(savedDate) == 0){
-           // Log.d("EstasReiniciando","Las fechas son iguales")
+            Log.d("ComparaFechas","Estas reiniciando tomas" + auxDate.compareTo(savedDate) + " @ " + auxDate.time.toString() + " : " + savedDate.time.toString())
+        }else if(auxDate.compareTo(savedDate) == 0){
+            Log.d("ComparaFechas","Las fechas son iguales")
 
+        }else{
+            Log.d("ComparaFechas","No está entrando " + auxDate.compareTo(savedDate))
         }
 
     }

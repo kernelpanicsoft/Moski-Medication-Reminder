@@ -4,6 +4,7 @@ import MMR.repositories.MedicoRepository
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import com.google.android.gms.dynamic.LifecycleDelegate
 import elements.Medico
 
 class MedicoViewModel (application: Application) : AndroidViewModel(application) {
@@ -41,4 +42,7 @@ class MedicoViewModel (application: Application) : AndroidViewModel(application)
         return repository.getMedicosUsuario(id)
     }
 
+    fun getCuentaMedicos(id: Int) : LiveData<Int>{
+        return repository.getMedicsCount(id)
+    }
 }

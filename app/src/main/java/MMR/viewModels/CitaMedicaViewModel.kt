@@ -37,4 +37,8 @@ class CitaMedicaViewModel (application: Application) : AndroidViewModel(applicat
     fun scheduleCitasAlarms(){
         repository.scheduleAlarmsForAppointments()
     }
+
+    fun getCuentaCitas(id: Int) : LiveData<Int>{
+        return repository.getCitasCount(id)
+    }
 }
