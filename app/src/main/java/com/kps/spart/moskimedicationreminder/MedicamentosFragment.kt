@@ -60,7 +60,7 @@ class MedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         RV.addItemDecoration(dividerItemDecoration)
 
 
-        val adapter = MedicamentosAdapter(context)
+        adapter = MedicamentosAdapter(context)
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val usuarioID = sharedPref.getInt("actualUserID", -1)
 
@@ -124,7 +124,11 @@ class MedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
 
-        adapter.updateList(newList)
+        try {
+            adapter.updateList(newList)
+        }catch (e: Exception){
+            Log.e("Error:", e.localizedMessage )
+        }
         return true
     }
 }// Required empty public constructor

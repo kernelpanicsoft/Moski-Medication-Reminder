@@ -37,6 +37,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
 
     lateinit  var usuarioViewModel : UsuarioViewModel
     var userPassWordHelper : String? = ""
+    var userEmailHelper : String? = ""
 
 
 
@@ -93,8 +94,10 @@ class ListarUsuariosActivity : AppCompatActivity() {
                                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                                 CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO)
                         userPassWordHelper = usuarioSeleccionado.password
+                        userEmailHelper = usuarioSeleccionado.email_recuperacion
+
                     }else{
-                        recoverPassWord(usuarioSeleccionado.password)
+                        recoverPassWord(usuarioSeleccionado.password, usuarioSeleccionado.email_recuperacion)
                         Log.e("Contrasena", usuarioSeleccionado.password)
                     }
 
@@ -163,9 +166,10 @@ class ListarUsuariosActivity : AppCompatActivity() {
 
     }
 
-    fun recoverPassWord(passWordUsuario: String?){
+    fun recoverPassWord(passWordUsuario: String?, emailRecuperacion: String?){
         val sendIntent = Intent(Intent.ACTION_SEND)
         sendIntent.type = "message/rfc822"
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailRecuperacion))
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.MMR_Recuperar_Contrasena))
         sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.su_contrasena_archivo_adjunto))
 
@@ -174,20 +178,15 @@ class ListarUsuariosActivity : AppCompatActivity() {
         writePasswordToFile(file, passWordUsuario!!)
         Log.e("Contrasena", userPassWordHelper)
 
-
         val fileURI : Uri = FileProvider.getUriForFile(this,
                 "com.kps.spart.android.fileprovider",
                 file
                 )
 
-
             sendIntent.putExtra(Intent.EXTRA_STREAM, fileURI)
             sendIntent.setType(".txt -> text/plain")
 
-
         startActivityForResult(Intent.createChooser(sendIntent,getString(R.string.enviar_email_recuperacion)), CodigosDeSolicitud.RECUPERAR_CONTRASENA)
-
-
     }
 
     fun getCurrentUserID() : Int{
@@ -233,7 +232,7 @@ class ListarUsuariosActivity : AppCompatActivity() {
         when(requestCode){
             CodigosDeSolicitud.SOLICITAR_PERMISO_ALMACENAMIENTO_EXTERNO ->{
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    recoverPassWord(userPassWordHelper)
+                    recoverPassWord(userPassWordHelper,userEmailHelper)
                 }else{
                     Toast.makeText(this, getString(R.string.es_necesario_permitir_permisos_archivos), Toast.LENGTH_SHORT).show()
                 }

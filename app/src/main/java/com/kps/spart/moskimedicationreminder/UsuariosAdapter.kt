@@ -3,8 +3,6 @@ package com.kps.spart.moskimedicationreminder
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.media.ExifInterface
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,13 +12,11 @@ import android.widget.ImageView
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.widget.TextView
 import elements.Usuario
-import kotlinx.android.synthetic.main.activity_registrar_usuario.*
 import java.io.FileNotFoundException
 
 
 class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener: View.OnClickListener? = null
-
 
     class DIFF_CALLBACK : DiffUtil.ItemCallback<Usuario>() {
         override fun areItemsTheSame(oldItem: Usuario, newItem: Usuario): Boolean {
@@ -60,7 +56,6 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
         holder.apellidos.text = usuarioActual.apellidos
     }
 
-
     fun setOnClickListener(listener : View.OnClickListener){
         this.listener = listener
     }
@@ -91,7 +86,6 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
         var scaledBitmap : Bitmap? = null
         try {
 
-
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
             scaledBitmap = bitmap
         }
@@ -99,10 +93,6 @@ class UsuariosAdapter: ListAdapter<Usuario,UsuariosAdapter.ViewHolder>(DIFF_CALL
         }catch ( e : FileNotFoundException){
             return null
         }
-
         return scaledBitmap
     }
-
-
-
 }

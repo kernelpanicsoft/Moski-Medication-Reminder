@@ -51,4 +51,7 @@ interface TratamientoDao {
     @Query("UPDATE Tratamiento SET diasTratamiento = diasTratamiento - 1 WHERE diasTratamiento != -1")
     fun decreaseTreatmentDays()
 
+    @Query( "SELECT COUNT(*) FROM Medico WHERE Medico.usuarioID = :id")
+    fun getMedicsCount( id : Int?) : LiveData<Int>
+
 }

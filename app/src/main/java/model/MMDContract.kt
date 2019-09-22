@@ -3,10 +3,7 @@ package model
 import android.net.Uri
 import android.provider.BaseColumns
 
-/**
- * Created by spart on 11/03/2018.
- *
- */
+
 
 const val REGISTRO_PRIMER_USUARIO = 2001
 const val CANAL_PRIMARIO_ID = "primary_notification_channel"

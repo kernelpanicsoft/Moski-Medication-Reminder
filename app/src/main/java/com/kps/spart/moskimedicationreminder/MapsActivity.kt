@@ -113,8 +113,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun centerMapToUserLocation(){
-
-
         if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),SOLICITA_UBICACION_APROXIMADA)
         }else{
@@ -131,7 +129,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
-
-
 
 }
