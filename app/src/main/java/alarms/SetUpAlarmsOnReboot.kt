@@ -12,6 +12,5 @@ class SetUpAlarmsOnReboot : BroadcastReceiver(){
         val setUpAppointments = Intent(context, CitasSchedulerService::class.java)
         context?.startService(setUpAppointments)
 
-
     }
 }

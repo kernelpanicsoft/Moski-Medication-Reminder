@@ -11,6 +11,7 @@ import android.content.Context
 
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
+import android.util.Log
 import elements.Medicamento
 
 
@@ -66,6 +67,8 @@ class MedicamentosAdapter(context: Context?): ListAdapter<Medicamento, Medicamen
             11-> {holder.icono.setImageResource(R.drawable.ic_intravenous)}
             12-> {holder.icono.setImageResource(R.drawable.ic_syringe)}
         }
+
+        Log.d("Medicamento",medicineType + " | " + iconsCollection?.indexOf(medicineType))
 
         medicamentoActual.color?.run {
             holder.icono.setColorFilter(medicamentoActual.color!!)

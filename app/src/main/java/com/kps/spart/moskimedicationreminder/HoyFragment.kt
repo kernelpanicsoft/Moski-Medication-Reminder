@@ -82,17 +82,17 @@ class HoyFragment : Fragment() {
                     .setItems(R.array.acciones_toma){ dialog, which ->
                         when(which){
                             0 -> {
-                              //  adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
                                 adapter.updateShotJoin(RV.getChildAdapterPosition(it),EstatusToma.TOMADA)
                                 Log.d("EstatusEnHoyFragment", EstatusToma.TOMADA.toString())
                             }
                             1 -> {
-                              //  adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
                                 adapter.updateShotJoin(RV.getChildAdapterPosition(it),EstatusToma.PASADA)
                                 Log.d("EstatusEnHoyFragment", EstatusToma.PASADA.toString())
                             }
                             2 -> {
-                               // adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
+                                adapter.changeShotStatus(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
                                 adapter.updateShotJoin(RV.getChildAdapterPosition(it),EstatusToma.POSPUESTA)
                                 Log.d("EstatusEnHoyFragment", EstatusToma.POSPUESTA.toString())
                             }
